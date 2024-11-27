@@ -1,66 +1,46 @@
-# SpandaAI Platform
+# spandaai-platform
 
 ## Overview
 
-This repository hosts the foundational components, shared services like Agentic AI, Optimization Engines, RAG Pipeline, and infrastructure configurations for the SpandaAI multi-domain architecture.
+Welcome to the **spandaai-platform** repository. This repository houses the core components of the SpandaAI ecosystem.
 
-## Directory Structure
+## Documentation
 
-- `data-connectors/`: Data ingestion tools and configurations.
-- `aiops/`: AIOps components including workflow automation, monitoring, and access control.
-- `genai/`: Generative AI components and configurations.
-- `agentic-ai/`: Centralized AI services.
-- `optimization-engines/`: Core optimization algorithms and domain-specific adapters.
-- `rag-pipeline/`: Retrieval-Augmented Generation pipeline components.
-- `infrastructure/`: Infrastructure as Code (IaC) configurations.
-- `docs/`: Documentation.
-- `scripts/`: Deployment and maintenance scripts.
+For detailed guides, best practices, and contribution guidelines, please refer to our [Central Documentation](https://github.com/spandaai/spandaai-docs).
 
 ## Getting Started
 
-1. Clone the repository:
+1. **Clone the Repository:**
+
    ```bash
-   git clone git@github.com:spandaai/spandaai-platform.git
-   cd spandaai-platform
+   git clone https://github.com/spandaai/spandaai-platform.git
    ```
 
-2. Navigate through the directories to explore various components.
+2. **Install Dependencies:**
+
+   ```bash
+   cd spandaai-platform
+   # Follow specific installation instructions here
+   ```
+
+3. **Run the Application:**
+
+   ```bash
+   # Command to start the application
+   ```
+
+## Features
+
+- Feature 1
+- Feature 2
+- Feature 3
 
 ## Contributing
 
-Please follow the [contribution guidelines](CONTRIBUTING.md).
+We welcome contributions! Please see our [Contributing Guidelines](https://github.com/spandaai/spandaai-docs/blob/main/Contributing/README.md) for more information.
 
-## License
+## Contact
 
-[MIT](LICENSE)
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-# Trigger CI/CD
-## Documentation
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
-Refer to the [Central Documentation](https://github.com/spandaai/spandaai-docs) for detailed guides and best practices.
+For questions or support, please reach out to the respective team.
+
+---
