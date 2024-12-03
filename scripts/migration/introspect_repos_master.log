@@ -1,0 +1,1141 @@
+2024-11-30 15:05:56,969 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 15:05:56,969 - INFO - Cloning https://github.com/spandaai/vllm/tree/main into temp_repos_master/main...
+2024-11-30 15:05:57,531 - ERROR - Error cloning https://github.com/spandaai/vllm/tree/main: Cmd('git') failed due to: exit code(128)
+  cmdline: git clone -v -- https://github.com/spandaai/vllm/tree/main temp_repos_master/main
+  stderr: 'Cloning into 'temp_repos_master/main'...
+fatal: repository 'https://github.com/spandaai/vllm/tree/main/' not found
+'
+2024-11-30 15:05:57,532 - WARNING - Skipping repository https://github.com/spandaai/vllm/tree/main due to cloning error.
+
+2024-11-30 15:05:57,532 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend...
+2024-11-30 15:05:58,936 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 15:05:58,940 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle...
+2024-11-30 15:09:24,587 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 15:09:27,239 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis...
+2024-11-30 15:09:28,957 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 15:09:29,020 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate...
+2024-11-30 15:12:41,914 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 15:12:42,164 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama...
+2024-11-30 15:12:46,814 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 15:12:46,970 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka...
+2024-11-30 15:22:01,894 - ERROR - Error cloning https://github.com/spandaai/kafka: Cmd('git') failed due to: exit code(128)
+  cmdline: git clone -v -- https://github.com/spandaai/kafka temp_repos_master/kafka
+  stderr: 'Cloning into 'temp_repos_master/kafka'...
+POST git-upload-pack (175 bytes)
+POST git-upload-pack (217 bytes)
+error: RPC failed; curl 56 Recv failure: Operation timed out
+error: 4517 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+'
+2024-11-30 15:22:01,894 - WARNING - Skipping repository https://github.com/spandaai/kafka due to cloning error.
+
+2024-11-30 15:22:01,895 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain...
+2024-11-30 15:22:49,361 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 16:53:17,652 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 16:53:17,653 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend...
+2024-11-30 16:53:19,355 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 16:53:19,362 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm...
+2024-11-30 16:53:27,343 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 16:53:31,651 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka...
+2024-11-30 16:54:34,613 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 16:54:34,846 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain...
+2024-11-30 16:55:42,491 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 16:55:42,635 - WARNING - Unexpected document format in temp_repos_master/langchain/libs/core/tests/unit_tests/examples/examples.yaml: [{'input': 'happy', 'output': 'sad'}, {'input': 'tall', 'output': 'short'}]
+2024-11-30 16:55:44,563 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle...
+2024-11-30 16:58:51,702 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 16:58:54,844 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset...
+2024-11-30 17:00:57,824 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 17:00:58,938 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 2
+2024-11-30 17:00:58,940 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/init-job.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 2
+2024-11-30 17:00:58,941 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 2
+2024-11-30 17:00:58,943 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 2
+2024-11-30 17:00:58,946 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 2
+2024-11-30 17:00:58,948 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/ingress.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 2
+2024-11-30 17:00:58,950 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 2
+2024-11-30 17:00:58,953 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 2
+2024-11-30 17:00:58,955 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 2
+2024-11-30 17:00:58,956 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 2
+2024-11-30 17:00:58,957 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 2
+2024-11-30 17:00:58,993 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-node.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 2
+2024-11-30 17:00:58,995 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 2
+2024-11-30 17:00:58,997 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 2
+2024-11-30 17:00:58,999 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 2
+2024-11-30 17:00:59,001 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 2
+2024-11-30 17:00:59,003 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 2
+2024-11-30 17:00:59,005 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 2
+2024-11-30 17:00:59,006 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-env.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 2
+2024-11-30 17:00:59,043 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 2
+2024-11-30 17:00:59,045 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 2
+2024-11-30 17:00:59,048 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 2
+2024-11-30 17:01:02,006 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama...
+2024-11-30 17:01:05,689 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 17:01:05,788 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis...
+2024-11-30 17:01:07,476 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 17:01:07,514 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate...
+2024-11-30 17:03:57,560 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 17:03:57,739 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 17:03:57,739 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 17:03:57,739 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:03:57,739 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:03:57,739 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper...
+2024-11-30 17:03:59,283 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 17:03:59,307 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:03:59,308 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:03:59,308 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 17:03:59,308 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 17:03:59,308 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:03:59,308 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation...
+2024-11-30 17:04:00,934 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 17:04:00,965 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:04:00,965 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 17:04:00,965 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:04:00,966 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:04:00,966 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 17:04:00,966 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 17:04:00,966 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:04:00,966 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation...
+2024-11-30 17:04:02,453 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 17:04:02,527 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:04:02,527 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 17:04:02,527 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:04:02,527 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:04:02,527 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 17:04:02,527 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 17:04:02,527 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant...
+2024-11-30 17:04:03,989 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 17:04:04,020 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:04:04,020 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:04:04,020 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:04:04,020 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:04:04,020 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 17:04:04,020 - INFO - Processing Application: ChatbotWILP
+2024-11-30 17:04:04,020 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP...
+2024-11-30 17:04:05,486 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 17:04:05,510 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:04:05,510 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:04:05,510 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:04:05,510 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:04:05,510 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 17:04:16,001 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 17:04:16,006 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 17:04:16,006 - INFO - Introspection process completed successfully.
+2024-11-30 17:10:59,421 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 17:10:59,421 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 17:11:00,760 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 17:11:00,792 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 17:11:05,602 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 17:11:08,353 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 17:12:02,005 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 17:12:02,100 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 17:12:39,043 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 17:12:39,197 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 17:14:21,809 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 17:14:22,051 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 2
+2024-11-30 17:14:22,052 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/init-job.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 2
+2024-11-30 17:14:22,053 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 2
+2024-11-30 17:14:22,055 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 2
+2024-11-30 17:14:22,056 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 2
+2024-11-30 17:14:22,058 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/ingress.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 2
+2024-11-30 17:14:22,059 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 2
+2024-11-30 17:14:22,060 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 2
+2024-11-30 17:14:22,062 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 2
+2024-11-30 17:14:22,063 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 2
+2024-11-30 17:14:22,064 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 2
+2024-11-30 17:14:22,065 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-node.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 2
+2024-11-30 17:14:22,066 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 2
+2024-11-30 17:14:22,068 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 2
+2024-11-30 17:14:22,069 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 2
+2024-11-30 17:14:22,070 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 2
+2024-11-30 17:14:22,071 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 2
+2024-11-30 17:14:22,073 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 2
+2024-11-30 17:14:22,076 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-env.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 2
+2024-11-30 17:14:22,078 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 2
+2024-11-30 17:14:22,080 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 2
+2024-11-30 17:14:22,082 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 2
+2024-11-30 17:14:24,942 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 17:14:28,820 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 17:14:28,917 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 17:14:30,387 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 17:14:30,392 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 17:17:26,126 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 17:17:26,308 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 17:20:01,361 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 17:20:03,298 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 17:20:03,298 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 17:20:03,298 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:20:03,298 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:20:03,298 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:20:03,298 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:20:03,299 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 17:20:04,880 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 17:20:04,900 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 17:20:04,900 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 17:20:04,900 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:20:04,900 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 17:20:04,900 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 17:20:06,490 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 17:20:06,509 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:20:06,509 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:20:06,509 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:20:06,509 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 17:20:06,509 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 17:20:06,509 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:20:06,510 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 17:20:06,510 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 17:20:08,189 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 17:20:08,212 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:20:08,213 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:20:08,213 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:20:08,213 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 17:20:08,213 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 17:20:08,213 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:20:08,213 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:20:08,213 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 17:20:09,922 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 17:20:09,946 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:20:09,947 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:20:09,947 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 17:20:09,947 - INFO - Processing Application: ChatbotWILP
+2024-11-30 17:20:09,947 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 17:20:11,513 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 17:20:11,533 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 17:20:11,533 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 17:20:11,534 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 17:20:11,534 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 17:20:11,534 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 17:20:20,782 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 17:20:20,786 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 17:20:20,786 - INFO - Introspection process completed successfully.
+2024-11-30 17:54:26,366 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 17:54:26,367 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 17:54:29,395 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 17:54:29,500 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 17:54:59,255 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 17:54:59,452 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 17:55:01,100 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 17:55:01,106 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 17:55:53,881 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 17:55:53,976 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 17:58:03,751 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 17:58:05,378 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 18:00:43,254 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 18:00:43,412 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 18:02:04,421 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 18:02:04,628 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 1, column 2
+2024-11-30 18:02:04,630 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/init-job.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 1, column 2
+2024-11-30 18:02:04,631 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 1, column 2
+2024-11-30 18:02:04,632 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 1, column 2
+2024-11-30 18:02:04,634 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 1, column 2
+2024-11-30 18:02:04,635 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/ingress.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 1, column 2
+2024-11-30 18:02:04,636 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 1, column 2
+2024-11-30 18:02:04,637 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 1, column 2
+2024-11-30 18:02:04,638 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 1, column 2
+2024-11-30 18:02:04,640 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 1, column 2
+2024-11-30 18:02:04,642 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 1, column 2
+2024-11-30 18:02:04,644 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-node.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 1, column 2
+2024-11-30 18:02:04,646 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 1, column 2
+2024-11-30 18:02:04,648 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 1, column 2
+2024-11-30 18:02:04,651 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 1, column 2
+2024-11-30 18:02:04,653 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 1, column 2
+2024-11-30 18:02:04,654 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 1, column 2
+2024-11-30 18:02:04,655 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 1, column 2
+2024-11-30 18:02:04,657 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-env.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 1, column 2
+2024-11-30 18:02:04,658 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-ws.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 1, column 2
+2024-11-30 18:02:04,659 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 1, column 2
+2024-11-30 18:02:04,660 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-flower.yaml: while constructing a mapping
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 1
+found unhashable key
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 1, column 2
+2024-11-30 18:02:07,202 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 18:02:11,436 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 18:02:14,106 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 18:02:15,557 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 18:02:15,594 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 18:02:15,594 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 18:02:15,595 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:02:15,595 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 18:02:16,980 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 18:02:17,001 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:02:17,002 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:02:17,002 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:02:17,002 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 18:02:17,002 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 18:02:17,002 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:02:17,002 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:02:17,003 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:02:17,003 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:02:17,003 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:02:17,003 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:02:18,385 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 18:02:18,409 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 18:02:18,409 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 18:02:18,409 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:02:18,409 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:02:19,694 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 18:02:19,714 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:02:19,714 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:02:19,714 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:02:19,714 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:02:19,714 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 18:02:19,715 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 18:02:19,715 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:02:19,715 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 18:02:21,253 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 18:02:21,274 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:02:21,274 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:02:21,274 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:02:21,274 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 18:02:21,274 - INFO - Processing Application: ChatbotWILP
+2024-11-30 18:02:21,274 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:02:21,274 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 18:02:22,681 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 18:02:22,703 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:02:22,703 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:02:22,703 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:02:22,703 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 18:02:22,703 - INFO - Cloning https://github.com/spandaai/spandaai-management into temp_repos_master/spandaai-management (Attempt 1)...
+2024-11-30 18:02:24,159 - INFO - Successfully cloned https://github.com/spandaai/spandaai-management
+
+2024-11-30 18:02:32,511 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 18:02:32,515 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 18:02:32,515 - INFO - Introspection process completed successfully.
+2024-11-30 18:14:05,481 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 18:14:05,481 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 18:14:40,455 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 18:14:40,599 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 18:14:44,215 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 18:14:44,388 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 18:17:09,313 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 18:17:11,135 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 18:17:12,591 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 18:17:12,595 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 18:17:59,264 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 18:17:59,383 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 18:20:38,116 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 18:20:38,390 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 18:20:39,870 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 18:20:39,910 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 18:20:45,072 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 18:20:47,832 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 18:22:28,434 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 18:22:28,768 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml", line 20, column 1
+2024-11-30 18:22:28,771 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/init-job.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/init-job.yaml", line 20, column 1
+2024-11-30 18:22:28,774 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "temp_repos_master/superset/helm/superset/templates/deployment.yaml", line 20, column 1
+2024-11-30 18:22:28,777 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-ws.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/service-ws.yaml", line 20, column 1
+2024-11-30 18:22:28,779 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/pdb.yaml", line 20, column 1
+2024-11-30 18:22:28,781 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/ingress.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/ingress.yaml", line 20, column 1
+2024-11-30 18:22:28,784 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml", line 20, column 1
+2024-11-30 18:22:28,786 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml", line 20, column 1
+2024-11-30 18:22:28,789 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml", line 20, column 1
+2024-11-30 18:22:28,792 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "temp_repos_master/superset/helm/superset/templates/service.yaml", line 20, column 1
+2024-11-30 18:22:28,795 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml", line 20, column 1
+2024-11-30 18:22:28,798 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-node.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/hpa-node.yaml", line 20, column 1
+2024-11-30 18:22:28,802 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml", line 20, column 1
+2024-11-30 18:22:28,806 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml", line 20, column 1
+2024-11-30 18:22:28,809 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml", line 20, column 1
+2024-11-30 18:22:28,811 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml", line 20, column 1
+2024-11-30 18:22:28,813 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml", line 20, column 1
+2024-11-30 18:22:28,815 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml", line 20, column 1
+2024-11-30 18:22:28,817 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-env.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/secret-env.yaml", line 19, column 1
+2024-11-30 18:22:28,819 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-ws.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/secret-ws.yaml", line 20, column 1
+2024-11-30 18:22:28,822 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml", line 20, column 1
+2024-11-30 18:22:28,824 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-flower.yaml: expected '<document start>', but found ('{',)
+  in "temp_repos_master/superset/helm/superset/templates/service-flower.yaml", line 20, column 1
+2024-11-30 18:22:31,910 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 18:22:31,910 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 18:22:31,910 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:22:31,910 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:22:31,911 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:22:31,911 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:22:31,911 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 18:22:33,242 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 18:22:33,276 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 18:22:33,276 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 18:22:33,276 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:22:33,277 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:22:33,277 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:22:33,277 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:22:33,277 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:22:34,638 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 18:22:34,665 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:22:34,666 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 18:22:34,666 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 18:22:34,666 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:22:34,666 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:22:34,666 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:22:34,666 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:22:34,666 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:22:36,234 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 18:22:36,259 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:22:36,260 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 18:22:36,260 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 18:22:36,260 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 18:22:38,010 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 18:22:38,044 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:22:38,044 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:22:38,044 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:22:38,045 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:22:38,045 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 18:22:38,045 - INFO - Processing Application: ChatbotWILP
+2024-11-30 18:22:38,045 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:22:38,045 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:22:38,046 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:22:38,046 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:22:38,046 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 18:22:39,581 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 18:22:39,607 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 18:22:39,608 - INFO - Cloning https://github.com/spandaai/spandaai-management into temp_repos_master/spandaai-management (Attempt 1)...
+2024-11-30 18:22:41,032 - INFO - Successfully cloned https://github.com/spandaai/spandaai-management
+
+2024-11-30 18:22:50,968 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 18:22:50,972 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 18:22:50,972 - INFO - Introspection process completed successfully.
+2024-11-30 18:28:15,415 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 18:28:15,415 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 18:29:46,458 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 18:29:46,637 - WARNING - Skipping temp_repos_master/superset/helm/superset/values.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,637 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,637 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/init-job.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,638 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,638 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service-ws.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,638 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,638 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/ingress.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,638 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/hpa-node.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,639 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-env.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,640 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-ws.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,641 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml due to Helm templating syntax.
+2024-11-30 18:29:46,641 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service-flower.yaml due to Helm templating syntax.
+2024-11-30 18:29:49,032 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 18:29:52,203 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 18:29:52,224 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/latest.yaml due to Helm templating syntax.
+2024-11-30 18:29:52,224 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/test.yaml due to Helm templating syntax.
+2024-11-30 18:29:52,224 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/release.yaml due to Helm templating syntax.
+2024-11-30 18:29:52,225 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 18:32:43,326 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 18:32:44,817 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 18:32:50,136 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 18:32:50,215 - WARNING - Skipping temp_repos_master/vllm/.github/workflows/mypy.yaml due to Helm templating syntax.
+2024-11-30 18:32:53,608 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 18:35:16,073 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 18:35:16,136 - WARNING - Skipping temp_repos_master/weaviate/.goreleaser.yaml due to Helm templating syntax.
+2024-11-30 18:35:16,265 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/pull_requests.yaml due to Helm templating syntax.
+2024-11-30 18:35:16,265 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/release.yaml due to Helm templating syntax.
+2024-11-30 18:35:16,266 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/cleanup.yaml due to Helm templating syntax.
+2024-11-30 18:35:16,271 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 18:35:17,694 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 18:35:17,730 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 18:35:49,939 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 18:35:50,066 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 18:36:34,985 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 18:36:35,070 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 18:36:36,573 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 18:36:36,577 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 18:36:36,577 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 18:36:36,577 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 18:36:38,107 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 18:36:38,124 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:36:38,124 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:36:38,124 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:36:38,124 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:36:38,124 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 18:36:38,125 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 18:36:38,125 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:36:38,125 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:36:38,125 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:36:38,125 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:36:38,125 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:36:39,711 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 18:36:39,729 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:36:39,729 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 18:36:39,729 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 18:36:39,729 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:36:39,729 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:36:41,359 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 18:36:41,376 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:36:41,376 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:36:41,376 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:36:41,377 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:36:41,377 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 18:36:41,377 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 18:36:41,377 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 18:36:42,759 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:36:42,781 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 18:36:42,781 - INFO - Processing Application: ChatbotWILP
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:36:42,781 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:36:42,782 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 18:36:44,122 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 18:36:44,138 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:36:44,138 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:36:44,138 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 18:36:44,138 - INFO - Cloning https://github.com/spandaai/spandaai-management into temp_repos_master/spandaai-management (Attempt 1)...
+2024-11-30 18:36:45,573 - INFO - Successfully cloned https://github.com/spandaai/spandaai-management
+
+2024-11-30 18:36:54,377 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 18:36:54,382 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 18:36:54,382 - INFO - Introspection process completed successfully.
+2024-11-30 18:38:57,852 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 18:38:57,852 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 18:41:27,016 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 18:41:27,074 - WARNING - Skipping temp_repos_master/weaviate/.goreleaser.yaml due to Helm templating syntax.
+2024-11-30 18:41:27,189 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/pull_requests.yaml due to Helm templating syntax.
+2024-11-30 18:41:27,190 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/release.yaml due to Helm templating syntax.
+2024-11-30 18:41:27,190 - WARNING - Skipping temp_repos_master/weaviate/.github/workflows/cleanup.yaml due to Helm templating syntax.
+2024-11-30 18:41:27,195 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 18:41:28,605 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 18:41:28,634 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 18:44:11,594 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 18:44:13,124 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 18:44:14,471 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 18:44:14,475 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 18:44:17,976 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 18:44:17,993 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/latest.yaml due to Helm templating syntax.
+2024-11-30 18:44:17,993 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/test.yaml due to Helm templating syntax.
+2024-11-30 18:44:17,993 - WARNING - Skipping temp_repos_master/ollama/.github/workflows/release.yaml due to Helm templating syntax.
+2024-11-30 18:44:17,994 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 18:44:56,495 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 18:44:56,614 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 18:45:10,597 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 18:45:10,679 - WARNING - Skipping temp_repos_master/vllm/.github/workflows/mypy.yaml due to Helm templating syntax.
+2024-11-30 18:45:13,310 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 18:46:20,457 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 18:46:20,547 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 18:48:05,285 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 18:48:05,422 - WARNING - Skipping temp_repos_master/superset/helm/superset/values.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,422 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,422 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/init-job.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service-ws.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/ingress.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,423 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/hpa-node.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,424 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-env.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/secret-ws.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml due to Helm templating syntax.
+2024-11-30 18:48:05,425 - WARNING - Skipping temp_repos_master/superset/helm/superset/templates/service-flower.yaml due to Helm templating syntax.
+2024-11-30 18:48:07,498 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 18:48:07,498 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 18:48:07,498 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:48:07,498 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:48:07,498 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:48:07,498 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:48:07,498 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 18:48:08,917 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 18:48:08,947 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 18:48:08,947 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 18:48:08,948 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:48:08,948 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:48:08,948 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:48:08,948 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:48:10,406 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 18:48:10,424 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:48:10,424 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:48:10,424 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 18:48:10,424 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 18:48:10,424 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:48:10,425 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 18:48:11,765 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 18:48:11,787 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:48:11,787 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 18:48:11,788 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 18:48:11,788 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:48:11,788 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 18:48:13,389 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 18:48:13,410 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:48:13,410 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 18:48:13,411 - INFO - Processing Application: ChatbotWILP
+2024-11-30 18:48:13,411 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 18:48:13,411 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 18:48:13,411 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 18:48:13,411 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 18:48:15,010 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 18:48:15,027 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 18:48:15,027 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 18:48:15,028 - INFO - Cloning https://github.com/spandaai/spandaai-management into temp_repos_master/spandaai-management (Attempt 1)...
+2024-11-30 18:48:16,459 - INFO - Successfully cloned https://github.com/spandaai/spandaai-management
+
+2024-11-30 18:48:24,610 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 18:48:24,614 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 18:48:24,614 - INFO - Introspection process completed successfully.
+2024-11-30 19:31:52,423 - INFO - Processing Application: Dissertation Analysis
+2024-11-30 19:31:52,423 - INFO - Cloning https://github.com/spandaai/ollama into temp_repos_master/ollama (Attempt 1)...
+2024-11-30 19:31:56,880 - INFO - Successfully cloned https://github.com/spandaai/ollama
+
+2024-11-30 19:31:56,897 - WARNING - Attempting to parse temp_repos_master/ollama/.github/workflows/latest.yaml with Helm templating syntax.
+2024-11-30 19:31:56,900 - WARNING - Attempting to parse temp_repos_master/ollama/.github/workflows/test.yaml with Helm templating syntax.
+2024-11-30 19:31:56,960 - WARNING - Attempting to parse temp_repos_master/ollama/.github/workflows/release.yaml with Helm templating syntax.
+2024-11-30 19:31:57,101 - INFO - Cloning https://github.com/spandaai/vllm.git into temp_repos_master/vllm (Attempt 1)...
+2024-11-30 19:32:03,974 - INFO - Successfully cloned https://github.com/spandaai/vllm.git
+
+2024-11-30 19:32:04,054 - WARNING - Attempting to parse temp_repos_master/vllm/.github/workflows/mypy.yaml with Helm templating syntax.
+2024-11-30 19:32:06,499 - INFO - Cloning https://github.com/spandaai/Dissertation-Analysis into temp_repos_master/Dissertation-Analysis (Attempt 1)...
+2024-11-30 19:32:07,982 - INFO - Successfully cloned https://github.com/spandaai/Dissertation-Analysis
+
+2024-11-30 19:32:08,013 - INFO - Cloning https://github.com/spandaai/kafka into temp_repos_master/kafka (Attempt 1)...
+2024-11-30 19:32:50,488 - INFO - Successfully cloned https://github.com/spandaai/kafka
+
+2024-11-30 19:32:50,665 - INFO - Cloning https://github.com/moodle/moodle into temp_repos_master/moodle (Attempt 1)...
+2024-11-30 19:36:00,274 - INFO - Successfully cloned https://github.com/moodle/moodle
+
+2024-11-30 19:36:01,862 - INFO - Cloning https://github.com/weaviate/weaviate into temp_repos_master/weaviate (Attempt 1)...
+2024-11-30 19:39:18,729 - INFO - Successfully cloned https://github.com/weaviate/weaviate
+
+2024-11-30 19:39:18,799 - WARNING - Attempting to parse temp_repos_master/weaviate/.goreleaser.yaml with Helm templating syntax.
+2024-11-30 19:39:18,938 - WARNING - Attempting to parse temp_repos_master/weaviate/.github/workflows/pull_requests.yaml with Helm templating syntax.
+2024-11-30 19:39:19,035 - WARNING - Attempting to parse temp_repos_master/weaviate/.github/workflows/release.yaml with Helm templating syntax.
+2024-11-30 19:39:19,041 - WARNING - Attempting to parse temp_repos_master/weaviate/.github/workflows/cleanup.yaml with Helm templating syntax.
+2024-11-30 19:39:19,049 - INFO - Cloning https://github.com/spandaai/dissertation-frontend into temp_repos_master/dissertation-frontend (Attempt 1)...
+2024-11-30 19:39:20,905 - INFO - Successfully cloned https://github.com/spandaai/dissertation-frontend
+
+2024-11-30 19:39:20,910 - INFO - Cloning https://github.com/spandaai/superset into temp_repos_master/superset (Attempt 1)...
+2024-11-30 19:41:16,606 - INFO - Successfully cloned https://github.com/spandaai/superset
+
+2024-11-30 19:41:16,777 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/values.yaml with Helm templating syntax.
+2024-11-30 19:41:16,866 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml with Helm templating syntax.
+2024-11-30 19:41:16,868 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-flower.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: apps/v1
+    ^ (line: 21)
+2024-11-30 19:41:16,869 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/init-job.yaml with Helm templating syntax.
+2024-11-30 19:41:16,871 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/init-job.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: batch/v1
+    ^ (line: 21)
+2024-11-30 19:41:16,871 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/deployment.yaml with Helm templating syntax.
+2024-11-30 19:41:16,873 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 20, column 1:
+    apiVersion: apps/v1
+    ^ (line: 20)
+2024-11-30 19:41:16,875 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/service-ws.yaml with Helm templating syntax.
+2024-11-30 19:41:16,877 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-ws.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: v1
+    ^ (line: 21)
+2024-11-30 19:41:16,877 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/pdb.yaml with Helm templating syntax.
+2024-11-30 19:41:16,880 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 25, column 1:
+    apiVersion: policy/v1
+    ^ (line: 25)
+2024-11-30 19:41:16,880 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/ingress.yaml with Helm templating syntax.
+2024-11-30 19:41:16,882 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/ingress.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 22, column 1:
+    apiVersion: networking.k8s.io/v1
+    ^ (line: 22)
+2024-11-30 19:41:16,882 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml with Helm templating syntax.
+2024-11-30 19:41:16,884 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-superset-config.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 20, column 1:
+    apiVersion: v1
+    ^ (line: 20)
+2024-11-30 19:41:16,884 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml with Helm templating syntax.
+2024-11-30 19:41:16,886 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-worker.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 20, column 1:
+    apiVersion: apps/v1
+    ^ (line: 20)
+2024-11-30 19:41:16,886 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml with Helm templating syntax.
+2024-11-30 19:41:16,889 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-ws.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 25, column 1:
+    apiVersion: policy/v1
+    ^ (line: 25)
+2024-11-30 19:41:16,889 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/service.yaml with Helm templating syntax.
+2024-11-30 19:41:16,891 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 20, column 1:
+    apiVersion: v1
+    ^ (line: 20)
+2024-11-30 19:41:16,891 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml with Helm templating syntax.
+2024-11-30 19:41:16,893 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-beat.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: apps/v1
+    ^ (line: 21)
+2024-11-30 19:41:16,925 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/hpa-node.yaml with Helm templating syntax.
+2024-11-30 19:41:16,927 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-node.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: autoscaling/v2
+    ^ (line: 21)
+2024-11-30 19:41:16,927 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml with Helm templating syntax.
+2024-11-30 19:41:16,929 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-flower.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 25, column 1:
+    apiVersion: policy/v1
+    ^ (line: 25)
+2024-11-30 19:41:16,930 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml with Helm templating syntax.
+2024-11-30 19:41:16,931 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-beat.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 25, column 1:
+    apiVersion: policy/v1
+    ^ (line: 25)
+2024-11-30 19:41:16,932 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml with Helm templating syntax.
+2024-11-30 19:41:16,934 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/deployment-ws.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: apps/v1
+    ^ (line: 21)
+2024-11-30 19:41:16,934 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml with Helm templating syntax.
+2024-11-30 19:41:16,936 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/configmap-superset.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: v1
+    ^ (line: 21)
+2024-11-30 19:41:16,936 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml with Helm templating syntax.
+2024-11-30 19:41:16,938 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/serviceaccount.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: v1
+    ^ (line: 21)
+2024-11-30 19:41:16,938 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml with Helm templating syntax.
+2024-11-30 19:41:16,940 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/hpa-worker.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: autoscaling/v2
+    ^ (line: 21)
+2024-11-30 19:41:16,940 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/secret-env.yaml with Helm templating syntax.
+2024-11-30 19:41:16,942 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-env.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 20, column 1:
+    apiVersion: v1
+    ^ (line: 20)
+2024-11-30 19:41:16,975 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/secret-ws.yaml with Helm templating syntax.
+2024-11-30 19:41:16,977 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/secret-ws.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: v1
+    ^ (line: 21)
+2024-11-30 19:41:16,978 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml with Helm templating syntax.
+2024-11-30 19:41:16,980 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/pdb-worker.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 25, column 1:
+    apiVersion: policy/v1
+    ^ (line: 25)
+2024-11-30 19:41:16,980 - WARNING - Attempting to parse temp_repos_master/superset/helm/superset/templates/service-flower.yaml with Helm templating syntax.
+2024-11-30 19:41:16,982 - ERROR - Error parsing temp_repos_master/superset/helm/superset/templates/service-flower.yaml: expected '<document start>', but found ('<block mapping start>',)
+  in "<unicode string>", line 21, column 1:
+    apiVersion: v1
+    ^ (line: 21)
+2024-11-30 19:41:19,580 - INFO - Cloning https://github.com/spandaai/langchain into temp_repos_master/langchain (Attempt 1)...
+2024-11-30 19:42:24,817 - INFO - Successfully cloned https://github.com/spandaai/langchain
+
+2024-11-30 19:42:24,922 - INFO - Completed processing for Dissertation Analysis
+
+2024-11-30 19:42:24,922 - INFO - Processing Application: Variants of a Question Paper and Answers Generation
+2024-11-30 19:42:24,922 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 19:42:24,922 - INFO - Cloning https://github.com/spandaai/Variants-of-a-Question-Paper into temp_repos_master/Variants-of-a-Question-Paper (Attempt 1)...
+2024-11-30 19:42:26,443 - INFO - Successfully cloned https://github.com/spandaai/Variants-of-a-Question-Paper
+
+2024-11-30 19:42:26,463 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 19:42:26,463 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 19:42:26,463 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 19:42:26,463 - INFO - Completed processing for Variants of a Question Paper and Answers Generation
+
+2024-11-30 19:42:26,463 - INFO - Processing Application: Current Instructor Evaluation
+2024-11-30 19:42:26,463 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 19:42:26,463 - INFO - Cloning https://github.com/spandaai/Current-Instructor-Evaluation into temp_repos_master/Current-Instructor-Evaluation (Attempt 1)...
+2024-11-30 19:42:27,996 - INFO - Successfully cloned https://github.com/spandaai/Current-Instructor-Evaluation
+
+2024-11-30 19:42:28,025 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 19:42:28,025 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 19:42:28,025 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 19:42:28,025 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 19:42:28,026 - INFO - Completed processing for Current Instructor Evaluation
+
+2024-11-30 19:42:28,026 - INFO - Processing Application: New Instructor Evaluation
+2024-11-30 19:42:28,026 - INFO - Cloning https://github.com/spandaai/New-Instructor-Evaluation into temp_repos_master/New-Instructor-Evaluation (Attempt 1)...
+2024-11-30 19:42:30,044 - INFO - Successfully cloned https://github.com/spandaai/New-Instructor-Evaluation
+
+2024-11-30 19:42:30,063 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/spandaai/superset already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Completed processing for New Instructor Evaluation
+
+2024-11-30 19:42:30,064 - INFO - Processing Application: Automated Grading Assistant
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 19:42:30,064 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 19:42:30,077 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 19:42:30,077 - INFO - Cloning https://github.com/spandaai/Automated-Grading-Assistant into temp_repos_master/Automated-Grading-Assistant (Attempt 1)...
+2024-11-30 19:42:31,685 - INFO - Successfully cloned https://github.com/spandaai/Automated-Grading-Assistant
+
+2024-11-30 19:42:31,709 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 19:42:31,709 - INFO - Completed processing for Automated Grading Assistant
+
+2024-11-30 19:42:31,709 - INFO - Processing Application: ChatbotWILP
+2024-11-30 19:42:31,709 - INFO - Repository https://github.com/spandaai/ollama already processed. Skipping...
+2024-11-30 19:42:31,709 - INFO - Repository https://github.com/moodle/moodle already processed. Skipping...
+2024-11-30 19:42:31,709 - INFO - Repository https://github.com/weaviate/weaviate already processed. Skipping...
+2024-11-30 19:42:31,710 - INFO - Cloning https://github.com/spandaai/ChatbotWILP into temp_repos_master/ChatbotWILP (Attempt 1)...
+2024-11-30 19:42:33,135 - INFO - Successfully cloned https://github.com/spandaai/ChatbotWILP
+
+2024-11-30 19:42:33,155 - INFO - Repository https://github.com/spandaai/langchain already processed. Skipping...
+2024-11-30 19:42:33,155 - INFO - Completed processing for ChatbotWILP
+
+2024-11-30 19:42:33,155 - INFO - Cloning https://github.com/spandaai/spandaai-management into temp_repos_master/spandaai-management (Attempt 1)...
+2024-11-30 19:42:34,427 - INFO - Successfully cloned https://github.com/spandaai/spandaai-management
+
+2024-11-30 19:42:44,253 - INFO - Cleaned up temporary directory: temp_repos_master
+2024-11-30 19:42:44,257 - INFO - Report generated at bits_pilani_master_migration_report.json
+2024-11-30 19:42:44,257 - INFO - Introspection process completed successfully.

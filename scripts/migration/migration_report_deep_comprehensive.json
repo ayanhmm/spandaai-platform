@@ -1,0 +1,227 @@
+{
+    "dissertation-frontend": {
+        "Repository URL": "https://github.com/spandaai/dissertation-frontend",
+        "Project Type": "Node.js",
+        "Frameworks": [
+            "React"
+        ],
+        "Dependencies": {
+            "@emotion/react": "^11.13.3",
+            "@emotion/styled": "^11.13.0",
+            "@fortawesome/fontawesome-svg-core": "^6.6.0",
+            "@fortawesome/free-brands-svg-icons": "^6.6.0",
+            "@fortawesome/free-solid-svg-icons": "^6.6.0",
+            "@fortawesome/react-fontawesome": "^0.2.2",
+            "@mui/icons-material": "^6.1.5",
+            "@mui/material": "^6.1.6",
+            "@mui/system": "^6.1.5",
+            "@react-pdf/renderer": "^4.0.0",
+            "apexcharts": "^3.54.0",
+            "axios": "^1.7.7",
+            "css-loader": "^7.1.2",
+            "docx": "^9.0.0",
+            "dompurify": "^3.1.7",
+            "dotenv": "^16.4.5",
+            "dotenv-webpack": "^8.1.0",
+            "file-saver": "^2.0.5",
+            "html2canvas": "^1.4.1",
+            "jspdf": "^2.5.2",
+            "jspdf-autotable": "^3.8.4",
+            "jszip": "^3.10.1",
+            "mammoth": "^1.8.0",
+            "marked": "^14.1.3",
+            "pdf-lib": "^1.17.1",
+            "pdf2json": "^3.1.4",
+            "pdfjs-dist": "^4.8.69",
+            "react": "^18.3.1",
+            "react-apexcharts": "^1.4.1",
+            "react-dom": "^18.3.1",
+            "react-dropzone": "^14.2.10",
+            "react-icons": "^5.3.0",
+            "react-pdf": "^9.1.1",
+            "react-router-dom": "^6.26.2",
+            "react-slick": "^0.30.2",
+            "slick-carousel": "^1.8.1",
+            "style-loader": "^4.0.0"
+        },
+        "Dev Dependencies": {
+            "@babel/core": "^7.25.2",
+            "@babel/preset-env": "^7.25.4",
+            "@babel/preset-react": "^7.24.7",
+            "babel-loader": "^9.2.1",
+            "file-loader": "^6.2.0",
+            "html-webpack-plugin": "^5.6.0",
+            "webpack": "^5.95.0",
+            "webpack-cli": "^5.1.4",
+            "webpack-dev-server": "^5.1.0",
+            "worker-loader": "^3.0.8"
+        },
+        "Scripts": {
+            "start": "webpack serve --mode development",
+            "build": "webpack --mode production",
+            "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "Dockerfile": {},
+        "Docker Compose": {},
+        "Kubernetes Manifests": {},
+        "External Dependencies": []
+    },
+    "Dissertation-Analysis": {
+        "Repository URL": "https://github.com/spandaai/Dissertation-Analysis",
+        "Project Type": "Python",
+        "Frameworks": [
+            "FastAPI"
+        ],
+        "Dependencies": {
+            "fastapi": "specified in requirements.txt",
+            "uvicorn": "specified in requirements.txt",
+            "httpx": "specified in requirements.txt",
+            "asyncio": "specified in requirements.txt",
+            "pydantic": "specified in requirements.txt",
+            "langchain-core": "specified in requirements.txt",
+            "langchain": "specified in requirements.txt",
+            "langchain-ollama": "specified in requirements.txt",
+            "pymupdf": "specified in requirements.txt",
+            "python-docx": "specified in requirements.txt",
+            "pytesseract": "specified in requirements.txt",
+            "pillow": "specified in requirements.txt",
+            "requests": "specified in requirements.txt",
+            "python-dotenv": "specified in requirements.txt",
+            "pypdf2": "specified in requirements.txt",
+            "websockets": "specified in requirements.txt",
+            "python-multipart": "specified in requirements.txt",
+            "sqlalchemy": "specified in requirements.txt",
+            "pymysql": "specified in requirements.txt",
+            "aiokafka": "specified in requirements.txt",
+            "contextlib2": "specified in requirements.txt",
+            "kafka-python": "specified in requirements.txt",
+            "aioredis": "specified in requirements.txt",
+            "setup.py": "present",
+            "docx": "used in source code but not declared in requirements.txt",
+            "backend": "used in source code but not declared in requirements.txt",
+            "typing_extensions": "used in source code but not declared in requirements.txt",
+            "langchain_text_splitters": "used in source code but not declared in requirements.txt",
+            "dotenv": "used in source code but not declared in requirements.txt",
+            "pil": "used in source code but not declared in requirements.txt",
+            "aiohttp": "used in source code but not declared in requirements.txt",
+            "kafka": "used in source code but not declared in requirements.txt"
+        },
+        "Dev Dependencies": {},
+        "Scripts": {},
+        "Dockerfile": {
+            "Base Image": "python:3.10-slim",
+            "Exposed Ports": [
+                "8006"
+            ]
+        },
+        "Docker Compose": {
+            "Services": {
+                "spanda_wilp_dissertation_analysis": {
+                    "Build": {
+                        "context": "C:\\Users\\hanis\\spandaai\\Dissertation-Analysis",
+                        "dockerfile": "Dockerfile"
+                    },
+                    "Ports": [
+                        "8007:8006"
+                    ],
+                    "Volumes": [
+                        "./backend/src:/app/backend/src"
+                    ],
+                    "Depends On": [
+                        "kafka",
+                        "redis"
+                    ],
+                    "Networks": [
+                        "app_network"
+                    ]
+                },
+                "zookeeper": {
+                    "Image": "confluentinc/cp-zookeeper:latest",
+                    "Ports": [
+                        "2181:2181"
+                    ],
+                    "Environment Variables": {
+                        "ZOOKEEPER_CLIENT_PORT": 2181,
+                        "ZOOKEEPER_TICK_TIME": 2000
+                    },
+                    "Networks": [
+                        "app_network"
+                    ]
+                },
+                "kafka": {
+                    "Image": "confluentinc/cp-kafka:latest",
+                    "Ports": [
+                        "9092:9092"
+                    ],
+                    "Environment Variables": {
+                        "KAFKA_BROKER_ID": 1,
+                        "KAFKA_ZOOKEEPER_CONNECT": "zookeeper:2181",
+                        "KAFKA_ADVERTISED_LISTENERS": "PLAINTEXT://kafka:9092",
+                        "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR": 1,
+                        "KAFKA_MESSAGE_MAX_BYTES": 200000000,
+                        "KAFKA_REPLICA_FETCH_MAX_BYTES": 200000000
+                    },
+                    "Depends On": [
+                        "zookeeper"
+                    ],
+                    "Networks": [
+                        "app_network"
+                    ]
+                },
+                "kafka-ui": {
+                    "Image": "provectuslabs/kafka-ui:latest",
+                    "Ports": [
+                        "8080:8080"
+                    ],
+                    "Environment Variables": {
+                        "KAFKA_CLUSTERS_0_NAME": "local",
+                        "KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS": "kafka:9092"
+                    },
+                    "Depends On": [
+                        "kafka"
+                    ],
+                    "Networks": [
+                        "app_network"
+                    ]
+                },
+                "redis": {
+                    "Image": "redis:alpine",
+                    "Ports": [
+                        "6379:6379"
+                    ],
+                    "Networks": [
+                        "app_network"
+                    ]
+                }
+            },
+            "Networks": {
+                "app_network": {
+                    "external": true
+                }
+            }
+        },
+        "Kubernetes Manifests": {},
+        "External Dependencies": [
+            {
+                "Service": "kafka",
+                "Type": "Message Broker",
+                "Image": "confluentinc/cp-kafka:latest"
+            },
+            {
+                "Service": "zookeeper",
+                "Type": "Message Broker",
+                "Image": "confluentinc/cp-zookeeper:latest"
+            },
+            {
+                "Service": "kafka-ui",
+                "Type": "Message Broker",
+                "Image": "provectuslabs/kafka-ui:latest"
+            },
+            {
+                "Service": "redis",
+                "Type": "Cache",
+                "Image": "redis:alpine"
+            }
+        ]
+    }
+}

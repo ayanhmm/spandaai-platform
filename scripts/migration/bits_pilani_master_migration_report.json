@@ -1,0 +1,1770 @@
+{
+    "Dissertation Analysis": {
+        "Repository URL": {
+            "frontend": "https://github.com/spandaai/dissertation-frontend",
+            "backend": "https://github.com/spandaai/Dissertation-Analysis"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/vllm.git",
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/spandaai/kafka",
+            "https://github.com/spandaai/superset",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/ollama",
+                "layer": "Platform",
+                "project_types": [
+                    "Go"
+                ],
+                "frameworks": [],
+                "dependencies": {},
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "--platform=linux/amd64",
+                    "Exposed Ports": [
+                        "11434",
+                        "11434"
+                    ],
+                    "Environment Variables": {
+                        "LD_LIBRARY_PATH": "/usr/local/nvidia/lib:/usr/local/nvidia/lib64",
+                        "LIBRARY_PATH": "/usr/local/cuda/lib64/stubs:/opt/amdgpu/lib64",
+                        "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                        "NVIDIA_DRIVER_CAPABILITIES": "compute,utility",
+                        "NVIDIA_VISIBLE_DEVICES": "all"
+                    }
+                },
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/vllm.git",
+                "layer": "Platform",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [],
+                "dependencies": {
+                    "setup.py": "present in setup.py",
+                    "uvloop": "used in source code but not declared in requirements.txt",
+                    "safetensors": "used in source code but not declared in requirements.txt",
+                    "pytest": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt",
+                    "tests": "used in source code but not declared in requirements.txt",
+                    "abc": "used in source code but not declared in requirements.txt",
+                    "reshapes": "used in source code but not declared in requirements.txt",
+                    "pprint": "used in source code but not declared in requirements.txt",
+                    "counter": "used in source code but not declared in requirements.txt",
+                    "granite_20b_fc_tool_parser": "used in source code but not declared in requirements.txt",
+                    "intern_vit": "used in source code but not declared in requirements.txt",
+                    "decord": "used in source code but not declared in requirements.txt",
+                    "ast": "used in source code but not declared in requirements.txt",
+                    "huggingface_hub": "used in source code but not declared in requirements.txt",
+                    "inputs": "used in source code but not declared in requirements.txt",
+                    "weight_shapes": "used in source code but not declared in requirements.txt",
+                    "cpuinfo": "used in source code but not declared in requirements.txt",
+                    "setuptools_scm": "used in source code but not declared in requirements.txt",
+                    "granite_tool_parser": "used in source code but not declared in requirements.txt",
+                    "image": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_w8a16_fp8": "used in source code but not declared in requirements.txt",
+                    "transformers_neuronx": "used in source code but not declared in requirements.txt",
+                    "cpu": "used in source code but not declared in requirements.txt",
+                    "gc": "used in source code but not declared in requirements.txt",
+                    "layerwise_profile": "used in source code but not declared in requirements.txt",
+                    "test_completion": "used in source code but not declared in requirements.txt",
+                    "torch": "used in source code but not declared in requirements.txt",
+                    "_typeshed": "used in source code but not declared in requirements.txt",
+                    "pynvml": "used in source code but not declared in requirements.txt",
+                    "urllib": "used in source code but not declared in requirements.txt",
+                    "rocm": "used in source code but not declared in requirements.txt",
+                    "fastapi": "used in source code but not declared in requirements.txt",
+                    "numbers": "used in source code but not declared in requirements.txt",
+                    "optimum": "used in source code but not declared in requirements.txt",
+                    "numpy": "used in source code but not declared in requirements.txt",
+                    "lmformatenforcer": "used in source code but not declared in requirements.txt",
+                    "torch_xla": "used in source code but not declared in requirements.txt",
+                    "registry": "used in source code but not declared in requirements.txt",
+                    "neuron": "used in source code but not declared in requirements.txt",
+                    "marlin_utils": "used in source code but not declared in requirements.txt",
+                    "matplotlib": "used in source code but not declared in requirements.txt",
+                    "aqlm": "used in source code but not declared in requirements.txt",
+                    "cloudpickle": "used in source code but not declared in requirements.txt",
+                    "einops": "used in source code but not declared in requirements.txt",
+                    "base": "used in source code but not declared in requirements.txt",
+                    "internvl": "used in source code but not declared in requirements.txt",
+                    "datasets": "used in source code but not declared in requirements.txt",
+                    "amdsmi": "used in source code but not declared in requirements.txt",
+                    "interface": "used in source code but not declared in requirements.txt",
+                    "aiohttp": "used in source code but not declared in requirements.txt",
+                    "fbgemm_fp8": "used in source code but not declared in requirements.txt",
+                    "quant_utils": "used in source code but not declared in requirements.txt",
+                    "experts_int8": "used in source code but not declared in requirements.txt",
+                    "vlm_utils": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_w4a16_24": "used in source code but not declared in requirements.txt",
+                    "psutil": "used in source code but not declared in requirements.txt",
+                    "hf_transfer": "used in source code but not declared in requirements.txt",
+                    "modelopt": "used in source code but not declared in requirements.txt",
+                    "backend_request_func": "used in source code but not declared in requirements.txt",
+                    "gradio": "used in source code but not declared in requirements.txt",
+                    "blame": "used in source code but not declared in requirements.txt",
+                    "gptq": "used in source code but not declared in requirements.txt",
+                    "pythonic_tool_parser": "used in source code but not declared in requirements.txt",
+                    "uvicorn": "used in source code but not declared in requirements.txt",
+                    "vllm": "used in source code but not declared in requirements.txt",
+                    "gptq_marlin_24": "used in source code but not declared in requirements.txt",
+                    "libtpu": "used in source code but not declared in requirements.txt",
+                    "habana_frameworks": "used in source code but not declared in requirements.txt",
+                    "pkg_resources": "used in source code but not declared in requirements.txt",
+                    "getpass": "used in source code but not declared in requirements.txt",
+                    "sphinx": "used in source code but not declared in requirements.txt",
+                    "vllm_inductor_pass": "used in source code but not declared in requirements.txt",
+                    "tokenizer": "used in source code but not declared in requirements.txt",
+                    "pandas": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_w8a8_fp8": "used in source code but not declared in requirements.txt",
+                    "unittest": "used in source code but not declared in requirements.txt",
+                    "transformers": "used in source code but not declared in requirements.txt",
+                    "neural_compressor": "used in source code but not declared in requirements.txt",
+                    "flashinfer": "used in source code but not declared in requirements.txt",
+                    "hermes_tool_parser": "used in source code but not declared in requirements.txt",
+                    "tabulate": "used in source code but not declared in requirements.txt",
+                    "librosa": "used in source code but not declared in requirements.txt",
+                    "ipex_quant": "used in source code but not declared in requirements.txt",
+                    "cv2": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors": "used in source code but not declared in requirements.txt",
+                    "mistral_common": "used in source code but not declared in requirements.txt",
+                    "mimetypes": "used in source code but not declared in requirements.txt",
+                    "platform": "used in source code but not declared in requirements.txt",
+                    "gptq_marlin": "used in source code but not declared in requirements.txt",
+                    "blip": "used in source code but not declared in requirements.txt",
+                    "soundfile": "used in source code but not declared in requirements.txt",
+                    "vllm_hpu_extension": "used in source code but not declared in requirements.txt",
+                    "yaml": "used in source code but not declared in requirements.txt",
+                    "prometheus_client": "used in source code but not declared in requirements.txt",
+                    "marlin_utils_test": "used in source code but not declared in requirements.txt",
+                    "glob": "used in source code but not declared in requirements.txt",
+                    "partial_json_parser": "used in source code but not declared in requirements.txt",
+                    "pass_manager": "used in source code but not declared in requirements.txt",
+                    "deepspeed": "used in source code but not declared in requirements.txt",
+                    "llava": "used in source code but not declared in requirements.txt",
+                    "xformers": "used in source code but not declared in requirements.txt",
+                    "llama_tool_parser": "used in source code but not declared in requirements.txt",
+                    "allclose_default": "used in source code but not declared in requirements.txt",
+                    "lmdeploy": "used in source code but not declared in requirements.txt",
+                    "parallel_state": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_w8a8_int8": "used in source code but not declared in requirements.txt",
+                    "my_opt": "used in source code but not declared in requirements.txt",
+                    "tpu_int8": "used in source code but not declared in requirements.txt",
+                    "blocksparse_attention_kernel": "used in source code but not declared in requirements.txt",
+                    "utils": "used in source code but not declared in requirements.txt",
+                    "pytest_asyncio": "used in source code but not declared in requirements.txt",
+                    "video": "used in source code but not declared in requirements.txt",
+                    "cutlass_library": "used in source code but not declared in requirements.txt",
+                    "mistral_tool_parser": "used in source code but not declared in requirements.txt",
+                    "nvtx": "used in source code but not declared in requirements.txt",
+                    "base_tokenizer_group": "used in source code but not declared in requirements.txt",
+                    "layer_utils": "used in source code but not declared in requirements.txt",
+                    "cuda": "used in source code but not declared in requirements.txt",
+                    "qwen2": "used in source code but not declared in requirements.txt",
+                    "depyf": "used in source code but not declared in requirements.txt",
+                    "outlines": "used in source code but not declared in requirements.txt",
+                    "requests": "used in source code but not declared in requirements.txt",
+                    "zipfile": "used in source code but not declared in requirements.txt",
+                    "pstats": "used in source code but not declared in requirements.txt",
+                    "test_mllama": "used in source code but not declared in requirements.txt",
+                    "awq": "used in source code but not declared in requirements.txt",
+                    "flash_attn": "used in source code but not declared in requirements.txt",
+                    "locale": "used in source code but not declared in requirements.txt",
+                    "openvino": "used in source code but not declared in requirements.txt",
+                    "clip": "used in source code but not declared in requirements.txt",
+                    "zmq": "used in source code but not declared in requirements.txt",
+                    "tqdm": "used in source code but not declared in requirements.txt",
+                    "conftest": "used in source code but not declared in requirements.txt",
+                    "starlette": "used in source code but not declared in requirements.txt",
+                    "tensorizer": "used in source code but not declared in requirements.txt",
+                    "moe_pallas": "used in source code but not declared in requirements.txt",
+                    "pydantic": "used in source code but not declared in requirements.txt",
+                    "lark": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_scheme": "used in source code but not declared in requirements.txt",
+                    "string": "used in source code but not declared in requirements.txt",
+                    "codecs": "used in source code but not declared in requirements.txt",
+                    "fusion": "used in source code but not declared in requirements.txt",
+                    "torchvision": "used in source code but not declared in requirements.txt",
+                    "inspect": "used in source code but not declared in requirements.txt",
+                    "idefics2_vision_model": "used in source code but not declared in requirements.txt",
+                    "vllm_cutlass_library_extension": "used in source code but not declared in requirements.txt",
+                    "awq_marlin": "used in source code but not declared in requirements.txt",
+                    "intel_extension_for_pytorch": "used in source code but not declared in requirements.txt",
+                    "ipaddress": "used in source code but not declared in requirements.txt",
+                    "test_utils": "used in source code but not declared in requirements.txt",
+                    "llama": "used in source code but not declared in requirements.txt",
+                    "vllm_test_utils": "used in source code but not declared in requirements.txt",
+                    "opentelemetry": "used in source code but not declared in requirements.txt",
+                    "version": "used in source code but not declared in requirements.txt",
+                    "errno": "used in source code but not declared in requirements.txt",
+                    "dataclasses": "used in source code but not declared in requirements.txt",
+                    "ctypes": "used in source code but not declared in requirements.txt",
+                    "spec_decode": "used in source code but not declared in requirements.txt",
+                    "jsonschema": "used in source code but not declared in requirements.txt",
+                    "transformers_modules": "used in source code but not declared in requirements.txt",
+                    "copy": "used in source code but not declared in requirements.txt",
+                    "models": "used in source code but not declared in requirements.txt",
+                    "detokenizer_utils": "used in source code but not declared in requirements.txt",
+                    "compressed_tensors_wna16": "used in source code but not declared in requirements.txt",
+                    "mistral": "used in source code but not declared in requirements.txt",
+                    "shutil": "used in source code but not declared in requirements.txt",
+                    "communication_op": "used in source code but not declared in requirements.txt",
+                    "pixtral": "used in source code but not declared in requirements.txt",
+                    "model_executor": "used in source code but not declared in requirements.txt",
+                    "fp8": "used in source code but not declared in requirements.txt",
+                    "msgspec": "used in source code but not declared in requirements.txt",
+                    "processing": "used in source code but not declared in requirements.txt",
+                    "fix_functionalization": "used in source code but not declared in requirements.txt",
+                    "ammo": "used in source code but not declared in requirements.txt",
+                    "bisect": "used in source code but not declared in requirements.txt",
+                    "bitsandbytes": "used in source code but not declared in requirements.txt",
+                    "transformer_engine": "used in source code but not declared in requirements.txt",
+                    "internlm2_tool_parser": "used in source code but not declared in requirements.txt",
+                    "entrypoints": "used in source code but not declared in requirements.txt",
+                    "_pytest": "used in source code but not declared in requirements.txt",
+                    "abstract_tool_parser": "used in source code but not declared in requirements.txt",
+                    "builders": "used in source code but not declared in requirements.txt",
+                    "timm": "used in source code but not declared in requirements.txt",
+                    "ray_tokenizer_group": "used in source code but not declared in requirements.txt",
+                    "grpc": "used in source code but not declared in requirements.txt",
+                    "triton": "used in source code but not declared in requirements.txt",
+                    "fractions": "used in source code but not declared in requirements.txt",
+                    "importlib": "used in source code but not declared in requirements.txt",
+                    "fnmatch": "used in source code but not declared in requirements.txt",
+                    "data": "used in source code but not declared in requirements.txt",
+                    "queue": "used in source code but not declared in requirements.txt",
+                    "neuron_quant": "used in source code but not declared in requirements.txt",
+                    "audio": "used in source code but not declared in requirements.txt",
+                    "gguf": "used in source code but not declared in requirements.txt",
+                    "jinja2": "used in source code but not declared in requirements.txt",
+                    "pil": "used in source code but not declared in requirements.txt",
+                    "importlib_metadata": "used in source code but not declared in requirements.txt",
+                    "filelock": "used in source code but not declared in requirements.txt",
+                    "interfaces_base": "used in source code but not declared in requirements.txt",
+                    "_version": "used in source code but not declared in requirements.txt",
+                    "array": "used in source code but not declared in requirements.txt",
+                    "mii": "used in source code but not declared in requirements.txt",
+                    "hqq_marlin": "used in source code but not declared in requirements.txt",
+                    "parse": "used in source code but not declared in requirements.txt",
+                    "cprofile": "used in source code but not declared in requirements.txt",
+                    "oneccl_bindings_for_pytorch": "used in source code but not declared in requirements.txt",
+                    "qqq": "used in source code but not declared in requirements.txt",
+                    "http": "used in source code but not declared in requirements.txt",
+                    "jamba_tool_parser": "used in source code but not declared in requirements.txt",
+                    "modelscope": "used in source code but not declared in requirements.txt",
+                    "qwen_vl_utils": "used in source code but not declared in requirements.txt",
+                    "seaborn": "used in source code but not declared in requirements.txt",
+                    "packaging": "used in source code but not declared in requirements.txt",
+                    "sentence_transformers": "used in source code but not declared in requirements.txt",
+                    "siglip": "used in source code but not declared in requirements.txt",
+                    "interfaces": "used in source code but not declared in requirements.txt",
+                    "mplinearkernel": "used in source code but not declared in requirements.txt",
+                    "xpu": "used in source code but not declared in requirements.txt",
+                    "tokenizer_group": "used in source code but not declared in requirements.txt",
+                    "inductor_pass": "used in source code but not declared in requirements.txt",
+                    "docs": "used in source code but not declared in requirements.txt",
+                    "benchmark_shapes": "used in source code but not declared in requirements.txt",
+                    "ray": "used in source code but not declared in requirements.txt",
+                    "hpu": "used in source code but not declared in requirements.txt",
+                    "openai": "used in source code but not declared in requirements.txt",
+                    "lm_eval": "used in source code but not declared in requirements.txt",
+                    "core": "used in source code but not declared in requirements.txt",
+                    "tpu": "used in source code but not declared in requirements.txt",
+                    "marlin": "used in source code but not declared in requirements.txt",
+                    "deepspeedfp": "used in source code but not declared in requirements.txt",
+                    "fused_moe": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "nvidia/cuda:${CUDA_VERSION}-devel-ubuntu20.04",
+                    "Environment Variables": {
+                        "DEBIAN_FRONTEND": "noninteractive",
+                        "TORCH_CUDA_ARCH_LIST": "${torch_cuda_arch_list}",
+                        "VLLM_FA_CMAKE_GPU_ARCHES": "${vllm_fa_cmake_gpu_arches}",
+                        "MAX_JOBS": "${max_jobs}",
+                        "NVCC_THREADS": "$nvcc_threads",
+                        "CCACHE_DIR": "/root/.cache/ccache",
+                        "VLLM_MAX_SIZE_MB": "$VLLM_MAX_SIZE_MB"
+                    }
+                },
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/Dissertation-Analysis",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "pypdf2": "specified in requirements.txt",
+                    "websockets": "specified in requirements.txt",
+                    "python-multipart": "specified in requirements.txt",
+                    "sqlalchemy": "specified in requirements.txt",
+                    "pymysql": "specified in requirements.txt",
+                    "aiokafka": "specified in requirements.txt",
+                    "contextlib2": "specified in requirements.txt",
+                    "kafka-python": "specified in requirements.txt",
+                    "aioredis": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "docx": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt",
+                    "pil": "used in source code but not declared in requirements.txt",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "fitz": "used in source code but not declared in requirements.txt",
+                    "kafka": "used in source code but not declared in requirements.txt",
+                    "aiohttp": "used in source code but not declared in requirements.txt",
+                    "langchain_text_splitters": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8006"
+                    ]
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_dissertation_analysis": {
+                            "Build": {
+                                "context": "C:\\Users\\hanis\\spandaai\\Dissertation-Analysis",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8007:8006"
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Depends On": [
+                                "kafka",
+                                "redis"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        },
+                        "zookeeper": {
+                            "Image": "confluentinc/cp-zookeeper:latest",
+                            "Ports": [
+                                "2181:2181"
+                            ],
+                            "Environment Variables": {
+                                "ZOOKEEPER_CLIENT_PORT": 2181,
+                                "ZOOKEEPER_TICK_TIME": 2000
+                            },
+                            "Networks": [
+                                "app_network"
+                            ]
+                        },
+                        "kafka": {
+                            "Image": "confluentinc/cp-kafka:latest",
+                            "Ports": [
+                                "9092:9092"
+                            ],
+                            "Environment Variables": {
+                                "KAFKA_BROKER_ID": 1,
+                                "KAFKA_ZOOKEEPER_CONNECT": "zookeeper:2181",
+                                "KAFKA_ADVERTISED_LISTENERS": "PLAINTEXT://kafka:9092",
+                                "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR": 1,
+                                "KAFKA_MESSAGE_MAX_BYTES": 200000000,
+                                "KAFKA_REPLICA_FETCH_MAX_BYTES": 200000000
+                            },
+                            "Depends On": [
+                                "zookeeper"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        },
+                        "kafka-ui": {
+                            "Image": "provectuslabs/kafka-ui:latest",
+                            "Ports": [
+                                "8080:8080"
+                            ],
+                            "Environment Variables": {
+                                "KAFKA_CLUSTERS_0_NAME": "local",
+                                "KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS": "kafka:9092"
+                            },
+                            "Depends On": [
+                                "kafka"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        },
+                        "redis": {
+                            "Image": "redis:alpine",
+                            "Ports": [
+                                "6379:6379"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [
+                    {
+                        "Service": "kafka-ui",
+                        "Type": "Message Broker",
+                        "Image": "provectuslabs/kafka-ui:latest"
+                    },
+                    {
+                        "Service": "zookeeper",
+                        "Type": "Message Broker",
+                        "Image": "confluentinc/cp-zookeeper:latest"
+                    },
+                    {
+                        "Service": "redis",
+                        "Type": "Cache",
+                        "Image": "redis:alpine"
+                    },
+                    {
+                        "Service": "kafka",
+                        "Type": "Message Broker",
+                        "Image": "confluentinc/cp-kafka:latest"
+                    }
+                ],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/kafka",
+                "layer": "Platform",
+                "project_types": [
+                    "Java"
+                ],
+                "frameworks": [],
+                "dependencies": {
+                    "build.gradle": "present in build.gradle"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {},
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/moodle/moodle",
+                "layer": "Domain",
+                "project_types": [
+                    "Node.js"
+                ],
+                "frameworks": [],
+                "dependencies": {},
+                "dev_dependencies": {
+                    "@babel/core": "7.17.5",
+                    "@babel/eslint-parser": "^7.21.3",
+                    "@babel/eslint-plugin": "7.19.1",
+                    "@babel/preset-env": "7.16.11",
+                    "@xmldom/xmldom": "^0.8.7",
+                    "ajv": "^8.12.0",
+                    "async": "^3.2.5",
+                    "babel-plugin-system-import-transformer": "^4.0.0",
+                    "babel-plugin-transform-es2015-modules-amd-lazy": "2.0.1",
+                    "babel-preset-minify": "0.5.1",
+                    "chalk": "^5.3.0",
+                    "commander": "^12.0.0",
+                    "cross-env": "^7.0.3",
+                    "docdash": "^2.0.2",
+                    "eslint": "^8.56.0",
+                    "eslint-plugin-jsdoc": "^48.0.4",
+                    "eslint-plugin-promise": "6.0.0",
+                    "fb-watchman": "^2.0.2",
+                    "gherkin-lint": "^4.2.2",
+                    "git-tags-remote": "^1.0.5",
+                    "glob": "^10.3.10",
+                    "grunt": "^1.6.1",
+                    "grunt-contrib-watch": "1.1.0",
+                    "grunt-eslint": "24.0.0",
+                    "grunt-rollup": "^11.9.0",
+                    "grunt-sass": "3.1.0",
+                    "grunt-stylelint": "^0.19.0",
+                    "hugo-bin": "^0.80.2",
+                    "hugo-lunr-indexer": "^1.1.3",
+                    "inquirer": "^9.2.15",
+                    "inquirer-search-list": "^1.2.6",
+                    "jsdoc": "^4.0.2",
+                    "jsdoc-to-markdown": "^8.0.0",
+                    "jshint": "^2.13.4",
+                    "jstoxml": "^3.2.3",
+                    "npm-run-all": "^4.1.5",
+                    "postcss-scss": "^4.0.9",
+                    "rollup-plugin-terser": "^7.0.2",
+                    "sass": "^1.58.3",
+                    "semver": "7.3.5",
+                    "shifter": "https://github.com/andrewnicols/shifter/archive/v1.2.0_moodle-0.tar.gz",
+                    "stylelint": "^15.11.0",
+                    "stylelint-csstree-validator": "^3.0.0",
+                    "winston": "^3.13.0",
+                    "xpath": "0.0.32"
+                },
+                "scripts": {
+                    "upgradenote": "node .grunt/upgradenotes.mjs create"
+                },
+                "dockerfile": {},
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/weaviate/weaviate",
+                "layer": "Platform",
+                "project_types": [
+                    "Go"
+                ],
+                "frameworks": [],
+                "dependencies": {},
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "golang:1.22-alpine",
+                    "Environment Variables": {
+                        "GO111MODULE": "on"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "contextionary": {
+                            "Image": "semitechnologies/contextionary:en0.16.0-v1.2.1",
+                            "Ports": [
+                                "9999:9999"
+                            ],
+                            "Environment Variables": {
+                                "EXTENSIONS_STORAGE_MODE": "weaviate",
+                                "EXTENSIONS_STORAGE_ORIGIN": "http://host.docker.internal:8080",
+                                "OCCURRENCE_WEIGHT_LINEAR_FACTOR": 0.75,
+                                "LOG_LEVEL": "debug"
+                            }
+                        },
+                        "prometheus": {
+                            "Image": "prom/prometheus:v2.46.0",
+                            "Ports": [
+                                "9090:9090"
+                            ],
+                            "Volumes": [
+                                "./tools/dev/prometheus_config/:/etc/prometheus/",
+                                "./data/prometheus:/prometheus"
+                            ]
+                        },
+                        "grafana": {
+                            "Image": "grafana/grafana-oss",
+                            "Ports": [
+                                "3000:3000"
+                            ],
+                            "Volumes": [
+                                "./tools/dev/grafana/grafana.ini:/etc/grafana/grafana.ini",
+                                "./tools/dev/grafana/datasource.yml:/etc/grafana/provisioning/datasources/prometheus.yml",
+                                "./tools/dev/grafana/dashboard_provider.yml:/etc/grafana/provisioning/dashboards/dashboards.yml",
+                                "./tools/dev/grafana/dashboards:/var/lib/grafana/dashboards"
+                            ]
+                        },
+                        "keycloak": {
+                            "Image": "jboss/keycloak:5.0.0",
+                            "Ports": [
+                                "9090:8080"
+                            ],
+                            "Environment Variables": {
+                                "KEYCLOAK_USER": "admin",
+                                "KEYCLOAK_PASSWORD": "admin",
+                                "KEYCLOAK_IMPORT": "/tmp/weaviate-realm.json"
+                            },
+                            "Volumes": [
+                                "./tools/dev/keycloak/weaviate-realm.json:/tmp/weaviate-realm.json"
+                            ]
+                        },
+                        "t2v-transformers": {
+                            "Image": "semitechnologies/transformers-inference:baai-bge-small-en-v1.5-onnx",
+                            "Ports": [
+                                "8000:8080"
+                            ]
+                        },
+                        "qna-transformers": {
+                            "Image": "semitechnologies/qna-transformers:distilbert-base-uncased-distilled-squad",
+                            "Ports": [
+                                "8001:8080"
+                            ]
+                        },
+                        "i2v-neural": {
+                            "Image": "semitechnologies/img2vec-pytorch:resnet50",
+                            "Ports": [
+                                "8002:8080"
+                            ]
+                        },
+                        "ner-transformers": {
+                            "Image": "semitechnologies/ner-transformers:latest",
+                            "Ports": [
+                                "8003:8080"
+                            ]
+                        },
+                        "text-spellcheck": {
+                            "Image": "semitechnologies/text-spellcheck-model:pyspellchecker-en",
+                            "Ports": [
+                                "8004:8080"
+                            ]
+                        },
+                        "multi2vec-clip": {
+                            "Image": "semitechnologies/multi2vec-clip:sentence-transformers-clip-ViT-B-32-multilingual-v1",
+                            "Ports": [
+                                "8005:8080"
+                            ]
+                        },
+                        "t2v-transformers-passage": {
+                            "Image": "semitechnologies/transformers-inference:facebook-dpr-ctx_encoder-single-nq-base",
+                            "Ports": [
+                                "8006:8080"
+                            ]
+                        },
+                        "t2v-transformers-query": {
+                            "Image": "semitechnologies/transformers-inference:facebook-dpr-question_encoder-single-nq-base",
+                            "Ports": [
+                                "8007:8080"
+                            ]
+                        },
+                        "sum-transformers": {
+                            "Image": "semitechnologies/sum-transformers:facebook-bart-large-cnn",
+                            "Ports": [
+                                "8008:8080"
+                            ]
+                        },
+                        "reranker-transformers": {
+                            "Image": "semitechnologies/reranker-transformers:cross-encoder-ms-marco-MiniLM-L-6-v2",
+                            "Ports": [
+                                "8009:8080"
+                            ]
+                        },
+                        "t2v-gpt4all": {
+                            "Image": "semitechnologies/gpt4all-inference:all-MiniLM-L6-v2",
+                            "Ports": [
+                                "8010:8080"
+                            ]
+                        },
+                        "multi2vec-bind": {
+                            "Image": "semitechnologies/multi2vec-bind:imagebind",
+                            "Ports": [
+                                "8011:8080"
+                            ]
+                        },
+                        "backup-s3": {
+                            "Image": "minio/minio",
+                            "Ports": [
+                                "9000:9000"
+                            ],
+                            "Environment Variables": {
+                                "MINIO_ROOT_USER": "aws_access_key",
+                                "MINIO_ROOT_PASSWORD": "aws_secret_key"
+                            },
+                            "Volumes": [
+                                "./backups-s3:/data"
+                            ]
+                        },
+                        "backup-gcs": {
+                            "Image": "oittaa/gcp-storage-emulator",
+                            "Ports": [
+                                "9090:8080"
+                            ],
+                            "Volumes": [
+                                "./backups-gcs:/storage"
+                            ]
+                        },
+                        "backup-azure": {
+                            "Image": "mcr.microsoft.com/azure-storage/azurite",
+                            "Ports": [
+                                "10000:10000"
+                            ],
+                            "Volumes": [
+                                "./backups-azure:/data"
+                            ]
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [
+                    {
+                        "Service": "prometheus",
+                        "Type": "Monitoring",
+                        "Image": "prom/prometheus:v2.46.0"
+                    },
+                    {
+                        "Service": "grafana",
+                        "Type": "Monitoring",
+                        "Image": "grafana/grafana-oss"
+                    }
+                ],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/dissertation-frontend",
+                "layer": "Application",
+                "project_types": [
+                    "Node.js"
+                ],
+                "frameworks": [
+                    "React"
+                ],
+                "dependencies": {
+                    "@emotion/react": "^11.13.3",
+                    "@emotion/styled": "^11.13.0",
+                    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+                    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+                    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+                    "@fortawesome/react-fontawesome": "^0.2.2",
+                    "@mui/icons-material": "^6.1.5",
+                    "@mui/material": "^6.1.6",
+                    "@mui/system": "^6.1.5",
+                    "@react-pdf/renderer": "^4.0.0",
+                    "apexcharts": "^3.54.0",
+                    "axios": "^1.7.7",
+                    "css-loader": "^7.1.2",
+                    "docx": "^9.0.0",
+                    "dompurify": "^3.1.7",
+                    "dotenv": "^16.4.5",
+                    "dotenv-webpack": "^8.1.0",
+                    "file-saver": "^2.0.5",
+                    "html2canvas": "^1.4.1",
+                    "jspdf": "^2.5.2",
+                    "jspdf-autotable": "^3.8.4",
+                    "jszip": "^3.10.1",
+                    "mammoth": "^1.8.0",
+                    "marked": "^14.1.3",
+                    "pdf-lib": "^1.17.1",
+                    "pdf2json": "^3.1.4",
+                    "pdfjs-dist": "^4.8.69",
+                    "react": "^18.3.1",
+                    "react-apexcharts": "^1.4.1",
+                    "react-dom": "^18.3.1",
+                    "react-dropzone": "^14.2.10",
+                    "react-icons": "^5.3.0",
+                    "react-pdf": "^9.1.1",
+                    "react-router-dom": "^6.26.2",
+                    "react-slick": "^0.30.2",
+                    "slick-carousel": "^1.8.1",
+                    "style-loader": "^4.0.0"
+                },
+                "dev_dependencies": {
+                    "@babel/core": "^7.25.2",
+                    "@babel/preset-env": "^7.25.4",
+                    "@babel/preset-react": "^7.24.7",
+                    "babel-loader": "^9.2.1",
+                    "file-loader": "^6.2.0",
+                    "html-webpack-plugin": "^5.6.0",
+                    "webpack": "^5.95.0",
+                    "webpack-cli": "^5.1.4",
+                    "webpack-dev-server": "^5.1.0",
+                    "worker-loader": "^3.0.8"
+                },
+                "scripts": {
+                    "start": "webpack serve --mode development",
+                    "build": "webpack --mode production",
+                    "test": "echo \"Error: no test specified\" && exit 1"
+                },
+                "dockerfile": {},
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/superset",
+                "layer": "Platform",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [],
+                "dependencies": {
+                    "setup.py": "present in setup.py",
+                    "deprecation": "used in source code but not declared in requirements.txt",
+                    "requests": "used in source code but not declared in requirements.txt",
+                    "zipfile": "used in source code but not declared in requirements.txt",
+                    "energy_dashboard": "used in source code but not declared in requirements.txt",
+                    "polyline": "used in source code but not declared in requirements.txt",
+                    "flask_cors": "used in source code but not declared in requirements.txt",
+                    "flask_sqlalchemy": "used in source code but not declared in requirements.txt",
+                    "celery": "used in source code but not declared in requirements.txt",
+                    "msgpack": "used in source code but not declared in requirements.txt",
+                    "birth_names_dashboard": "used in source code but not declared in requirements.txt",
+                    "pytest": "used in source code but not declared in requirements.txt",
+                    "pyinstrument": "used in source code but not declared in requirements.txt",
+                    "decimal": "used in source code but not declared in requirements.txt",
+                    "sshtunnel": "used in source code but not declared in requirements.txt",
+                    "world_bank_dashboard": "used in source code but not declared in requirements.txt",
+                    "markdown": "used in source code but not declared in requirements.txt",
+                    "tests": "used in source code but not declared in requirements.txt",
+                    "sqlglot": "used in source code but not declared in requirements.txt",
+                    "abc": "used in source code but not declared in requirements.txt",
+                    "func_timeout": "used in source code but not declared in requirements.txt",
+                    "backoff": "used in source code but not declared in requirements.txt",
+                    "pprint": "used in source code but not declared in requirements.txt",
+                    "helpers": "used in source code but not declared in requirements.txt",
+                    "conftest": "used in source code but not declared in requirements.txt",
+                    "trino": "used in source code but not declared in requirements.txt",
+                    "parsedatetime": "used in source code but not declared in requirements.txt",
+                    "pytz": "used in source code but not declared in requirements.txt",
+                    "click_option_group": "used in source code but not declared in requirements.txt",
+                    "colorama": "used in source code but not declared in requirements.txt",
+                    "ast": "used in source code but not declared in requirements.txt",
+                    "progress": "used in source code but not declared in requirements.txt",
+                    "pgsanity": "used in source code but not declared in requirements.txt",
+                    "zlib": "used in source code but not declared in requirements.txt",
+                    "string": "used in source code but not declared in requirements.txt",
+                    "freezegun": "used in source code but not declared in requirements.txt",
+                    "openapi_spec_validator": "used in source code but not declared in requirements.txt",
+                    "html": "used in source code but not declared in requirements.txt",
+                    "prophet": "used in source code but not declared in requirements.txt",
+                    "inspect": "used in source code but not declared in requirements.txt",
+                    "ipaddress": "used in source code but not declared in requirements.txt",
+                    "sqlalchemy_bigquery": "used in source code but not declared in requirements.txt",
+                    "log": "used in source code but not declared in requirements.txt",
+                    "jsonpath_ng": "used in source code but not declared in requirements.txt",
+                    "wtforms_json": "used in source code but not declared in requirements.txt",
+                    "__future__": "used in source code but not declared in requirements.txt",
+                    "simplejson": "used in source code but not declared in requirements.txt",
+                    "flask_login": "used in source code but not declared in requirements.txt",
+                    "urllib": "used in source code but not declared in requirements.txt",
+                    "css_templates": "used in source code but not declared in requirements.txt",
+                    "random_time_series": "used in source code but not declared in requirements.txt",
+                    "numpy": "used in source code but not declared in requirements.txt",
+                    "sqlparse": "used in source code but not declared in requirements.txt",
+                    "errno": "used in source code but not declared in requirements.txt",
+                    "timeit": "used in source code but not declared in requirements.txt",
+                    "holidays": "used in source code but not declared in requirements.txt",
+                    "psycopg2": "used in source code but not declared in requirements.txt",
+                    "dataclasses": "used in source code but not declared in requirements.txt",
+                    "pylint": "used in source code but not declared in requirements.txt",
+                    "sqlalchemy_utils": "used in source code but not declared in requirements.txt",
+                    "flask_jwt_extended": "used in source code but not declared in requirements.txt",
+                    "processors": "used in source code but not declared in requirements.txt",
+                    "croniter": "used in source code but not declared in requirements.txt",
+                    "selenium": "used in source code but not declared in requirements.txt",
+                    "parameterized": "used in source code but not declared in requirements.txt",
+                    "base": "used in source code but not declared in requirements.txt",
+                    "slack_sdk": "used in source code but not declared in requirements.txt",
+                    "geohash": "used in source code but not declared in requirements.txt",
+                    "markupsafe": "used in source code but not declared in requirements.txt",
+                    "shapely": "used in source code but not declared in requirements.txt",
+                    "calendar": "used in source code but not declared in requirements.txt",
+                    "big_data": "used in source code but not declared in requirements.txt",
+                    "misc_dashboard": "used in source code but not declared in requirements.txt",
+                    "jwt": "used in source code but not declared in requirements.txt",
+                    "mixins": "used in source code but not declared in requirements.txt",
+                    "flask_migrate": "used in source code but not declared in requirements.txt",
+                    "pytest_mock": "used in source code but not declared in requirements.txt",
+                    "paramiko": "used in source code but not declared in requirements.txt",
+                    "pyhive": "used in source code but not declared in requirements.txt",
+                    "github": "used in source code but not declared in requirements.txt",
+                    "psutil": "used in source code but not declared in requirements.txt",
+                    "sqloxide": "used in source code but not declared in requirements.txt",
+                    "superset_config_docker": "used in source code but not declared in requirements.txt",
+                    "alembic": "used in source code but not declared in requirements.txt",
+                    "urllib3": "used in source code but not declared in requirements.txt",
+                    "cron_descriptor": "used in source code but not declared in requirements.txt",
+                    "click": "used in source code but not declared in requirements.txt",
+                    "flask_testing": "used in source code but not declared in requirements.txt",
+                    "mysqldb": "used in source code but not declared in requirements.txt",
+                    "flask_talisman": "used in source code but not declared in requirements.txt",
+                    "isodate": "used in source code but not declared in requirements.txt",
+                    "pyarrow": "used in source code but not declared in requirements.txt",
+                    "sqlalchemy_kusto": "used in source code but not declared in requirements.txt",
+                    "superset": "used in source code but not declared in requirements.txt",
+                    "playwright": "used in source code but not declared in requirements.txt",
+                    "clickhouse_connect": "used in source code but not declared in requirements.txt",
+                    "energy": "used in source code but not declared in requirements.txt",
+                    "paris": "used in source code but not declared in requirements.txt",
+                    "world_bank": "used in source code but not declared in requirements.txt",
+                    "nh3": "used in source code but not declared in requirements.txt",
+                    "cryptography": "used in source code but not declared in requirements.txt",
+                    "country_map": "used in source code but not declared in requirements.txt",
+                    "pyparsing": "used in source code but not declared in requirements.txt",
+                    "_pytest": "used in source code but not declared in requirements.txt",
+                    "pyocient": "used in source code but not declared in requirements.txt",
+                    "shortid": "used in source code but not declared in requirements.txt",
+                    "hashids": "used in source code but not declared in requirements.txt",
+                    "deck": "used in source code but not declared in requirements.txt",
+                    "db2": "used in source code but not declared in requirements.txt",
+                    "astroid": "used in source code but not declared in requirements.txt",
+                    "pandas_gbq": "used in source code but not declared in requirements.txt",
+                    "long_lat": "used in source code but not declared in requirements.txt",
+                    "sqlite3": "used in source code but not declared in requirements.txt",
+                    "pkg_resources": "used in source code but not declared in requirements.txt",
+                    "rich": "used in source code but not declared in requirements.txt",
+                    "sf_population_polygons": "used in source code but not declared in requirements.txt",
+                    "wtforms": "used in source code but not declared in requirements.txt",
+                    "redis": "used in source code but not declared in requirements.txt",
+                    "pkgutil": "used in source code but not declared in requirements.txt",
+                    "builtins": "used in source code but not declared in requirements.txt",
+                    "importlib": "used in source code but not declared in requirements.txt",
+                    "email": "used in source code but not declared in requirements.txt",
+                    "public_role": "used in source code but not declared in requirements.txt",
+                    "migration_utils": "used in source code but not declared in requirements.txt",
+                    "fixtures": "used in source code but not declared in requirements.txt",
+                    "flask_appbuilder": "used in source code but not declared in requirements.txt",
+                    "pandas": "used in source code but not declared in requirements.txt",
+                    "xlsxwriter": "used in source code but not declared in requirements.txt",
+                    "unittest": "used in source code but not declared in requirements.txt",
+                    "secrets": "used in source code but not declared in requirements.txt",
+                    "jinja2": "used in source code but not declared in requirements.txt",
+                    "_thread": "used in source code but not declared in requirements.txt",
+                    "multiformat_time_series": "used in source code but not declared in requirements.txt",
+                    "pil": "used in source code but not declared in requirements.txt",
+                    "doctest": "used in source code but not declared in requirements.txt",
+                    "importlib_metadata": "used in source code but not declared in requirements.txt",
+                    "flask_compress": "used in source code but not declared in requirements.txt",
+                    "textwrap": "used in source code but not declared in requirements.txt",
+                    "humanize": "used in source code but not declared in requirements.txt",
+                    "supported_charts_dashboard": "used in source code but not declared in requirements.txt",
+                    "geojson": "used in source code but not declared in requirements.txt",
+                    "flask_babel": "used in source code but not declared in requirements.txt",
+                    "flask": "used in source code but not declared in requirements.txt",
+                    "platform": "used in source code but not declared in requirements.txt",
+                    "superset_config": "used in source code but not declared in requirements.txt",
+                    "requests_cache": "used in source code but not declared in requirements.txt",
+                    "dateutil": "used in source code but not declared in requirements.txt",
+                    "base_tests": "used in source code but not declared in requirements.txt",
+                    "smtplib": "used in source code but not declared in requirements.txt",
+                    "tcliservice": "used in source code but not declared in requirements.txt",
+                    "yaml": "used in source code but not declared in requirements.txt",
+                    "flask_session": "used in source code but not declared in requirements.txt",
+                    "google": "used in source code but not declared in requirements.txt",
+                    "http": "used in source code but not declared in requirements.txt",
+                    "prison": "used in source code but not declared in requirements.txt",
+                    "boto3": "used in source code but not declared in requirements.txt",
+                    "statsd": "used in source code but not declared in requirements.txt",
+                    "flights": "used in source code but not declared in requirements.txt",
+                    "es": "used in source code but not declared in requirements.txt",
+                    "unicode_dashboard": "used in source code but not declared in requirements.txt",
+                    "sqlalchemy": "used in source code but not declared in requirements.txt",
+                    "marshmallow": "used in source code but not declared in requirements.txt",
+                    "flask_wtf": "used in source code but not declared in requirements.txt",
+                    "graphlib": "used in source code but not declared in requirements.txt",
+                    "babel": "used in source code but not declared in requirements.txt",
+                    "shillelagh": "used in source code but not declared in requirements.txt",
+                    "packaging": "used in source code but not declared in requirements.txt",
+                    "geopy": "used in source code but not declared in requirements.txt",
+                    "apispec": "used in source code but not declared in requirements.txt",
+                    "csv": "used in source code but not declared in requirements.txt",
+                    "birth_names": "used in source code but not declared in requirements.txt",
+                    "validators": "used in source code but not declared in requirements.txt",
+                    "werkzeug": "used in source code but not declared in requirements.txt",
+                    "utils": "used in source code but not declared in requirements.txt",
+                    "gzip": "used in source code but not declared in requirements.txt",
+                    "bart_lines": "used in source code but not declared in requirements.txt",
+                    "botocore": "used in source code but not declared in requirements.txt",
+                    "flask_caching": "used in source code but not declared in requirements.txt",
+                    "tabbed_dashboard": "used in source code but not declared in requirements.txt",
+                    "superset_test_config": "used in source code but not declared in requirements.txt",
+                    "imp": "used in source code but not declared in requirements.txt",
+                    "copy": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "--platform=${BUILDPLATFORM}",
+                    "Environment Variables": {
+                        "BUILD_CMD": "${NPM_BUILD_CMD} \\",
+                        "LANG": "C.UTF-8 \\"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "nginx": {
+                            "Image": "nginx:latest",
+                            "Ports": [
+                                "80:80"
+                            ],
+                            "Volumes": [
+                                "./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+                            ]
+                        },
+                        "redis": {
+                            "Image": "redis:7",
+                            "Ports": [
+                                "127.0.0.1:6379:6379"
+                            ],
+                            "Volumes": [
+                                "redis:/data"
+                            ]
+                        },
+                        "db": {
+                            "Image": "postgres:15",
+                            "Ports": [
+                                "127.0.0.1:5432:5432"
+                            ],
+                            "Volumes": [
+                                "db_home:/var/lib/postgresql/data",
+                                "./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+                            ]
+                        },
+                        "superset": {
+                            "Build": {
+                                "context": ".",
+                                "target": "dev",
+                                "cache_from": [
+                                    "apache/superset-cache:3.10-slim-bookworm"
+                                ],
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Ports": [
+                                "8088:8088"
+                            ],
+                            "Environment Variables": {
+                                "CYPRESS_CONFIG": "${CYPRESS_CONFIG:-}"
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        },
+                        "superset-websocket": {
+                            "Build": "./superset-websocket",
+                            "Ports": [
+                                "8080:8080"
+                            ],
+                            "Environment Variables": [
+                                "PORT=8080",
+                                "REDIS_HOST=redis",
+                                "REDIS_PORT=6379",
+                                "REDIS_SSL=false"
+                            ],
+                            "Volumes": [
+                                "./superset-websocket:/home/superset-websocket",
+                                "/home/superset-websocket/node_modules",
+                                "/home/superset-websocket/dist",
+                                "./docker/superset-websocket/config.json:/home/superset-websocket/config.json"
+                            ],
+                            "Depends On": [
+                                "redis"
+                            ]
+                        },
+                        "superset-init": {
+                            "Build": {
+                                "context": ".",
+                                "target": "dev",
+                                "cache_from": [
+                                    "apache/superset-cache:3.10-slim-bookworm"
+                                ],
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Environment Variables": {
+                                "CYPRESS_CONFIG": "${CYPRESS_CONFIG:-}"
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        },
+                        "superset-node": {
+                            "Build": {
+                                "context": ".",
+                                "target": "superset-node",
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Environment Variables": {
+                                "BUILD_SUPERSET_FRONTEND_IN_DOCKER": true,
+                                "NPM_RUN_PRUNE": false,
+                                "SCARF_ANALYTICS": "${SCARF_ANALYTICS:-}"
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        },
+                        "superset-worker": {
+                            "Build": {
+                                "context": ".",
+                                "target": "dev",
+                                "cache_from": [
+                                    "apache/superset-cache:3.10-slim-bookworm"
+                                ],
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Environment Variables": {
+                                "CELERYD_CONCURRENCY": 2
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        },
+                        "superset-worker-beat": {
+                            "Build": {
+                                "context": ".",
+                                "target": "dev",
+                                "cache_from": [
+                                    "apache/superset-cache:3.10-slim-bookworm"
+                                ],
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        },
+                        "superset-tests-worker": {
+                            "Build": {
+                                "context": ".",
+                                "target": "dev",
+                                "cache_from": [
+                                    "apache/superset-cache:3.10-slim-bookworm"
+                                ],
+                                "args": {
+                                    "DEV_MODE": "true"
+                                }
+                            },
+                            "Environment Variables": {
+                                "DATABASE_HOST": "localhost",
+                                "DATABASE_DB": "test",
+                                "REDIS_CELERY_DB": 2,
+                                "REDIS_RESULTS_DB": 3,
+                                "REDIS_HOST": "localhost",
+                                "CELERYD_CONCURRENCY": 8
+                            },
+                            "Volumes": [
+                                "./docker:/app/docker",
+                                "./superset:/app/superset",
+                                "./superset-frontend:/app/superset-frontend",
+                                "superset_home:/app/superset_home",
+                                "./tests:/app/tests"
+                            ],
+                            "Depends On": [
+                                "db",
+                                "redis"
+                            ]
+                        }
+                    },
+                    "Volumes": {
+                        "superset_home": {
+                            "external": false
+                        },
+                        "db_home": {
+                            "external": false
+                        },
+                        "redis": {
+                            "external": false
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [
+                    {
+                        "Service": "redis",
+                        "Type": "Cache",
+                        "Image": "redis:7"
+                    },
+                    {
+                        "Service": "db",
+                        "Type": "Database",
+                        "Image": "postgres:15"
+                    }
+                ],
+                "subfolders": {}
+            },
+            {
+                "repository": "https://github.com/spandaai/langchain",
+                "layer": "Platform",
+                "project_types": [
+                    "Unknown"
+                ],
+                "frameworks": [],
+                "dependencies": {},
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {},
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "Variants of a Question Paper and Answers Generation": {
+        "Repository URL": {
+            "frontend": null,
+            "backend": "https://github.com/spandaai/Variants-of-a-Question-Paper"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/Variants-of-a-Question-Paper",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8003"
+                    ],
+                    "Environment Variables": {
+                        "PYTHONDONTWRITEBYTECODE": "1",
+                        "PYTHONUNBUFFERED": "1"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_variants_of_a_question_paper": {
+                            "Build": {
+                                "context": ".",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8003:8003"
+                            ],
+                            "Environment Variables": [
+                                "PYTHONUNBUFFERED=1",
+                                "PYTHONDONTWRITEBYTECODE=1",
+                                "OLLAMA_URL=http://ollama:11434",
+                                "OLLAMA_MODEL=${OLLAMA_MODEL}",
+                                "WEAVIATE_URL=http://weaviate:8080",
+                                "VERBA_URL=http://verba:8000",
+                                "DB_TYPE = \"Docker\"",
+                                "WEAVIATE_URL=\"\"",
+                                "WEAVIATE_KEY=\"\""
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "Current Instructor Evaluation": {
+        "Repository URL": {
+            "frontend": null,
+            "backend": "https://github.com/spandaai/Current-Instructor-Evaluation"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/superset",
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/Current-Instructor-Evaluation",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8002"
+                    ],
+                    "Environment Variables": {
+                        "PYTHONDONTWRITEBYTECODE": "1",
+                        "PYTHONUNBUFFERED": "1"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_current_instructor_evaluation": {
+                            "Build": {
+                                "context": ".",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8002:8002"
+                            ],
+                            "Environment Variables": [
+                                "PYTHONUNBUFFERED=1",
+                                "PYTHONDONTWRITEBYTECODE=1",
+                                "OLLAMA_URL=http://ollama:11434",
+                                "OLLAMA_MODEL=${OLLAMA_MODEL}",
+                                "WEAVIATE_URL=http://weaviate:8080",
+                                "VERBA_URL=http://verba:8000",
+                                "DB_TYPE = \"Docker\"",
+                                "WEAVIATE_URL=\"\"",
+                                "WEAVIATE_KEY=\"\""
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "New Instructor Evaluation": {
+        "Repository URL": {
+            "frontend": null,
+            "backend": "https://github.com/spandaai/New-Instructor-Evaluation"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/spandaai/superset",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/New-Instructor-Evaluation",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8004"
+                    ],
+                    "Environment Variables": {
+                        "PYTHONDONTWRITEBYTECODE": "1",
+                        "PYTHONUNBUFFERED": "1"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_new_instructor_evaluation": {
+                            "Build": {
+                                "context": ".",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8004:8004"
+                            ],
+                            "Environment Variables": [
+                                "PYTHONUNBUFFERED=1",
+                                "PYTHONDONTWRITEBYTECODE=1",
+                                "OLLAMA_URL=http://ollama:11434",
+                                "OLLAMA_MODEL=${OLLAMA_MODEL}",
+                                "WEAVIATE_URL=http://weaviate:8080",
+                                "VERBA_URL=http://verba:8000",
+                                "DB_TYPE = \"Docker\"",
+                                "WEAVIATE_URL=\"\"",
+                                "WEAVIATE_KEY=\"\""
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "Automated Grading Assistant": {
+        "Repository URL": {
+            "frontend": null,
+            "backend": "https://github.com/spandaai/Automated-Grading-Assistant"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/Automated-Grading-Assistant",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "csv": "used in source code but not declared in requirements.txt",
+                    "pil": "used in source code but not declared in requirements.txt",
+                    "docx": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "fitz": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8005"
+                    ],
+                    "Environment Variables": {
+                        "PYTHONDONTWRITEBYTECODE": "1",
+                        "PYTHONUNBUFFERED": "1"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_grading_assistant": {
+                            "Build": {
+                                "context": ".",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8005:8005"
+                            ],
+                            "Environment Variables": [
+                                "PYTHONUNBUFFERED=1",
+                                "PYTHONDONTWRITEBYTECODE=1",
+                                "OLLAMA_URL=http://ollama:11434",
+                                "OLLAMA_MODEL=${OLLAMA_MODEL}",
+                                "WEAVIATE_URL=http://weaviate:8080",
+                                "VERBA_URL=http://verba:8000",
+                                "DB_TYPE = \"Docker\"",
+                                "WEAVIATE_URL=\"\"",
+                                "WEAVIATE_KEY=\"\""
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "ChatbotWILP": {
+        "Repository URL": {
+            "frontend": null,
+            "backend": "https://github.com/spandaai/ChatbotWILP"
+        },
+        "Platform Repositories": [
+            "https://github.com/spandaai/ollama",
+            "https://github.com/spandaai/langchain",
+            "https://github.com/weaviate/weaviate"
+        ],
+        "Domain Specific Repositories": [
+            "https://github.com/moodle/moodle"
+        ],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/ChatbotWILP",
+                "layer": "Application",
+                "project_types": [
+                    "Python"
+                ],
+                "frameworks": [
+                    "FastAPI"
+                ],
+                "dependencies": {
+                    "fastapi": "specified in requirements.txt",
+                    "uvicorn": "specified in requirements.txt",
+                    "httpx": "specified in requirements.txt",
+                    "asyncio": "specified in requirements.txt",
+                    "pydantic": "specified in requirements.txt",
+                    "langchain-core": "specified in requirements.txt",
+                    "langchain": "specified in requirements.txt",
+                    "langchain-ollama": "specified in requirements.txt",
+                    "pymupdf": "specified in requirements.txt",
+                    "python-docx": "specified in requirements.txt",
+                    "pytesseract": "specified in requirements.txt",
+                    "pillow": "specified in requirements.txt",
+                    "requests": "specified in requirements.txt",
+                    "python-dotenv": "specified in requirements.txt",
+                    "setup.py": "present in setup.py",
+                    "dotenv": "used in source code but not declared in requirements.txt",
+                    "backend": "used in source code but not declared in requirements.txt"
+                },
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {
+                    "Base Image": "python:3.10-slim",
+                    "Exposed Ports": [
+                        "8001"
+                    ],
+                    "Environment Variables": {
+                        "PYTHONDONTWRITEBYTECODE": "1",
+                        "PYTHONUNBUFFERED": "1"
+                    }
+                },
+                "docker_compose": {
+                    "Services": {
+                        "spanda_wilp_chatbot_app": {
+                            "Build": {
+                                "context": ".",
+                                "dockerfile": "Dockerfile"
+                            },
+                            "Ports": [
+                                "8001:8001"
+                            ],
+                            "Environment Variables": [
+                                "PYTHONUNBUFFERED=1",
+                                "PYTHONDONTWRITEBYTECODE=1",
+                                "OLLAMA_URL=http://ollama:11434",
+                                "OLLAMA_MODEL=${OLLAMA_MODEL}",
+                                "WEAVIATE_URL=http://weaviate:8080",
+                                "VERBA_URL=http://verba:8000",
+                                "DB_TYPE = \"Docker\"",
+                                "WEAVIATE_URL=\"\"",
+                                "WEAVIATE_KEY=\"\""
+                            ],
+                            "Volumes": [
+                                "./backend/src:/app/backend/src"
+                            ],
+                            "Networks": [
+                                "app_network"
+                            ]
+                        }
+                    },
+                    "Networks": {
+                        "app_network": {
+                            "external": true
+                        }
+                    }
+                },
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    },
+    "SpandaAI Management": {
+        "Repository URL": {},
+        "Platform Repositories": [],
+        "Domain Specific Repositories": [],
+        "Components": [
+            {
+                "repository": "https://github.com/spandaai/spandaai-management",
+                "layer": "Management",
+                "project_types": [
+                    "Unknown"
+                ],
+                "frameworks": [],
+                "dependencies": {},
+                "dev_dependencies": {},
+                "scripts": {},
+                "dockerfile": {},
+                "docker_compose": {},
+                "kubernetes_manifests": {},
+                "external_dependencies": [],
+                "subfolders": {}
+            }
+        ]
+    }
+}
