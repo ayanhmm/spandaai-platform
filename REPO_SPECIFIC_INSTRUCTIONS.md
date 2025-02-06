@@ -121,3 +121,52 @@ spandaai-platform/
 - **CI/CD Pipelines:** Independent builds and deployments for Platform, Domain, and Solutions layers.
 
 
+# Recommended Integration Strategy
+
+## Primary Goal
+We want to ensure that the Dissertation Analysis application remains decoupled from the internal implementation details of the Spanda.AI Platform. This decoupling simplifies security, maintenance, and future upgrades.
+
+## Our Recommended Approach
+
+### Via the API Gateway (Preferred for External Integration)
+
+#### **Usage:**
+The Dissertation Analysis Domain (and any thin client wrappers in its Platform layer) should generally make calls to the Spanda.AI Platform through the unified API gateway provided in the Solutions layer.
+
+#### **Benefits:**
+- **Security & Consistency:** All calls are mediated by Keycloak-enabled, secure endpoints that enforce consistent authentication and authorization.
+- **Abstraction:** The API gateway abstracts away the underlying service implementations, so if internal services change (e.g., a new inference engine or training service), the Dissertation Analysis app remains unaffected as long as the gateway’s contract is maintained.
+- **Decoupling:** This approach decouples the Dissertation Analysis application from the specific details of the Platform services, making maintenance and future upgrades easier.
+
+#### **When to Use:**
+This is ideal for external API calls and interactions where a unified, secure access point is required.
+
+---
+
+### Direct Calls via Thin Client Wrappers (If Tightly Coupled in the Same Deployment Environment)
+
+#### **Usage:**
+If the Dissertation Analysis app is deployed within the same Kubernetes cluster or tightly integrated environment as the Spanda.AI Platform, you might choose to use the thin client wrappers (provided in the Dissertation Analysis Platform layer) that call the underlying Platform services directly.
+
+#### **Benefits:**
+- **Low Latency:** Direct calls can reduce overhead and latency if both systems reside in the same environment.
+- **Internal Optimization:** When service-to-service communication is internal and controlled, direct calls using shared libraries can simplify the architecture.
+
+#### **When to Use:**
+This approach might be adopted when internal microservices are closely coupled and managed under a single operational domain. However, it’s less preferred if you want to maintain a strict separation of concerns and allow for independent evolution of the systems.
+
+---
+
+## Our Recommendation for Our Vision
+For the full vision of the Spanda‑AI Platform and to maximize decoupling, security, and maintainability, the Dissertation Analysis Domain and Platform layers should primarily call the Spanda.AI Platform via the unified API gateway (Solutions layer). This ensures:
+
+- **Centralized Security:** All external calls are uniformly secured by Keycloak.
+- **Clear Separation:** The Dissertation Analysis application does not need to know the internal details of the Platform’s implementation.
+- **Future Flexibility:** The Spanda.AI Platform can evolve internally (changing services, scaling, etc.) without requiring changes in the Dissertation Analysis code as long as the API gateway’s interface remains stable.
+
+If there is a need for very low latency or if both systems are deployed very tightly together, the use of thin client wrappers for direct calls is acceptable—but even then, it is wise to design these wrappers so that they eventually route through the same API contracts defined by the gateway.
+
+
+In our envisioned architecture, the Dissertation Analysis Domain and Platform layers should primarily call the Spanda.AI Platform through the API gateway provided in the Solutions layer. This approach provides a consistent, secure, and decoupled integration point. Direct calls via thin client wrappers may be considered in tightly coupled deployments, but the best practice is to use the API gateway to ensure long-term maintainability and security.
+
+---
