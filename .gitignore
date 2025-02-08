@@ -1,0 +1,13 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore egg-info directory
+*.egg-info
+
+Docker-build/ollama.log
+Docker/ollama.log
+# Ignore .env file
+.env
+
+venv/
