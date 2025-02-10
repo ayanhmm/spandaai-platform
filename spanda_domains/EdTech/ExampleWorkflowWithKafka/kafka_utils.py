@@ -36,7 +36,7 @@ import asyncio
 import logging 
 import json
 
-from spanda_domains.EdTech.ExampleWorkflowWithKafka.types import QueryRequestThesisAndRubric
+from spanda_domains.EdTech.ExampleWorkflowWithKafka.spanda_types import QueryRequestThesisAndRubric
 from spanda_domains.EdTech.FunctionalBlocks.AnalysisAlgorithms.analysis_algorithms import DissertationAnalyzer
 
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer, TopicPartition, OffsetAndMetadata # type: ignore

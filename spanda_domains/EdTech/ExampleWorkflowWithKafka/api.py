@@ -45,7 +45,7 @@ Configuration:
 The service runs on port 8006 and includes error handling and connection management.
 """
 
-from spanda_domains.EdTech.ExampleWorkflowWithKafka.types import QueryRequestThesisAndRubric, QueryRequestThesis,PostData,FeedbackData ,User, UserScore, Feedback
+from spanda_domains.EdTech.ExampleWorkflowWithKafka.spanda_types import QueryRequestThesisAndRubric, QueryRequestThesis,PostData,FeedbackData ,User, UserScore, Feedback
 from spanda_domains.EdTech.ExampleWorkflowWithKafka.kafka_utils import *
 from spanda_domains.EdTech.FunctionalBlocks.DataPreprocessing.data_processing import process_docx, process_pdf
 from spanda_domains.EdTech.FunctionalBlocks.BusinessLogic.business_logic import summarize_and_analyze_agent, process_initial_agents
