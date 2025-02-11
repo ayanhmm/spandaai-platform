@@ -34,10 +34,10 @@ The system supports:
 import re
 import logging
 
-from spanda_domains.EdTech.FunctionalBlocks.AnalysisAlgorithms.spanda_types import CancellationToken, QueryRequestThesisAndRubric
+from FunctionalBlocks.AnalysisAlgorithms.spanda_types import CancellationToken, QueryRequestThesisAndRubric
 
-from spanda_domains.EdTech.platform_client.service_client import stream_llm, invoke_llm
-from spanda_domains.EdTech.common.configs import ModelType
+from platform_client.service_client import stream_llm, invoke_llm
+from common.configs import ModelType
 
 from fastapi import WebSocket
 from typing import Dict, Any

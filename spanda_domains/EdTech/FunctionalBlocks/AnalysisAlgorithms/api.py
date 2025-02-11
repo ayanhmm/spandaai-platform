@@ -1,7 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
-from spanda_domains.EdTech.FunctionalBlocks.AnalysisAlgorithms import analysis_algorithms
-from spanda_domains.EdTech.FunctionalBlocks.AnalysisAlgorithms.spanda_types import QueryRequestThesisAndRubric
+from FunctionalBlocks.AnalysisAlgorithms import analysis_algorithms
+from FunctionalBlocks.AnalysisAlgorithms.spanda_types import QueryRequestThesisAndRubric
 
 import uvicorn
 import asyncio

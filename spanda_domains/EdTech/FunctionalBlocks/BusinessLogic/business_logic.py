@@ -1,8 +1,8 @@
 import asyncio
 import logging
 from dotenv import load_dotenv
-from spanda_domains.EdTech.common.configs import ModelType
-from spanda_domains.EdTech.platform_client.service_client import invoke_llm
+from common.configs import ModelType
+from platform_client.service_client import invoke_llm
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import os
 from typing import List, Dict
