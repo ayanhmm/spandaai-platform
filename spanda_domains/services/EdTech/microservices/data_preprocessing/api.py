@@ -3,8 +3,8 @@ from fastapi.responses import Response
 from typing import List, Optional
 import logging
 import uvicorn
-from spanda_domains.services.EdTech.microservices.data_processing.spanda_types import *
-from spanda_domains.services.EdTech.microservices.data_processing.data_processing import (
+from spanda_domains.services.EdTech.microservices.data_preprocessing.spanda_types import *
+from spanda_domains.services.EdTech.microservices.data_preprocessing.data_processing import (
     chunk_text,
     get_first_n_words,
     resize_image,

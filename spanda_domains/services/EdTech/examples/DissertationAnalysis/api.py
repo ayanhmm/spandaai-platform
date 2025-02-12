@@ -47,7 +47,7 @@ The service runs on port 8006 and includes error handling and connection managem
 
 from spanda_domains.services.EdTech.examples.DissertationAnalysis.spanda_types import QueryRequestThesisAndRubric, QueryRequestThesis,PostData,FeedbackData ,User, UserScore, Feedback
 from spanda_domains.services.EdTech.examples.DissertationAnalysis.kafka_utils import *
-from spanda_domains.services.EdTech.microservices.data_processing.data_processing import process_docx, process_pdf
+from spanda_domains.services.EdTech.microservices.data_preprocessing.data_processing import process_docx, process_pdf
 from spanda_domains.services.EdTech.microservices.edu_ai_agents.business_logic import summarize_and_analyze_agent, process_initial_agents
 from spanda_domains.services.EdTech.microservices.document_analysis.analysis_algorithms import DocumentAnalyzer
 
