@@ -1,98 +1,152 @@
-# WebSocket Endpoint Documentation: `/api/ws/dissertation_analysis`
+# API Documentation: Dissertation Analysis Service
 
 ## Overview
-This WebSocket endpoint enables real-time dissertation analysis. Clients can send dissertation-related data and receive step-by-step analysis feedback.
+This FastAPI service provides real-time and non-streaming endpoints for dissertation analysis. It includes WebSocket-based live processing and a traditional HTTP-based analysis endpoint.
 
-## Workflow
-1. Accepts an incoming WebSocket connection.
-2. Receives JSON data containing:
-   - A rubric for evaluation.
-   - Pre-analysis data about the dissertation.
-   - Optional feedback from the user.
-3. Initializes the dissertation analysis process asynchronously.
-4. Streams results back to the client in real-time.
-5. Handles disconnections and errors gracefully.
+## Base URL
+```
+http://<host>:9000
+```
 
-## Request Structure (JSON Payload)
+---
+
+## WebSocket Endpoint
+### **Dissertation Analysis WebSocket**
+**Endpoint:**
+```
+/ws/dissertation_analysis
+```
+**Method:** WebSocket
+
+### **Description**
+This WebSocket endpoint enables real-time dissertation analysis. Clients can connect, send dissertation details, and receive step-by-step feedback on the analysis progress.
+
+### **Workflow**
+1. Establish a WebSocket connection.
+2. Send a JSON payload with rubric and dissertation details.
+3. Receive real-time analysis updates.
+4. Handle disconnection or errors gracefully.
+
+### **Request Format**
 ```json
 {
     "rubric": {
-        "criterion_1": {
-            "criteria_explanation": "Clarity of argument",
-            "score_explanation": "Scores range from 1 to 5 based on coherence",
-            "criteria_output": "Well-structured argument with supporting evidence"
-        },
-        "criterion_2": {
-            "criteria_explanation": "Use of references",
-            "score_explanation": "Scores based on appropriate citation usage",
-            "criteria_output": "Citations follow APA style"
+        "Introduction": {
+            "criteria_explanation": "Evaluates clarity of introduction.",
+            "score_explanation": "Scores from 1-5 based on clarity.",
+            "criteria_output": "Well-defined introduction."
         }
     },
     "pre_analysis": {
         "degree": "PhD",
         "name": "John Doe",
-        "topic": "Machine Learning for Healthcare",
-        "pre_analyzed_summary": "The dissertation explores ML models for medical diagnosis."
+        "topic": "AI in Education",
+        "pre_analyzed_summary": "The study focuses on AI's impact on education."
     },
-    "feedback": "Please focus on methodological accuracy"
+    "feedback": "Please ensure clarity in the introduction."
 }
 ```
 
-## Response Format (WebSocket Messages)
-Messages are sent as JSON objects with a `type` field:
-
-### Progress Updates(WIP)
+### **Response Format**
+The server streams real-time JSON responses, such as:
 ```json
 {
     "type": "progress",
-    "data": {
-        "step": "Processing Introduction",
-        "progress": "20%"
-    }
+    "data": {"message": "Analyzing introduction section..."}
 }
 ```
-
-### Analysis Results
 ```json
 {
     "type": "result",
-    "data": {
-        "criterion": "Clarity of argument",
-        "score": 4,
-        "feedback": "The argument is clear but could use more supporting evidence."
-    }
+    "data": {"message": "Analysis completed successfully."}
 }
 ```
 
-### Completion Message
-```json
-{
-    "type": "completed",
-    "data": {
-        "message": "Dissertation analysis finished successfully."
-    }
-}
-```
-
-### Error Handling
+### **Error Handling**
+- If an error occurs, the server sends:
 ```json
 {
     "type": "error",
-    "data": {
-        "message": "Invalid rubric format."
+    "data": {"message": "An error occurred during analysis."}
+}
+```
+
+---
+
+## REST API Endpoint
+### **Analyze Document**
+**Endpoint:**
+```
+/analyze
+```
+**Method:** POST
+
+### **Description**
+This endpoint allows clients to perform non-streaming dissertation analysis via a standard HTTP request.
+
+### **Request Format**
+Note: The pre_analyzed_summary could just be the document text itself. Or if the document is very long, use Spanda.AI's summarization service and that could be the input instead!
+
+```json
+{
+    "rubric": {
+        "Introduction": {
+            "criteria_explanation": "Evaluates clarity of introduction.",
+            "score_explanation": "Scores from 1-5 based on clarity.",
+            "criteria_output": "Well-defined introduction."
+        }
+    },
+    "pre_analysis": {
+        "degree": "PhD",
+        "name": "John Doe",
+        "topic": "AI in Education",
+        "pre_analyzed_summary": "The study focuses on AI's impact on education."
+    },
+    "feedback": "Please ensure clarity in the introduction."
+}
+```
+
+### **Response Format**
+```json
+{
+    "status": "success",
+    "message": "Document analyzed successfully.",
+    "analysis": {
+        "Introduction": {
+            "score": 4,
+            "comments": "Clear and well-articulated introduction."
+        }
     }
 }
 ```
 
-## Usage Example
-1. Clients establish a WebSocket connection to `ws://<host>:9000/api/ws/dissertation_analysis`.
-2. Send a properly formatted JSON payload.
-3. Receive real-time dissertation analysis updates in the formats above.
+### **Error Handling**
+If an error occurs, the response format will be:
+```json
+{
+    "status": "error",
+    "message": "Invalid input data."
+}
+```
 
-## Error Handling
-- If an exception occurs during processing, an error message is sent.
-- If the WebSocket disconnects, processing is halted safely.
+---
 
-## Returns
-- None (Communication occurs via WebSocket messages).
+## WebSocket Handling
+### **Events**
+| Event Type  | Description |
+|------------|-------------|
+| `progress` | Provides updates on different analysis stages. |
+| `result`   | Sends final analysis output. |
+| `error`    | Reports issues encountered during processing. |
+
+### **Disconnection Handling**
+- If the client disconnects, the processing stops.
+- If the server detects a closed connection, it stops streaming updates.
+
+---
+
+## Notes
+- WebSocket clients should handle reconnect logic in case of disconnection.
+- Ensure JSON payloads match the expected format to avoid errors.
+- The WebSocket-based endpoint is ideal for real-time feedback, while the REST endpoint is best for batch processing.
 
