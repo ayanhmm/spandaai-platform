@@ -45,11 +45,11 @@ Configuration:
 The service runs on port 8006 and includes error handling and connection management.
 """
 
-from spanda_domains.EdTech.ExampleWorkflowWithKafka.spanda_types import QueryRequestThesisAndRubric, QueryRequestThesis,PostData,FeedbackData ,User, UserScore, Feedback
-from spanda_domains.EdTech.ExampleWorkflowWithKafka.kafka_utils import *
-from spanda_domains.EdTech.FunctionalBlocks.DataPreprocessing.data_processing import process_docx, process_pdf
-from spanda_domains.EdTech.FunctionalBlocks.BusinessLogic.business_logic import summarize_and_analyze_agent, process_initial_agents
-
+from spanda_domains.services.EdTech.examples.DissertationAnalysis.spanda_types import QueryRequestThesisAndRubric, QueryRequestThesis,PostData,FeedbackData ,User, UserScore, Feedback
+from spanda_domains.services.EdTech.examples.DissertationAnalysis.kafka_utils import *
+from spanda_domains.services.EdTech.microservices.data_processing.data_processing import process_docx, process_pdf
+from spanda_domains.services.EdTech.microservices.edu_ai_agents.business_logic import summarize_and_analyze_agent, process_initial_agents
+from spanda_domains.services.EdTech.microservices.document_analysis.analysis_algorithms import DocumentAnalyzer
 
 from sqlalchemy.orm import Session
 import uvicorn
@@ -341,7 +341,7 @@ async def websocket_dissertation(websocket: WebSocket):
     WebSocket endpoint for dissertation analysis.
     Handles direct WebSocket calls.
     """
-    analyzer = DissertationAnalyzer()
+    analyzer = DocumentAnalyzer()
     
     try:
         # Accept WebSocket connection
@@ -417,7 +417,7 @@ async def websocket_dissertation(websocket: WebSocket):
 
         # Process the request immediately using the analyzer
         try:
-            await analyzer.process_dissertation(websocket, request)
+            await analyzer.process_Document(websocket, request)
         except Exception as e:
             logger.error(f"Error during dissertation analysis: {e}")
             if not analyzer.is_connection_closed:

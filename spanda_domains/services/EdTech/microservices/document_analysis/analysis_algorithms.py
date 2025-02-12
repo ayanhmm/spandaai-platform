@@ -1,8 +1,8 @@
 """
-Dissertation Analysis WebSocket Handler and Analysis Algorithm
+Document Analysis WebSocket Handler and Analysis Algorithm
 
-This module implements a WebSocket-based real-time dissertation analysis system that:
-- Processes dissertation evaluation requests using a streaming approach
+This module implements a WebSocket-based real-time Document analysis system that:
+- Processes Document evaluation requests using a streaming approach
 - Handles communication between the frontend and the LLM-based analysis backend
 - Implements a criterion-by-criterion evaluation process with real-time updates
 
@@ -14,7 +14,7 @@ Technical Components:
 - Regex-based score extraction from LLM responses
 
 Core Functionality:
-1. Accepts dissertation text, rubric, and metadata via WebSocket
+1. Accepts Document text, rubric, and metadata via WebSocket
 2. Streams analysis progress and results back to the client
 3. Processes each rubric criterion individually:
    - Generates criterion-specific prompts
@@ -34,10 +34,10 @@ The system supports:
 import re
 import logging
 
-from FunctionalBlocks.AnalysisAlgorithms.spanda_types import CancellationToken, QueryRequestThesisAndRubric
+from spanda_domains.services.EdTech.microservices.document_analysis.spanda_types import CancellationToken, QueryRequestThesisAndRubric
 
-from platform_client.service_client import stream_llm, invoke_llm
-from common.configs import ModelType
+from spanda_domains.services.EdTech.shared.platform_client.service_client import stream_llm, invoke_llm
+from spanda_domains.services.EdTech.shared.config.configs import ModelType
 
 from fastapi import WebSocket
 from typing import Dict, Any
@@ -45,7 +45,7 @@ from typing import Dict, Any
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class DissertationAnalyzer:
+class DocumentAnalyzer:
     def __init__(self):
         self.cancellation_token = CancellationToken()
         self.is_connection_closed = False
@@ -78,37 +78,39 @@ class DissertationAnalyzer:
                               criterion: str, 
                               explanation: Dict[str, str], 
                               context: Dict[str, str],
-                              feedback: str = None) -> tuple[float, str]:
+                              feedback: str = None,
+                              streaming: bool = True) -> tuple[float, str]:
         """Process a single criterion and return its score and analysis"""
         
         # Send criterion start marker
-        if not await self.safe_send(websocket, {
+        if streaming and not await self.safe_send(websocket, {
             "type": "criterion_start",
             "data": {"criterion": criterion}
         }):
             return 0, ""
 
-        dissertation_user_prompt = self._build_criterion_prompt(
+        Document_user_prompt = self._build_criterion_prompt(
             criterion, 
             explanation, 
             context,
             feedback
         )
 
-        # Stream the analysis
+        # Stream or collect analysis
         analysis_chunks = []
         try:
             async for chunk in stream_llm(
-                system_prompt=self.DISSERTATION_SYSTEM_PROMPT,
-                user_prompt=dissertation_user_prompt,
+                system_prompt=self.DOCUMENT_SYSTEM_PROMPT,
+                user_prompt=Document_user_prompt,
                 model_type=ModelType.ANALYSIS,
                 cancellation_token=self.cancellation_token
             ):
                 if self.cancellation_token.is_cancelled:
                     return 0, ""
-                    
+                
                 analysis_chunks.append(chunk)
-                if not await self.safe_send(websocket, {
+                
+                if streaming and not await self.safe_send(websocket, {
                     "type": "analysis_chunk",
                     "data": {
                         "criterion": criterion,
@@ -117,28 +119,28 @@ class DissertationAnalyzer:
                 }):
                     return 0, ""
 
-            analyzed_dissertation = "".join(analysis_chunks)
+            analyzed_Document = "".join(analysis_chunks)
             
             # Get the score
             score = await self._calculate_score(
-                analyzed_dissertation, 
+                analyzed_Document, 
                 criterion, 
                 explanation,
                 feedback
             )
 
-            # Send criterion completion
-            if not await self.safe_send(websocket, {
+            # Send criterion completion if streaming
+            if streaming and not await self.safe_send(websocket, {
                 "type": "criterion_complete",
                 "data": {
                     "criterion": criterion,
                     "score": score,
-                    "full_analysis": analyzed_dissertation
+                    "full_analysis": analyzed_Document
                 }
             }):
                 return 0, ""
 
-            return score, analyzed_dissertation
+            return score, analyzed_Document
 
         except Exception as e:
             print(f"Error processing criterion {criterion}: {str(e)}")
@@ -152,23 +154,19 @@ class DissertationAnalyzer:
                 })
             return 0, ""
 
-    async def process_dissertation(self, websocket: WebSocket, request: QueryRequestThesisAndRubric):
-        """Process the entire dissertation analysis"""
+    async def process_Document(self, websocket: WebSocket, request: QueryRequestThesisAndRubric, streaming: bool = True):
+        """Process the entire Document analysis"""
         context = {
-            "name": request.pre_analysis.name,
-            "degree": request.pre_analysis.degree,
-            "topic": request.pre_analysis.topic,
+            "name": getattr(request.pre_analysis, 'name', 'Not Provided'),
+            "degree": getattr(request.pre_analysis, 'degree', 'Not Provided'),
+            "topic": getattr(request.pre_analysis, 'topic', 'Not Provided'),
             "summary": request.pre_analysis.pre_analyzed_summary
         }
 
-        # Send initial metadata
-        if not await self.safe_send(websocket, {
+        metadata = {k: v for k, v in context.items() if k != 'summary' and v != 'Not Provided'}
+        if metadata and streaming and not await self.safe_send(websocket, {
             "type": "metadata",
-            "data": {
-                "name": context["name"],
-                "degree": context["degree"],
-                "topic": context["topic"]
-            }
+            "data": metadata
         }):
             return
 
@@ -185,7 +183,8 @@ class DissertationAnalyzer:
                 criterion, 
                 explanation, 
                 context,
-                request.feedback
+                request.feedback,
+                streaming
             )
             
             total_score += score
@@ -195,14 +194,22 @@ class DissertationAnalyzer:
             }
 
         if not self.cancellation_token.is_cancelled and not self.is_connection_closed:
-            await self.safe_send(websocket, {
-                "type": "complete",
-                "data": {
+            final_context = {k: v for k, v in context.items() if v != 'Not Provided'}
+            if streaming:
+                await self.safe_send(websocket, {
+                    "type": "complete",
+                    "data": {
+                        "criteria_evaluations": evaluation_results,
+                        "total_score": total_score,
+                        **final_context
+                    }
+                })
+            else:
+                return {
                     "criteria_evaluations": evaluation_results,
                     "total_score": total_score,
-                    **context
+                    **final_context
                 }
-            })
 
     def _build_criterion_prompt(self, 
                               criterion: str, 
@@ -212,12 +219,8 @@ class DissertationAnalyzer:
         """Build the prompt for criterion evaluation"""
         prompt = f"""
 # Input Materials
-## Dissertation Text
+## Document Text
 {context['summary']}
-
-## Evaluation Context
-- Author: {context['name']}
-- Academic Field: {context['degree']}
 
 ## Assessment Criterion and its explanation
 ### {criterion}:
@@ -227,7 +230,7 @@ class DissertationAnalyzer:
 
 Please make sure that you critique the work heavily, including all improvements that can be made.
 
-DO NOT SCORE THE DISSERTATION, YOU ARE TO PROVIDE ONLY DETAILED ANALYSIS, AND NO SCORES ASSOCIATED WITH IT.
+DO NOT SCORE THE DOCUMENT, YOU ARE TO PROVIDE ONLY DETAILED ANALYSIS, AND NO SCORES ASSOCIATED WITH IT.
 """
         if feedback:
             prompt += '\nIMPORTANT(The following feedback was provided by an expert. Consider the feedback properly, and ensure your evaluation follows this feedback): ' + feedback
@@ -253,18 +256,21 @@ DO NOT SCORE THE DISSERTATION, YOU ARE TO PROVIDE ONLY DETAILED ANALYSIS, AND NO
         match = re.search(pattern, graded_response, re.IGNORECASE)
         return float(match.group(1)) if match else 0
 
-    DISSERTATION_SYSTEM_PROMPT = """You are an impartial academic evaluator - an expert in analyzing the summarized dissertation provided to you. 
-Your task is to assess the quality of the provided summarized dissertation in relation to specific evaluation criteria. 
-You will receive both the summarized dissertation and the criteria to analyze how effectively the dissertation addresses the research topic."""
-
+    DOCUMENT_SYSTEM_PROMPT = """You are an impartial academic evaluator—an expert in analyzing structured documents.  
+Your task is to assess the quality and relevance of the provided document based on specific evaluation criteria.  
+You will receive the document along with the evaluation criteria and must analyze how effectively the document presents and supports its key information.  
+Focus on clarity, coherence, completeness, and alignment with the intended purpose of the document.
+"""
 
 
 
 async def scoring_agent(analysis, criteria, score_guidelines, criteria_guidelines, feedback):
-    scoring_agent_system_prompt = """You are a precise scoring agent that evaluates one dissertation criterion at a time. 
-    Review the provided criterion analysis, match it to the scoring guidelines, and assign a score from 0 to 5, without justification, solely use the analysis for your justification. 
-    Evaluate only the assigned criterion, using only the given analysis, and follow the guidelines exactly. 
-    Do not consider external factors, make assumptions, or deviate from objective standards."""
+    scoring_agent_system_prompt = """You are a precise scoring agent that evaluates one document criterion at a time.  
+Review the provided criterion analysis, match it to the scoring guidelines, and assign a score from 0 to 5.  
+Base your scoring solely on the given analysis—do not provide justifications.  
+Evaluate only the assigned criterion, using only the provided analysis, and strictly follow the scoring guidelines.  
+Do not consider external factors, make assumptions, or deviate from objective standards.
+"""
 
     scoring_agent_user_prompt = f"""# Provide a score for the following analysis done:
 

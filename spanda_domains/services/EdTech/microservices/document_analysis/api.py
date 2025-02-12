@@ -1,7 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 
-from FunctionalBlocks.AnalysisAlgorithms import analysis_algorithms
-from FunctionalBlocks.AnalysisAlgorithms.spanda_types import QueryRequestThesisAndRubric
+from spanda_domains.services.EdTech.microservices.document_analysis import analysis_algorithms
+from spanda_domains.services.EdTech.microservices.document_analysis.spanda_types import QueryRequestThesisAndRubric
 
 import uvicorn
 import asyncio
@@ -30,7 +30,7 @@ async def websocket_dissertation(websocket: WebSocket):
     Returns:
     - None (Communication via WebSocket messages).
     """
-    dissertation_analyzer = analysis_algorithms.DissertationAnalyzer()
+    dissertation_analyzer = analysis_algorithms.DocumentAnalyzer()
     
     try:
         await websocket.accept()
@@ -41,7 +41,7 @@ async def websocket_dissertation(websocket: WebSocket):
         
         # Create a task for processing the dissertation
         process_task = asyncio.create_task(
-            dissertation_analyzer.process_dissertation(websocket, request)
+            dissertation_analyzer.process_Document(websocket, request)
         )
         
         # Wait for either the processing to complete or a disconnect
@@ -73,6 +73,15 @@ async def websocket_dissertation(websocket: WebSocket):
     finally:
         if not dissertation_analyzer.is_connection_closed:
             await websocket.close()
+
+
+@app.post("/analyze")
+async def analyze_document(request: QueryRequestThesisAndRubric):
+    """Non-streaming endpoint to analyze a document."""
+    document_analyzer = analysis_algorithms.DocumentAnalyzer()
+    result = await document_analyzer.process_Document(None, request, streaming=False)
+    return result
+
 
 # Main function to start the FastAPI server
 def main():

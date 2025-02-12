@@ -36,8 +36,8 @@ import asyncio
 import logging 
 import json
 
-from spanda_domains.EdTech.ExampleWorkflowWithKafka.spanda_types import QueryRequestThesisAndRubric
-from spanda_domains.EdTech.FunctionalBlocks.AnalysisAlgorithms.analysis_algorithms import DissertationAnalyzer
+from spanda_domains.services.EdTech.examples.DissertationAnalysis.spanda_types import QueryRequestThesisAndRubric
+from spanda_domains.services.EdTech.microservices.document_analysis.analysis_algorithms import DocumentAnalyzer
 
 from aiokafka import AIOKafkaProducer, AIOKafkaConsumer, TopicPartition, OffsetAndMetadata # type: ignore
 from kafka.admin import KafkaAdminClient, NewTopic # type: ignore
@@ -144,11 +144,11 @@ async def process_dequeued_request(data: dict, session_id: str):
         websocket = await wait_for_websocket_reconnect(session_id)
 
         # Create analyzer instance and process the request
-        analyzer = DissertationAnalyzer()
+        analyzer = DocumentAnalyzer()
         request = QueryRequestThesisAndRubric(**data)
         
         try:
-            await analyzer.process_dissertation(websocket, request)
+            await analyzer.process_Document(websocket, request)
         except Exception as e:
             logger.error(f"Error during dissertation analysis: {e}")
             if not analyzer.is_connection_closed:

@@ -3,8 +3,8 @@ from typing import List
 import logging
 import uvicorn
 
-from FunctionalBlocks.BusinessLogic.spanda_types import *
-from FunctionalBlocks.BusinessLogic.business_logic import summarize_and_analyze_agent, process_initial_agents, process_chunks_in_batch, scoring_agent, extract_degree_agent, extract_name_agent, extract_topic_agent
+from spanda_domains.services.EdTech.microservices.edu_ai_agents.spanda_types import *
+from spanda_domains.services.EdTech.microservices.edu_ai_agents.business_logic import summarize_and_analyze_agent, process_initial_agents, process_chunks_in_batch, scoring_agent, extract_degree_agent, extract_name_agent, extract_topic_agent
 
 from dotenv import load_dotenv
 

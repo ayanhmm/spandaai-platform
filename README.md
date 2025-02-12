@@ -57,7 +57,7 @@ The SpandaAI GenAI Platform is structured into a **3-layered architecture**:
 - Monitoring and logging using Prometheus and Dockprom.
 
 #### Domain Layer:
-- Encapsulates domain-specific GenAI models and business rules tailored for industries like FinTech and Healthcare.
+- Encapsulates domain-specific GenAI models and business rules tailored for industries like EdTech, FinTech and Healthcare.
 
 #### Solutions Layer:
 - Provides client-facing applications, integration adapters, and user experience layers for end-user systems.

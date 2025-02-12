@@ -12,7 +12,7 @@ from docx.parts.image import ImagePart
 from fastapi import UploadFile
 from typing import List, Dict, Tuple
 
-from platform_client.service_client import analyze_image
+from spanda_domains.services.EdTech.shared.platform_client.service_client import analyze_image
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
