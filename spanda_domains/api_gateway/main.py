@@ -1,35 +1,111 @@
-from spanda_domains.api_gateway.spanda_types import *
-from spanda_domains.api_gateway.config import Config
-
 from fastapi import FastAPI, UploadFile, HTTPException, Request
 from fastapi.responses import Response, JSONResponse
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 import httpx
 import logging
 import uvicorn
-from dotenv import load_dotenv
 from datetime import datetime
+from functools import wraps
+import asyncio
+from spanda_domains.api_gateway.spanda_types import *
+from spanda_domains.api_gateway.config import Config
+from dotenv import load_dotenv
+from contextlib import asynccontextmanager
 
-# Load environment variables
+# Load environment variables and configure logging
 load_dotenv()
-
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# FastAPI app initialization
+class HTTPClientManager:
+    def __init__(self):
+        self.clients: Dict[str, httpx.AsyncClient] = {}
+
+    async def get_client(self, base_url: str, timeout: Optional[float] = 30.0) -> httpx.AsyncClient:
+        if base_url not in self.clients:
+            self.clients[base_url] = httpx.AsyncClient(
+                base_url=base_url,
+                timeout=timeout,
+                limits=httpx.Limits(max_keepalive_connections=5, max_connections=10)
+            )
+        return self.clients[base_url]
+
+    async def close_all(self):
+        for client in self.clients.values():
+            await client.aclose()
+
+# Initialize client manager
+client_manager = HTTPClientManager()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Initialize resources
+    logger.info("Starting up API Gateway...")
+    yield
+    # Shutdown: Cleanup resources
+    logger.info("Shutting down API Gateway...")
+    await client_manager.close_all()
+
+# FastAPI app initialization with lifespan
 app = FastAPI(
     title="API Gateway",
     description="API Gateway for Data Processing Services",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
-# HTTP client
-async def get_http_client():
-    return httpx.AsyncClient(
-        base_url=Config.DATA_PROCESSING_URL,
-        timeout=30.0
-    )
+class APIError(Exception):
+    def __init__(self, status_code: int, detail: str):
+        self.status_code = status_code
+        self.detail = detail
+
+class RequestMetrics:
+    def __init__(self):
+        self.start_time = datetime.utcnow()
+    
+    def get_duration(self) -> float:
+        return (datetime.utcnow() - self.start_time).total_seconds()
+
+async def retry_with_backoff(func, max_retries: int = 3, initial_delay: float = 1.0):
+    """Retry a coroutine with exponential backoff."""
+    delay = initial_delay
+    last_exception = None
+    
+    for attempt in range(max_retries):
+        try:
+            return await func()
+        except Exception as e:
+            last_exception = e
+            if attempt == max_retries - 1:
+                raise
+            await asyncio.sleep(delay)
+            delay *= 2
+    
+    raise last_exception
+
+def log_request():
+    """Decorator for logging request details and timing."""
+    def decorator(func):
+        @wraps(func)
+        async def wrapper(*args, **kwargs):
+            metrics = RequestMetrics()
+            endpoint = func.__name__
+            
+            try:
+                result = await func(*args, **kwargs)
+                logger.info(
+                    f"Request to {endpoint} completed successfully "
+                    f"in {metrics.get_duration():.2f}s"
+                )
+                return result
+            except Exception as e:
+                logger.error(
+                    f"Request to {endpoint} failed after {metrics.get_duration():.2f}s: {str(e)}"
+                )
+                raise
+        return wrapper
+    return decorator
+
 
 # Error handler
 @app.exception_handler(Exception)
@@ -51,179 +127,222 @@ async def general_exception_handler(request: Request, exc: Exception):
         content=error_response.dict()
     )
 
+async def make_request(
+    url: str,
+    method: str = "POST",
+    data: Optional[dict] = None,
+    files: Optional[dict] = None,
+    params: Optional[dict] = None,
+    timeout: Optional[float] = 30.0
+) -> Any:
+    client = await client_manager.get_client(url, timeout)
+    
+    async def request_with_retry():
+        response = await client.request(
+            method=method,
+            url=url,
+            json=data,
+            files=files,
+            params=params
+        )
+        response.raise_for_status()
+        return response
+
+    try:
+        response = await retry_with_backoff(request_with_retry)
+        return response
+    except httpx.TimeoutException as e:
+        logger.error(f"Request timeout to {url}: {e}")
+        raise HTTPException(status_code=504, detail="Request timed out")
+    except httpx.HTTPError as e:
+        logger.error(f"HTTP error from {url}: {e}")
+        raise HTTPException(
+            status_code=e.response.status_code if hasattr(e, 'response') else 500,
+            detail=str(e)
+        )
+    except Exception as e:
+        logger.error(f"Unexpected error in request to {url}: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Text processing endpoints
 @app.post("/gateway/chunk-text", response_model=ChunkTextResponse)
+@log_request()
 async def gateway_chunk_text(request: TextChunkRequest):
-    async with await get_http_client() as client:
-        try:
-            response = await client.post("/api/chunk-text", json=request.dict())
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPError as e:
-            logger.error(f"Error in chunk_text gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/chunk-text",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/gateway/first-n-words", response_model=FirstWordsResponse)
+@log_request()
 async def gateway_first_n_words(request: FirstWordsRequest):
-    async with await get_http_client() as client:
-        try:
-            response = await client.post("/api/first-n-words", json=request.dict())
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPError as e:
-            logger.error(f"Error in first_n_words gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/first-n-words",
+        data=request.dict()
+    )
+    return response.json()
 
+# Image processing endpoints
 @app.post("/gateway/resize-image")
+@log_request()
 async def gateway_resize_image(
     file: UploadFile,
     max_size: Optional[int] = 800,
     min_size: Optional[int] = 70
 ):
-    async with await get_http_client() as client:
-        try:
-            files = {"file": (file.filename, await file.read(), file.content_type)}
-            params = {"max_size": max_size, "min_size": min_size}
-            response = await client.post("/api/resize-image", files=files, params=params)
-            response.raise_for_status()
-            return Response(
-                content=response.content,
-                media_type=response.headers.get("content-type", file.content_type)
-            )
-        except httpx.HTTPError as e:
-            logger.error(f"Error in resize_image gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    files = {"file": (file.filename, await file.read(), file.content_type)}
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/resize-image",
+        files=files,
+        params={"max_size": max_size, "min_size": min_size}
+    )
+    return Response(
+        content=response.content,
+        media_type=response.headers.get("content-type", file.content_type)
+    )
 
 @app.post("/gateway/process-images-batch", response_model=ImageProcessingResponse)
+@log_request()
 async def gateway_process_images_batch(
     files: List[UploadFile],
     batch_size: Optional[int] = 5
 ):
-    async with await get_http_client() as client:
-        try:
-            files_dict = {
-                f"files": (f.filename, await f.read(), f.content_type)
-                for f in files
-            }
-            response = await client.post(
-                "/api/process-images-batch",
-                files=files_dict,
-                params={"batch_size": batch_size}
-            )
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPError as e:
-            logger.error(f"Error in process_images_batch gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    files_dict = {
+        f"files": (f.filename, await f.read(), f.content_type)
+        for f in files
+    }
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/process-images-batch",
+        files=files_dict,
+        params={"batch_size": batch_size}
+    )
+    return response.json()
 
+# Document processing endpoints
 @app.post("/gateway/process-pdf", response_model=DocumentAnalysisResponse)
+@log_request()
 async def gateway_process_pdf(file: UploadFile):
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="File must be a PDF")
     
-    async with await get_http_client() as client:
-        try:
-            files = {"file": (file.filename, await file.read(), file.content_type)}
-            response = await client.post("/api/process-pdf", files=files)
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPError as e:
-            logger.error(f"Error in process_pdf gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    files = {"file": (file.filename, await file.read(), file.content_type)}
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/process-pdf",
+        files=files
+    )
+    return response.json()
 
 @app.post("/gateway/process-docx", response_model=DocumentAnalysisResponse)
+@log_request()
 async def gateway_process_docx(file: UploadFile):
     if not file.filename.lower().endswith('.docx'):
         raise HTTPException(status_code=400, detail="File must be a DOCX")
     
-    async with await get_http_client() as client:
-        try:
-            files = {"file": (file.filename, await file.read(), file.content_type)}
-            response = await client.post("/api/process-docx", files=files)
-            response.raise_for_status()
-            return response.json()
-        except httpx.HTTPError as e:
-            logger.error(f"Error in process_docx gateway: {e}")
-            raise HTTPException(status_code=e.response.status_code if hasattr(e, 'response') else 500,
-                              detail=str(e))
+    files = {"file": (file.filename, await file.read(), file.content_type)}
+    response = await make_request(
+        f"{Config.DATA_PROCESSING_URL}/api/process-docx",
+        files=files
+    )
+    return response.json()
 
-@app.get("/gateway/health")
-async def gateway_health_check():
-    async with await get_http_client() as client:
-        try:
-            response = await client.get("/api/health")
-            response.raise_for_status()
-            return {
-                "status": "healthy",
-                "timestamp": datetime.utcnow().isoformat(),
-                "data_processing_service": response.json()
-            }
-        except httpx.HTTPError as e:
-            logger.error(f"Health check failed: {e}")
-            return {
-                "status": "unhealthy",
-                "timestamp": datetime.utcnow().isoformat(),
-                "data_processing_service": "unavailable"
-            }
-
-
-# HTTP Client with Infinite Timeout
-async def forward_request_analysis(target_url: str, request: Request):
-    async with httpx.AsyncClient(timeout=None) as client:  # No timeout
-        body = await request.json()
-        response = await client.post(target_url, json=body)
-        return response.json()
-
+# Analysis endpoints
 @app.post("/analyze")
+@log_request()
 async def analyze(request: Request):
-    return await forward_request_analysis(f"{Config.DOCUMENT_ANALYSIS_URL}/analyze", request)
+    body = await request.json()
+    response = await make_request(
+        f"{Config.DOCUMENT_ANALYSIS_URL}/analyze",
+        data=body,
+        timeout=None  # No timeout for analysis requests
+    )
+    return response.json()
 
-# Route handlers
+# AI agent endpoints
 @app.post("/api/process-chunks")
+@log_request()
 async def process_chunks_gateway(request: ProcessChunksRequest):
-    return await forward_request("/api/process-chunks", request.dict())
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/process-chunks",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/summarize-analyze")
-async def summarize_analyze_gateway(request: ThesisText):
-    return await forward_request("/api/summarize-analyze", request.dict())
+@log_request()
+async def summarize_analyze_gateway(request: DocumentText):
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/summarize-analyze",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/extract-name")
-async def extract_name_gateway(request: ThesisText):
-    return await forward_request("/api/extract-name", request.dict())
+@log_request()
+async def extract_name_gateway(request: DocumentText):
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/extract-name",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/extract-topic")
-async def extract_topic_gateway(request: ThesisText):
-    return await forward_request("/api/extract-topic", request.dict())
+@log_request()
+async def extract_topic_gateway(request: DocumentText):
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/extract-topic",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/extract-degree")
-async def extract_degree_gateway(request: ThesisText):
-    return await forward_request("/api/extract-degree", request.dict())
+@log_request()
+async def extract_degree_gateway(request: DocumentText):
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/extract-degree",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/scoring")
+@log_request()
 async def scoring_gateway(request: ScoringRequest):
-    return await forward_request("/api/scoring", request.dict())
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/scoring",
+        data=request.dict()
+    )
+    return response.json()
 
 @app.post("/api/process-initial")
-async def process_initial_gateway(request: ThesisText):
-    return await forward_request("/api/process-initial", request.dict())
+@log_request()
+async def process_initial_gateway(request: DocumentText):
+    response = await make_request(
+        f"{Config.EDU_AI_AGENTS_URL}/api/process-initial",
+        data=request.dict()
+    )
+    return response.json()
 
-# Helper function for making requests
-async def forward_request(endpoint: str, data: dict):
-    async with httpx.AsyncClient() as client:
-        try:
-            response = await client.post(
-                f"{Config.EDU_AI_AGENTS_URL}{endpoint}",
-                json=data,
-                timeout=30
-            )
-            return response.json()
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-
+# Health check endpoint
+@app.get("/gateway/health")
+@log_request()
+async def gateway_health_check():
+    try:
+        response = await make_request(
+            f"{Config.DATA_PROCESSING_URL}/api/health",
+            method="GET"
+        )
+        return {
+            "status": "healthy",
+            "timestamp": datetime.utcnow().isoformat(),
+            "data_processing_service": response.json()
+        }
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        return {
+            "status": "unhealthy",
+            "timestamp": datetime.utcnow().isoformat(),
+            "data_processing_service": "unavailable"
+        }
 
 def main():
     uvicorn.run(

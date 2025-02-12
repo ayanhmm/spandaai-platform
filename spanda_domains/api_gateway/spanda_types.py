@@ -40,12 +40,12 @@ class PreAnalysis(BaseModel):
     topic: str
     pre_analyzed_summary: str
 
-class QueryRequestThesisAndRubric(BaseModel):
+class QueryRequestDocumentAndRubric(BaseModel):
     rubric: Dict[str, RubricCriteria]
     pre_analysis: PreAnalysis
     feedback: Optional[str] = None
 
-class ThesisText(BaseModel):
+class DocumentText(BaseModel):
     text: str
 
 class ProcessChunksRequest(BaseModel):
@@ -57,7 +57,7 @@ class DissertationRequest(BaseModel):
     rubric: dict
     dissertation: str
     feedback: str = None
-    
+
 class ScoringRequest(BaseModel):
     analysis: str
     criteria: str
