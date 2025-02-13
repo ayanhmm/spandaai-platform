@@ -28,14 +28,13 @@ setup(
         "pymysql",
         "aiokafka",
         "kafka-python",
-        "psycopg2",
         "pymysql",
         "mysql-connector-python",
         "cryptography",
     ],
     entry_points={
         'console_scripts': [
-            "da-start = api:main"  # Use the new run_server function
+            "da-start = api:main"  
         ],
     },
 )

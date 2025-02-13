@@ -28,7 +28,6 @@ setup(
         "pymysql",
         "aiokafka",
         "kafka-python",
-        "psycopg2",
         "pymysql",
         "mysql-connector-python",
         "cryptography",
