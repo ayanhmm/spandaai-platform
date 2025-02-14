@@ -248,20 +248,6 @@ Performs document scoring based on criteria.
 }
 ```
 
-### Process Initial
-```http
-POST /api/process-initial
-```
-
-Performs initial document processing.
-
-**Request Body (documentText)**
-```json
-{
-  "text": "string"
-}
-```
-
 ## Health Check
 
 ### Gateway Health

@@ -314,15 +314,6 @@ async def scoring_gateway(request: ScoringRequest):
     )
     return response.json()
 
-@app.post("/api/process-initial")
-@log_request()
-async def process_initial_gateway(request: DocumentText):
-    response = await make_request(
-        f"{Config.EDU_AI_AGENTS_URL}/api/process-initial",
-        data=request.dict()
-    )
-    return response.json()
-
 # Health check endpoint
 @app.get("/gateway/health")
 @log_request()
