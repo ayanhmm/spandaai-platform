@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, HTTPException, Request
+from fastapi import FastAPI, UploadFile, HTTPException, Request, File, Form
 from fastapi.responses import Response, JSONResponse
 from typing import List, Optional, Dict, Any
 import httpx
@@ -11,6 +11,7 @@ from spanda_domains.api_gateway.spanda_types import *
 from spanda_domains.api_gateway.config import Config
 from dotenv import load_dotenv
 from contextlib import asynccontextmanager
+import aiohttp
 
 # Load environment variables and configure logging
 load_dotenv()
@@ -343,6 +344,83 @@ async def gateway_health_check():
             "timestamp": datetime.utcnow().isoformat(),
             "data_processing_service": "unavailable"
         }
+
+# QA Generation endpoints
+@app.post("/gateway/questions-generation")
+@log_request()
+async def gateway_questions_generation(query_request: QueryRequest):
+    """
+    Gateway endpoint for generating questions based on given context and topic.
+    """
+    try:
+        response = await make_request(
+            f"{Config.QA_GENERATION_URL}/api/questions_generation",
+            data=query_request.dict(exclude_none=True),
+            timeout=None  # Disable timeout
+        )
+        return response.json()
+    except Exception as e:
+        logger.error(f"Error in questions generation: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Questions generation service error: {str(e)}"
+        )
+
+@app.post("/gateway/answers-generation")
+@log_request()
+async def gateway_answers_generation(question_request: QuestionRequest):
+    """
+    Gateway endpoint for generating answers based on given questions and context.
+    """
+    try:
+        response = await make_request(
+            f"{Config.QA_GENERATION_URL}/api/answers_generation",
+            data=question_request.dict(exclude_none=True),
+            timeout=None  # Disable timeout
+        )
+        return response.json()
+    except Exception as e:
+        logger.error(f"Error in answers generation: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Answers generation service error: {str(e)}"
+        )
+
+@app.post("/gateway/ingest-files")
+@log_request()
+async def gateway_ingest_files(
+    courseid: str = Form(...),
+    files: List[UploadFile] = File(...)
+):
+    """
+    Gateway endpoint for ingesting files to Verba.
+    """
+    try:
+        # Use aiohttp to create a proper multipart request
+        async with aiohttp.ClientSession() as session:
+            form_data = aiohttp.FormData()
+            form_data.add_field("courseid", courseid)
+
+            for file in files:
+                form_data.add_field(
+                    "files", 
+                    await file.read(), 
+                    filename=file.filename,
+                    content_type=file.content_type
+                )
+
+            async with session.post(
+                f"{Config.QA_GENERATION_URL}/api/ingest_files/",
+                data=form_data
+            ) as response:
+                return await response.json()
+
+    except Exception as e:
+        logger.error(f"Error in file ingestion: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"File ingestion service error: {str(e)}"
+        )
 
 def main():
     uvicorn.run(

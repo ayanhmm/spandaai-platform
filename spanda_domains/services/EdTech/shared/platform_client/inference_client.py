@@ -6,7 +6,7 @@ import aiohttp
 import base64
 import logging
 from dotenv import load_dotenv
-from spanda_domains.services.EdTech.shared.config.configs import CancellationToken
+from spanda_domains.services.EdTech.shared.config.model_configs import CancellationToken
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

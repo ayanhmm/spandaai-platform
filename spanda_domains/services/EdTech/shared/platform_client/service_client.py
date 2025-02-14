@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from typing import AsyncGenerator, Optional, Dict, Any
 
 from spanda_domains.services.EdTech.shared.platform_client.inference_client import invoke_llm_ollama, invoke_llm_vllm, stream_llm_ollama, stream_llm_vllm, analyze_image_ollama, analyze_image_vllm
-from spanda_domains.services.EdTech.shared.config.configs import ModelType, EnvConfig, CancellationToken
+from spanda_domains.services.EdTech.shared.config.model_configs import ModelType, EnvConfig, CancellationToken
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

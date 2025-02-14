@@ -37,7 +37,7 @@ import logging
 from spanda_domains.services.EdTech.microservices.document_analysis.spanda_types import CancellationToken, QueryRequestThesisAndRubric
 
 from spanda_domains.services.EdTech.shared.platform_client.service_client import stream_llm, invoke_llm
-from spanda_domains.services.EdTech.shared.config.configs import ModelType
+from spanda_domains.services.EdTech.shared.config.model_configs import ModelType
 
 from fastapi import WebSocket
 from typing import Dict, Any
