@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  data_preprocessing:
+    build:
+      context: .
+      dockerfile: Dockerfile.data_preprocessing
+    volumes:
+      - ./shared:/app/shared
+    ports:
+      - "9001:9001"  # Expose the container port to the host  
+    env_file:
+      - .env  # Load environment variables
+
+  document_analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.document_analysis
+    volumes:
+      - ./shared:/app/shared
+    ports:
+      - "9000:9000"  # Expose the container port to the host
+    env_file:
+      - .env  # Load environment variables
+
+  edu_ai_agents:
+    build:
+      context: .
+      dockerfile: Dockerfile.edu_ai_agents
+    volumes:
+      - ./shared:/app/shared
+    ports:
+      - "9002:9002"  # Expose the container port to the host
+    env_file:
+      - .env  # Load environment variables
+
+  qa_generation:
+    build:
+      context: .
+      dockerfile: Dockerfile.qa_generation
+    volumes:
+      - ./shared:/app/shared
+    ports:
+      - "9004:9004"  # Expose the container port to the host
+    env_file:
+      - .env  # Load environment variables

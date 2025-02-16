@@ -1,0 +1,17 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Copy the shared directory and setup.py
+COPY shared ./shared
+COPY setup.py ./
+
+# Copy only the data_preprocessing service files
+COPY qa_generation ./qa_generation
+
+# Install dependencies
+RUN pip install --no-cache-dir .
+
+EXPOSE 9004
+
+CMD ["python", "qa_generation/api.py"]
