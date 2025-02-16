@@ -1,0 +1,17 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Copy the shared directory and setup.py
+COPY shared ./shared
+COPY setup.py ./
+
+# Copy only the data_preprocessing service files
+COPY edu_ai_agents ./edu_ai_agents
+
+# Install dependencies
+RUN pip install --no-cache-dir .
+
+EXPOSE 9002
+
+CMD ["python", "edu_ai_agents/api.py"]
