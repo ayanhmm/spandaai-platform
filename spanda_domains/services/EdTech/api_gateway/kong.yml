@@ -1,0 +1,136 @@
+# kong.yml
+_format_version: "2.1"
+_transform: true
+
+services:
+  # Data Processing Service
+  - name: data-processing-service
+    url: http://host.docker.internal:9001
+    routes:
+      - name: chunk-text
+        paths:
+          - /api/chunk-text
+        strip_path: true
+        methods:
+          - POST
+      - name: first-n-words
+        paths:
+          - /api/first-n-words
+        strip_path: true
+        methods:
+          - POST
+      - name: resize-image
+        paths:
+          - /api/resize-image
+        strip_path: true
+        methods:
+          - POST
+      - name: process-images-batch
+        paths:
+          - /api/process-images-batch
+        strip_path: true
+        methods:
+          - POST
+      - name: process-pdf
+        paths:
+          - /api/process-pdf
+        strip_path: true
+        methods:
+          - POST
+      - name: process-docx
+        paths:
+          - /api/process-docx
+        strip_path: true
+        methods:
+          - POST
+      - name: health
+        paths:
+          - /api/health
+        strip_path: true
+        methods:
+          - GET
+
+  # Document Analysis Service
+  - name: document-analysis-service
+    url: http://host.docker.internal:9000
+    routes:
+      - name: analyze
+        paths:
+          - /analyze
+        strip_path: false
+        methods:
+          - POST
+
+  # Educational AI Agents Service
+  - name: edu-ai-agents-service
+    url: http://host.docker.internal:9002
+    routes:
+      - name: process-chunks
+        paths:
+          - /api/process-chunks
+        strip_path: false
+        methods:
+          - POST
+      - name: summarize-analyze
+        paths:
+          - /api/summarize-analyze
+        strip_path: false
+        methods:
+          - POST
+      - name: extract-name
+        paths:
+          - /api/extract-name
+        strip_path: false
+        methods:
+          - POST
+      - name: extract-topic
+        paths:
+          - /api/extract-topic
+        strip_path: false
+        methods:
+          - POST
+      - name: extract-degree
+        paths:
+          - /api/extract-degree
+        strip_path: false
+        methods:
+          - POST
+      - name: scoring
+        paths:
+          - /api/scoring
+        strip_path: false
+        methods:
+          - POST
+
+  # QA Generation Service
+  - name: qa-generation-service
+    url: http://host.docker.internal:9004
+    routes:
+      - name: questions-generation
+        paths:
+          - /api/questions_generation
+        strip_path: false
+        methods:
+          - POST
+      - name: answers-generation
+        paths:
+          - /api/answers_generation
+        strip_path: false
+        methods:
+          - POST
+      - name: ingest-files
+        paths:
+          - /api/ingest_files
+        strip_path: false
+        methods:
+          - POST
+
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 60
+      policy: local
+  - name: file-log
+    config:
+      path: /usr/local/kong/logs/file.log
+      reopen: true
