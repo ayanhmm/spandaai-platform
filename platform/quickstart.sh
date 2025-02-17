@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Exit on any error
+# Exit immediately if any command fails.
 set -e
 
 echo "
@@ -14,70 +13,116 @@ echo "
         |_|   
 "
 
-# Prompt user to choose between CPU or GPU setup
-echo "Choose your setup type:"
-echo "1. CPU"
-echo "2. GPU"
-read -rp "Enter the number (1 or 2): " SETUP_TYPE
-
-# Validate input
-if [[ "$SETUP_TYPE" != "1" && "$SETUP_TYPE" != "2" ]]; then
-  echo "❌ Invalid input! Please choose either 1 (CPU) or 2 (GPU)."
-  exit 1
-fi
-
-# Set compose file based on user input
-if [[ "$SETUP_TYPE" == "1" ]]; then
-  COMPOSE_FILE="docker-compose-cpu.yml"
-  echo "🔧 Selected setup: CPU"
-else
-  COMPOSE_FILE="docker-compose-gpu.yml"
-  echo "🔧 Selected setup: GPU"
-fi
-
-# Store the root directory path
+# Save the repository's root directory.
 ROOT_DIR=$(pwd)
 
-echo "🌐 Creating platform network if it doesn't exist..."
+# Ensure required Docker networks exist.
+echo "🌐 Ensuring required Docker networks exist..."
 docker network inspect platform_network >/dev/null 2>&1 || docker network create platform_network
+docker network inspect app_network      >/dev/null 2>&1 || docker network create app_network
 
-echo "🌐 Creating app_network if it doesn't exist..."
-docker network inspect app_network >/dev/null 2>&1 || docker network create app_network
+# ====================================================================
+# 1. Process Docker Compose files in the root directory.
+# ====================================================================
+echo "📂 Processing Docker Compose files in the root directory..."
+shopt -s nullglob
+for file in docker-compose*.yml; do
+  if [[ -f "$file" ]]; then
+    # Remove "docker-compose-" prefix and ".yml" suffix.
+    base=$(basename "$file")
+    friendly_name=${base#docker-compose-}
+    friendly_name=${friendly_name%.yml}
+    while true; do
+      read -rp "Do you want to run '$friendly_name'? (y/n): " yn
+      case $yn in
+        [Yy]* )
+          if [[ "$friendly_name" == "vllm" ]]; then
+            read -rp "Enter command for vllm: " vllm_command
+            echo "🚀 Running $friendly_name with command '$vllm_command'..."
+            COMMAND="$vllm_command" docker compose -f "$file" up -d
+          else
+            echo "🚀 Running $friendly_name..."
+            docker compose -f "$file" up -d
+          fi
+          break
+          ;;
+        [Nn]* )
+          echo "⏩ Skipping $friendly_name."
+          break
+          ;;
+        * )
+          echo "Please answer yes (y) or no (n)."
+          ;;
+      esac
+    done
+  fi
+done
 
-echo "🚀 Starting main services with Docker Compose..."
-docker compose -f "$COMPOSE_FILE" up -d
+# ====================================================================
+# 2. Process each subdirectory containing Docker Compose files.
+# ====================================================================
 
-echo "📂 Changing to dockprom directory..."
-cd observability/dockprom || {
-    echo "❌ Error: dockprom directory not found!"
-    echo "Creating dockprom directory..."
-    mkdir dockprom
-    cd dockprom
-}
+# Find all directories (at any depth) that contain a file matching 'docker-compose*.yml'
+mapfile -t DIRS < <(find . -type f -name "docker-compose*.yml" -printf '%h\n' | sort -u)
 
-echo "🚀 Starting monitoring services in dockprom..."
-docker compose up -d
+for d in "${DIRS[@]}"; do
+  # Skip the root directory since it was already processed.
+  if [ "$d" == "." ]; then
+    continue
+  fi
 
-# Return to root directory
-cd "$ROOT_DIR"
+  echo "📂 Entering directory: $d"
+  pushd "$d" > /dev/null
 
-echo "⏳ Waiting for services to be healthy..."
+  # For each Docker Compose file in the directory, ask the user whether to run it.
+  for file in docker-compose*.yml; do
+    if [[ -f "$file" ]]; then
+      # Remove "docker-compose-" prefix and ".yml" suffix.
+      base=$(basename "$file")
+      friendly_name=${base#docker-compose-}
+      friendly_name=${friendly_name%.yml}
+      while true; do
+        read -rp "Do you want to run '$friendly_name' in directory '$d'? (y/n): " yn
+        case $yn in
+          [Yy]* )
+            if [[ "$friendly_name" == "vllm" ]]; then
+              read -rp "Enter command for vllm: " vllm_command
+              echo "🚀 Running $friendly_name in $d with command '$vllm_command'..."
+              COMMAND="$vllm_command" docker compose -f "$file" up -d
+            else
+              echo "🚀 Running $friendly_name in $d..."
+              docker compose -f "$file" up -d
+            fi
+            break
+            ;;
+          [Nn]* )
+            echo "⏩ Skipping $friendly_name."
+            break
+            ;;
+          * )
+            echo "Please answer yes (y) or no (n)."
+            ;;
+        esac
+      done
+    fi
+  done
+
+  popd > /dev/null
+done
+
+# Give services some time to start.
+echo "⏳ Waiting for services to stabilize..."
 sleep 10
-
-echo "✨ Checking service status..."
-echo "Main services:"
-docker compose ps
-echo -e "\nMonitoring services:"
-cd observability/dockprom && docker compose ps
 
 echo "🎉 Deployment complete! All services are now running."
 echo "
 📝 Access points:
-- Grafana: http://localhost:3000 (username - admin/ password - admin)
+- Grafana: http://localhost:3000 (username: admin / password: admin)
 - Prometheus: http://localhost:9090
 - AlertManager: http://localhost:9093
 - Kafka: http://localhost:9092
 - Redis: http://localhost:6379
 - MySQL: http://localhost:3306
 - Ollama: http://localhost:11434
-- Verba: http://localhost:8000"
+- Verba: http://localhost:8000
+"
