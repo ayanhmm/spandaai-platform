@@ -31,6 +31,12 @@ setup(
         "pymysql",
         "mysql-connector-python",
         "cryptography",
+        'batch_face',
+        'opencv-python',
+        'numpy',
+        'torch',
+        'pandas',
+        'tqdm',
     ],
     entry_points={
         'console_scripts': [
