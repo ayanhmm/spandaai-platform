@@ -137,6 +137,26 @@ services:
         methods:
           - POST
 
+  - name: face-analysis-service
+    url: http://host.docker.internal:9005
+    routes:
+      - name: process-video-route
+        paths:
+          - /process-video
+        strip_path: false
+      - name: direction-from-json-route
+        paths:
+          - /direction-from-json
+        strip_path: false
+      - name: attention-from-direction-route
+        paths:
+          - /attention-from-direction
+        strip_path: false
+      - name: attention-pipeline-route
+        paths:
+          - /attention_pipeline
+        strip_path: false
+
 plugins:
   - name: rate-limiting
     config:

@@ -44,3 +44,14 @@ services:
       - "9004:9004"  # Expose the container port to the host
     env_file:
       - .env  # Load environment variables
+
+  face_analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile.face_analysis
+    volumes:
+      - ./shared:/app/shared
+    ports:
+      - "9005:9005"  # Expose the container port to the host
+    env_file:
+      - .env  # Load environment variables

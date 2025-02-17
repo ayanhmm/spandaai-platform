@@ -5,13 +5,13 @@ if /i "%mode%"=="docker" (
     echo Starting EdTech services with Docker...
     
     REM Run first docker-compose in the background
-    start cmd /k "docker-compose up -d"
+    start cmd /k "docker compose up -d"
 
     echo All services have been started in the background!
     
     REM Start API Gateway in foreground
     cd api_gateway
-    docker-compose up
+    docker compose up
     exit /b
 )
 
@@ -23,12 +23,13 @@ if /i "%mode%"=="local" (
     start cmd /k "cd document_analysis && python api.py"
     start cmd /k "cd edu_ai_agents && python api.py"
     start cmd /k "cd qa_generation && python api.py"
+    start cmd /k "cd face_analysis && python api.py"
 
     echo All services have been started!
     
     REM Start API Gateway in foreground
     cd api_gateway
-    docker-compose up
+    docker compose up
     exit /b
 )
 
