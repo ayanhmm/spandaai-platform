@@ -1,0 +1,281 @@
+_format_version: "2.1"
+_transform: true
+
+services:
+  # vLLM Service
+  - name: vllm-service
+    url: http://host.docker.internal:8001
+    routes:
+      - name: vllm-generate
+        paths:
+          - /v1/generate
+        strip_path: false
+        methods:
+          - POST
+      - name: vllm-embeddings
+        paths:
+          - /v1/embeddings
+        strip_path: false
+        methods:
+          - POST
+      - name: vllm-health
+        paths:
+          - /v1/health
+        strip_path: false
+        methods:
+          - GET
+
+  - name: ollama-service
+    url: http://host.docker.internal:11434
+    routes:
+      - name: ollama-list-models
+        paths:
+          - /api/tags
+        strip_path: false
+        methods:
+          - GET
+      - name: ollama-show-model-info
+        paths:
+          - /api/show
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-copy-model
+        paths:
+          - /api/copy
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-delete-model
+        paths:
+          - /api/delete
+        strip_path: false
+        methods:
+          - DELETE
+      - name: ollama-pull-model
+        paths:
+          - /api/pull
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-push-model
+        paths:
+          - /api/push
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-create-model
+        paths:
+          - /api/create
+        strip_path: false
+        methods:
+          - POST
+      
+      - name: ollama-generate
+        paths:
+          - /api/generate
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-chat
+        paths:
+          - /api/chat
+        strip_path: false
+        methods:
+          - POST
+      - name: ollama-embeddings
+        paths:
+          - /api/embeddings
+        strip_path: false
+        methods:
+          - POST
+      
+      - name: ollama-health
+        paths:
+          - /api/health
+        strip_path: false
+        methods:
+          - GET
+      - name: ollama-version
+        paths:
+          - /api/version
+        strip_path: false
+        methods:
+          - GET
+
+  # Verba Service
+  - name: verba-service
+    url: http://host.docker.internal:8000
+    routes:
+      - name: verba-health
+        paths:
+          - /api/health
+        strip_path: false
+        methods:
+          - GET
+      - name: verba-connect
+        paths:
+          - /api/connect
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-generate-stream
+        paths:
+          - /ws/generate_stream
+        strip_path: false
+        methods:
+          - GET
+      - name: verba-import-files
+        paths:
+          - /ws/import_files
+        strip_path: false
+        methods:
+          - GET
+      - name: verba-get-rag-config
+        paths:
+          - /api/get_rag_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-set-rag-config
+        paths:
+          - /api/set_rag_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-user-config
+        paths:
+          - /api/get_user_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-set-user-config
+        paths:
+          - /api/set_user_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-theme-config
+        paths:
+          - /api/get_theme_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-set-theme-config
+        paths:
+          - /api/set_theme_config
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-query
+        paths:
+          - /api/query
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-document
+        paths:
+          - /api/get_document
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-datacount
+        paths:
+          - /api/get_datacount
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-labels
+        paths:
+          - /api/get_labels
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-content
+        paths:
+          - /api/get_content
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-vectors
+        paths:
+          - /api/get_vectors
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-chunks
+        paths:
+          - /api/get_chunks
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-chunk
+        paths:
+          - /api/get_chunk
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-all-documents
+        paths:
+          - /api/get_all_documents
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-delete-document
+        paths:
+          - /api/delete_document
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-reset
+        paths:
+          - /api/reset
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-meta
+        paths:
+          - /api/get_meta
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-suggestions
+        paths:
+          - /api/get_suggestions
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-get-all-suggestions
+        paths:
+          - /api/get_all_suggestions
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-delete-suggestion
+        paths:
+          - /api/delete_suggestion
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-import-file
+        paths:
+          - /api/import_file
+        strip_path: false
+        methods:
+          - POST
+      - name: verba-synthesize
+        paths:
+          - /api/synthesize
+        strip_path: false
+        methods:
+          - POST
+
+plugins:
+  - name: rate-limiting
+    config:
+      minute: 60
+      policy: local
+  - name: file-log
+    config:
+      path: /usr/local/kong/logs/file.log
+      reopen: true

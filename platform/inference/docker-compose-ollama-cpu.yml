@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  ollama:
+    image: ollama/ollama:0.5.1
+    container_name: ollama-platform
+    ports:
+      - "11434:11434"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ollama:/root/.ollama
+    networks:
+      - platform_network
+      - app_network
+    restart: unless-stopped
+volumes:
+  ollama:
+    driver: local
+networks:
+  platform_network:
+    external: true
+  app_network:
+    external: true
