@@ -16,29 +16,56 @@ EdTech/
 └── shared/                # Shared utilities and components
 ```
 
-## Why This Architecture?
+## Platform-Domain-Solution Layer Architecture
 
-### 1. Platform-Domain-Solution Layer Architecture
 Our three-layer architecture provides significant advantages:
 
-- **Platform Layer (Foundation)**
-  - Handles core infrastructure and shared services
-  - Provides scalable computing resources
-  - Manages data storage and model serving
-  - Enables consistent monitoring and logging
+### **Layered Architecture Diagram**
+```
++----------------------------+
+|        Solutions Layer     |
+| (Client-Facing Applications) |
++----------------------------+
+            |
+            v
++----------------------------+
+|        Domain Layer        |
+| (Education-Specific AI & APIs) |
++----------------------------+
+            |
+            v
++---------------------------------+
+|        Platform Layer           |
+| (Infrastructure & Core Services) |
+| - API Gateway (Kong)             |
+| - Logging & Monitoring           |
+| - Model Serving (LLMs, Embeddings) |
+| - Data Storage & Databases       |
+| - Distributed Computing          |
+| - Task Scheduling & Workflow Orchestration |
++---------------------------------+
+```
 
-- **Domain Layer (EdTech Specific)**
-  - Houses education-specific AI models
-  - Implements academic business rules
-  - Provides specialized APIs for educational needs
-  - Enables domain-specific fine-tuning
+### **1. Platform Layer (Foundation)**
+- **API Gateway (Kong)**: Manages authentication, rate limiting, and routing.
+- **Logging & Monitoring**: Provides centralized logging, tracing, and real-time system monitoring.
+- **Model Serving**: Hosts AI models for tasks like NLP, embeddings, and document analysis.
+- **Data Storage & Databases**: Manages relational (PostgreSQL), NoSQL (MongoDB), and vector databases (Weaviate).
+- **Distributed Computing**: Enables parallel processing for large-scale computations.
+- **Task Scheduling & Workflow Orchestration**: Manages job execution and automation using Celery or Prefect.
 
-- **Solutions Layer (Client-Facing)**
-  - Delivers customizable end-user applications
-  - Offers integration capabilities
-  - Provides tailored UX for educational contexts
+### **2. Domain Layer (EdTech Specific)**
+- Houses education-specific AI models
+- Implements academic business rules
+- Provides specialized APIs for educational needs
+- Enables domain-specific fine-tuning
 
-### 2. Benefits for EdTech
+### **3. Solutions Layer (Client-Facing)**
+- Delivers customizable end-user applications
+- Offers integration capabilities
+- Provides tailored UX for educational contexts
+
+## Benefits for EdTech domain
 - **Modularity**: Each service (QA generation, document analysis, etc.) can be developed and scaled independently
 - **Flexibility**: Easy to add new educational features or modify existing ones
 - **Specialization**: Services are optimized for educational use cases
@@ -46,7 +73,7 @@ Our three-layer architecture provides significant advantages:
 
 ## Quick Start
 
-1. **Environment Setup**
+### 1. **Environment Setup**
 ```bash
 # Create and activate virtual environment
 python -m venv venv
@@ -57,45 +84,45 @@ venv\Scripts\activate     # Windows
 pip install -e .
 ```
 
-2. **Start Services**
+### 2. **Start Services**
 ```bash
 # Start all services
 start_edtech_domain_services_locally.bat  # Windows
 ./start_edtech_domain_services_locally.sh # Unix/MacOS
 ```
 
-3. **Configure Gateway**
+### 3. **Configure Gateway**
 ```bash
 # Import Kong configuration
 docker exec -it api_gateway-kong-1 kong config db_import /usr/local/kong/declarative/kong.yml
 
 # Restart Kong container
-It is important to restart kong conatiners so that the effects take place - loading kong configuration
+# Important: Restart Kong containers to apply configuration
 ```
 
 ## Key Components
 
-### Document Analysis
+### **Document Analysis**
 - Dissertation evaluation
 - Academic paper analysis
 - Content quality assessment
 
-### Question Generation
+### **Question Generation**
 - Automated assessment creation
 - Multiple question types
 - Difficulty-based generation
 
-### Data Preprocessing
+### **Data Preprocessing**
 - Text chunking and analysis
 - Educational content processing
 - Document format handling
 
-### Face Analysis
+### **Face Analysis**
 - Student engagement monitoring
 - Attendance tracking
 - Emotion analysis for learning
 
-### Educational AI Agents
+### **Educational AI Agents**
 - Intelligent tutoring
 - Learning path optimization
 - Student support automation
@@ -110,36 +137,36 @@ Copy `env.example` to `.env` and adjust variables as needed:
 
 Our modular architecture enables scaling in multiple dimensions:
 
-1. **Vertical Scaling**
+### **1. Vertical Scaling**
    - Individual services can be upgraded
    - Resource allocation per component
    - Performance optimization per module
 
-2. **Horizontal Scaling**
+### **2. Horizontal Scaling**
    - Services can be replicated
    - Load balancing across instances
    - Geographic distribution
 
-3. **Functional Scaling**
+### **3. Functional Scaling**
    - Easy addition of new services
    - Feature expansion per module
    - Integration of new AI capabilities
 
 ## EdTech Domain Advantages
 
-1. **Comprehensive Coverage**
+### **1. Comprehensive Coverage**
    - Complete academic document analysis
    - Automated assessment generation
    - Student engagement tracking
    - Intelligent tutoring systems
 
-2. **Educational Focus**
+### **2. Educational Focus**
    - Models trained on academic content
    - Education-specific business rules
    - Academic standard compliance
    - Learning-oriented features
 
-3. **Integration Ready**
+### **3. Integration Ready**
    - LMS integration capabilities
    - API-first design
    - Standard education protocol support
