@@ -42,10 +42,10 @@ services:
       KONG_PROXY_ERROR_LOG: /dev/stderr
       KONG_ADMIN_ERROR_LOG: /dev/stderr
       KONG_ADMIN_LISTEN: 0.0.0.0:8002
-      KONG_PROXY_LISTEN: 0.0.0.0:8091  # Updated to port 8090
+      KONG_PROXY_LISTEN: 0.0.0.0:8091  # Updated to port 8091
       KONG_LOG_LEVEL: debug
     ports:
-      - "8091:8090"  # Proxy port
-      - "8002:8001"  # Admin API port
+      - "8091:8091"  # Proxy port
+      - "8002:8002"  # Admin API port
     volumes:
       - ./kong.yml:/usr/local/kong/declarative/kong.yml  # Load your kong.yml
