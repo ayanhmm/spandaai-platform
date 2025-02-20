@@ -4,7 +4,7 @@ _transform: true
 services:
   # vLLM Service
   - name: vllm-service
-    url: http://host.docker.internal:8001
+    url: http://host.docker.internal:7500
     routes:
       - name: vllm-generate
         paths:
