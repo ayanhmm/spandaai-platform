@@ -1,0 +1,10 @@
+defaultTest:
+  options:
+    provider:
+      text:
+        id: ollama:smollm2
+prompts:
+  - 'Translate the following text to French: "{{name}}: {{text}}" ensure to return the output only in JSON format'
+providers:
+  - ollama:smollm2
+tests: https://docs.google.com/spreadsheets/d/1jGx8Ag3mSTrFj7P4qJ2KGf_WNXskvd7vlWIUaPGdcg0/edit?usp=sharing
