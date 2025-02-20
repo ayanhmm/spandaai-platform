@@ -1,16 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-echo(
-echo    _____                       _                  _____ 
-echo   / ____|                     | |           /\   |_   _|
-echo  | (___  _ __   __ _ _ __   __| | __ _     /  \    | |  
-echo   \___ \| '_ \ / _` | '_ \ / _` |/ _` |   / /\ \   | |  
-echo   ____) | |_) | (_| | | | | (_| | (_| |_ / ____ \ _| |_ 
-echo  |_____/| .__/ \__,_|_| |_|\__,_|\__,_(_)_/    \_\_____| 
-echo         | |                                             
-echo         |_|                                             
-echo(
 
 :: Save the repository's root directory.
 set "ROOT_DIR=%cd%"

@@ -89,7 +89,6 @@ services:
         strip_path: false
         methods:
           - POST
-      
       - name: ollama-health
         paths:
           - /api/health
