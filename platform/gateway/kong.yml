@@ -24,6 +24,21 @@ services:
         strip_path: false
         methods:
           - GET
+  - name: promptfoo-service
+    url: http://host.docker.internal:7100
+    routes:
+      - name: promptfoo-generate-config
+        paths:
+          - /v1/generate-config
+        strip_path: false
+        methods:
+          - POST
+      - name: promptfoo-run-eval
+        paths:
+          - /v1/run-eval
+        strip_path: false
+        methods:
+          - POST
   - name: vllm-gateway-service
     url: http://host.docker.internal:7500
     routes:

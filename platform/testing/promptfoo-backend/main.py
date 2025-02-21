@@ -137,7 +137,6 @@ async def run_eval():
         )
         eval_stdout, eval_stderr = await eval_process.communicate()
 
-
         log_info(f"Evaluation output:\n{eval_stdout.decode()}")
 
         # Start `promptfoo view` in the background
@@ -159,3 +158,10 @@ async def run_eval():
     except Exception as e:
         log_error(f"Error during execution: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# Run the server when executing the script directly
+if __name__ == "__main__":
+    import uvicorn
+    log_info("Starting FastAPI server on port 7100")
+    uvicorn.run(app, host="0.0.0.0", port=7100)

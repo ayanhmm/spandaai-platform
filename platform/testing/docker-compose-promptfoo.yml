@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  backend:
+    image: prabhas264/promptfoo-backend
+    ports:
+      - "7100:7100"
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  ui:
+    image: prabhas264/promptfoo-ui
+    ports:
+      - "7101:80"
