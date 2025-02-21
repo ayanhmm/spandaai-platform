@@ -43,7 +43,7 @@ def model_exists(model_name):
     Returns True if the model exists, False otherwise.
     """
     try:
-        list_command = "docker exec -it ollama ollama list"
+        list_command = "docker exec -i ollama ollama list"
         log_info(f"Checking if model '{model_name}' exists with command: {list_command}")
 
         process = subprocess.Popen(
@@ -82,7 +82,7 @@ async def generate_config(data: dict):
         log_info(f"Model '{model_name}' not found. Pulling model...")
 
         try:
-            model_pull_command = f"docker exec -it ollama ollama pull {model_name}"
+            model_pull_command = f"docker exec -i ollama ollama pull {model_name}"
             log_info(f"Pulling model using command: {model_pull_command}")
 
             process = subprocess.Popen(
