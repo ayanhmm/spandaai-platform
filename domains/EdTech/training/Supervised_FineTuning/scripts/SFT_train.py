@@ -17,7 +17,7 @@ from unsloth import FastLanguageModel, is_bfloat16_supported
 from unsloth.chat_templates import get_chat_template  # Import get_chat_template for chat formatting
 from datasets import load_dataset  # Import load_dataset for CSV support
 import logging
-
+import pandas as pd
 logging.getLogger('hf-to-gguf').setLevel(logging.WARNING)
 
 
@@ -93,7 +93,7 @@ def run(args):
         # Convert ChatML to text using the tokenizer's apply_chat_template
         texts = [tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=False) + tokenizer.eos_token for chat in chatml_data]
         return {"text": texts}
-
+      
     def formatting_prompts_custom(examples):
         # Example: Assume the dataset has 'question' and 'answer' fields
         questions = examples["question"]
@@ -117,8 +117,38 @@ def run(args):
         dataset = load_dataset("json", data_files=args.dataset, split="train")
     elif args.dataset.endswith(".csv"):
         dataset = load_dataset("csv", data_files=args.dataset, split="train")
+    elif args.dataset.endswith(".xlsx"):
+        # Load Excel file using Pandas
+        df = pd.read_excel(args.dataset)
+        
+        # Ensure the required columns are present
+        required_columns = ["instruction", "course_no", "course_title", "topic", "marks", "question"]
+        if not all(col in df.columns for col in required_columns):
+            raise ValueError(f"Missing required columns in the dataset. Expected: {required_columns}")
+        
+        # Convert Pandas DataFrame to Hugging Face Dataset
+        dataset = load_dataset("pandas", pd_df=df, split="train")
     else:
         raise ValueError(f"Unsupported dataset format: {args.dataset}")
+    
+    def map_columns(example):
+    # Map your dataset columns here
+        instruction = example["instruction"]
+        input_context = (
+            f"Generate a question for the course id {example['course_no']}, "
+            f"course name {example['course_title']} under the topic {example['topic']} "
+            f"appropriate for marks {example['marks']}"
+        )
+        output = example["question"]  # Use the 'question' field as the output
+        return {
+            "instruction": instruction,
+            "input": input_context,
+            "output": output,
+        }
+    
+    # Apply column mapping
+    dataset = dataset.map(map_columns)
+
 
     # Preprocess dataset based on data format
     if args.data_format == "alpaca":
@@ -137,7 +167,8 @@ def run(args):
         per_device_train_batch_size=args.per_device_train_batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         warmup_steps=args.warmup_steps,
-        max_steps=args.max_steps,
+        max_steps=args.max_steps ,
+        num_train_epochs=args.num_train_epochs,
         learning_rate=args.learning_rate,
         fp16=not is_bfloat16_supported(),
         bf16=is_bfloat16_supported(),
@@ -217,7 +248,7 @@ if __name__ == "__main__":
     # Dataset Options
     dataset_group = parser.add_argument_group("📋 Dataset Options")
     dataset_group.add_argument('--dataset', type=str, required=True, help="Path to dataset file (.txt, .json, .csv)")
-    dataset_group.add_argument('--data_format', type=str, choices=["alpaca", "chatml", "custom"], required=True, help="Dataset format: 'alpaca', 'chatml', or 'custom'")
+    dataset_group.add_argument('--data_format', type=str,default= "alpaca", choices=["alpaca", "chatml", "custom"], required=True, help="Dataset format: 'alpaca', 'chatml', or 'custom'")
     
     # LoRA Options
     lora_group = parser.add_argument_group("🧠 LoRA Options", "These options are used to configure the LoRA model.")
@@ -232,10 +263,11 @@ if __name__ == "__main__":
     
     # Training Options
     training_group = parser.add_argument_group("🎓 Training Options")
-    training_group.add_argument('--per_device_train_batch_size', type=int, default=2, help="Batch size per device during training, default is 2.")
-    training_group.add_argument('--gradient_accumulation_steps', type=int, default=4, help="Number of gradient accumulation steps, default is 4.")
+    training_group.add_argument('--per_device_train_batch_size', type=int, default=4, help="Batch size per device during training, default is 4.")
+    training_group.add_argument('--gradient_accumulation_steps', type=int, default=8, help="Number of gradient accumulation steps, default is 8.")
     training_group.add_argument('--warmup_steps', type=int, default=5, help="Number of warmup steps, default is 5.")
     training_group.add_argument('--max_steps', type=int, default=400, help="Maximum number of training steps, default is 400.")
+    training_group.add_argument('--num_train_epochs', type=int, default=3, help="Number of training epochs, default is 3.")
     training_group.add_argument('--learning_rate', type=float, default=2e-4, help="Learning rate, default is 2e-4.")
     training_group.add_argument('--optim', type=str, default="adamw_8bit", help="Optimizer type, default is adamw_8bit.")
     training_group.add_argument('--weight_decay', type=float, default=0.01, help="Weight decay, default is 0.01.")
