@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 7500
 
 # Run the FastAPI server using uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "7500"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "7500"]

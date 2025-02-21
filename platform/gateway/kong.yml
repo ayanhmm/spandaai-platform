@@ -4,7 +4,7 @@ _transform: true
 services:
   # vLLM Service
   - name: vllm-service
-    url: http://host.docker.internal:7500
+    url: http://host.docker.internal:7000
     routes:
       - name: vllm-generate
         paths:
@@ -24,7 +24,27 @@ services:
         strip_path: false
         methods:
           - GET
-
+  - name: vllm-gateway-service
+    url: http://host.docker.internal:7500
+    routes:
+      - name: vllm-start
+        paths:
+          - /start-vllm
+        strip_path: false
+        methods:
+          - POST
+      - name: vllm-stop
+        paths:
+          - /stop-vllm
+        strip_path: false
+        methods:
+          - POST
+      - name: vllm-status
+        paths:
+          - /status-vllm
+        strip_path: false
+        methods:
+          - GET
   - name: ollama-service
     url: http://host.docker.internal:11434
     routes:
