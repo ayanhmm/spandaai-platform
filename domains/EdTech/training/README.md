@@ -1,25 +1,26 @@
-# Fine-Tuning with Unsloth
+Spanda AI Fine-Tuning Platform
 
-## 1. Overview
-This repository provides scripts and datasets for fine-tuning large language models using Unsloth within the **Spanda AI Platform**. The fine-tuning process leverages **LoRA (Low-Rank Adaptation)** to enable efficient training with minimal computational resources.
+🚀 What We Offer
 
-The training process supports three different methodologies:
-- **Supervised Fine-Tuning (SFT)**
-- **Unsupervised Fine-Tuning (Continuous Pretraining)**
-- **Reinforcement Learning (RLHF)**
+Spanda AI provides a streamlined fine-tuning framework for Large Language Models (LLMs). Our platform is optimized for efficient adaptation using LoRA (Low-Rank Adaptation) and other advanced techniques, allowing fine-tuning on minimal compute resources.
 
-## 2. Cloning and Setup
-To begin, clone the **Spanda AI Platform** repository and navigate to the training scripts:
-```bash
-# Clone the repository
+🔹 Key Features
+
+Multiple Fine-Tuning Approaches: Supports Supervised Fine-Tuning (SFT), Unsupervised Pretraining, and RLHF (Reinforcement Learning with Human Feedback).
+
+Optimized Performance: Leverages efficient training methods to enable cost-effective LLM adaptation.
+
+Seamless Deployment: Easily integrates with the Spanda AI Platform for production-ready AI solutions.
+
+🛠️ Getting Started
+
+1️⃣ Clone the Repository
+
 git clone https://github.com/spandaai/spandaai-platform.git
-
-# Navigate to the appropriate directory
 cd spandaai-platform/domain/Edtech/Training
-```
 
-## 3. Directory Structure
-```
+2️⃣ Directory Structure
+
 training/
 ├── Continued_Pre-training/
 │   ├── outputs/
@@ -34,43 +35,31 @@ training/
     ├── outputs/
     └── scripts/
         └── SFT_train.py
-```
 
-## 4. Virtual Environment Setup
-It is recommended to use a virtual environment for dependency management.
+3️⃣ Setup Virtual Environment
 
-### 4.1 Create and Activate Virtual Environment
-```bash
-# Create a virtual environment
 python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate  # Windows
 
-# Activate the virtual environment (Linux/Mac)
-source venv/bin/activate
+4️⃣ Install Dependencies
 
-# Activate the virtual environment (Windows)
-venv\Scripts\activate
-```
+4.1 General Dependencies
 
-### 4.2 Install Dependencies
-Install the required dependencies:
-```bash
 pip install -r requirements.txt
-```
-For fine-tuning with Unsloth, additional dependencies may be required:
-```bash
-pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
-```
-For GPU acceleration:
-```bash
-pip install "unsloth[cu118] @ git+https://github.com/unslothai/unsloth.git"
-```
-For CPU-only users:
-```bash
-pip install "unsloth[huggingface] @ git+https://github.com/unslothai/unsloth.git"
-```
 
-## 5. Training Methods
-### 5.1 Supervised Fine-Tuning (SFT)
+4.2 Unsloth Installation
+
+For fine-tuning with Unsloth, additional dependencies may be required:
+
+pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+
+For GPU acceleration:
+
+pip install "unsloth[cu118] @ git+https://github.com/unslothai/unsloth.git"
+
+🔍 Fine-Tuning Methods
+📌 Supervised Fine-Tuning (SFT)
 - **Location:** `Supervised_FineTuning/scripts/`
 - **Purpose:** Fine-tune an LLM using labeled datasets.
 - **Example Command:**
@@ -78,7 +67,7 @@ pip install "unsloth[huggingface] @ git+https://github.com/unslothai/unsloth.git
 python SFT_train.py --model_name "unsloth/llama-3.2-1b-Instruct" --dataset "dataset.json"
 ```
 
-### 5.2 Unsupervised Fine-Tuning (Continuous Pretraining)
+📌 Unsupervised Fine-Tuning (Continuous Pretraining)
 - **Location:** `Continued_Pre-training/scripts/`
 - **Purpose:** Train an LLM on domain-specific text data without labeled supervision.
 - **Example Command:**
@@ -86,15 +75,15 @@ python SFT_train.py --model_name "unsloth/llama-3.2-1b-Instruct" --dataset "data
 python CPT_train.py --model_name "unsloth/llama-3.2-1b-Instruct" --dataset "corpus.txt"
 ```
 
-### 5.3 Reinforcement Learning (RLHF)
+📌 Reinforcement Learning (RLHF)
 - **Location:** `Reinforcement_Learning/scripts/`
 - **Purpose:** Fine-tune an LLM based on human feedback and reward modeling.
 - **Example Command:**
 ```bash
-python ORPO_train.py --model_name "unsloth/llama-3.2-1b-Instruct" --reward_model "reward_model.pt"
+python ORPO_train.py --model_name "unsloth/llama-3.2-1b-Instruct"
 ```
 
-## 6. Running the Fine-Tuning Scripts
+⚙️ Running the Fine-Tuning Scripts
 Each training script includes configurable parameters such as batch size, learning rate, and optimization settings. An example command for supervised fine-tuning:
 ```bash
 python SFT_train.py \
@@ -124,36 +113,36 @@ python SFT_train.py \
     --save_path "model"
 ```
 
-## 7. Running on Different Environments
-### 7.1 Running on a Single GPU
-```bash
-CUDA_VISIBLE_DEVICES=0 python SFT_train.py --model_name "unsloth/llama-3.2-1b-Instruct"
-```
+💻 Running on Different Environments
 
-### 7.2 Running on Multiple GPUs
-Using PyTorch distributed training:
-```bash
-torchrun --nproc_per_node=2 SFT_train.py --model_name "unsloth/llama-3.2-1b-Instruct"
-```
+Single GPU:
 
-### 7.3 Running on CPU-Only Mode
-For CPU-only training (not recommended for large models):
-```bash
-python SFT_train.py --model_name "unsloth/llama-3.2-1b-Instruct" --dtype bf16
-```
+CUDA_VISIBLE_DEVICES=0 python SFT_train.py --model_name "llama-3.2-1b-Instruct"
 
-## 8. Troubleshooting
-- **Out of Memory (OOM) Errors?**
-  - Reduce `--per_device_train_batch_size`
-  - Enable `--use_gradient_checkpointing`
-  - Use `--load_in_4bit`
-- **Dataset Issues?**
-  - Ensure dataset format is correct (JSON, CSV, Hugging Face dataset)
-- **Slow Training?**
-  - Optimize using `--optim adamw_8bit`
-  - Ensure GPU acceleration is enabled
+Multi-GPU:
 
----
+torchrun --nproc_per_node=2 SFT_train.py --model_name "llama-3.2-1b-Instruct"
 
-This README provides step-by-step guidance for setting up and fine-tuning LLMs using Unsloth within the **Spanda AI Platform**. Follow the instructions carefully to ensure a smooth training process.
+
+
+🛠️ Troubleshooting
+
+Out of Memory (OOM) Errors?
+
+Reduce --per_device_train_batch_size
+
+Enable --use_gradient_checkpointing
+
+Use --load_in_4bit
+
+Dataset Issues?
+
+Ensure dataset format is correct (JSON, CSV, Hugging Face dataset)
+
+Slow Training?
+
+Optimize using --optim adamw_8bit
+
+Ensure GPU acceleration is enabled
+
 
