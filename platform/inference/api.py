@@ -70,7 +70,7 @@ def start_vllm_container(request: StartVLLMRequest):
             detach=True,
             runtime=config["docker"]["gpu_runtime"],
             environment={"HUGGING_FACE_HUB_TOKEN": hf_token},
-            ports={"8000/tcp": 8001},
+            ports={"8000/tcp": 7000},
             volumes={
                 os.path.expanduser("~") + "/.cache/huggingface": {
                     "bind": "/root/.cache/huggingface",

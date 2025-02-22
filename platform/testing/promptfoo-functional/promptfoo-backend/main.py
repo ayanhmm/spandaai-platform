@@ -43,7 +43,7 @@ def model_exists(model_name):
     Returns True if the model exists, False otherwise.
     """
     try:
-        list_command = "docker exec -it ollama ollama list"
+        list_command = "docker exec -i ollama ollama list"
         log_info(f"Checking if model '{model_name}' exists with command: {list_command}")
 
         process = subprocess.Popen(
@@ -82,7 +82,7 @@ async def generate_config(data: dict):
         log_info(f"Model '{model_name}' not found. Pulling model...")
 
         try:
-            model_pull_command = f"docker exec -it ollama ollama pull {model_name}"
+            model_pull_command = f"docker exec -i ollama ollama pull {model_name}"
             log_info(f"Pulling model using command: {model_pull_command}")
 
             process = subprocess.Popen(
@@ -137,7 +137,6 @@ async def run_eval():
         )
         eval_stdout, eval_stderr = await eval_process.communicate()
 
-
         log_info(f"Evaluation output:\n{eval_stdout.decode()}")
 
         # Start `promptfoo view` in the background
@@ -159,3 +158,10 @@ async def run_eval():
     except Exception as e:
         log_error(f"Error during execution: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# Run the server when executing the script directly
+if __name__ == "__main__":
+    import uvicorn
+    log_info("Starting FastAPI server on port 7100")
+    uvicorn.run(app, host="0.0.0.0", port=7100)

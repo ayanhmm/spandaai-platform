@@ -60,7 +60,7 @@ services:
           - http
           - https
         paths:
-          - /api/ws/dissertation_analysis
+          - /api/ws/document_analysis
         strip_path: false
         
       - name: document-analysis-http

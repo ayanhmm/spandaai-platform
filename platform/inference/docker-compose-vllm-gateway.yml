@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  vllm-gateway:
+    image: prabhas264/vllm-gateway
+    container_name: vllm-gateway
+    ports:
+      - "7500:7500"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped

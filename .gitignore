@@ -11,3 +11,4 @@ Docker/ollama.log
 .env
 
 venv/
+/mnt/media/repos/spandaai-platform/platform/testing/promptfoo-functional/promptfoo-ui/node_modules

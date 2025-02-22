@@ -63,7 +63,7 @@ function App() {
         }
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/generate-config/", {
+            const response = await axios.post("http://127.0.0.1:7100/generate-config/", {
                 prompt,
                 model,
                 dataset
@@ -89,7 +89,7 @@ function App() {
         setIsRunning(true);
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/run-eval/");
+            const response = await axios.post("http://127.0.0.1:7100/run-eval/");
             console.log("Evaluation response:", response.data);
             
             if (response.data.message === "Evaluation completed successfully, and view is running in the background.") {

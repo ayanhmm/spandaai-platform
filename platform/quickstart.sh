@@ -125,4 +125,6 @@ echo "
 - MySQL: http://localhost:3306
 - Ollama: http://localhost:11434
 - Verba: http://localhost:8000
+- Promptfoo-backend: http://localhost:7100
+- Promptfoo-ui: http://localhost:7101
 "
