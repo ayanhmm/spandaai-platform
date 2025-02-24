@@ -1,3 +1,6 @@
 [submodule "platform/observability/dockprom"]
 	path = platform/observability/dockprom
 	url = git@github.com:stefanprodan/dockprom.git
+[submodule "platform/fine-tuning_and_training/ms-swift"]
+	path = platform/fine-tuning_and_training/ms-swift
+	url = https://github.com/spandaai/ms-swift.git
