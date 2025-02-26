@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from "react";import axios from 'axios'; // Axios for API requests
+import { useState } from 'react';
+import axios from 'axios'; // Axios for API requests
 import { extractTextFromFile } from '../utils/fileUtils';
 import '../styles/questionBank.css';
 
 
-const QUESTION_SERVICE_URL = "http://localhost:8090/db"
+const QUESTION_SERVICE_URL = "http://localhost:8004"
 const GENERATION_SERVICE_URL = "http://localhost:8090"
 
 const Notification = ({ message, type, onClose }) => {
@@ -41,47 +42,13 @@ const QuestionBank = () => {
   const [feedbackData, setFeedbackData] = useState({});
   const [fileStatuses, setFileStatuses] = useState([]);
   const [submittedFeedback, setSubmittedFeedback] = useState(new Set()); // To track which questions have submitted feedback
-  const [courseIdSuggestions, setCourseIdSuggestions] = useState([]); // Course ID dropdown suggestions
-  const [isCourseIdValid, setIsCourseIdValid] = useState(true);
-
-  const fetchCourseIds = async (searchText = ''
-
-  ) => {
-    try {
-      const response = await axios.get(`http://localhost:8090/db/fetch-courseids`, {
-        params: { search_text: searchText },
-      });
-      setCourseIdSuggestions(response.data.course_ids);
-    } catch (err) {
-      console.error('Error fetching Course IDs:', err);
-    }
-  };
-
-  useEffect(() => {
-    fetchCourseIds();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-  
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  
-    // Trigger Course ID suggestions fetching
-    if (name === 'courseId') {
-      fetchCourseIds(value); // Fetch suggestions based on input
-    }
-  };  
-
-  const handleCourseIdBlur = () => {
-    if (!courseIdSuggestions.includes(formData.courseId)) {
-      setFormData((prev) => ({ ...prev, courseId: '' }));
-      setIsCourseIdValid(false);
-    } else {
-      setIsCourseIdValid(true);
-    }
   };
 
   const handleNotification = (message, type) => {
@@ -503,228 +470,199 @@ const handleFeedbackSubmit = async (questionId) => {
         onClose={() => setNotification({ message: '', type: '' })} // Close the notification
       />
       {/* Left Panel */}
-<div className="input-panel">
-  <h2 className="panel-title">Generate Questions</h2>
-  <form onSubmit={handleSubmit}>
-    <div className="metadata-grid">
-      <div className="form-group">
-        <label className="required-field">Course ID</label>
-        <div className="dropdown-container">
-          <input
-            type="text"
-            name="courseId"
-            value={formData.courseId}
-            onChange={handleInputChange}
-            onBlur={handleCourseIdBlur}
-            placeholder="Search and select a Course ID"
-            className={`input-field ${isCourseIdValid ? '' : 'invalid'}`}
-            list="course-id-suggestions"
-            required
-          />
-          <datalist id="course-id-suggestions">
-            {courseIdSuggestions.map((id) => (
-              <option key={id} value={id}>
-                {id}
-              </option>
-            ))}
-          </datalist>
-        </div>
-        {!isCourseIdValid && (
-          <div className="error-message">
-            Invalid Course ID. Please select a valid one.
+      <div className="input-panel">
+        <h2 className="panel-title">Generate Questions</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="metadata-grid">
+            <div className="form-group">
+              <label className="required-field">Course ID</label>
+              <input
+                type="text"
+                name="courseId"
+                value={formData.courseId}
+                onChange={handleInputChange}
+                placeholder="Enter Course ID"
+                className="input-field"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Exam Type</label>
+              <select
+                name="examType"
+                value={formData.examType}
+                onChange={handleInputChange}
+                className="select-field"
+              >
+                <option value="Any">Any</option>
+                <option value="Mid-semester">Mid-semester</option>
+                <option value="Comprehensive">Comprehensive</option>
+                <option value="Quiz">Quiz</option>
+              </select>
+            </div>
           </div>
-        )}
-      </div>
-      <div className="form-group">
-        <label>Exam Type</label>
-        <select
-          name="examType"
-          value={formData.examType}
-          onChange={handleInputChange}
-          className="select-field"
-        >
-          <option value="Any">Any</option>
-          <option value="Mid-semester">Mid-semester</option>
-          <option value="Comprehensive">Comprehensive</option>
-          <option value="Quiz">Quiz</option>
-        </select>
-      </div>
-    </div>
 
-    <div className="form-group">
-      <label className="required-field">Topic</label>
-      <input
-        type="text"
-        name="topic"
-        value={formData.topic}
-        onChange={handleInputChange}
-        placeholder="Enter topic for question generation"
-        className="input-field"
-        required
-      />
-    </div>
+          <div className="form-group">
+            <label className="required-field">Topic</label>
+            <input
+              type="text"
+              name="topic"
+              value={formData.topic}
+              onChange={handleInputChange}
+              placeholder="Enter topic for question generation"
+              className="input-field"
+              required
+            />
+          </div>
 
-    <div className="metadata-grid">
-      <div className="form-group">
-        <label className="required-field">Question Format</label>
-        <select
-          name="questionFormat"
-          value={formData.questionFormat}
-          onChange={handleInputChange}
-          className="select-field"
-        >
-          <option value="Non-Numerical/Theoretical">
-            Non-Numerical / Theoretical
-          </option>
-          <option value="Numerical/Coding">Numerical / Coding</option>
-        </select>
-      </div>
-    </div>
+          <div className="metadata-grid">
+            <div className="form-group">
+              <label className="required-field">Question Format</label>
+              <select
+                name="questionFormat"
+                value={formData.questionFormat}
+                onChange={handleInputChange}
+                className="select-field"
+              >
+                <option value="Non-Numerical/Theoretical">Non-Numerical / Theoretical</option>
+                <option value="Numerical/Coding">Numerical / Coding</option>
+              </select>
+            </div>
+          </div>
 
-    <div className="metadata-grid">
-      <div className="form-group">
-        <label className="required-field">Question Type</label>
-        <select
-          name="questionType"
-          value={formData.questionType}
-          onChange={handleInputChange}
-          className="select-field"
-          required
-        >
-          <option value="Multiple Choice Questions">
-            Multiple Choice Questions
-          </option>
-          <option value="True/False">True/False</option>
-          <option value="Fill in the blanks">Fill in the blanks</option>
-          <option value="Short Answer">Short Answer</option>
-          <option value="Essay">Essay</option>
-        </select>
-      </div>
+          <div className="metadata-grid">
+            <div className="form-group">
+              <label className="required-field">Question Type</label>
+              <select
+                name="questionType"
+                value={formData.questionType}
+                onChange={handleInputChange}
+                className="select-field"
+                required
+              >
+                <option value="Multiple Choice Questions">Multiple Choice Questions</option>
+                <option value="True/False">True/False</option>
+                <option value="Fill in the blanks">Fill in the blanks</option>
+                <option value="Short Answer">Short Answer</option>
+                <option value="Essay">Essay</option>
+              </select>
+            </div>
 
-      <div className="form-group">
-        <label className="required-field">Difficulty Level</label>
-        <select
-          name="difficultyLevel"
-          value={formData.difficultyLevel}
-          onChange={handleInputChange}
-          className="select-field"
-          required
-        >
-          <option value="Easy">Easy</option>
-          <option value="Medium">Medium</option>
-          <option value="Hard">Hard</option>
-        </select>
-      </div>
+            <div className="form-group">
+              <label className="required-field">Difficulty Level</label>
+              <select
+                name="difficultyLevel"
+                value={formData.difficultyLevel}
+                onChange={handleInputChange}
+                className="select-field"
+                required
+              >
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+            </div>
 
-      <div className="form-group">
-        <label className="required-field">Number of Questions</label>
-        <select
-          name="numberOfQuestions"
-          value={formData.numberOfQuestions}
-          onChange={handleInputChange}
-          className="select-field"
-          required
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-      </div>
+            <div className="form-group">
+              <label className="required-field">Number of Questions</label>
+              <select
+                name="numberOfQuestions"
+                value={formData.numberOfQuestions}
+                onChange={handleInputChange}
+                className="select-field"
+                required
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-      {formData.questionType === 'Multiple Choice Questions' && (
-        <div className="form-group">
-          <label className="required-field">Number of Options</label>
-          <select
-            name="mcqOptionsCount"
-            value={formData.mcqOptionsCount}
-            onChange={handleInputChange}
-            className="select-field"
-            required
-          >
-            {[2, 3, 4, 5, 6].map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-    </div>
+            {formData.questionType === 'Multiple Choice Questions' && (
+              <div className="form-group">
+                <label className="required-field">Number of Options</label>
+                <select
+                  name="mcqOptionsCount"
+                  value={formData.mcqOptionsCount}
+                  onChange={handleInputChange}
+                  className="select-field"
+                  required
+                >
+                  {[2, 3, 4, 5, 6].map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
 
-    <div className="form-group">
-      <label>
-        Example Question <span className="optional-label">(Optional)</span>
-      </label>
-      <textarea
-        name="exampleQuestion"
-        value={formData.exampleQuestion}
-        onChange={handleInputChange}
-        placeholder="Enter an example question to guide the generation..."
-        className="input-field context-area"
-      />
-    </div>
+          <div className="form-group">
+            <label>Example Question <span className="optional-label">(Optional)</span></label>
+            <textarea
+              name="exampleQuestion"
+              value={formData.exampleQuestion}
+              onChange={handleInputChange}
+              placeholder="Enter an example question to guide the generation..."
+              className="input-field context-area"
+            />
+          </div>
 
-    <div className="new-file-upload-section">
-      <h3>Upload and Ingest Files</h3>
-      <div className="file-controls">
-        <label className="add-files-label">
-          Add Files
-          <input
-  type="file"
-  multiple
-  accept=".pdf,.docx,.pptx,.txt,.doc"
-  onChange={handleNewFileSelection}
-  className="file-input"
-/>
-        </label>
-        <button
-          type="button"
-          className="clear-files-button"
-          onClick={() => setFileStatuses([])}
-        >
-          Clear Files
-        </button>
-      </div>
+          <div className="new-file-upload-section">
+            <h3>Upload and Ingest Files</h3>
+            <div className="file-controls">
+              <label className="add-files-label">
+                Add Files
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.docx"
+                  onChange={handleNewFileSelection}
+                  className="file-input"
+                />
+              </label>
+              <button
+                type="button"
+                className="clear-files-button"
+                onClick={() => setFileStatuses([])}
+              >
+                Clear Files
+              </button>
+            </div>
 
-      <div className="file-list">
-        {fileStatuses.map((file, index) => (
-          <div key={index} className="file-item">
-            <span>{file.name}</span>
-            <span
-              className={`file-status ${file.status.toLowerCase()}`}
+            <div className="file-list">
+              {fileStatuses.map((file, index) => (
+                <div key={index} className="file-item">
+                  <span>{file.name}</span>
+                  <span className={`file-status ${file.status.toLowerCase()}`}>{file.status}</span>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={ingestFiles}
+              className="process-files-button"
+              disabled={fileStatuses.length === 0 || !fileStatuses.some((file) => file.status === 'Pending')}
             >
-              {file.status}
-            </span>
+              Ingest Files
+            </button>
           </div>
-        ))}
+
+          {error && <div className="error-message">{error}</div>}
+
+          <button
+            type="submit"
+            className={`generate-btn ${isLoading ? 'disabled' : ''}`}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Generating Questions...' : 'Generate Questions'}
+          </button>
+        </form>
       </div>
-
-      <button
-        type="button"
-        onClick={ingestFiles}
-        className="process-files-button"
-        disabled={
-          fileStatuses.length === 0 ||
-          !fileStatuses.some((file) => file.status === 'Pending')
-        }
-      >
-        Ingest Files
-      </button>
-    </div>
-
-    {error && <div className="error-message">{error}</div>}
-
-    <button
-      type="submit"
-      className={`generate-btn ${isLoading ? 'disabled' : ''}`}
-      disabled={isLoading}
-    >
-      {isLoading ? 'Generating Questions...' : 'Generate Questions'}
-    </button>
-  </form>
-</div>
 
       {/* Right Panel */}
       <div className="output-panel">

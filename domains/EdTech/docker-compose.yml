@@ -8,9 +8,11 @@ services:
     volumes:
       - ./shared:/app/shared
     ports:
-      - "9001:9001"  # Expose the container port to the host  
+      - "9001:9001"  
     env_file:
-      - .env  # Load environment variables
+      - .env
+    networks:
+      - platform_network
 
   document_analysis:
     build:
@@ -19,9 +21,11 @@ services:
     volumes:
       - ./shared:/app/shared
     ports:
-      - "9000:9000"  # Expose the container port to the host
+      - "9000:9000"
     env_file:
-      - .env  # Load environment variables
+      - .env
+    networks:
+      - platform_network
 
   edu_ai_agents:
     build:
@@ -30,9 +34,11 @@ services:
     volumes:
       - ./shared:/app/shared
     ports:
-      - "9002:9002"  # Expose the container port to the host
+      - "9002:9002"
     env_file:
-      - .env  # Load environment variables
+      - .env
+    networks:
+      - platform_network
 
   qa_generation:
     build:
@@ -41,9 +47,11 @@ services:
     volumes:
       - ./shared:/app/shared
     ports:
-      - "9004:9004"  # Expose the container port to the host
+      - "9004:9004"
     env_file:
-      - .env  # Load environment variables
+      - .env
+    networks:
+      - platform_network
 
   face_analysis:
     build:
@@ -52,6 +60,12 @@ services:
     volumes:
       - ./shared:/app/shared
     ports:
-      - "9005:9005"  # Expose the container port to the host
+      - "9005:9005"
     env_file:
-      - .env  # Load environment variables
+      - .env
+    networks:
+      - platform_network
+
+networks:
+  platform_network:
+    external: true
