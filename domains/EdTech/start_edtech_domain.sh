@@ -18,12 +18,12 @@ if [ "$mode" == "docker" ]; then
 elif [ "$mode" == "local" ]; then
     echo "Starting EdTech services locally..."
 
-    # Start services in separate terminals
-    gnome-terminal -- bash -c "cd data_preprocessing && python api.py; exec bash"
-    gnome-terminal -- bash -c "cd document_analysis && python api.py; exec bash"
-    gnome-terminal -- bash -c "cd edu_ai_agents && python api.py; exec bash"
-    gnome-terminal -- bash -c "cd qa_generation && python api.py; exec bash"
-    gnome-terminal -- bash -c "cd face_analysis && python api.py; exec bash"
+    # Start services in background
+    (cd data_preprocessing && python3 api.py &) 
+    (cd document_analysis && python3 api.py &)
+    (cd edu_ai_agents && python3 api.py &)
+    (cd qa_generation && python3 api.py &)
+    (cd face_analysis && python3 api.py &)
 
     echo "All services have been started!"
     

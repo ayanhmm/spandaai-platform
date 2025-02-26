@@ -94,7 +94,7 @@ start_edtech_domain_services_locally.bat  # Windows
 ### 3. **Configure Gateway**
 ```bash
 # Import Kong configuration
-docker exec -it api_gateway-kong-1 kong config db_import /usr/local/kong/declarative/kong.yml
+docker exec -it api_gateway-kong-edtech-domain-1 kong config db_import /usr/local/kong/declarative/kong.yml
 
 # Restart Kong container
 # Important: Restart Kong containers to apply configuration
