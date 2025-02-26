@@ -5,9 +5,7 @@ import Sidebar from './components/common/Sidebar';
 import Footer from './components/common/Footer';
 import HomePage from './pages/HomePage';
 import QuestionBank from './pages/QuestionBank';
-import QuestionPaper from './pages/QuestionPaper';
-import './styles/App.css';
-import './styles/questionPaper.css';  // Add this new import
+import './styles/App.css';  // Add this new import
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,7 +20,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/question-bank" element={<QuestionBank />} />
-            <Route path="/question-paper" element={<QuestionPaper />} />
           </Routes>
         </div>
 
