@@ -117,6 +117,7 @@ Below is a simplified architectural diagram illustrating the separation of layer
 | 🤖 Model Support                  | Status | Description                                             |
 | --------------------------------- | ----------- | ------------------------------------------------------- |
 | Ollama (e.g. Llama3)              | Done ✅          | Local Embedding and Generation Models powered by Ollama |
+| vLLM | Done ✅ | High-throughput and memory-efficient inference engine for LLMs. Optimized for speed in production environments. |
 | HuggingFace (e.g. MiniLMEmbedder) | Done ✅          | Local Embedding Models powered by HuggingFace           |
 
 
