@@ -12,7 +12,6 @@ http://<host>:8090
 ---
 
 # 1. Document Analysis Service
-Base path: `/api`
 
 ## 1.1 Real-time Analysis (WebSocket)
 ```
@@ -127,7 +126,6 @@ POST /analyze
 ---
 
 # 2. Educational AI Agents Service
-Base path: `/api`
 
 ## 2.1 Process Chunks
 ```
@@ -301,10 +299,45 @@ POST /api/scoring
 }
 ```
 
+## 2.5 Pre-Analysis
+
+**Endpoint:**  
+`POST /api/pre_analyze`
+
+**Description:**  
+Processes an entire document to extract key elements (degree, name, topic) and returns a pre-analyzed summary based on the document’s topic.
+
+**Request Model:**  
+- **QueryRequestDocument**  
+  - `document` (string): The full text of the document.
+
+**Example Request:**
+```json
+{
+  "document": "Full document text goes here..."
+}
+```
+
+**Response:**  
+A JSON object with the following keys:
+- `degree` (string): Extracted degree information (if applicable).
+- `name` (string): Extracted author or originator name.
+- `topic` (string): Extracted document topic.
+- `pre_analyzed_summary` (string): A summary analysis of the document.
+
+**Example Response:**
+```json
+{
+  "degree": "PhD",
+  "name": "John Doe",
+  "topic": "Artificial Intelligence in Healthcare",
+  "pre_analyzed_summary": "This document explores the impact of AI on healthcare systems by..."
+}
+```
+
 ---
 
 # 3. Data Processing Service
-Base path: `/api`
 
 ## 3.1 Text Processing
 
@@ -422,94 +455,348 @@ Form Data:
 
 ## 3.3 Document Processing
 
-### Process PDF
-```
-POST /api/process-pdf
-```
+### Health Check
 
-**Purpose:** Extracts text content and analyzes embedded images from PDF documents to enable further analysis.
+Check if the API service is running properly.
 
-**Detailed Description:** This comprehensive PDF processing endpoint performs multiple operations: text extraction from all pages, detection and analysis of embedded images, and basic structure recognition. The service uses OCR when necessary for scanned documents. For each embedded image, the system generates a descriptive analysis and records positioning information. This endpoint is essential for working with academic PDFs, research papers, and formal documentation where both textual and visual information must be processed.
+**Endpoint:** `GET /api/health`
 
-#### Input Format
-```
-Form Data:
-- file: PDF file
-```
-
-#### Output Format
+**Response:**
 ```json
 {
-    "text": "string",
-    "pages": "number",
-    "images": [
-        {
-            "page": "number",
-            "description": "string",
-            "dimensions": {
-                "width": "number",
-                "height": "number"
-            }
-        }
-    ]
+  "status": "healthy"
 }
 ```
 
-### Process DOCX
-```
-POST /api/process-docx
-```
+---
 
-**Purpose:** Extracts text, embedded images, and metadata from Microsoft Word documents for analysis.
+### Text Chunking
 
-**Detailed Description:** This endpoint specializes in parsing Microsoft Word (.docx) files to extract their content and structure. It retrieves plain text while preserving paragraph breaks and section divisions, extracts and analyzes embedded images, and captures document metadata including authorship information and revision history. The comprehensive processing enables downstream analysis systems to work with formal documents while maintaining awareness of their original formatting and context.
+Split text into semantic chunks using LangChain's RecursiveCharacterTextSplitter.
 
-#### Input Format
-```
-Form Data:
-- file: DOCX file
-```
+**Endpoint:** `POST /api/chunk-text`
 
-#### Output Format
+**Request Body:**
 ```json
 {
-    "text": "string",
-    "images": [
-        {
-            "description": "string",
-            "location": "string"
-        }
-    ],
-    "metadata": {
-        "author": "string",
-        "created": "string",
-        "modified": "string"
-    }
+  "text": "Your long text content goes here...",
+  "chunk_size": 1000
 }
 ```
 
-## 3.4 Health Check
-```
-GET /api/health
-```
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| text | string | Yes | - | Input text to be chunked |
+| chunk_size | integer | No | 1000 | Target size for each chunk in words |
 
-**Purpose:** Monitors the operational status of the data processing service for system health monitoring.
-
-**Detailed Description:** This endpoint provides real-time information about the operational status of the data processing service. It returns basic health metrics including a status indicator (typically "up" or "down"), the current software version, and system uptime in seconds. This endpoint is essential for monitoring systems, load balancers, and operational dashboards to verify service availability and perform automated health checks.
-
-#### Output Format
+**Response:**
 ```json
 {
-    "status": "string",
-    "version": "string",
-    "uptime": "number"
+  "chunks": [
+    ["First chunk of text...", 987],
+    ["Second chunk of text...", 1024],
+    ["Third chunk of text...", 856]
+  ]
+}
+```
+
+**Example Request:**
+```json
+{
+  "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+  "chunk_size": 10
+}
+```
+
+**Example Response:**
+```json
+{
+  "chunks": [
+    ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do", 12],
+    ["eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim", 11],
+    ["ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip", 12],
+    ["ex ea commodo consequat.", 4]
+  ]
+}
+```
+
+---
+
+### Get First N Words
+
+Extract the first N words from a given text.
+
+**Endpoint:** `POST /api/first-n-words`
+
+**Request Body:**
+```json
+{
+  "text": "Your text content goes here...",
+  "n_words": 50
+}
+```
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| text | string | Yes | - | Input text |
+| n_words | integer | Yes | - | Number of words to extract |
+
+**Response:**
+```json
+{
+  "text": "First 50 words from the input text..."
+}
+```
+
+**Example Request:**
+```json
+{
+  "text": "The quick brown fox jumps over the lazy dog. This is a sample sentence to test the API endpoint.",
+  "n_words": 5
+}
+```
+
+**Example Response:**
+```json
+{
+  "text": "The quick brown fox jumps"
+}
+```
+
+---
+
+### Resize Image
+
+Resize an uploaded image while maintaining aspect ratio.
+
+**Endpoint:** `POST /api/resize-image`
+
+**Request:**
+- Form data with the following parameters:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| file | file | Yes | - | Image file to resize |
+| max_size | integer | No | 800 | Maximum allowed dimension |
+| min_size | integer | No | 70 | Minimum allowed dimension |
+
+**Response:**
+- The resized image bytes with appropriate content type
+
+**Example Request:**
+```
+POST /api/resize-image HTTP/1.1
+Host: localhost:9001
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="example.jpg"
+Content-Type: image/jpeg
+
+[Binary image data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="max_size"
+
+600
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="min_size"
+
+100
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+**Example Response:**
+- Binary image data with the appropriate content type (e.g., image/jpeg)
+
+---
+
+### Process Images in Batch
+
+Process multiple images in batches for analysis.
+
+**Endpoint:** `POST /api/process-images-batch`
+
+**Request:**
+- Form data with the following parameters:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| files | array of files | Yes | - | List of image files |
+| batch_size | integer | No | 5 | Number of images to process in each batch |
+
+**Response:**
+```json
+{
+  "analysis_results": {
+    "0": "Analysis result for first image",
+    "1": "Analysis result for second image",
+    "2": "Analysis result for third image"
+  }
+}
+```
+
+**Example Request:**
+```
+POST /api/process-images-batch HTTP/1.1
+Host: localhost:9001
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="image1.jpg"
+Content-Type: image/jpeg
+
+[Binary image data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="image2.jpg"
+Content-Type: image/jpeg
+
+[Binary image data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="batch_size"
+
+2
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+**Example Response:**
+```json
+{
+  "analysis_results": {
+    "0": "Image contains: landscape with mountains and trees",
+    "1": "Image contains: portrait of a person wearing glasses"
+  }
+}
+```
+
+---
+
+### Process PDF Document
+
+Process a PDF file, extracting text and analyzing embedded images.
+
+**Endpoint:** `POST /api/process-pdf`
+
+**Request:**
+- Form data with the following parameter:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| file | file | Yes | - | PDF file to process |
+
+**Response:**
+```json
+{
+  "text_and_image_analysis": "Combined text extraction and image analysis results from the PDF"
+}
+```
+
+**Example Request:**
+```
+POST /api/process-pdf HTTP/1.1
+Host: localhost:9001
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="document.pdf"
+Content-Type: application/pdf
+
+[Binary PDF data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+**Example Response:**
+```json
+{
+  "text_and_image_analysis": "Document Title: Annual Report\nContents:\n1. Executive Summary\n2. Financial Results\n...\nImage Analysis:\nPage 1: Contains company logo and header\nPage 3: Contains chart showing quarterly profits\n..."
+}
+```
+
+---
+
+### Process DOCX Document
+
+Process a DOCX file, extracting text and analyzing embedded images.
+
+**Endpoint:** `POST /api/process-docx`
+
+**Request:**
+- Form data with the following parameter:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| file | file | Yes | - | DOCX file to process |
+
+**Response:**
+```json
+{
+  "text_and_image_analysis": "Combined text extraction and image analysis results from the DOCX"
+}
+```
+
+**Example Request:**
+```
+POST /api/process-docx HTTP/1.1
+Host: localhost:9001
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="report.docx"
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+[Binary DOCX data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+**Example Response:**
+```json
+{
+  "text_and_image_analysis": "Document Title: Project Proposal\nContents:\nIntroduction: This document outlines the proposed implementation...\n\nImage Analysis:\nPage 2: Organization chart showing team structure\nPage 5: Timeline diagram showing project milestones\n..."
+}
+```
+
+---
+
+### Extract Text and Analyze Images from File
+
+This endpoint serves as a general-purpose document processor that automatically routes to the appropriate handler based on file type.
+
+**Endpoint:** `POST /api/extract_text_from_file_and_analyze_images`
+
+**Request:**
+- Form data with the following parameter:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| file | file | Yes | - | PDF or DOCX file to process |
+
+**Response:**
+- For PDF files, the response format matches the `/api/process-pdf` endpoint
+- For DOCX files, the response format matches the `/api/process-docx` endpoint
+
+**Example Request:**
+```
+POST /api/extract_text_from_file_and_analyze_images HTTP/1.1
+Host: localhost:9001
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="document.pdf"
+Content-Type: application/pdf
+
+[Binary PDF data]
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+**Example Response:**
+```json
+{
+  "text_and_image_analysis": "Document Analysis:\n\nText Content:\nThis document contains information about...\n\nImage Analysis:\n- Page 1: Company logo detected\n- Page 2: Graph showing quarterly sales data\n- Page 3: Product illustration with labeled components\n..."
 }
 ```
 
 ---
 
 # 4. QA Generation Service
-Base path: `/api`
 
 ## 4.1 Generate Questions
 ```
