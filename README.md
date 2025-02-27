@@ -90,7 +90,7 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **MS-Swift** | DONE | Microsoft's framework for efficient fine-tuning of large language models. Advanced model fine-tuning/pre-training engine. |
+| **MS-Swift** | DONE | Framework for efficient fine-tuning of large language models. Advanced model fine-tuning/pre-training engine. Supports optimizations such as DeepSpeed. |
 | **Unsloth** | DONE | Optimization library for faster training and fine-tuning of LLMs. Provides robust training pipelines designed for efficient model adjustments. |
 | **TensorFlow** | Implemented | Open-source machine learning framework. |
 | **PyTorch** | Implemented | Deep learning framework with strong GPU acceleration. |
