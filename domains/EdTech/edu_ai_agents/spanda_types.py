@@ -5,6 +5,9 @@ from typing import List
 class ThesisText(BaseModel):
     text: str
 
+class QueryRequestDocument(BaseModel):
+    document: str
+
 class ProcessChunksRequest(BaseModel):
     chunks: List[str]
     system_prompt: str

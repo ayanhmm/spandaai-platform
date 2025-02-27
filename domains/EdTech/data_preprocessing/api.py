@@ -23,6 +23,21 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+@app.post("/api/extract_text_from_file_and_analyze_images")
+async def analyze_file(file: UploadFile = File(...)):
+    try:
+        if file.filename.endswith(".pdf"):
+            return await process_pdf(file)
+        elif file.filename.endswith(".docx"):
+            return await process_docx(file)
+        else:
+            raise HTTPException(status_code=400, detail="Unsupported file type.")
+    except Exception as e:
+        logger.exception("An error occurred while processing the file.")
+        raise HTTPException(status_code=500, detail="Failed to process the file. Please try again.") from e
+
+
 @app.post("/api/chunk-text", response_model=ChunkTextResponse)
 async def api_chunk_text(request: TextChunkRequest):
     """

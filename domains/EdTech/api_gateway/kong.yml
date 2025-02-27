@@ -10,6 +10,13 @@ services:
     write_timeout: 3600000
     read_timeout: 3600000
     routes:
+      - name: extract-text-from-file-and-analyze-images
+        paths:
+          - /api/extract_text_from_file_and_analyze_images
+        strip_path: false
+        methods:
+          - POST
+          - OPTIONS
       - name: chunk-text
         paths:
           - /api/chunk-text
@@ -93,6 +100,13 @@ services:
     write_timeout: 3600000
     read_timeout: 3600000
     routes:
+      - name: pre-analyzer
+        paths:
+          - /api/pre_analyze
+        strip_path: false
+        methods:
+          - POST
+          - OPTIONS
       - name: process-chunks
         paths:
           - /api/process-chunks

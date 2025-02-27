@@ -20,6 +20,36 @@ app = FastAPI(title="Dissertation Analysis API",
              version="1.0.0")
 
 
+
+@app.post("/api/pre_analyze")
+async def pre_analysis(request: QueryRequestDocument):
+    try:
+        # Process initial agents in batch
+        initial_results = await process_initial_agents(request.document)
+        
+        # Use the topic from batch results for summary
+        summary_of_thesis = await summarize_and_analyze_agent(
+            request.document, 
+            initial_results["topic"]
+        )
+        
+        response = {
+            "degree": initial_results["degree"],
+            "name": initial_results["name"],
+            "topic": initial_results["topic"],
+            "pre_analyzed_summary": summary_of_thesis
+        }
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Failed to pre-analyze thesis: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to pre-analyze thesis"
+        )
+    
+
 @app.post("/api/process-chunks", response_model=List[str])
 async def process_chunks_endpoint(request: ProcessChunksRequest):
     """
