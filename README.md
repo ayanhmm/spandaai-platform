@@ -114,11 +114,54 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 **Purpose**: Enhance LLM responses with retrieved relevant information.
 
-| Component | Status | Description |
-|-----------|--------|-------------|
-| **Weaviate** | DONE | Vector database for semantic search operations. Provides vector search engine for contextually relevant data retrieval. |
-| **Sentence Transformers** | DONE | Framework for generating text embeddings. Used to create high-quality embeddings for semantic search. |
-| **Ollama Support** | DONE | Integration with Ollama for unified retrieval workflows. Extended to serve embedding models for RAG applications. |
+| 🤖 Model Support                  | Implemented | Description                                             |
+| --------------------------------- | ----------- | ------------------------------------------------------- |
+| Ollama (e.g. Llama3)              | ✅          | Local Embedding and Generation Models powered by Ollama |
+| HuggingFace (e.g. MiniLMEmbedder) | ✅          | Local Embedding Models powered by HuggingFace           |
+
+
+| 🤖 Embedding Support | Implemented | Description                              |
+| -------------------- | ----------- | ---------------------------------------- |
+| Weaviate             | ✅          | Embedding Models powered by Weaviate     |
+| Ollama               | ✅          | Local Embedding Models powered by Ollama |
+| SentenceTransformers | ✅          | Embedding Models powered by HuggingFace  |
+
+
+| 📁 Data Support                                          | Implemented | Description                                    |
+| -------------------------------------------------------- | ----------- | ---------------------------------------------- |
+| [UnstructuredIO](https://docs.unstructured.io/welcome)   | ✅          | Import Data through Unstructured               |
+| PDF Ingestion                                            | ✅          | Import PDF into Verba                          |
+| GitHub & GitLab                                          | ✅          | Import Files from Github and GitLab            |
+| CSV/XLSX Ingestion                                       | ✅          | Import Table Data into Verba                   |
+| .DOCX                                                    | ✅          | Import .docx files                             |
+
+| ✨ RAG Features         | Implemented     | Description                                                               |
+| ----------------------- | --------------- | ------------------------------------------------------------------------- |
+| Hybrid Search           | ✅              | Semantic Search combined with Keyword Search                              |
+| Filtering               | ✅              | Apply Filters (e.g. documents, document types etc.) before performing RAG |
+| Customizable Metadata   | ✅              | Free control over Metadata                                                |
+| Async Ingestion         | ✅              | Ingest data asynchronously to speed up the process                        |
+| Advanced Querying       | planned ⏱️      | Task Delegation Based on LLM Evaluation                                   |
+| Reranking               | planned ⏱️      | Rerank results based on context for improved results                      |
+| RAG Evaluation          | planned ⏱️      | Interface for Evaluating RAG pipelines                                    |                                          |
+
+| 🗡️ Chunking Techniques | Implemented | Description                                             |
+| ---------------------- | ----------- | ------------------------------------------------------- |
+| Token                  | ✅          | Chunk by Token powered by [spaCy](https://spacy.io/)    |
+| Sentence               | ✅          | Chunk by Sentence powered by [spaCy](https://spacy.io/) |
+| Semantic               | ✅          | Chunk and group by semantic sentence similarity         |
+| Recursive              | ✅          | Recursively chunk data based on rules                   |
+| HTML                   | ✅          | Chunk HTML files                                        |
+| Markdown               | ✅          | Chunk Markdown files                                    |
+| Code                   | ✅          | Chunk Code files                                        |
+| JSON                   | ✅          | Chunk JSON files                                        |
+
+
+| 🤝 RAG Libraries | Implemented | Description                        |
+| ---------------- | ----------- | ---------------------------------- |
+| LangChain        | ✅          | Implement LangChain RAG pipelines  |
+| Haystack         | planned ⏱️  | Implement Haystack RAG pipelines   |
+| LlamaIndex       | planned ⏱️  | Implement LlamaIndex RAG pipelines |
 
 **Integration Points**: Connects to inference engines and domain knowledge bases.
 
