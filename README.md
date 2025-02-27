@@ -174,7 +174,7 @@ Below is a simplified architectural diagram illustrating the separation of layer
 |-----------|--------|-------------|
 | **Promptfoo Functional Testing** | Done ✅ | Validates core functionality of AI systems using promptfoo. |
 | **Promptfoo Risk Assessment** | Done ✅ | Identifies safety, reliability, and ethical breaches using promptfoo. |
-| **Predator Non-Functional Testing** | planned ⏱️ | Ensures safety, reliability, and ethical constraints using promptfoo. |
+| **Predator Non-Functional Testing** | planned ⏱️ | Ensures non-functional needs are met using stress tests. |
 | **LLM Guardrails** | planned ⏱️ | Ensures safety, reliability, and ethical constraints using promptfoo. |
 
 **Integration Points**: Validates outputs across all platform layers.
