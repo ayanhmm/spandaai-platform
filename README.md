@@ -90,10 +90,10 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **MS-Swift** | DONE | Framework for efficient fine-tuning of large language models. Advanced model fine-tuning/pre-training engine. Supports optimizations such as DeepSpeed. |
-| **Unsloth** | DONE | Optimization library for faster training and fine-tuning of LLMs. Provides robust training pipelines designed for efficient model adjustments. |
-| **TensorFlow** | Implemented | Open-source machine learning framework. |
-| **PyTorch** | Implemented | Deep learning framework with strong GPU acceleration. |
+| **MS-Swift** | Done ✅ | Framework for efficient fine-tuning of large language models. Advanced model fine-tuning/pre-training engine. Supports optimizations such as DeepSpeed. |
+| **Unsloth** | Done ✅ | Optimization library for faster training and fine-tuning of LLMs. Provides robust training pipelines designed for efficient model adjustments. |
+| **TensorFlow** | Done ✅ | Open-source machine learning framework. |
+| **PyTorch** | Done ✅ | Deep learning framework with strong GPU acceleration. |
 
 **Integration Points**: Provides trained models to the Inference component.
 
@@ -103,10 +103,10 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **vLLM** | DONE | High-throughput and memory-efficient inference engine for LLMs. Optimized for speed in production environments. |
-| **Ollama** | DONE | Local LLM running framework with model management. Production-ready LLM serving platform. |
-| **Llama.cpp** | PLANNED | Lightweight C++ implementation for LLM inference. Will provide CPU-only inference solutions for lightweight deployment. |
-| **Dllama** | PLANNED | Distributed Llama implementation for scaled inference. Will extend the capabilities of Llama.cpp with distributed computing features for scalability. |
+| **vLLM** | Done ✅ | High-throughput and memory-efficient inference engine for LLMs. Optimized for speed in production environments. |
+| **Ollama** | Done ✅ | Local LLM running framework with model management. Production-ready LLM serving platform. |
+| **Llama.cpp** | planned ⏱️ | Lightweight C++ implementation for LLM inference. Will provide CPU-only inference solutions for lightweight deployment. |
+| **Dllama** | planned ⏱️ | Distributed Llama implementation for scaled inference. Will extend the capabilities of Llama.cpp with distributed computing features for scalability. |
 
 **Integration Points**: Interfaces with domain-specific services and RAG components.
 
@@ -114,52 +114,52 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 **Purpose**: Enhance LLM responses with retrieved relevant information.
 
-| 🤖 Model Support                  | Implemented | Description                                             |
+| 🤖 Model Support                  | Status | Description                                             |
 | --------------------------------- | ----------- | ------------------------------------------------------- |
-| Ollama (e.g. Llama3)              | ✅          | Local Embedding and Generation Models powered by Ollama |
-| HuggingFace (e.g. MiniLMEmbedder) | ✅          | Local Embedding Models powered by HuggingFace           |
+| Ollama (e.g. Llama3)              | Done ✅          | Local Embedding and Generation Models powered by Ollama |
+| HuggingFace (e.g. MiniLMEmbedder) | Done ✅          | Local Embedding Models powered by HuggingFace           |
 
 
-| 🤖 Embedding Support | Implemented | Description                              |
+| 🤖 Embedding Support | Status | Description                              |
 | -------------------- | ----------- | ---------------------------------------- |
-| Weaviate             | ✅          | Embedding Models powered by Weaviate     |
-| Ollama               | ✅          | Local Embedding Models powered by Ollama |
-| SentenceTransformers | ✅          | Embedding Models powered by HuggingFace  |
+| Weaviate             | Done ✅          | Embedding Models powered by Weaviate     |
+| Ollama               | Done ✅          | Local Embedding Models powered by Ollama |
+| SentenceTransformers | Done ✅          | Embedding Models powered by HuggingFace  |
 
 
-| 📁 Data Support                                          | Implemented | Description                                    |
+| 📁 Data Support                                          | Status | Description                                    |
 | -------------------------------------------------------- | ----------- | ---------------------------------------------- |
-| [UnstructuredIO](https://docs.unstructured.io/welcome)   | ✅          | Import Data through Unstructured               |
-| PDF Ingestion                                            | ✅          | Import PDF into Verba                          |
-| GitHub & GitLab                                          | ✅          | Import Files from Github and GitLab            |
-| CSV/XLSX Ingestion                                       | ✅          | Import Table Data into Verba                   |
-| .DOCX                                                    | ✅          | Import .docx files                             |
+| [UnstructuredIO](https://docs.unstructured.io/welcome)   | Done ✅          | Import Data through Unstructured               |
+| PDF Ingestion                                            | Done ✅          | Import PDF into Verba                          |
+| GitHub & GitLab                                          | Done ✅          | Import Files from Github and GitLab            |
+| CSV/XLSX Ingestion                                       | Done ✅          | Import Table Data into Verba                   |
+| .DOCX                                                    | Done ✅          | Import .docx files                             |
 
-| ✨ RAG Features         | Implemented     | Description                                                               |
+| ✨ RAG Features         | Status    | Description                                                               |
 | ----------------------- | --------------- | ------------------------------------------------------------------------- |
-| Hybrid Search           | ✅              | Semantic Search combined with Keyword Search                              |
-| Filtering               | ✅              | Apply Filters (e.g. documents, document types etc.) before performing RAG |
-| Customizable Metadata   | ✅              | Free control over Metadata                                                |
-| Async Ingestion         | ✅              | Ingest data asynchronously to speed up the process                        |
+| Hybrid Search           | Done ✅              | Semantic Search combined with Keyword Search                              |
+| Filtering               | Done ✅              | Apply Filters (e.g. documents, document types etc.) before performing RAG |
+| Customizable Metadata   | Done ✅              | Free control over Metadata                                                |
+| Async Ingestion         | Done ✅              | Ingest data asynchronously to speed up the process                        |
 | Advanced Querying       | planned ⏱️      | Task Delegation Based on LLM Evaluation                                   |
 | Reranking               | planned ⏱️      | Rerank results based on context for improved results                      |
 | RAG Evaluation          | planned ⏱️      | Interface for Evaluating RAG pipelines                                    |                                          |
 
-| 🗡️ Chunking Techniques | Implemented | Description                                             |
+| 🗡️ Chunking Techniques | Status | Description                                             |
 | ---------------------- | ----------- | ------------------------------------------------------- |
-| Token                  | ✅          | Chunk by Token powered by [spaCy](https://spacy.io/)    |
-| Sentence               | ✅          | Chunk by Sentence powered by [spaCy](https://spacy.io/) |
-| Semantic               | ✅          | Chunk and group by semantic sentence similarity         |
-| Recursive              | ✅          | Recursively chunk data based on rules                   |
-| HTML                   | ✅          | Chunk HTML files                                        |
-| Markdown               | ✅          | Chunk Markdown files                                    |
-| Code                   | ✅          | Chunk Code files                                        |
-| JSON                   | ✅          | Chunk JSON files                                        |
+| Token                  | Done ✅          | Chunk by Token powered by [spaCy](https://spacy.io/)    |
+| Sentence               | Done ✅          | Chunk by Sentence powered by [spaCy](https://spacy.io/) |
+| Semantic               | Done ✅          | Chunk and group by semantic sentence similarity         |
+| Recursive              | Done ✅          | Recursively chunk data based on rules                   |
+| HTML                   | Done ✅          | Chunk HTML files                                        |
+| Markdown               | Done ✅          | Chunk Markdown files                                    |
+| Code                   | Done ✅          | Chunk Code files                                        |
+| JSON                   | Done ✅          | Chunk JSON files                                        |
 
 
-| 🤝 RAG Libraries | Implemented | Description                        |
+| 🤝 RAG Libraries | Status | Description                        |
 | ---------------- | ----------- | ---------------------------------- |
-| LangChain        | ✅          | Implement LangChain RAG pipelines  |
+| LangChain        | Done ✅          | Implement LangChain RAG pipelines  |
 | Haystack         | planned ⏱️  | Implement Haystack RAG pipelines   |
 | LlamaIndex       | planned ⏱️  | Implement LlamaIndex RAG pipelines |
 
@@ -171,10 +171,10 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **Promptfoo Functional Testing** | DONE | Validates core functionality of AI systems using promptfoo. |
-| **Promptfoo Risk Assessment** | DONE | Identifies safety, reliability, and ethical breaches using promptfoo. |
-| **Predator Non-Functional Testing** | Planned | Ensures safety, reliability, and ethical constraints using promptfoo. |
-| **LLM Guardrails** | Planned | Ensures safety, reliability, and ethical constraints using promptfoo. |
+| **Promptfoo Functional Testing** | Done ✅ | Validates core functionality of AI systems using promptfoo. |
+| **Promptfoo Risk Assessment** | Done ✅ | Identifies safety, reliability, and ethical breaches using promptfoo. |
+| **Predator Non-Functional Testing** | planned ⏱️ | Ensures safety, reliability, and ethical constraints using promptfoo. |
+| **LLM Guardrails** | planned ⏱️ | Ensures safety, reliability, and ethical constraints using promptfoo. |
 
 **Integration Points**: Validates outputs across all platform layers.
 
@@ -184,12 +184,12 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **Kafka** | Supported by components | Distributed event streaming platform. Central messaging system ensuring decoupled and scalable communication. |
-| **Redis** | Supported by components | In-memory data structure store for caching and messaging. High-performance data store for caching and quick data access. |
-| **Kubernetes** | Supported by components | Container orchestration for scalable deployments. Orchestration platform for containerized services. |
-| **Docker** | Supported by components | Containerization technology. Provides consistent deployment across environments. |
-| **Helm** | Supported by components | Kubernetes package manager. Streamlines deployment and management of Kubernetes applications. |
-| **Ray** | Supported by components | Framework for distributed and parallel computing. Enables scalable model serving and parallel processing. |
+| **Kafka** | Supported by components ✅| Distributed event streaming platform. Central messaging system ensuring decoupled and scalable communication. |
+| **Redis** | Supported by components ✅| In-memory data structure store for caching and messaging. High-performance data store for caching and quick data access. |
+| **Kubernetes** | Supported by components ✅| Container orchestration for scalable deployments. Orchestration platform for containerized services. |
+| **Docker** | Supported by components ✅| Containerization technology. Provides consistent deployment across environments. |
+| **Helm** | Supported by components ✅| Kubernetes package manager. Streamlines deployment and management of Kubernetes applications. |
+| **Ray** | Supported by components ✅| Framework for distributed and parallel computing. Enables scalable model serving and parallel processing. |
 
 **Integration Points**: Provides operational foundation for all other components.
 
@@ -199,15 +199,15 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **Prometheus** | DONE | Metrics collection and monitoring. Acts as a metrics database for real-time monitoring. |
-| **Pushgateway** | DONE | Push-based metrics collection. Acts as push acceptor for ephemeral and batch jobs. |
-| **AlertManager** | DONE | Alert handling and notification routing. Manages system notifications. |
-| **Grafana** | DONE | Visualization and dashboarding. Provides visualization tools for metrics. |
-| **NodeExporter** | DONE | Host-level metrics collector. Gathers system-level metrics from servers. |
-| **cAdvisor** | DONE | Container metrics collector. Gathers performance data from containers. |
-| **Caddy** | DONE | Reverse proxy. Provides reverse proxy and basic auth for Prometheus and AlertManager. |
+| **Prometheus** | Done ✅ | Metrics collection and monitoring. Acts as a metrics database for real-time monitoring. |
+| **Pushgateway** | Done ✅ | Push-based metrics collection. Acts as push acceptor for ephemeral and batch jobs. |
+| **AlertManager** | Done ✅ | Alert handling and notification routing. Manages system notifications. |
+| **Grafana** | Done ✅ | Visualization and dashboarding. Provides visualization tools for metrics. |
+| **NodeExporter** | Done ✅| Host-level metrics collector. Gathers system-level metrics from servers. |
+| **cAdvisor** | Done ✅ | Container metrics collector. Gathers performance data from containers. |
+| **Caddy** | Done ✅ | Reverse proxy. Provides reverse proxy and basic auth for Prometheus and AlertManager. |
 
-**Integration Points**: Monitors all platform services and components.
+**Integration Points**: Monitors Hardware. Planned to monitor all platform components.
 
 ## 7. Agentic Framework
 
@@ -215,9 +215,9 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **Orchestration** | Planned | Coordination of multiple AI agents. |
-| **Management** | Planned | Lifecycle and state management for agents. |
-| **Agent Tools** | Planned | Capabilities and functions available to AI agents. |
+| **Orchestration** | planned ⏱️ | Coordination of multiple AI agents. |
+| **Management** | planned ⏱️ | Lifecycle and state management for agents. |
+| **Agent Tools** | planned ⏱️| Capabilities and functions available to AI agents. |
 
 **Integration Points**: Connects with domain-specific agent implementations.
 
@@ -227,12 +227,12 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 | Component | Status | Description |
 |-----------|--------|-------------|
-| **Apache Superset** | Planned | Business intelligence web application. |
-| **Iceberg** | Planned | Table format for large analytical datasets. |
-| **Dremio** | Planned | Data lake engine. |
-| **Spark** | Planned | Analytics engine for large-scale data processing. |
-| **MinIO** | Planned | High-performance object storage. |
-| **Nesse** | Planned | Data processing framework. |
+| **Apache Superset** | planned ⏱️ | Business intelligence web application. |
+| **Iceberg** | planned ⏱️ | Table format for large analytical datasets. |
+| **Dremio** | planned ⏱️ | Data lake engine. |
+| **Spark** | planned ⏱️ | Analytics engine for large-scale data processing. |
+| **MinIO** | planned ⏱️ | High-performance object storage. |
+| **Nesse** | planned ⏱️ | Data processing framework. |
 
 **Integration Points**: Will provide analytical capabilities across the platform.
 
