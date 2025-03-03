@@ -123,7 +123,7 @@ Supported Training Methods:
 | ✅ Model Execution | CUDA/HIP graph for fast execution |
 | ✅ Quantization Support | GPTQ, AWQ, INT4, INT8, FP8 |
 | ✅ Optimized Kernels | Integration with FlashAttention and FlashInfer |
-| ✅ Speculative Decoding | Yes |
+| ✅ Speculative Decoding | Yes. Planned integrations for massive performance boost. |
 | ✅ Chunked Prefill | Yes |
 | ✅ Performance Benchmarking | Benchmarks vs. TensorRT-LLM, SGLang, and LMDeploy |
 | **Ease of Use & Flexibility** | |
