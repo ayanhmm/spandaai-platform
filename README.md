@@ -80,7 +80,7 @@ This section provides a concise yet comprehensive overview of the Platform Layer
 
 Below is a simplified architectural diagram illustrating the separation of layers and key components:
 
-![Platform Overview](docs/images/platform.png)
+![Platform Overview](docs/images/platform.svg)
 ---
 # SpandaAI Platform Layer Components
 
