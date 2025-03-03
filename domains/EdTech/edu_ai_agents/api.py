@@ -29,8 +29,7 @@ async def pre_analysis(request: QueryRequestDocument):
         
         # Use the topic from batch results for summary
         summary_of_thesis = await summarize_and_analyze_agent(
-            request.document, 
-            initial_results["topic"]
+            request.document
         )
         
         response = {

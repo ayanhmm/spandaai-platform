@@ -33,6 +33,7 @@ services:
       kong-migrations-edtech-domain:
         condition: service_completed_successfully
     environment:
+      KONG_NGINX_HTTP_CLIENT_BODY_BUFFER_SIZE: 50m
       KONG_DATABASE: "postgres"
       KONG_PG_HOST: kong-database-edtech-domain
       KONG_PG_USER: kong

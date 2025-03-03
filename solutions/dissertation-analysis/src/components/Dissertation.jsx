@@ -374,7 +374,7 @@ const preAnalyzeText = async (extractedData) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        thesis: thesisText,
+        document: thesisText,
       }),
     });
 
@@ -620,8 +620,8 @@ const  handleEvaluate = async () => {
   setResponseloading(true);
   setAnalyzing(true);
 
-  const websocketUrl = `${apiUrl.replace("http", "ws")}/api/ws/dissertation_analysis`; // Convert to WebSocket URL
-  const reconnectUrlBase = `${apiUrl.replace("http", "ws")}/api/ws/dissertation_analysis_reconnect?session_id=`;
+  const websocketUrl = `${apiUrl.replace("http", "ws")}/api/ws/document_analysis`; // Convert to WebSocket URL
+  const reconnectUrlBase = `${apiUrl.replace("http", "ws")}/api/ws/document_analysis_reconnect?session_id=`;
 
   try {
     console.log("Starting extraction...");

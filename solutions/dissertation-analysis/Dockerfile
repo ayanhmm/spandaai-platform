@@ -61,4 +61,4 @@ EXPOSE 4000
 
 
 # Run config.sh at startup
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/config.sh"]
