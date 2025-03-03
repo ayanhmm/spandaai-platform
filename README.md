@@ -132,7 +132,6 @@ Supported Training Methods:
 | ✅ Distributed Inference | Supports tensor parallelism and pipeline parallelism |
 | ✅ Streaming Outputs | Yes |
 | ✅ OpenAI API Compatibility | Yes |
-| ✅ Hardware Support | NVIDIA GPUs, AMD CPUs & GPUs, Intel CPUs & GPUs, PowerPC CPUs, TPU, AWS Neuron |
 | ✅ Prefix Caching | Yes |
 | ✅ Multi-LoRA Support | Yes |
 | **Model Support** | |
