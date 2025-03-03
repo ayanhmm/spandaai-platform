@@ -88,14 +88,6 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 **Purpose**: Train and customize AI models for specific domains and use cases.
 
-| Component | Status | Description |
-|-----------|--------|-------------|
-| **MS-Swift** | Done ✅ | Framework for efficient fine-tuning of large language models. Advanced model fine-tuning/pre-training engine. Supports optimizations such as DeepSpeed. |
-| **Unsloth** | Done ✅ | Optimization library for faster training and fine-tuning of LLMs. Provides robust training pipelines designed for efficient model adjustments. |
-| **TensorFlow** | Done ✅ | Open-source machine learning framework. |
-| **PyTorch** | Done ✅ | Deep learning framework with strong GPU acceleration. |
-
-
 ### Training
 
 Supported Training Methods:
