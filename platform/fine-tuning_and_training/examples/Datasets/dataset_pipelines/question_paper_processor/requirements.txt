@@ -1,7 +1,0 @@
-tqdm
-PyMuPDF
-python-docx
-python-pptx
-beautifulsoup4
-markdown
-aiohttp
