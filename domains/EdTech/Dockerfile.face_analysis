@@ -11,6 +11,7 @@ COPY face_analysis ./face_analysis
 
 # Install dependencies
 RUN pip install --no-cache-dir .
+RUN apt-get update && apt-get install -y libglib2.0-0 ffmpeg libsm6 libxext6
 
 # Expose port 9001
 EXPOSE 9005
