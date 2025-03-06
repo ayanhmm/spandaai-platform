@@ -9,6 +9,7 @@ app = FastAPI()
 @app.post("/process-video")
 async def process_video_endpoint(file: UploadFile, batch_size: int = Form(10), output_fps: int = Form(4)):
     tempin = 'media/input/tempfile.mp4'
+    os.makedirs('media/input', exist_ok=True)
     try:
         with open(tempin, 'wb') as f:
             content = await file.read()
@@ -36,7 +37,7 @@ async def attention_from_direction_endpoint(data, t1: int = Form(2000), t2: int 
         raise HTTPException(status_code=500, detail=f"Processing failed: {str(e)}")
 
 # Endpoint to execute complete pipeline from input video to attention levels dict
-@app.post("/attention_pipeline")
+@app.post("/attention-pipeline")
 async def attention_pipeline_endpoint(file: UploadFile, batch_size: int = Form(10), output_fps: int = Form(4),
                                       t1: int = Form(2000), t2: int = Form(4000), thresh: float = Form(0.7)):
     tempin = 'media/input/tempfile.mp4'
