@@ -16,36 +16,6 @@ EdTech/
 └── shared/                # Shared utilities and components
 ```
 
-## Platform-Domain-Solution Layer Architecture
-
-Our three-layer architecture provides significant advantages:
-
-### **Layered Architecture Diagram**
-```
-+----------------------------+
-|        Solutions Layer     |
-| (Client-Facing Applications) |
-+----------------------------+
-            |
-            v
-+----------------------------+
-|        Domain Layer        |
-| (Education-Specific AI & APIs) |
-+----------------------------+
-            |
-            v
-+---------------------------------+
-|        Platform Layer           |
-| (Infrastructure & Core Services) |
-| - API Gateway (Kong)             |
-| - Logging & Monitoring           |
-| - Model Serving (LLMs, Embeddings) |
-| - Data Storage & Databases       |
-| - Distributed Computing          |
-| - Task Scheduling & Workflow Orchestration |
-+---------------------------------+
-```
-
 ### **1. Platform Layer (Foundation)**
 - **API Gateway (Kong)**: Manages authentication, rate limiting, and routing.
 - **Logging & Monitoring**: Provides centralized logging, tracing, and real-time system monitoring.
@@ -76,9 +46,12 @@ Our three-layer architecture provides significant advantages:
 ### 1. **Environment Setup**
 ```bash
 # Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # Unix/MacOS
+cd spandaai-platform
+cd domains/EdTech
+python -m venv venv # Windows
+python3 -m venv venv # Unix/MacOS
 venv\Scripts\activate     # Windows
+source venv/bin/activate  # Unix/MacOS
 
 # Install dependencies
 pip install -e .
@@ -87,8 +60,8 @@ pip install -e .
 ### 2. **Start Services**
 ```bash
 # Start all services
-start_edtech_domain_services_locally.bat  # Windows
-./start_edtech_domain_services_locally.sh # Unix/MacOS
+start_edtech_domain.bat  # Windows
+./start_edtech_domain.sh # Unix/MacOS
 ```
 
 ### 3. **Configure Gateway**

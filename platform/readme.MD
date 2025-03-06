@@ -59,6 +59,7 @@ This directory includes scripts and configurations for testing various component
     ```bash
     git clone https://github.com/spandaai/spandaai-platform.git
     cd spandaai-platform
+    cd platform
     ```
 
 2. **Run the Application:**
