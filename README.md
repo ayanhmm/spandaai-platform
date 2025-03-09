@@ -88,9 +88,18 @@ Below is a simplified architectural diagram illustrating the separation of layer
 
 **Purpose**: Train and customize AI models for specific domains and use cases.
 
-### Training
 
-Supported Training Methods:
+## Training Methods Plan
+
+| Training Method                          | Description | Status |
+|------------------------------------------|-------------|------------|
+| **Decentralized Training**               | In decentralized training, multiple nodes independently train models using their local data and periodically exchange updates with each other to improve performance. This approach eliminates the need for a central server, enabling training to be more robust to failures and reducing communication overhead. It is ideal for scenarios where data privacy is a concern, and computing resources are distributed across multiple devices or edge nodes. |  Planned ⏱️  |
+| **Federated Training**                   | Federated training involves multiple client devices that locally train models on their own data and then share only the model updates (gradients) with a central server, rather than raw data. This method enhances data privacy and security while still allowing collaborative model training. It is commonly used in environments where data cannot be centralized, such as healthcare and mobile applications. |  Planned ⏱️  |
+| **Decentralized Federated Training**     | This method combines the principles of both decentralized and federated learning. Instead of a single central server coordinating the learning process, groups of clients collaboratively train models and share updates among themselves in a decentralized manner. This reduces reliance on any single entity while maintaining privacy and efficiency. It is particularly useful in large-scale networks where communication costs and centralization risks need to be minimized. | Planned ⏱️  |
+
+
+
+### Supported Training Methods:
 
 | Method                             | Full-Parameter                                               | LoRA                                                         | QLoRA                                                        | Deepspeed                                                    | Multi-Node                                                   | Multi-Modal                                                  |
 |------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|--------------------------------------------------------------|

@@ -1,4 +1,8 @@
-# Verba API Documentation
+# Launch and use the API documentation
+
+It is important to launch the RAG component before using the API documentation. For more information, go to the platform dir and follow instructions for launch.
+
+# RAG API Documentation
 
 ## Table of Contents
 - [Health and Connection](#health-and-connection)
