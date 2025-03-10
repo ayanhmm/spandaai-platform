@@ -1,7 +1,3 @@
-Here is a draft README.md for the `platform` folder in the `spandaai/spandaai-platform` repository:
-
----
-
 # Platform Folder
 
 ### Quickstart Scripts
@@ -42,7 +38,3 @@ Contributions are welcome! Please refer to the main repository's README.md for g
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
----
-
-If you need to add more specific details or sections, please let me know!
