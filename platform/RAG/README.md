@@ -136,7 +136,7 @@ Configure the language model used for generation, including model parameters and
 We provide flexibility in connecting to Weaviate instances based on your needs:
 
 ### 💻 Weaviate Embedded
-Embedded Weaviate runs a Weaviate instance directly from your application code rather than from a stand-alone Weaviate server installation. When you run Spanda.AI RAG in `Local Deployment`, it will setup and manage Embedded Weaviate in the background.
+Embedded Weaviate runs a Weaviate instance directly from your application code rather than from a stand-alone Weaviate server installation. When you run `Local Deployment`, it will setup and manage Embedded Weaviate in the background.
 
 **Note:** Weaviate Embedded is not supported on Windows and is in Experimental Mode which can bring unexpected errors. We recommend using the Docker Deployment or Cloud Deployment instead for production environments.
 
@@ -144,10 +144,10 @@ Embedded Weaviate runs a Weaviate instance directly from your application code r
 If you prefer a cloud-based solution, Weaviate Cloud (WCD) offers a scalable, managed environment. Learn how to set up a cloud cluster and get the API keys by following the Weaviate Cluster Setup Guide.
 
 ### 🐳 Docker Deployment
-Another local alternative is deploying Weaviate using Docker. This provides isolation and consistent environments across different machines. For more details, follow the "How to install Spanda.AI RAG with Docker" section.
+Another local alternative is deploying Weaviate using Docker. This provides isolation and consistent environments across different machines. For more details, follow the "How to install with Docker" section.
 
 ### ⚙️ Custom Weaviate Deployment
-If you're hosting Weaviate yourself, you can use the `Custom` deployment option in Spanda.AI RAG. This allows you to specify the URL, PORT, and API key of your custom Weaviate instance.
+If you're hosting Weaviate yourself, you can use the `Custom` deployment option. This allows you to specify the URL, PORT, and API key of your custom Weaviate instance.
 
 ## Document Management
 
@@ -170,9 +170,6 @@ Leverage the suggestions engine to guide users toward effective queries.
 
 ### Conversation Memory
 Maintain context across multiple interactions for more coherent conversations.
-
-### Theme Customization
-Customize the appearance of your Spanda.AI RAG interface.
 
 ## API Reference
 
