@@ -51,123 +51,131 @@ Implement a Data Lakehouse architecture that combines:
 
 ![Data Lakehouse](./images/data_lakehouse.png)
 
-#### Optimized Data Lakehouse Stack: Justification & Setup Guide
+# Building a Data Lakehouse Pipeline with Dremio and Apache Iceberg
 
-##### 1. Overview
-This document outlines the final optimized stack for a Data Lakehouse setup, detailing the role of each selected component, the justification for its inclusion, and the initial steps to get started using GitHub repositories.
+## Overview
+This guide walks through creating an end-to-end data pipeline from SQLServer to dashboards using Dremio's Data Lakehouse Platform and Apache Iceberg. We'll demonstrate how to simplify what traditionally requires multiple steps (data lake transfer, data warehousing, BI acceleration) into a streamlined workflow that can run on a laptop.
 
-##### 2. Final Optimized Stack
+## Components
 
-| Component | Keep? | Justification |
-|-----------|-------|---------------|
-| Dremio | ✅ Yes | Acts as the Data Lakehouse query engine, integrating with Apache Iceberg and MinIO. Provides high-performance analytics over raw and structured data. |
-| Apache Superset | ✅ Yes | A powerful business intelligence (BI) tool for visualization, dashboarding, and reporting over Dremio's queried data. |
-| Apache Iceberg | ⚠️ Use as a format, not a separate service | A table format for managing large datasets efficiently. Dremio natively supports Iceberg, so there is no need to manage it separately. |
-| Apache Spark | ✅ Yes | Best choice for large-scale data processing, ETL, ML workloads, and analytics. Integrates well with Dremio and Iceberg. |
-| MinIO | ⚠️ Keep if self-hosting storage (best to set this up for demos and using it in our use-case) | Required only if you need a self-hosted object storage alternative to AWS S3, GCP Storage, or Azure Blob Storage (we require it for missing pieces). |
+| Component | Purpose | Role in Our Pipeline |
+|-----------|---------|----------------------|
+| **SQLServer** | Source database | Stores our operational data that needs to be analyzed |
+| **Dremio** | Data Lakehouse Platform | Core engine that queries data across sources and manages the lakehouse |
+| **Apache Iceberg** | Table format | Provides advanced data management features for our lake tables |
+| **Nessie** | Catalog service | Manages and versions our data lake tables |
+| **MinIO** | Object storage | Simulates cloud storage locally for our data lake |
+| **Superset** | BI dashboard tool | Creates visualizations from our processed data |
 
-##### 3. Component Details & Justification
+## Implementation Steps
 
-###### 3.1 Dremio
-**What it does:**
-- Acts as a high-performance SQL query engine for data lakes.
-- Eliminates the need for a traditional data warehouse.
-- Provides native support for Apache Iceberg and object storage solutions like MinIO.
-- Enables fast BI and ad hoc querying without extensive ETL.
+### 1. Setting Up the Environment
 
-**Why we chose it:**
-- Eliminates the complexity of traditional data warehouses.
-- Provides self-service analytics without excessive data movement.
-- Works natively with Apache Iceberg for optimized query performance.
+Create a `docker-compose.yml` file with the following services:
+- **Nessie**: Catalog server using in-memory store (port 19120)
+- **MinIO**: Storage server with admin/password credentials (ports 9000/9001)
+- **Dremio**: Data lakehouse platform (ports 9047/31010/32010)
+- **SQLServer**: Source database with SA user (port 1433)
+- **Superset**: BI visualization tool (port 8080)
 
-**GitHub Repository:** Dremio OSS
+Start the environment:
+```bash
+docker compose up
+```
 
-**First Steps:**
-- Clone the repository: `git clone https://github.com/dremio/dremio-oss.git`
-- Follow the installation guide to deploy on your system.
-- Connect your object storage (AWS S3 / MinIO) and start running SQL queries.
+### 2. Data Preparation in SQLServer
 
-###### 3.2 Apache Superset
-**What it does:**
-- A lightweight BI visualization tool for data analysis and dashboarding.
-- Integrates well with Dremio and other SQL-based data sources.
-- Provides an easy-to-use UI for creating dashboards.
+Access the SQLServer container:
+```bash
+docker exec -it sqlserver /bin/bash
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Yourpassword2024'
+```
 
-**Why we chose it:**
-- Works seamlessly with Dremio's SQL engine.
-- Provides interactive dashboards for end users.
-- Open-source alternative to Tableau and Power BI.
+Create and populate sample data:
+```sql
+CREATE TABLE DashboardData (RecordID INT PRIMARY KEY, Category NVARCHAR(50), Value INT, DateRecorded DATE);
 
-**GitHub Repository:** Apache Superset
+GO
 
-**First Steps:**
-- Clone the repository: `git clone https://github.com/apache/superset.git`
-- Follow the installation guide to deploy.
-- Connect Superset to Dremio and start building dashboards.
+INSERT INTO DashboardData (RecordID, Category, Value, DateRecorded) 
+VALUES (1, 'Category A', 100, '2023-01-01'), 
+       (2, 'Category B', 150, '2023-01-02'),
+       -- additional sample data rows
+       (10, 'Category A', 180, '2023-01-10');
 
-###### 3.3 Apache Iceberg
-(This comes out of the box with dremio, so there is no need to install separately)
+GO
+```
 
-**What it does:**
-- A high-performance table format for organizing large datasets in a data lake.
-- Supports ACID transactions, schema evolution, and time travel.
-- Works with Dremio, Apache Spark, and other engines.
+### 3. Configuring Data Sources in Dremio
 
-**Why we chose it:**
-- Dremio natively supports Iceberg, so we don't need to manage it separately.
-- Provides efficient data organization while keeping data accessible.
-- Optimized for query performance on large-scale datasets.
+1. **Set up MinIO:**
+   - Access MinIO at `localhost:9000` (admin/password)
+   - Create a bucket named "warehouse"
 
-**GitHub Repository:** Apache Iceberg
+2. **Configure Dremio:**
+   - Access Dremio at `localhost:9047` and create admin account
+   - Add Nessie source:
+     - Source Name: nessie
+     - Endpoint URL: http://nessie:19120/api/v2
+     - AWS Root Path: warehouse
+     - AWS Keys: admin/password
+     - Connection Properties:
+       - fs.s3a.path.style.access: true
+       - fs.s3a.endpoint: minio:9000
+       - dremio.s3.compat: true
 
-**First Steps:**
-- Ensure Dremio is set up and configured to use Iceberg.
-- Follow the Iceberg Quickstart guide to create tables.
-- Enable Iceberg in Dremio's settings for optimized query performance.
+   - Add SQLServer source:
+     - Name: sqlserver
+     - Host: sqlserver
+     - Port: 1433
+     - Username: SA
+     - Password: Yourpassword2024
 
-###### 3.4 Apache Spark
-**What it does:**
-- A distributed computing engine for large-scale data processing.
-- Supports SQL, machine learning, streaming, and ETL workflows.
-- Works with Dremio and Iceberg to process raw data efficiently.
+### 4. Moving Data to the Data Lake
 
-**Why we chose it:**
-- Best for large-scale data processing (ETL, ML, and batch jobs).
-- Integrates natively with Dremio and Iceberg.
-- Provides scalability for handling massive datasets.
+Use Dremio's SQL Runner to:
 
-**GitHub Repository:** Apache Spark
+1. **Initial data load:**
+```sql
+CREATE TABLE nessie.dashboard_data AS 
+SELECT * FROM sqlserver.master.dbo.DashboardData;
+```
 
-**First Steps:**
-- Clone the repository: `git clone https://github.com/apache/spark.git`
-- Follow the official documentation for setup.
-- Configure Spark to read/write Iceberg tables in your data lake.
+2. **Incremental updates:**
+```sql
+INSERT INTO nessie.dashboard_data
+SELECT *
+FROM sqlserver.master.dbo.DashboardData
+WHERE RecordID > (SELECT COALESCE(MAX(RecordID), 0) FROM nessie.dashboard_data);
+```
 
-###### 3.5 MinIO
-**What it does:**
-- A self-hosted object storage solution, similar to AWS S3.
-- Provides high-performance, scalable storage for unstructured and semi-structured data.
-- Works with Dremio, Iceberg, and Spark for efficient storage and retrieval.
+### 5. Connecting Superset to Dremio
 
-**Why we chose it (conditionally):**
-- Only needed if self-hosting storage (e.g., not using AWS/GCP/Azure).
-- Offers high availability and redundancy for object storage.
+1. Initialize Superset:
+```bash
+docker exec -it superset superset init
+```
 
-**GitHub Repository:** MinIO
+2. Configure Dremio connection in Superset:
+   - Access Superset at `localhost:8080` (admin/admin)
+   - Add database connection with this string:
+     ```
+     dremio+flight://USERNAME:PASSWORD@dremio:32010/?UseEncryption=false
+     ```
+   - Create dataset from the `dashboard_data` table
+   - Build charts and dashboards based on this dataset
 
-**First Steps:**
-- Clone the repository: `git clone https://github.com/minio/minio.git`
-- Follow the installation guide for deployment.
-- Configure MinIO as a data source for Dremio.
+## Key Benefits
 
-##### 4. Next Steps & Deployment Plan
-1. Set up Dremio and connect it to your storage solution (AWS S3, MinIO, or other).
-2. Install Apache Superset and configure it to use Dremio as a data source.
-3. Enable Apache Iceberg inside Dremio for table optimization.
-4. Deploy Apache Spark to run ETL workloads and interact with Iceberg tables.
-5. If using MinIO, set it up and ensure Dremio can access it.
+1. **Simplified Architecture**: Eliminates the need for separate data lake, data warehouse, and BI extract layers
+2. **SQL-Based Integration**: Replaces complex Spark jobs with simple SQL commands
+3. **Resource Optimization**: Prevents analytical queries from competing with operational workloads
+4. **Scalability**: Leverages Dremio's horizontal and vertical scaling capabilities
+5. **Modern Data Format**: Uses Apache Iceberg for advanced data management features
 
-This setup ensures an efficient, scalable Lakehouse architecture optimized for query performance, analytics, and large-scale data processing.
+## Conclusion
+
+This implementation demonstrates how Dremio's Data Lakehouse Platform streamlines the traditionally complex process of moving operational data to analytical dashboards. By using Dremio with Apache Iceberg, we can build a modern, efficient data pipeline that eliminates unnecessary complexity while providing enhanced functionality.
 
 ## Part Two: Data Annotation, Pipeline Debt, and Testing in MLOps
 
