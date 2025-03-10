@@ -1,9 +1,12 @@
 [submodule "platform/observability/dockprom"]
 	path = platform/observability/dockprom
 	url = git@github.com:stefanprodan/dockprom.git
-[submodule "platform/fine-tuning_and_training/ms-swift"]
-	path = platform/fine-tuning_and_training/ms-swift
-	url = https://github.com/spandaai/ms-swift.git
+[submodule "platform/fine-tuning_and_training/Llama-Factory"]
+	path = platform/fine-tuning_and_training/Llama-Factory
+	url = https://github.com/hiyouga/LLaMA-Factory.git
 [submodule "platform/fine-tuning_and_training/unsloth"]
 	path = platform/fine-tuning_and_training/unsloth
 	url = https://github.com/spandaai/unsloth.git
+[submodule "platform/fine-tuning_and_training/LLaMA-Factory"]
+	path = platform/fine-tuning_and_training/LLaMA-Factory
+	url = https://github.com/hiyouga/LLaMA-Factory.git
