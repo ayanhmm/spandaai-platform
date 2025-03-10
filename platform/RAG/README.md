@@ -1,893 +1,185 @@
-# Launch and use the API documentation
-
-It is important to launch the RAG component before using the API documentation. For more information, go to the platform dir and follow instructions for launch.
-
-# RAG API Documentation
-
-## Table of Contents
-- [Health and Connection](#health-and-connection)
-- [WebSocket Endpoints](#websocket-endpoints)
-- [File Import](#file-import)
-- [Configuration Management](#configuration-management)
-- [Document Retrieval and Management](#document-retrieval-and-management)
-- [Administration](#administration)
-- [Suggestions Management](#suggestions-management)
-- [Static Content](#static-content)
-
-## Health and Connection
-
-### GET /api/health
-**Description:** Checks if the application is running and returns deployment information.
-
-**Response:**
-```json
-{
-  "message": "Alive!",
-  "production": "Local|Demo|Custom",
-  "gtag": "string",
-  "deployments": {
-    "WEAVIATE_URL_VERBA": "string",
-    "WEAVIATE_API_KEY_VERBA": "string"
-  },
-  "default_deployment": "string"
-}
-```
-
-### POST /api/connect
-**Description:** Connects to the Verba backend.
-
-**Request Body:**
-```json
-{
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  },
-  "port": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "connected": true,
-  "error": "",
-  "rag_config": {
-    // RAG configuration object
-  },
-  "user_config": {
-    // User configuration object
-  },
-  "theme": {
-    // Current theme configuration
-  },
-  "themes": {
-    // Available themes
-  }
-}
-```
-
-**Error Response:**
-```json
-{
-  "connected": false,
-  "error": "Error message",
-  "rag_config": {},
-  "theme": {},
-  "themes": {}
-}
-```
-
-## WebSocket Endpoints
-
-### WS /ws/generate_stream
-**Description:** Streams generated responses for queries.
-
-**Request:**
-```json
-{
-  "query": "string",
-  "context": "string",
-  "conversation": [
-    {
-      "type": "string",
-      "content": "string"
-    }
-  ],
-  "rag_config": {
-    // RAG component configuration
-  }
-}
-```
-
-**Response Stream:**
-Each chunk contains:
-```json
-{
-  "message": "string",
-  "finish_reason": "string|null",
-  "full_text": "string" // Only in the final chunk
-}
-```
-
-### WS /ws/import_files
-**Description:** Handles file imports via WebSocket. Not available in Demo mode.
-
-**Request:**
-```json
-{
-  "chunk": "string",
-  "isLastChunk": boolean,
-  "total": integer,
-  "fileID": "string",
-  "order": integer,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  },
-  "rag_config": {
-    // RAG configuration
-  },
-  "file_data": {
-    // File metadata
-  }
-}
-```
-
-**Response:**
-Status updates are sent as messages during the import process.
-
-## File Import
-
-### POST /api/import_file
-**Description:** Alternative HTTP endpoint for file imports.
-
-**Request Body:**
-```json
-{
-  "fileID": "string",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  },
-  "rag_config": {
-    // RAG configuration
-  },
-  "file_data": {
-    // File metadata
-  },
-  "total": integer,
-  "order": integer,
-  "chunk": "string",
-  "isLastChunk": boolean
-}
-```
-
-**Success Response:**
-```json
-{
-  "status": "success",
-  "message": "File imported successfully."
-}
-```
-
-**Error Response:**
-```json
-{
-  "status": "error",
-  "message": "Error message"
-}
-```
-
-## Configuration Management
-
-### POST /api/get_rag_config
-**Description:** Retrieves RAG (Retrieval Augmented Generation) configuration.
-
-**Request Body:**
-```json
-{
-  "deployment": "Weaviate|Docker|Local|Custom",
-  "url": "string",
-  "key": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "rag_config": {
-    "Reader": {
-      "selected": "string",
-      "components": {
-        // Component configurations
-      }
-    },
-    "Chunker": {
-      "selected": "string",
-      "components": {
-        // Component configurations
-      }
-    },
-    "Embedder": {
-      "selected": "string",
-      "components": {
-        // Component configurations
-      }
-    },
-    "Retriever": {
-      "selected": "string",
-      "components": {
-        // Component configurations
-      }
-    },
-    "Generator": {
-      "selected": "string",
-      "components": {
-        // Component configurations
-      }
-    }
-  },
-  "error": ""
-}
-```
-
-### POST /api/set_rag_config
-**Description:** Updates the RAG configuration. Not available in Demo mode.
-
-**Request Body:**
-```json
-{
-  "rag_config": {
-    // Full RAG configuration object (see RAGConfig model)
-  },
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "status": 200
-}
-```
-
-**Error Response:**
-```json
-{
-  "status": 400,
-  "status_msg": "Error message"
-}
-```
-
-### POST /api/get_user_config
-**Description:** Retrieves user configuration.
-
-**Request Body:**
-```json
-{
-  "deployment": "Weaviate|Docker|Local|Custom",
-  "url": "string",
-  "key": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "user_config": {
-    // User configuration object
-  },
-  "error": ""
-}
-```
-
-### POST /api/set_user_config
-**Description:** Updates the user configuration. Not available in Demo mode.
-
-**Request Body:**
-```json
-{
-  "user_config": {
-    // User configuration object
-  },
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "status": 200,
-  "status_msg": "User config updated"
-}
-```
-
-**Error Response:**
-```json
-{
-  "status": 400,
-  "status_msg": "Error message"
-}
-```
-
-### POST /api/get_theme_config
-**Description:** Retrieves theme configuration.
-
-**Request Body:**
-```json
-{
-  "deployment": "Weaviate|Docker|Local|Custom",
-  "url": "string",
-  "key": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "theme": {
-    // Current theme configuration
-  },
-  "themes": {
-    // Available themes
-  },
-  "error": ""
-}
-```
-
-### POST /api/set_theme_config
-**Description:** Updates the theme configuration. Not available in Demo mode.
-
-**Request Body:**
-```json
-{
-  "theme": {
-    // Theme configuration
-  },
-  "themes": {
-    // Available themes
-  },
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "status": 200
-}
-```
-
-**Error Response:**
-```json
-{
-  "status": 400,
-  "status_msg": "Error message"
-}
-```
-
-## Document Retrieval and Management
-
-### POST /api/query
-**Description:** Retrieves chunks and context based on a query.
-
-**Request Body:**
-```json
-{
-  "query": "string",
-  "RAG": {
-    // RAG component configuration
-  },
-  "labels": ["string"],
-  "documentFilter": [
-    {
-      "title": "string",
-      "uuid": "string"
-    }
-  ],
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "documents": [
-    // Document objects
-  ],
-  "context": "string"
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "documents": [],
-  "context": ""
-}
-```
-
-### POST /api/get_document
-**Description:** Retrieves a specific document by UUID.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "document": {
-    "title": "string",
-    "extension": "string",
-    "fileSize": number,
-    "labels": ["string"],
-    "source": "string",
-    "meta": {},
-    "metadata": {},
-    "content": ""
-  }
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "document": null
-}
-```
-
-### POST /api/get_datacount
-**Description:** Retrieves document count statistics.
-
-**Request Body:**
-```json
-{
-  "embedding_model": "string",
-  "documentFilter": [
-    {
-      "title": "string",
-      "uuid": "string"
-    }
-  ],
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "datacount": number
-}
-```
-
-### POST /api/get_labels
-**Description:** Retrieves all available document labels.
-
-**Request Body:**
-```json
-{
-  "deployment": "Weaviate|Docker|Local|Custom",
-  "url": "string",
-  "key": "string"
-}
-```
-
-**Response:**
-```json
-{
-  "labels": ["string"]
-}
-```
-
-### POST /api/get_content
-**Description:** Retrieves document content.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "page": number,
-  "chunkScores": [
-    {
-      "uuid": "string",
-      "score": number,
-      "chunk_id": number,
-      "embedder": "string"
-    }
-  ],
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "content": "string",
-  "maxPage": number
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "document": null
-}
-```
-
-### POST /api/get_vectors
-**Description:** Retrieves vector representations for a document.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "showAll": boolean,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "vector_groups": [
-    // Vector group objects
-  ]
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "payload": {
-    "embedder": "None",
-    "vectors": []
-  }
-}
-```
-
-### POST /api/get_chunks
-**Description:** Retrieves chunks from a document with pagination.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "page": number,
-  "pageSize": number,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "chunks": [
-    // Chunk objects
-  ]
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "chunks": null
-}
-```
-
-### POST /api/get_chunk
-**Description:** Retrieves a specific chunk by UUID and embedder.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "embedder": "string",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "chunk": {
-    // Chunk object
-  }
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "chunk": null
-}
-```
-
-### POST /api/get_all_documents
-**Description:** Searches and retrieves documents with pagination.
-
-**Request Body:**
-```json
-{
-  "query": "string",
-  "labels": ["string"],
-  "page": number,
-  "pageSize": number,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "documents": [
-    {
-      "title": "string",
-      "extension": "string",
-      "fileSize": number,
-      "labels": ["string"],
-      "source": "string",
-      "meta": {}
-    }
-  ],
-  "labels": ["string"],
-  "error": "",
-  "totalDocuments": number
-}
-```
-
-**Error Response:**
-```json
-{
-  "documents": [],
-  "label": [],
-  "error": "Error message",
-  "totalDocuments": 0
-}
-```
-
-### POST /api/delete_document
-**Description:** Deletes a specific document. Not available in Demo mode.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{}
-```
-
-**Error Response:**
-Status code 400 with empty body.
-
-## Administration
-
-### POST /api/reset
-**Description:** Resets the Verba application data. Not available in Demo mode.
-
-**Request Body:**
-```json
-{
-  "resetMode": "ALL|DOCUMENTS|CONFIG|SUGGESTIONS",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Reset Modes:**
-- `ALL`: Deletes all data
-- `DOCUMENTS`: Deletes all documents
-- `CONFIG`: Deletes all configurations
-- `SUGGESTIONS`: Deletes all suggestions
-
-**Success Response:**
-```json
-{}
-```
-
-**Error Response:**
-Status code 500 with empty body.
-
-### POST /api/get_meta
-**Description:** Retrieves metadata about Weaviate node and collections.
-
-**Request Body:**
-```json
-{
-  "deployment": "Weaviate|Docker|Local|Custom",
-  "url": "string",
-  "key": "string"
-}
-```
-
-**Success Response:**
-```json
-{
-  "error": "",
-  "node_payload": {
-    // Node metadata
-  },
-  "collection_payload": {
-    // Collection metadata
-  }
-}
-```
-
-**Error Response:**
-```json
-{
-  "error": "Error message",
-  "node_payload": {},
-  "collection_payload": {}
-}
-```
-
-## Suggestions Management
-
-### POST /api/get_suggestions
-**Description:** Retrieves query suggestions based on a partial query.
-
-**Request Body:**
-```json
-{
-  "query": "string",
-  "limit": number,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "suggestions": [
-    // Suggestion objects
-  ]
-}
-```
-
-### POST /api/get_all_suggestions
-**Description:** Retrieves all suggestions with pagination.
-
-**Request Body:**
-```json
-{
-  "page": number,
-  "pageSize": number,
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Response:**
-```json
-{
-  "suggestions": [
-    // Suggestion objects
-  ],
-  "total_count": number
-}
-```
-
-### POST /api/delete_suggestion
-**Description:** Deletes a specific suggestion.
-
-**Request Body:**
-```json
-{
-  "uuid": "string",
-  "credentials": {
-    "deployment": "Weaviate|Docker|Local|Custom",
-    "url": "string",
-    "key": "string"
-  }
-}
-```
-
-**Success Response:**
-```json
-{
-  "status": 200
-}
-```
-
-**Error Response:**
-```json
-{
-  "status": 400
-}
-```
-
-## Static Content
-
-### GET /
-**Description:** Serves the main frontend application.
-**Response:** HTML content of the main application page
-
-### GET /static/_next/*
-**Description:** Serves Next.js assets
-
-### GET /static/*
-**Description:** Serves other static files
+# Spanda.AI RAG
+
+## Overview
+
+Spanda.AI RAG is a powerful Retrieval Augmented Generation system that combines the capabilities of vector search and large language models to provide context-aware, knowledge-grounded responses. Built on top of Weaviate's vector database technology, Spanda.AI RAG offers a flexible, scalable solution for applications requiring intelligent document retrieval and generation.
+
+## Key Features
+
+### 🚀 High-Performance Vector Search
+- Built on Weaviate's cloud-native vector database engine
+- Lightning-fast nearest neighbor search on millions of documents in milliseconds
+- Production-ready with scaling, replication, and security features
+
+### 🧠 Flexible Component Architecture
+- Modular design with pluggable components:
+  - **Reader**: Document ingestion and parsing
+  - **Chunker**: Intelligent document segmentation
+  - **Embedder**: Multiple vector embedding options
+  - **Retriever**: Advanced retrieval algorithms
+  - **Generator**: Integration with various LLM providers
+
+### 🔄 Versatile Integration Options
+- Support for multiple embedding models and services
+- Compatible with popular AI frameworks:
+  - LangChain
+  - LlamaIndex
+  - DocArray
+  - Haystack
+  - Auto-GPT
+
+### 💬 Comprehensive API
+- REST and WebSocket interfaces for all operations
+- Streaming generation capabilities
+- File import and document management
+- Configuration management
+- Advanced querying and filtering
+
+## Feature Lists
+
+### 🤖 Model Support
+
+| Model | Implemented | Description |
+|-------|-------------|-------------|
+| Ollama (e.g. Llama3) | ✅ | Local Embedding and Generation Models powered by Ollama |
+| HuggingFace (e.g. MiniLMEmbedder) | ✅ | Local Embedding Models powered by HuggingFace |
+
+
+### 🤖 Embedding Support
+
+| Embedding Provider | Implemented | Description |
+|-------------------|-------------|-------------|
+| Weaviate | ✅ | Embedding Models powered by Weaviate |
+| Ollama | ✅ | Local Embedding Models powered by Ollama |
+| SentenceTransformers | ✅ | Embedding Models powered by HuggingFace |
+
+
+### 📁 Data Support
+
+| Feature | Implemented | Description |
+|---------|-------------|-------------|
+| UnstructuredIO | ✅ | Import Data through Unstructured |
+| PDF Ingestion | ✅ | Import PDF into Verba |
+| GitHub & GitLab | ✅ | Import Files from Github and GitLab |
+| CSV/XLSX Ingestion | ✅ | Import Table Data into Verba |
+| .DOCX | ✅ | Import .docx files |
+
+
+### ✨ RAG Features
+
+| Feature | Implemented | Description |
+|---------|-------------|-------------|
+| Hybrid Search | ✅ | Semantic Search combined with Keyword Search |
+| Autocomplete Suggestion | ✅ | Verba suggests autocompletion |
+| Filtering | ✅ | Apply Filters (e.g. documents, document types etc.) before performing RAG |
+| Customizable Metadata | ✅ | Free control over Metadata |
+| Async Ingestion | ✅ | Ingest data asynchronously to speed up the process |
+| Advanced Querying | planned ⏱️ | Task Delegation Based on LLM Evaluation |
+| Reranking | planned ⏱️ | Rerank results based on context for improved results |
+| RAG Evaluation | planned ⏱️ | Interface for Evaluating RAG pipelines |
+
+### 🗡️ Chunking Techniques
+
+| Technique | Implemented | Description |
+|-----------|-------------|-------------|
+| Token | ✅ | Chunk by Token powered by spaCy |
+| Sentence | ✅ | Chunk by Sentence powered by spaCy |
+| Semantic | ✅ | Chunk and group by semantic sentence similarity |
+| Recursive | ✅ | Recursively chunk data based on rules |
+| HTML | ✅ | Chunk HTML files |
+| Markdown | ✅ | Chunk Markdown files |
+| Code | ✅ | Chunk Code files |
+| JSON | ✅ | Chunk JSON files |
+
+### 🆒 Cool Bonus
+
+| Feature | Implemented | Description |
+|---------|-------------|-------------|
+| Docker Support | ✅ | Verba is deployable via Docker |
+| Customizable Frontend | ✅ | Verba's frontend is fully-customizable via the frontend |
+| Vector Viewer | ✅ | Visualize your data in 3D |
+
+### 🤝 RAG Libraries
+
+| Library | Implemented | Description |
+|---------|-------------|-------------|
+| LangChain | ✅ | Implement LangChain RAG pipelines |
+| Haystack | planned ⏱️ | Implement Haystack RAG pipelines |
+| LlamaIndex | planned ⏱️ | Implement LlamaIndex RAG pipelines |
+
+## Getting Started
+
+### Prerequisites
+Ensure the RAG component is launched before using the API. For setup instructions, refer to the `/platform` directory.
+
+## Configuration
+
+Spanda.AI RAG offers extensive configuration options for each component:
+
+### Reader Configuration
+Configure how documents are read and processed during import.
+
+### Chunker Configuration
+Control how documents are segmented into smaller chunks for embedding and retrieval.
+
+### Embedder Configuration
+Choose and configure the embedding models used to vectorize your content.
+
+### Retriever Configuration
+Adjust retrieval parameters such as search depth, similarity metrics, and filtering options.
+
+### Generator Configuration
+Configure the language model used for generation, including model parameters and prompt templates.
+
+## Weaviate Deployment Options
+
+We provide flexibility in connecting to Weaviate instances based on your needs:
+
+### 💻 Weaviate Embedded
+Embedded Weaviate runs a Weaviate instance directly from your application code rather than from a stand-alone Weaviate server installation. When you run Spanda.AI RAG in `Local Deployment`, it will setup and manage Embedded Weaviate in the background.
+
+**Note:** Weaviate Embedded is not supported on Windows and is in Experimental Mode which can bring unexpected errors. We recommend using the Docker Deployment or Cloud Deployment instead for production environments.
+
+### 🌩️ Weaviate Cloud Deployment (WCD)
+If you prefer a cloud-based solution, Weaviate Cloud (WCD) offers a scalable, managed environment. Learn how to set up a cloud cluster and get the API keys by following the Weaviate Cluster Setup Guide.
+
+### 🐳 Docker Deployment
+Another local alternative is deploying Weaviate using Docker. This provides isolation and consistent environments across different machines. For more details, follow the "How to install Spanda.AI RAG with Docker" section.
+
+### ⚙️ Custom Weaviate Deployment
+If you're hosting Weaviate yourself, you can use the `Custom` deployment option in Spanda.AI RAG. This allows you to specify the URL, PORT, and API key of your custom Weaviate instance.
+
+## Document Management
+
+Spanda.AI RAG provides comprehensive document management capabilities:
+
+- Import documents through WebSocket or HTTP endpoints
+- Retrieve documents by UUID
+- Get document content and metadata
+- View vector representations
+- List all documents with pagination and filtering
+- Delete documents when needed
+
+## Advanced Features
+
+### Label-based Organization
+Organize and filter documents using labels for improved retrieval precision.
+
+### Query Suggestions
+Leverage the suggestions engine to guide users toward effective queries.
+
+### Conversation Memory
+Maintain context across multiple interactions for more coherent conversations.
+
+### Theme Customization
+Customize the appearance of your Spanda.AI RAG interface.
+
+## API Reference
+
+For detailed API documentation, refer to the full [API Documentation](API_DOCS.md).
+
+## Community and Support
+
+Join our community to get help, share ideas, and contribute to the development of Spanda.AI RAG.
+
+---
