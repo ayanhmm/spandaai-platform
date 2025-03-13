@@ -1,6 +1,5 @@
 # Spanda.AI Platform - Data Management
  
-
 ## Part One: Data Storage and Management
 
 ### Core Data Management Framework

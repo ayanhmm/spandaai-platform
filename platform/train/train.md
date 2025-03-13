@@ -1,5 +1,3 @@
-
-
 **Fine-tuning a large language model can be easy as...**
 
 https://github.com/user-attachments/assets/7c96b465-9df7-45f4-8053-bf03e58386d3
@@ -238,9 +236,9 @@ Compared to ChatGLM's [P-Tuning](https://github.com/THUDM/ChatGLM2-6B/tree/main/
 >
 > Remember to use the **SAME** template in training and inference.
 
-Please refer to [constants.py](src/llamafactory/extras/constants.py) for a full list of models we supported.
+Please refer to [constants.py](https://github.com/hiyouga/LLaMA-Factory/blob/ae4cbe8fbc9b7e3ea122440be49c8cba52e03248/src/llamafactory/extras/constants.py) for a full list of models we supported.
 
-You also can add a custom chat template to [template.py](src/llamafactory/data/template.py).
+You also can add a custom chat template to [template.py](https://github.com/hiyouga/LLaMA-Factory/blob/ae4cbe8fbc9b7e3ea122440be49c8cba52e03248/src/llamafactory/data/template.py).
 
 # Supported Training Approaches
 
