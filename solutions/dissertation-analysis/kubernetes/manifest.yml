@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dissertation-backend
+  labels:
+    app: dissertation-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dissertation-backend
+  template:
+    metadata:
+      labels:
+        app: dissertation-backend
+    spec:
+      containers:
+      - name: dissertation-backend
+        image: prabhas264/dissertation-backend:1.0.0
+        command: ["da-start"]
+        ports:
+        - containerPort: 8006
+        envFrom:
+        - configMapRef:
+            name: dissertation-env-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dissertation-backend-service
+spec:
+  selector:
+    app: dissertation-backend
+  ports:
+  - protocol: TCP
+    port: 8006
+    targetPort: 8006
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dissertation-env-config
+data:
+  VERBA_URL: "http://localhost:8000"
+  DB_TYPE: "Docker"
+  WEAVIATE_URL: ""
+  WEAVIATE_KEY: ""
+  EMBEDDER: "SentenceTransformers"
+  EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+  SQLALCHEMY_DATABASE_URL: "mysql+pymysql://root:Spanda@123@localhost:3306/questionbank"
+  VLLM_URL_FOR_ANALYSIS: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_SUMMARY: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_IMAGE: "http://vllm-service:8001/v1/chat/completions"
+  VLLM_URL_FOR_SCORING: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_EXTRACTION: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_MODEL_FOR_ANALYSIS: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_EXTRACTION: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_SUMMARY: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2-VL-2B-Instruct-AWQ"
+  VLLM_MODEL_FOR_SCORING: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dissertation-frontend
+  labels:
+    app: dissertation-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dissertation-frontend
+  template:
+    metadata:
+      labels:
+        app: dissertation-frontend
+    spec:
+      containers:
+      - name: dissertation-frontend
+        image: prabhas264/dissertation-frontend:1.0.3
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4000
+        env:
+        - name: REACT_APP_API_URL
+          value: http://172.16.92.136/dissertation-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dissertation-frontend-service
+spec:
+  selector:
+    app: dissertation-frontend
+  ports:
+  - protocol: TCP
+    port: 4000       
+    targetPort: 4000 
+  type: ClusterIP
+---
