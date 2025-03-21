@@ -1,334 +1,306 @@
 # Spanda.AI Platform - Data Management
- 
-## Part One: Data Storage and Management
+## Spark, Dremio, Nessie, MinIO, and Superset
 
-### Core Data Management Framework
-#### FAIR Data Principles
-- **Findable**: Implement metadata tagging, DOI assignment, and search indexing
-- **Accessible**: Provide multiple access methods via standard protocols (HTTP/HTTPS)
-- **Interoperable**: Adopt Educational Data Structure (EDS) standards
-- **Reusable**: Clear data use agreements and community standards
+![Data Architecture](images/data_architecture.png)
 
-#### Data Submission Process
-(TBD For EdTech domain - might have to create from scratch, we can do this at the very end, we can setup existing platform pieces first)
 
-- Create a standardized metadata schema (discipline-dependent and independent)
-- Implement automated validation similar to BIDS validator
-- Ensure de-identification of data (remove 18 personal identifiers per HIPAA)
+This README guides you through setting up a complete data engineering environment that demonstrates the Data Lakehouse architecture. You'll learn how to move data from an operational database (PostgreSQL) to a data lake (MinIO with Apache Iceberg tables managed by Nessie), and then query the data using Dremio and visualize it through Apache Superset.
 
-#### Privacy Protection
-- Attribute-Based Access Control (ABAC)
-- Decentralized Identifiers (DIDs) for personal data ownership
-- Informed consent documentation for data sharing
+## Prerequisites
 
-### Data Architecture
+- [Docker](https://www.docker.com/products/docker-desktop/) installed on your machine
+- Basic knowledge of SQL and data engineering concepts
 
-![Data Architecture](./images/data_architecture.png)
+## Architecture Overview
 
-Implement a Data Lakehouse architecture that combines:
+This setup demonstrates a modern Data Lakehouse architecture with the following components:
 
-#### Data Lake
-- Store raw, unstructured, and semi-structured data
-- Maintain data in original format for maximum flexibility
-- Scalable storage on cloud platforms
+- **PostgreSQL**: Operational database
+- **Apache Spark**: Data processing and ETL
+- **MinIO**: S3-compatible object storage (data lake)
+- **Nessie**: Catalog service for Apache Iceberg tables
+- **Dremio**: Data lakehouse platform and query engine
+- **Apache Superset**: Business intelligence and visualization tool
 
-#### Data Warehouse
-- Structured data organization
-- Optimized for querying and analysis
-- Supports SQL-based tools
+## Setup Instructions
 
-#### Processing Layer
-- Tools like Apache Spark and Apache Hive
-- Data transformation capabilities
-- Machine learning and analytics support
+### 1. Create Docker Compose File
 
-![Structured and Unstructured Data to Warehouse](./images/structured_unstructured_data_to_warehouse.png)
+Create a new directory for the project, then create a file named `docker-compose.yml` with the following content:
 
-![Semi-structured Data to Warehouse](./images/semi-structured_data_to_warehouse.png)
+```yaml
+version: "3"
 
-### Implementation Tools
-
-![Data Lakehouse](./images/data_lakehouse.png)
-
-# Building a Data Lakehouse Pipeline with Dremio and Apache Iceberg
-
-## Overview
-This guide walks through creating an end-to-end data pipeline from SQLServer to dashboards using Dremio's Data Lakehouse Platform and Apache Iceberg. We'll demonstrate how to simplify what traditionally requires multiple steps (data lake transfer, data warehousing, BI acceleration) into a streamlined workflow that can run on a laptop.
-
-## Components
-
-| Component | Purpose | Role in Our Pipeline |
-|-----------|---------|----------------------|
-| **SQLServer** | Source database | Stores our operational data that needs to be analyzed |
-| **Dremio** | Data Lakehouse Platform | Core engine that queries data across sources and manages the lakehouse |
-| **Apache Iceberg** | Table format | Provides advanced data management features for our lake tables |
-| **Nessie** | Catalog service | Manages and versions our data lake tables |
-| **MinIO** | Object storage | Simulates cloud storage locally for our data lake |
-| **Superset** | BI dashboard tool | Creates visualizations from our processed data |
-
-## Implementation Steps
-
-### 1. Setting Up the Environment
-
-Create a `docker-compose.yml` file with the following services:
-- **Nessie**: Catalog server using in-memory store (port 19120)
-- **MinIO**: Storage server with admin/password credentials (ports 9000/9001)
-- **Dremio**: Data lakehouse platform (ports 9047/31010/32010)
-- **SQLServer**: Source database with SA user (port 1433)
-- **Superset**: BI visualization tool (port 8080)
-
-Start the environment:
-```bash
-docker compose up
+services:
+  # Nessie Catalog Server Using In-Memory Store
+  nessie:
+    image: projectnessie/nessie:latest
+    container_name: nessie
+    networks:
+      de-end-to-end:
+    ports:
+      - 19120:19120
+  # Minio Storage Server
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINIO_DOMAIN=storage
+      - MINIO_REGION_NAME=us-east-1
+      - MINIO_REGION=us-east-1
+    networks:
+      de-end-to-end:
+    ports:
+      - 9001:9001
+      - 9000:9000
+    command: ["server", "/data", "--console-address", ":9001"]
+  # Dremio
+  dremio:
+    platform: linux/x86_64
+    image: dremio/dremio-oss:latest
+    ports:
+      - 9047:9047
+      - 31010:31010
+      - 32010:32010
+    container_name: dremio
+    networks:
+      de-end-to-end:
+  # Spark
+  spark:
+    platform: linux/x86_64
+    image: alexmerced/spark35nb:latest
+    ports: 
+      - 8080:8080  # Master Web UI
+      - 7077:7077  # Master Port
+      - 8888:8888  # Notebook
+    environment:
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=admin #minio username
+      - AWS_SECRET_ACCESS_KEY=password #minio password
+    container_name: spark
+    networks:
+      de-end-to-end:
+  # Postgres
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5435:5432"
+    networks:
+      de-end-to-end:
+  #Superset
+  superset:
+    image: alexmerced/dremio-superset
+    container_name: superset
+    networks:
+      de-end-to-end:
+    ports:
+      - 8088:8088
+networks:
+  de-end-to-end:
 ```
 
-### 2. Data Preparation in SQLServer
+### 2. Start PostgreSQL and Populate Data
 
-Access the SQLServer container:
-```bash
-docker exec -it sqlserver /bin/bash
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Yourpassword2024'
+1. Start the PostgreSQL container:
+   ```bash
+   docker-compose up -d postgres
+   ```
+
+2. Access the PostgreSQL shell:
+   ```bash
+   docker exec -it postgres psql -U myuser mydb
+   ```
+
+3. Create a table and add sample data:
+   ```sql
+   -- Create a table for a mock BI dashboard dataset
+   CREATE TABLE sales_data (
+       id SERIAL PRIMARY KEY,
+       product_name VARCHAR(255),
+       category VARCHAR(50),
+       sales_amount DECIMAL(10, 2),
+       sales_date DATE
+   );
+
+   -- Insert sample data into the table
+   INSERT INTO sales_data (product_name, category, sales_amount, sales_date)
+   VALUES
+       ('Product A', 'Electronics', 1000.50, '2024-03-01'),
+       ('Product B', 'Clothing', 750.25, '2024-03-02'),
+       ('Product C', 'Home Goods', 1200.75, '2024-03-03'),
+       ('Product D', 'Electronics', 900.00, '2024-03-04'),
+       ('Product E', 'Clothing', 600.50, '2024-03-05');
+   ```
+
+4. Exit the PostgreSQL shell:
+   ```
+   \q
+   ```
+
+### 3. Start the Data Lake Components
+
+1. Start the MinIO, Nessie, Spark, and Dremio services:
+   ```bash
+   docker-compose up -d spark nessie minio dremio
+   ```
+
+### 4. Set Up MinIO Bucket
+
+1. Open MinIO console in your browser: http://localhost:9001
+2. Login with:
+   - Username: `admin`
+   - Password: `password`
+3. Create a new bucket named `warehouse`
+
+### 5. Use Spark to Move Data to the Data Lake
+
+1. Access the Jupyter Notebook interface at http://localhost:8888
+2. Create a new Python notebook
+3. Add the following PySpark code:
+
+```python
+import pyspark
+from pyspark.sql import SparkSession
+import os
+
+## DEFINE SENSITIVE VARIABLES
+CATALOG_URI = "http://nessie:19120/api/v1" ## Nessie Server URI
+WAREHOUSE = "s3://warehouse/" ## S3 Address to Write to
+STORAGE_URI = "http://minio:9000"
+
+conf = (
+    pyspark.SparkConf()
+        .setAppName('app_name')
+          #packages
+        .set('spark.jars.packages', 'org.postgresql:postgresql:42.7.3,org.apache.iceberg:iceberg-spark-runtime-3.5_2.12:1.5.0,org.projectnessie.nessie-integrations:nessie-spark-extensions-3.5_2.12:0.77.1,software.amazon.awssdk:bundle:2.24.8,software.amazon.awssdk:url-connection-client:2.24.8')
+          #SQL Extensions
+        .set('spark.sql.extensions', 'org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions,org.projectnessie.spark.extensions.NessieSparkSessionExtensions')
+          #Configuring Catalog
+        .set('spark.sql.catalog.nessie', 'org.apache.iceberg.spark.SparkCatalog')
+        .set('spark.sql.catalog.nessie.uri', CATALOG_URI)
+        .set('spark.sql.catalog.nessie.ref', 'main')
+        .set('spark.sql.catalog.nessie.authentication.type', 'NONE')
+        .set('spark.sql.catalog.nessie.catalog-impl', 'org.apache.iceberg.nessie.NessieCatalog')
+        .set('spark.sql.catalog.nessie.s3.endpoint', STORAGE_URI)
+        .set('spark.sql.catalog.nessie.warehouse', WAREHOUSE)
+        .set('spark.sql.catalog.nessie.io-impl', 'org.apache.iceberg.aws.s3.S3FileIO')
+)
+## Start Spark Session
+spark = SparkSession.builder.config(conf=conf).getOrCreate()
+print("Spark Running")
+# Define the JDBC URL for the Postgres database
+jdbc_url = "jdbc:postgresql://postgres:5432/mydb"
+properties = {
+    "user": "myuser",
+    "password": "mypassword",
+    "driver": "org.postgresql.Driver"
+}
+# Load the table from Postgres
+postgres_df = spark.read.jdbc(url=jdbc_url, table="sales_data", properties=properties)
+# Write the DataFrame to an Iceberg table
+postgres_df.writeTo("nessie.sales_data").createOrReplace()
+# Show the contents of the Iceberg table
+spark.read.table("nessie.sales_data").show()
+# Stop the Spark session
+spark.stop()
 ```
 
-Create and populate sample data:
-```sql
-CREATE TABLE DashboardData (RecordID INT PRIMARY KEY, Category NVARCHAR(50), Value INT, DateRecorded DATE);
+**Note:** If you encounter an "Unknown Host" issue with `http://minio:9000`, you may need to replace `minio` with the container's actual IP address. You can find this by running `docker inspect minio` and looking for the IP address in the network section.
 
-GO
+### 6. Configure Dremio to Connect to Nessie/MinIO
 
-INSERT INTO DashboardData (RecordID, Category, Value, DateRecorded) 
-VALUES (1, 'Category A', 100, '2023-01-01'), 
-       (2, 'Category B', 150, '2023-01-02'),
-       -- additional sample data rows
-       (10, 'Category A', 180, '2023-01-10');
+1. Access the Dremio UI at http://localhost:9047 and set up an admin account
+2. Add a new source:
+   - Click "Add a Source" and select "Nessie"
+   - **General settings tab:**
+     - Source Name: `nessie`
+     - Nessie Endpoint URL: `nessie:19120/api/v2`
+     - Auth Type: `None`
+   - **Storage settings tab:**
+     - AWS Root Path: `warehouse`
+     - AWS Access Key: `admin`
+     - AWS Secret Key: `password`
+     - Uncheck "Encrypt Connection" Box
+   - **Connection Properties:**
+     - Key: `fs.s3a.path.style.access` | Value: `true`
+     - Key: `fs.s3a.endpoint` | Value: `minio:9000`
+     - Key: `dremio.s3.compat` | Value: `true`
+   - Click "Save"
 
-GO
-```
+### 7. Set Up Superset for BI Dashboards
 
-### 3. Configuring Data Sources in Dremio
+1. Start the Superset service:
+   ```bash
+   docker-compose up -d superset
+   ```
 
-1. **Set up MinIO:**
-   - Access MinIO at `localhost:9000` (admin/password)
-   - Create a bucket named "warehouse"
+2. Initialize Superset:
+   ```bash
+   docker exec -it superset superset init
+   ```
 
-2. **Configure Dremio:**
-   - Access Dremio at `localhost:9047` and create admin account
-   - Add Nessie source:
-     - Source Name: nessie
-     - Endpoint URL: http://nessie:19120/api/v2
-     - AWS Root Path: warehouse
-     - AWS Keys: admin/password
-     - Connection Properties:
-       - fs.s3a.path.style.access: true
-       - fs.s3a.endpoint: minio:9000
-       - dremio.s3.compat: true
+3. Access Superset at http://localhost:8080 and log in:
+   - Username: `admin`
+   - Password: `admin`
 
-   - Add SQLServer source:
-     - Name: sqlserver
-     - Host: sqlserver
-     - Port: 1433
-     - Username: SA
-     - Password: Yourpassword2024
-
-### 4. Moving Data to the Data Lake
-
-Use Dremio's SQL Runner to:
-
-1. **Initial data load:**
-```sql
-CREATE TABLE nessie.dashboard_data AS 
-SELECT * FROM sqlserver.master.dbo.DashboardData;
-```
-
-2. **Incremental updates:**
-```sql
-INSERT INTO nessie.dashboard_data
-SELECT *
-FROM sqlserver.master.dbo.DashboardData
-WHERE RecordID > (SELECT COALESCE(MAX(RecordID), 0) FROM nessie.dashboard_data);
-```
-
-### 5. Connecting Superset to Dremio
-
-1. Initialize Superset:
-```bash
-docker exec -it superset superset init
-```
-
-2. Configure Dremio connection in Superset:
-   - Access Superset at `localhost:8080` (admin/admin)
-   - Add database connection with this string:
+4. Add a database connection:
+   - Go to "Settings" > "Database Connections"
+   - Click "Add a database" > Select "Other"
+   - Enter connection string:
      ```
      dremio+flight://USERNAME:PASSWORD@dremio:32010/?UseEncryption=false
      ```
-   - Create dataset from the `dashboard_data` table
-   - Build charts and dashboards based on this dataset
+     (Replace USERNAME and PASSWORD with your Dremio credentials)
+   - Test connection and save
 
-## Key Benefits
+5. Create a dataset:
+   - Click the "+" icon > "Create dataset"
+   - Select the database connection you just created
+   - Choose the `sales_data` table
+   - Save
 
-1. **Simplified Architecture**: Eliminates the need for separate data lake, data warehouse, and BI extract layers
-2. **SQL-Based Integration**: Replaces complex Spark jobs with simple SQL commands
-3. **Resource Optimization**: Prevents analytical queries from competing with operational workloads
-4. **Scalability**: Leverages Dremio's horizontal and vertical scaling capabilities
-5. **Modern Data Format**: Uses Apache Iceberg for advanced data management features
+6. Build dashboards:
+   - Create charts based on your dataset
+   - Add charts to dashboards for visualization
 
-## Conclusion
+## Troubleshooting
 
-This implementation demonstrates how Dremio's Data Lakehouse Platform streamlines the traditionally complex process of moving operational data to analytical dashboards. By using Dremio with Apache Iceberg, we can build a modern, efficient data pipeline that eliminates unnecessary complexity while providing enhanced functionality.
+### Spark Connection Issues
 
-## Part Two: Data Annotation, Pipeline Debt, and Testing in MLOps
+If the Spark notebook can't connect to MinIO using the hostname, use the container's IP address:
+1. Run `docker inspect minio`
+2. Find the IP address in the Network section
+3. Update the `STORAGE_URI` variable in your PySpark code, e.g., `STORAGE_URI = "http://172.18.0.6:9000"`
 
-### Table of Contents
-1. Introduction
-2. Data Annotation with Label Studio
-3. Managing Pipeline Debt
-4. Data Testing with Great Expectations
-5. Model Testing Strategies
-6. Implementation Roadmap
-7. GitHub Repositories and Resources
+### Dremio Connection Issues
 
-### Introduction
-This guide provides a comprehensive overview of essential MLOps components to build robust machine learning systems that avoid the "Debt Collection Day" scenario. It covers:
-- Data annotation tools to improve data quality and model training
-- Pipeline debt management to prevent cascading failures
-- Data validation to ensure data quality and detect drift
-- Model testing strategies to verify model behavior beyond simple metrics
+If Dremio can't connect to Nessie or MinIO:
+1. Make sure all services are running: `docker-compose ps`
+2. Check if the network is properly configured
+3. Try using container IP addresses instead of hostnames in connection settings
 
-Each section explains the component's function, its importance in production ML systems, and practical implementation steps.
+## Additional Resources
 
-### Data Annotation with Label Studio
+- [Dremio Documentation](https://docs.dremio.com/)
+- [Apache Iceberg Documentation](https://iceberg.apache.org/docs/latest/)
+- [Nessie Documentation](https://projectnessie.org/documentation/)
+- [Apache Superset Documentation](https://superset.apache.org/docs/intro)
 
-![Data Labelling Overview](./images/data_labelling_one.png)
+## Next Steps
 
-![Data Labelling Process](./images/data_labelling_two.jpg)
+After completing this tutorial, you might want to:
+1. Add more data sources to Dremio
+2. Create more complex transformations with Spark
+3. Build comprehensive dashboards in Superset
+4. Implement data governance policies
 
-#### What It Does
-Label Studio is an open-source data labeling tool that provides:
-- A configurable interface for annotating text, images, and audio
-- Machine learning integration for pre-labeling and active learning
-- Team collaboration support
-- Export capabilities to common ML formats (COCO, VOC, CONLL, etc.)
-- Model prediction comparison for verification
+---
 
-#### Why We Need It
-High-quality labeled data is essential for successful ML projects. Label Studio addresses key challenges:
-- Data Quality Improvement: Ensures consistent labeling
-- Unstructured Data Handling: Supports text, images, and audio
-- Model Validation: Compares predictions from different models
-- Edge Case Management: Identifies and labels difficult examples
-- Human-in-the-Loop Learning: Integrates human feedback for improvements
-
-#### Getting Started
-```
-pip install label-studio
-label-studio start my_project --init
-```
-
-### Managing Pipeline Debt
-
-#### What It Is
-Pipeline debt arises from undocumented, untested, and unstable data pipelines, leading to brittle ML systems. Symptoms include:
-- Entangled dependencies
-- Lack of visibility in data transformations
-- Difficult debugging and maintenance
-- Cascading failures affecting multiple teams
-
-#### Prevention Strategies
-- Documentation: Track all pipeline components and transformations
-- Testing: Implement tests for data pipelines
-- Monitoring: Track pipeline health and data quality metrics
-- Governance: Establish standards for modifications
-- Visibility: Use dashboards to track dependencies
-
-### Data Testing with Great Expectations
-
-#### What It Does
-Great Expectations provides:
-- Declarative syntax for defining data quality expectations
-- Automatic data documentation generation
-- Integration with Pandas, SQL, and Spark
-- CI/CD integration for automated validation
-
-#### Why We Need It
-- Preventing Bad Data: Stops problematic data from reaching models
-- Early Warning: Detects data drift
-- Documentation: Generates data quality reports
-- Knowledge Sharing: Makes data assumptions explicit
-- Outlier Detection: Prevents model failures
-
-#### Getting Started
-```
-pip install great_expectations
-great_expectations init
-great_expectations suite new
-```
-
-### Model Testing Strategies
-
-![Pre-train Tests and Post-train Tests](./images/pre-train_tests_and_post-train_tests.png)
-
-#### Key Strategies
-- Pre-train tests: Validate architecture and data setup
-- Post-train tests: Verify trained model behaviors
-- Invariance tests: Ensure consistent predictions with specific input changes
-- Directional expectation tests: Verify expected changes in outputs
-- Minimum functionality tests: Validate performance in critical scenarios
-
-#### Implementation Approaches
-- Automated test suites: Use GitHub Actions or Jenkins
-- Smoke tests: Quick validation of model training and prediction
-- Behavioral test suites: Tests organized around model capabilities
-- Manual validation: Expert review of test results
-- A/B testing: Compare models in production
-
-### Implementation Roadmap
-
-#### Phase 1: Set Up Data Annotation
-- Install Label Studio and configure data types
-- Define annotation guidelines
-- Set up ML-assisted labeling
-- Begin annotating datasets
-
-#### Phase 2: Implement Data Testing
-- Install Great Expectations
-- Profile existing datasets
-- Create expectation suites
-- Integrate validation into ingestion pipelines
-
-#### Phase 3: Address Pipeline Debt
-- Document all pipelines and dependencies
-- Implement pipeline health monitoring
-- Establish governance standards
-- Refactor unstable pipelines
-
-#### Phase 4: Implement Model Testing
-- Create pre-train test suites
-- Develop invariance and directional tests
-- Automate testing in CI/CD pipelines
-- Establish manual validation processes
-
-### GitHub Repositories and Resources
-
-#### Data Annotation
-- Label Studio
-- LLM Data Annotation
-
-#### Data Testing
-- Great Expectations
-- Pandera
-- Deepchecks
-
-#### Model Testing (Let me know if anything here overlaps with Promptfoo)
-- CheckList
-- Snorkel
-- Alibi Detect
-
-#### Drift Monitoring
-- Drift Monitoring
-- EvidentialyAI
-- Whylogs
-
-#### MLOps Frameworks
-- MLflow
-- Kubeflow
-- DVC
+*Based on the "End-to-End Basic Data Engineering Tutorial" by Alex Merced, https://medium.com/data-engineering-with-dremio/end-to-end-basic-data-engineering-tutorial-spark-dremio-superset-c076a56eaa75*

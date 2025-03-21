@@ -1,0 +1,75 @@
+---
+# afe : ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: question-bank-frontend-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "800m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: question-bank-backend-service
+            port:
+              number: 8001
+      - path: /db(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: question-bank-mysql-backend-service
+            port:
+              number: 8004
+      - path: /v1(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: vllm-service
+            port:
+              number: 8002
+      - path: /afe(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: afe-backend-service
+            port:
+              number: 8009
+      - path: /dissertation-api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: dissertation-backend-service
+            port:
+              number: 8006
+      - path: /dissertation(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: dissertation-frontend-service
+            port:
+              number: 4000
+      - path: /multimodal
+        pathType: Prefix
+        backend:
+          service:
+            name: afe-frontend-service
+            port:
+              number: 5173
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: question-bank-frontend-service
+            port:
+              number: 8008
+

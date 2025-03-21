@@ -1,0 +1,146 @@
+# question-bank-backend : deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-bank-backend
+  labels:
+    app: question-bank-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: question-bank-backend
+  template:
+    metadata:
+      labels:
+        app: question-bank-backend
+    spec:
+      containers:
+      - name: question-bank-backend
+        image: prabhas264/qbg:latest
+        ports:
+        - containerPort: 8081
+        envFrom:
+        - configMapRef:
+            name: question-bank-env-config
+---
+# question-bank-backend : service
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-bank-backend-service
+spec:
+  selector:
+    app: question-bank-backend
+  ports:
+  - protocol: TCP
+    port: 8001
+    targetPort: 8001
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: question-bank-env-config
+data:
+  VERBA_URL: "http://verba:8000"
+  DB_TYPE: "Docker"
+  WEAVIATE_URL: ""
+  WEAVIATE_KEY: ""
+  EMBEDDER: "SentenceTransformers"
+  EMBEDDING_MODEL: "all-MiniLM-L6-v2"
+  VLLM_URL_FOR_ANALYSIS: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_SUMMARY: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_IMAGE: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_SCORING: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_EXTRACTION: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_MODEL_FOR_ANALYSIS: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_EXTRACTION: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_SUMMARY: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2-VL-2B-Instruct-AWQ"
+  VLLM_MODEL_FOR_SCORING: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-bank-mysql-backend
+  labels:
+    app: question-bank-mysql-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: question-bank-mysql-backend
+  template:
+    metadata:
+      labels:
+        app: question-bank-mysql-backend
+    spec:
+      containers:
+      - name: question-bank-mysql-backend
+        image: prabhas264/sql-backend:latest
+        ports:
+        - containerPort: 8004
+        env:
+        - name: DB_HOST
+          value: "db"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWORD
+          value: "Mysql@824"
+        - name: DB_NAME
+          value: "question_bank"
+
+---
+# question-bank-mysql-backend : service
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-bank-mysql-backend-service
+spec:
+  selector:
+    app: question-bank-mysql-backend
+  ports:
+  - protocol: TCP
+    port: 8004
+    targetPort: 8004
+  type: ClusterIP
+---
+# question-bank-frontend : deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-bank-frontend
+  labels:
+    app: question-bank-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: question-bank-frontend
+  template:
+    metadata:
+      labels:
+        app: question-bank-frontend
+    spec:
+      containers:
+      - name: question-bank-frontend
+        image: prabhas264/qbg-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+---
+# question-bank-frontend : service
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-bank-frontend-service
+spec:
+  selector:
+    app: question-bank-frontend
+  ports:
+  - protocol: TCP
+    port: 8008
+    targetPort: 80
+  type: ClusterIP
+---

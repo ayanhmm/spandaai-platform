@@ -40,40 +40,7 @@ The SpandaAI Platform is a state-of-the-art GenAI ecosystem developed to serve d
 
 The platform is organized into two primary areas: the **Platform Layer** (core infrastructure and services) and the **Domain Layer** (industry-specific logic and capabilities).
 
-### Platform Layer Components
-
-The `platform` directory is structured as follows:
-
-- **data_management**  
-  Responsible for managing data storage, retrieval, and processing. This component handles databases, caching mechanisms, and data pipelines that feed into AI models.
-
-- **fine-tuning_and_training**  
-  Provides the infrastructure for training and fine-tuning AI models. It includes scripts, configurations, and resources needed to adjust models with domain-specific datasets.
-
-- **gateway**  
-  Acts as the primary interface for incoming requests. It routes external API calls to the appropriate internal services and manages authentication, load balancing, and other middleware functions.
-
-- **inference**  
-  Manages the model serving and inference processes. This component is optimized for real-time prediction, ensuring that responses from AI models are delivered efficiently to client applications.
-
-- **infrastructure**  
-  Contains the configuration and scripts related to the provisioning of compute resources and cloud infrastructure. This includes container orchestration (e.g., Kubernetes) and other core infrastructure services.
-
-- **observability**  
-  Implements monitoring and logging solutions to track system performance, detect anomalies, and ensure overall health of the platform. Tools like Prometheus and Dockprom are integrated here.
-
-- **RAG (Retrieval Augmented Generation)**  
-  Enhances the generative capabilities of the platform by integrating retrieval mechanisms. This module retrieves contextually relevant data to improve the quality and relevance of AI-generated content.
-
-- **testing**  
-  Houses automated tests and quality assurance scripts that ensure the stability and reliability of the platform components. This is crucial for continuous integration and delivery pipelines.
-
-- **init.py, quickstart.bat, quickstart.sh, readme.MD**  
-  These files provide initialization routines, quick-start scripts for different operating systems, and introductory documentation to help developers understand the platform's structure.
-
-# SpandaAI Platform: Detailed Overview of the Platform Layer
-
-This section provides a concise yet comprehensive overview of the Platform Layer components within the SpandaAI ecosystem. The Platform Layer is the backbone of the system, providing essential services and infrastructure that power the overall GenAI operations. It integrates seamlessly with both the Domain and Solutions layers, with Kafka queues ensuring scalable and decoupled communication across all layers. Additionally, all components connect via a Kong API Gateway for unified external interfacing.
+This section provides a concise yet comprehensive overview of the Platform Layer components within the SpandaAI ecosystem. The Platform Layer is the backbone of the system, providing essential services and infrastructure that power the overall GenAI operations. 
 
 ---
 ## Overall Architecture Diagram
@@ -267,19 +234,22 @@ DeepSpeed is supported, thus multi-node is supported aswell. Please look at the 
 | **Agent Tools** | planned ⏱️| Capabilities and functions available to AI agents. |
 
 **Integration Points**: Connects with domain-specific agent implementations.
+---
 
 ## 8. Analytics/Lakehouse (Planned)
 
 **Purpose**: Data storage, analysis, and intelligence.
 
-| Component | Status | Description |
-|-----------|--------|-------------|
-| **Apache Superset** | planned ⏱️ | Business intelligence web application. |
-| **Iceberg** | planned ⏱️ | Table format for large analytical datasets. |
-| **Dremio** | planned ⏱️ | Data lake engine. |
-| **Spark** | planned ⏱️ | Analytics engine for large-scale data processing. |
-| **MinIO** | planned ⏱️ | High-performance object storage. |
-| **Nesse** | planned ⏱️ | Data processing framework. |
+| Component | Status | Description | Supported Sources |
+|-----------|--------|-------------|--------------------|
+| **Apache Superset** | Done ✅ | Business intelligence web application. | Connects to databases like PostgreSQL, MySQL, Snowflake, and more. |
+| **Iceberg** | Done ✅ | Table format for large analytical datasets. | Works with Spark, Flink, Hive, Dremio, and Presto. |
+| **Dremio** | Done ✅ | Data lake engine. | Supports sources like Amazon S3, Azure Data Lake, Google Cloud Storage, HDFS, PostgreSQL, MySQL, MongoDB, Snowflake, and Elasticsearch. |
+| **Apache Spark** | Done ✅ | Analytics engine for large-scale data processing. | Works with Hadoop, S3, Delta Lake, Kafka, and JDBC-compatible sources. |
+| **MinIO** | Done ✅ | High-performance object storage. | Compatible with Amazon S3 APIs and integrates with Spark, Presto, and Dremio. |
+| **Nesse** | Done ✅ | Data processing framework. | Works with various databases and file systems. |
+
+Note: The above stack provides extensive capabilities beyond what's listed, supporting integrations with various data sources.
 
 **Integration Points**: Will provide analytical capabilities across the platform.
 
@@ -331,13 +301,6 @@ Within the `domains\EdTech` directory, the components are organized to address t
 - **training**  
   Contains resources and scripts dedicated to training the EdTech-specific AI models. This component is integral for continuously updating and refining the models based on new educational data.
 
-- **Configuration and Environment Files**  
-  - **.env, env.example**: Environment configuration files that store sensitive settings and parameters.
-  - **docker-compose.yml**: Orchestrates containerized services for the EdTech domain.
-  - **Dockerfiles (e.g., Dockerfile.data_preprocessing, Dockerfile.document_analysis, etc.)**: Define the build processes for various services in the EdTech domain.
-  - **setup.py**: Handles the packaging and installation of the domain-specific modules.
-  - **start_edtech_domain.bat, start_edtech_domain.sh**: Scripts to initialize the EdTech domain services.
-
 ### Shared Components Across Domains
 
 The EdTech domain includes components which can be used across various domains with minor modifications.
@@ -360,7 +323,6 @@ Beyond the EdTech domain, the SpandaAI Platform is designed to support a wide va
 - **Other Industries:**  
   The platform’s modular design means it can be adapted to meet the unique challenges of nearly any sector. With the ability to plug in domain-specific models and shared services, SpandaAI is poised to handle a broad spectrum of use cases.
 
-
 ---
 
 ## Support
@@ -371,4 +333,4 @@ For assistance or to report issues, please contact the SpandaAI support team or 
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the Apache 2.0 License. See the `LICENSE` file for details.
