@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1800">
+  <!-- Styles -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+    <linearGradient id="header-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A73E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D47A1;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="section-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#26A69A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00897B;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="section-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#66BB6A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#43A047;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="section-grad-4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB8C00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EF6C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="section-grad-5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5C6BC0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3949AB;stop-opacity:1" />
+    </linearGradient>
+    <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Title -->
+  <rect x="250" y="20" width="700" height="70" rx="10" fill="url(#header-grad)" filter="url(#drop-shadow)" />
+  <text x="600" y="60" font-family="Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="white">Application Specific Model Fine-tuning/Training</text>
+  
+  <!-- Data Sources -->
+  <rect x="300" y="120" width="600" height="90" rx="8" fill="#E1F5FE" stroke="#81D4FA" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="155" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">0. Data Sources</text>
+  <text x="600" y="185" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">PDFs, PPTs, Textbooks, Reference Books, Previous Year Question Papers</text>
+  
+  <!-- Flow arrow from Data Sources to Data Labelling -->
+  <line x1="600" y1="210" x2="600" y2="240" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Data Labelling -->
+  <rect x="400" y="240" width="400" height="110" rx="8" fill="#FFF9C4" stroke="#FFF176" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="275" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">3.1 Data Labelling</text>
+  <text x="600" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Human labelling (Label Studio)</text>
+  <text x="600" y="330" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Automatic labelling (LLM Data Annotation)</text>
+  
+  <!-- Flow arrow from Data Labelling to Data Quality Check -->
+  <line x1="600" y1="350" x2="600" y2="380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Data Quality Check -->
+  <rect x="400" y="380" width="400" height="110" rx="8" fill="#FFF9C4" stroke="#FFF176" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="415" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">3.2 Data Quality Check</text>
+  <text x="600" y="445" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">BirdiDQ</text>
+  <text x="600" y="470" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Data validation and integrity checks</text>
+  
+  <!-- Flow arrow from data quality check to dataset construction -->
+  <line x1="600" y1="490" x2="600" y2="520" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Dataset Construction Section -->
+  <rect x="400" y="520" width="400" height="70" rx="10" fill="url(#section-grad-2)" filter="url(#drop-shadow)" />
+  <text x="600" y="565" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">3. Dataset Construction</text>
+  
+  <!-- Flow arrow from section 3 to dataset -->
+  <line x1="600" y1="590" x2="600" y2="620" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Dataset for Supervised Training -->
+  <rect x="400" y="620" width="400" height="110" rx="8" fill="#E0F7FA" stroke="#80DEEA" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="655" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">3.3 Dataset for Supervised Training</text>
+  <text x="600" y="685" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Structured dataset with</text>
+  <text x="600" y="710" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Instruction, Query, Question</text>
+  
+  <!-- Flow arrow from dataset to training section -->
+  <line x1="600" y1="730" x2="600" y2="760" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Training/Fine-Tuning Section -->
+  <rect x="400" y="760" width="400" height="70" rx="10" fill="url(#section-grad-3)" filter="url(#drop-shadow)" />
+  <text x="600" y="805" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">4. Training/Fine-Tuning</text>
+  
+  <!-- Flow arrow from section 4 to supervised training -->
+  <line x1="600" y1="830" x2="600" y2="860" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Supervised Training -->
+  <rect x="400" y="860" width="400" height="110" rx="8" fill="#F1F8E9" stroke="#C5E1A5" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="895" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">4.1 Supervised Training</text>
+  <text x="600" y="925" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Fine-tune model using</text>
+  <text x="600" y="950" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">structured dataset</text>
+  
+  <!-- Flow arrows from training to application models -->
+  <line x1="600" y1="970" x2="600" y2="1000" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Application Specific Model Output -->
+  <rect x="350" y="1000" width="500" height="90" rx="8" fill="#BBDEFB" stroke="#64B5F6" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="600" y="1035" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">Application-Specific Models</text>
+  <text x="600" y="1065" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">Models specialized for specific use cases</text>
+  
+  <!-- Flow arrow from application models to testing -->
+  <line x1="600" y1="1090" x2="600" y2="1120" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Post-Train Testing Phase -->
+  <rect x="250" y="1120" width="700" height="70" rx="10" fill="url(#section-grad-4)" filter="url(#drop-shadow)" />
+  <text x="600" y="1165" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">5. Post-Train Testing Phase</text>
+  
+  <!-- Flow arrow from section 5 to testing tools -->
+  <line x1="600" y1="1190" x2="600" y2="1220" stroke="#333" stroke-width="2" />
+  <line x1="600" y1="1220" x2="310" y2="1220" stroke="#333" stroke-width="2" />
+  <line x1="600" y1="1220" x2="890" y2="1220" stroke="#333" stroke-width="2" />
+  <line x1="310" y1="1220" x2="310" y2="1260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="890" y1="1220" x2="890" y2="1260" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Testing Tools -->
+  <rect x="200" y="1260" width="220" height="60" rx="5" fill="#FFF3E0" stroke="#FFCC80" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="310" y="1295" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Evidently AI</text>
+  
+  <rect x="780" y="1260" width="220" height="60" rx="5" fill="#FFF3E0" stroke="#FFCC80" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="890" y="1295" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Promptfoo</text>
+  
+  <!-- Flow arrows from testing to decision -->
+  <line x1="310" y1="1320" x2="310" y2="1350" stroke="#333" stroke-width="2" />
+  <line x1="890" y1="1320" x2="890" y2="1350" stroke="#333" stroke-width="2" />
+  <line x1="310" y1="1350" x2="600" y2="1350" stroke="#333" stroke-width="2" />
+  <line x1="890" y1="1350" x2="600" y2="1350" stroke="#333" stroke-width="2" />
+  <line x1="600" y1="1350" x2="600" y2="1380" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Decision Diamond -->
+  <polygon points="600,1380 700,1430 600,1480 500,1430" fill="#FFF3E0" stroke="#FFCC80" stroke-width="3" filter="url(#drop-shadow)" />
+  <text x="600" y="1440" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle">Performance Acceptable?</text>
+  
+  <!-- Flow arrows from decision -->
+  <line x1="500" y1="1430" x2="310" y2="1430" stroke="#333" stroke-width="2" />
+  <line x1="700" y1="1430" x2="890" y2="1430" stroke="#333" stroke-width="2" />
+  <line x1="310" y1="1430" x2="310" y2="1500" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  <line x1="890" y1="1430" x2="890" y2="1500" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Text for decision paths -->
+  <text x="400" y="1420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">No</text>
+  <text x="800" y="1420" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">Yes</text>
+  
+  <!-- Decision Outcomes -->
+  <rect x="200" y="1500" width="220" height="60" rx="5" fill="#FFF3E0" stroke="#FFCC80" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="310" y="1535" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Trigger Retraining</text>
+  
+  <rect x="780" y="1500" width="220" height="60" rx="5" fill="#FFF3E0" stroke="#FFCC80" stroke-width="2" filter="url(#drop-shadow)" />
+  <text x="890" y="1535" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">Deploy to Application</text>
+  
+  <!-- Deployment Section -->
+  <rect x="250" y="1600" width="700" height="70" rx="10" fill="url(#section-grad-5)" filter="url(#drop-shadow)" />
+  <text x="600" y="1645" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="white">6. Deployment Monitoring</text>
+  
+  <!-- Flow arrow from Deploy to Deployment Section -->
+  <line x1="890" y1="1560" x2="890" y2="1575" stroke="#333" stroke-width="2" />
+  <line x1="890" y1="1575" x2="600" y2="1575" stroke="#333" stroke-width="2" />
+  <line x1="600" y1="1575" x2="600" y2="1600" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Feedback Loop from Deployment Monitoring back to Data Sources -->
+  <line x1="600" y1="1670" x2="600" y2="1700" stroke="#333" stroke-width="2" />
+  <line x1="600" y1="1700" x2="100" y2="1700" stroke="#333" stroke-width="2" />
+  <line x1="100" y1="1700" x2="100" y2="150" stroke="#333" stroke-width="2" />
+  <line x1="100" y1="150" x2="300" y2="150" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)" />
+  
+  <!-- Feedback Loop Label -->
+  <text x="200" y="1720" font-family="Arial, sans-serif" font-size="14" font-style="italic" text-anchor="middle">Continuous Improvement Feedback Loop</text>
+</svg>
