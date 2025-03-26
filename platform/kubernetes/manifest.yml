@@ -44,14 +44,14 @@ spec:
             name: afe-backend-service
             port:
               number: 8009
-      - path: /dissertation-api(/|$)(.*)
+      - path: /dissertation(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
             name: dissertation-backend-service
             port:
               number: 8006
-      - path: /dissertation(/|$)(.*)
+      - path: /dissertation-page(/|$)(.*)
         pathType: ImplementationSpecific
         backend:
           service:
@@ -72,4 +72,41 @@ spec:
             name: question-bank-frontend-service
             port:
               number: 8008
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          ports:
+            - containerPort: 6379
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  ports:
+    - port: 6379
+      targetPort: 6379
+  selector:
+    app: redis
+  type: ClusterIP
+
 

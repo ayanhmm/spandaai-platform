@@ -16,13 +16,15 @@ spec:
     spec:
       containers:
       - name: dissertation-backend
-        image: prabhas264/dissertation-backend:1.0.0
+        image: prabhas264/dissertation-backend
+        imagePullPolicy: Always
         command: ["da-start"]
         ports:
         - containerPort: 8006
         envFrom:
         - configMapRef:
             name: dissertation-env-config
+
 ---
 apiVersion: v1
 kind: Service
@@ -78,7 +80,7 @@ spec:
     spec:
       containers:
       - name: dissertation-frontend
-        image: prabhas264/dissertation-frontend:1.0.3
+        image: prabhas264/dissertation-front:v1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 4000
