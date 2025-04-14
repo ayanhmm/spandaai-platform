@@ -2,6 +2,8 @@
 
 ## A Comprehensive Multi-Domain Generative AI Ecosystem
 
+🔍 Research layer repositories can be found [here](https://github.com/keshavaspanda?tab=repositories).
+
 The SpandaAI Platform is a cutting-edge Generative AI (GenAI) ecosystem designed to support multiple domains such as FinTech, Healthcare, EdTech, and Oil & Gas. The platform leverages a modular, 4-layer architecture to ensure scalability, flexibility, and seamless integration of GenAI capabilities.
 
 ![SpandaAI Platform Architecture](docs/images/platform.png)
@@ -109,6 +111,8 @@ The Foundation Layer (formerly Platform Layer) provides the core technological i
 | **Analytics/Lakehouse** | Data storage, analysis, and intelligence capabilities |
 
 ### Research Layer
+
+🔍 Research layer repositories can be found [here](https://github.com/keshavaspanda?tab=repositories).
 
 The Research Layer forms the intellectual foundation of the SpandaAI Platform:
 
