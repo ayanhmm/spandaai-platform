@@ -1,10 +1,28 @@
 # Spanda.AI Platform - Data Management
 ## Spark, Dremio, Nessie, MinIO, and Superset
 
+### Analytics/Lakehouse
+
+**Purpose**: Data storage, analysis, and intelligence.
+
+| Component | Status | Description | Supported Sources |
+|-----------|--------|-------------|--------------------|
+| **Apache Superset** | Done ✅ | Business intelligence web application. | Connects to databases like PostgreSQL, MySQL, Snowflake, and more. |
+| **Iceberg** | Done ✅ | Table format for large analytical datasets. | Works with Spark, Flink, Hive, Dremio, and Presto. |
+| **Dremio** | Done ✅ | Data lake engine. | Supports sources like Amazon S3, Azure Data Lake, Google Cloud Storage, HDFS, PostgreSQL, MySQL, MongoDB, Snowflake, and Elasticsearch. |
+| **Apache Spark** | Done ✅ | Analytics engine for large-scale data processing. | Works with Hadoop, S3, Delta Lake, Kafka, and JDBC-compatible sources. |
+| **MinIO** | Done ✅ | High-performance object storage. | Compatible with Amazon S3 APIs and integrates with Spark, Presto, and Dremio. |
+| **Nesse** | Done ✅ | Data processing framework. | Works with various databases and file systems. |
+
+Note: The above stack provides extensive capabilities beyond what's listed, supporting integrations with various data sources.
+
+**Integration Points**: Will provide analytical capabilities across the platform.
+
+
 ![Data Architecture](images/data_architecture.png)
 
 
-This README guides you through setting up a complete data engineering environment that demonstrates the Data Lakehouse architecture. You'll learn how to move data from an operational database (PostgreSQL) to a data lake (MinIO with Apache Iceberg tables managed by Nessie), and then query the data using Dremio and visualize it through Apache Superset.
+This guides you through setting up a complete data engineering environment that demonstrates the Data Lakehouse architecture. You'll learn how to move data from an operational database (PostgreSQL) to a data lake (MinIO with Apache Iceberg tables managed by Nessie), and then query the data using Dremio and visualize it through Apache Superset.
 
 ## Prerequisites
 

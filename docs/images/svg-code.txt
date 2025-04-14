@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1000">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1100">
   <!-- Background -->
-  <rect x="0" y="0" width="1100" height="1000" fill="#000000" stroke="none"/>
+  <rect x="0" y="0" width="1100" height="1100" fill="#000000" stroke="none"/>
   
   <!-- Title -->
   <text x="550" y="60" font-family="Arial" font-size="38" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
@@ -115,9 +115,9 @@
   <text x="940" y="650" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Manufacturing</text>
   <text x="940" y="665" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Others</text>
 
-  <!-- Platform Layer -->
+  <!-- Foundation Layer (renamed from Platform Layer) -->
   <rect x="100" y="720" width="900" height="220" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
-  <text x="550" y="755" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Platform Layer</text>
+  <text x="550" y="755" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Foundation Layer</text>
   
   <!-- Fine Tuning + Pre-Training -->
   <rect x="130" y="780" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
@@ -167,9 +167,16 @@
   <text x="895" y="905" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Apache Superset, Iceberg</text>
   <text x="895" y="920" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Dremio, Spark, MinIO, Nesse</text>
   
+  <!-- Connect the Foundation Layer with Research Layer -->
+  <line x1="550" y1="940" x2="550" y2="955" stroke="#FFBF00" stroke-width="2" stroke-dasharray="6,3"/>
+  
+  <!-- Spanda.AI Research Layer -->
+  <rect x="100" y="955" width="900" height="80" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
+  <text x="550" y="1000" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Spanda.AI Research</text>
+  
   <!-- Key Principles -->
-  <rect x="100" y="955" width="900" height="35" rx="0" ry="0" fill="#FFBF00" stroke="none"/>
-  <text x="550" y="977" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Key Principles: Domain Isolation • Selective Consumption • Shared Platform • Agentic Foundation • Extensibility</text>
+  <rect x="100" y="1050" width="900" height="35" rx="0" ry="0" fill="#FFBF00" stroke="none"/>
+  <text x="550" y="1072" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Key Principles: Domain Isolation • Selective Consumption • Shared Foundation • Agentic Foundation • Extensibility</text>
   
   <!-- Connect the layers with vertical lines -->
   <line x1="550" y1="370" x2="550" y2="385" stroke="#FFBF00" stroke-width="2" stroke-dasharray="6,3"/>
