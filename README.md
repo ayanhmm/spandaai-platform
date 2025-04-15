@@ -1,5 +1,7 @@
 # SpandaAI Platform
 
+![SpandaAI Platform Architecture-new](docs/images/platform-with-catalyst.png)
+
 ## A Comprehensive Multi-Domain Generative AI Ecosystem
 
 🔍 Research layer repositories can be found [here](https://github.com/keshavaspanda?tab=repositories).
