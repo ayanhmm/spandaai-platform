@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spanda-wilp-chatbot
+  labels:
+    app: spanda-wilp-chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spanda-wilp-chatbot
+  template:
+    metadata:
+      labels:
+        app: spanda-wilp-chatbot
+    spec:
+      containers:
+        - name: spanda-wilp-chatbot
+          image: prabhas264/operations-backend
+          ports:
+            - containerPort: 8091
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
+            - name: VLLM_URL
+              value: "http://vllm-service:8002/v1/chat/completions"
+            - name: VLLM_MODEL
+              value: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+            - name: VERBA_URL
+              value: "http://172.16.92.136:8100"
+            - name: DB_TYPE
+              value: "Weaviate"
+            - name: WEAVIATE_URL
+              value: "https://tlfi18bctikurm8dye8omq.c0.asia-southeast1.gcp.weaviate.cloud/"
+            - name: WEAVIATE_KEY
+              value: "Vhw5ScEi9InL0I91BxNtMWMup3mQLZ0Uyowj"
+            - name: EMBEDDER
+              value: "SentenceTransformers"
+            - name: EMBEDDING_MODEL
+              value: "all-MiniLM-L6-v2"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spanda-wilp-chatbot-service
+spec:
+  selector:
+    app: spanda-wilp-chatbot
+  ports:
+    - protocol: TCP
+      port: 8091
+      targetPort: 8091
+  type: ClusterIP
