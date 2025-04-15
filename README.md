@@ -1,6 +1,6 @@
 # SpandaAI Platform
 
-![SpandaAI Platform Architecture-new](docs/images/platform-with-catalyst.png)
+<!-- ![SpandaAI Platform Architecture-new](docs/images/platform-with-catalyst.png) -->
 
 ## A Comprehensive Multi-Domain Generative AI Ecosystem
 
@@ -8,7 +8,8 @@
 
 The SpandaAI Platform is a cutting-edge Generative AI (GenAI) ecosystem designed to support multiple domains such as FinTech, Healthcare, EdTech, and Oil & Gas. The platform leverages a modular, 4-layer architecture to ensure scalability, flexibility, and seamless integration of GenAI capabilities.
 
-![SpandaAI Platform Architecture](docs/images/platform.png)
+<!-- ![SpandaAI Platform Architecture](docs/images/platform.png) -->
+![SpandaAI Platform Architecture-new](docs/images/platform-with-catalyst.png)
 
 ---
 
