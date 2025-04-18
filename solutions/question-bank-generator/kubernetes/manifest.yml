@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: question-bank-backend
-        image: prabhas264/qbg:latest
+        image: prabhas264/qbg:productionv1.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 8081
         envFrom:
@@ -34,8 +35,8 @@ spec:
     app: question-bank-backend
   ports:
   - protocol: TCP
-    port: 8001
-    targetPort: 8001
+    port: 8008
+    targetPort: 8008
   type: ClusterIP
 ---
 apiVersion: v1
@@ -59,6 +60,63 @@ data:
   VLLM_MODEL_FOR_SUMMARY: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
   VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2-VL-2B-Instruct-AWQ"
   VLLM_MODEL_FOR_SCORING: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  AUTH_TOKEN: "f061c203-cb2c-4b3b-9bc1-eab048642d3a"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: question-bank-image-backend
+  labels:
+    app: question-bank-image-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: question-bank-image-backend
+  template:
+    metadata:
+      labels:
+        app: question-bank-image-backend
+    spec:
+      containers:
+      - name: question-bank-image-backend
+        image: prabhas264/qfi:productionv1.2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8014
+        envFrom:
+        - configMapRef:
+            name: question-bank-image-env-config
+---
+# question-bank-backend : service
+apiVersion: v1
+kind: Service
+metadata:
+  name: question-bank-image-backend-service
+spec:
+  selector:
+    app: question-bank-image-backend
+  ports:
+  - protocol: TCP
+    port: 8014
+    targetPort: 8014
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: question-bank-image-env-config
+data:
+  VLLM_URL_FOR_ANALYSIS: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_SUMMARY: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_IMAGE: "http://vllm-vision-service:8001/v1/chat/completions"
+  VLLM_URL_FOR_SCORING: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_URL_FOR_EXTRACTION: "http://vllm-service:8002/v1/chat/completions"
+  VLLM_MODEL_FOR_ANALYSIS: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_EXTRACTION: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_SUMMARY: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
+  VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2.5-VL-32B-Instruct-AWQ"
+  VLLM_MODEL_FOR_SCORING: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -78,7 +136,8 @@ spec:
     spec:
       containers:
       - name: question-bank-mysql-backend
-        image: prabhas264/sql-backend:latest
+        image: prabhas264/sql-backend:productionv1.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 8004
         env:
@@ -90,7 +149,6 @@ spec:
           value: "Mysql@824"
         - name: DB_NAME
           value: "question_bank"
-
 ---
 # question-bank-mysql-backend : service
 apiVersion: v1
@@ -125,7 +183,7 @@ spec:
     spec:
       containers:
       - name: question-bank-frontend
-        image: prabhas264/qbg-frontend:latest
+        image: prabhas264/qbg-frontend:productionv1.5
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -143,4 +201,3 @@ spec:
     port: 8008
     targetPort: 80
   type: ClusterIP
----

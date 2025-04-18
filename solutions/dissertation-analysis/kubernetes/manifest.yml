@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: dissertation-backend
-        image: prabhas264/dissertation-backend
+        image: prabhas264/dissertation-backend:prodv1.2
         imagePullPolicy: Always
         command: ["da-start"]
         ports:
@@ -50,16 +50,16 @@ data:
   WEAVIATE_KEY: ""
   EMBEDDER: "SentenceTransformers"
   EMBEDDING_MODEL: "all-MiniLM-L6-v2"
-  SQLALCHEMY_DATABASE_URL: "mysql+pymysql://root:Spanda@123@localhost:3306/questionbank"
+  SQLALCHEMY_DATABASE_URL: "mysql+pymysql://root:Mysql%40824@db:3306/dissertation_data"
   VLLM_URL_FOR_ANALYSIS: "http://vllm-service:8002/v1/chat/completions"
   VLLM_URL_FOR_SUMMARY: "http://vllm-service:8002/v1/chat/completions"
-  VLLM_URL_FOR_IMAGE: "http://vllm-service:8001/v1/chat/completions"
+  VLLM_URL_FOR_IMAGE: "http://vllm-vision-service:8001/v1/chat/completions"
   VLLM_URL_FOR_SCORING: "http://vllm-service:8002/v1/chat/completions"
   VLLM_URL_FOR_EXTRACTION: "http://vllm-service:8002/v1/chat/completions"
   VLLM_MODEL_FOR_ANALYSIS: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
   VLLM_MODEL_FOR_EXTRACTION: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
   VLLM_MODEL_FOR_SUMMARY: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
-  VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2-VL-2B-Instruct-AWQ"
+  VLLM_MODEL_FOR_IMAGE: "Qwen/Qwen2.5-VL-32B-Instruct-AWQ"
   VLLM_MODEL_FOR_SCORING: "ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4"
 ---
 apiVersion: apps/v1
@@ -80,7 +80,7 @@ spec:
     spec:
       containers:
       - name: dissertation-frontend
-        image: prabhas264/dissertation-front:v1.0
+        image: prabhas264/dissertation-front:prodv1.0
         imagePullPolicy: Always
         ports:
         - containerPort: 4000
