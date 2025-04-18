@@ -1,0 +1,46 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment
+venv/
+env/
+
+# Ignore logs and temporary files
+*.log
+logs/
+*.out
+*.tmp
+*.swp
+
+# Ignore Jupyter Notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Ignore compiled Python files
+*.pyo
+*.pyd
+*.egg-info/
+*.pytest_cache/
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore dependency lock files (optional, if not tracking exact dependencies)
+Pipfile.lock
+poetry.lock
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore dataset/model files (if applicable)
+*.h5
+*.pth
+*.pt
+*.ckpt
+
+# Ignore Docker-related temporary files (if applicable)
+docker-compose.override.yml
+*.container

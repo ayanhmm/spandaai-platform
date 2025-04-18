@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  question-generation-from-image:
+    build: .
+    ports:
+      - "8014:8014"
+    env_file:
+      - .env
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL_FOR_ANALYSIS=llama3.1
+      - OLLAMA_MODEL_FOR_EXTRACTION=llama3.1
+      - OLLAMA_MODEL_FOR_SUMMARY=llama3.1
+      - OLLAMA_MODEL_FOR_IMAGE=gemma3:4b
+      - OLLAMA_MODEL_FOR_SCORING=llama3.1
+# PLEASE CHANGE THE ENV VARIABLES IN CASE OF VLLM. WORKS SAME WAY.
+    volumes:
+      - .:/app
+    networks:
+      - app_network
+    command: qfi-start
+
+networks:
+  app_network:
+    external: true
