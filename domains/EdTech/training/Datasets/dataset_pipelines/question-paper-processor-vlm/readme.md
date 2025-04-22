@@ -60,7 +60,7 @@ The **Question Paper Processor** is an intelligent, end-to-end system that:
 ```bash
 # 1. Clone the repository
 git clone git@github.com:spandaai/spandaai-platform.git
-cd spandaai-platform/domains/EdTech/training/Datasets/dataset_pipelines/question_paper_processor_vlm
+cd spandaai-platform/domains/EdTech/training/Datasets/dataset_pipelines/question-paper-processor-vlm
  ```
 
 ```bash
