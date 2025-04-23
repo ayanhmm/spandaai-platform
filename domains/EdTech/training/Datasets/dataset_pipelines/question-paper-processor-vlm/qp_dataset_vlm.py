@@ -288,13 +288,22 @@ async def extract_questions(text_content: str, config: EnvConfig) -> list:
     system_prompt = """
     You are an expert question extraction system for academic exam papers. Your task is to accurately identify and extract ONLY the questions as they appear in the original document, without adding any solutions, answers, or additional content.
 
-    CRITICAL INSTRUCTIONS:
-    1. Extract ONLY the content that appears in the original question paper.
-    2. DO NOT generate answers, solutions, or explanations under any circumstances.
-    3. DO NOT attempt to solve or complete any calculations asked in the questions.
-    4. DO NOT add mathematical expressions using \\approx or equality signs if they are not in the original.
-    5. If a question asks for a calculation without showing the result, DO NOT calculate or provide the result.
-    6. If you're unsure about any content, include it as is without modification.
+    CRITICAL EXTRACTION RULES:
+    1. Extract ONLY what appears in the original text - NEVER add any content that isn't present.
+    2. DO NOT solve any equations or mathematical expressions.
+    3. DO NOT complete any calculations that are left incomplete in the original.
+    4. DO NOT provide any answers whatsoever.
+    5. DO NOT generate any content - you are ONLY extracting existing content.
+    6. PRESERVE the original text EXACTLY as it appears, including any incomplete equations.
+    7. If an equation appears as "Find x when..." then leave it EXACTLY that way - DON'T solve for x.
+    8. If a value is missing in the original, DO NOT fill it in.
+
+    ABOUT MATH CONTENT:
+    1. Convert mathematical expressions to LaTeX, but ONLY represent what's visibly in the text.
+    2. NEVER add equality signs (=) or results that aren't in the original text.
+    3. NEVER use \\approx or any other symbol to provide approximate answers.
+    4. If an equation is left unsolved in the original, DO NOT solve it or complete it.
+    5. TREAT all mathematical expressions as literal text to be preserved, not as problems to be solved.
 
     CRITICAL JSON FORMATTING REQUIREMENTS:
     - You MUST produce valid, parseable JSON.
@@ -303,31 +312,14 @@ async def extract_questions(text_content: str, config: EnvConfig) -> list:
     - Do NOT include any markdown formatting like ```json or ``` around your response.
     - Return ONLY the JSON array with no explanatory text before or after.
 
-    EXTRACTION RULES:
-    1. Extract each question with its full identifier (including section, part numbers, etc.)
-    2. Include all subparts of questions (a, b, c, etc.)
-    3. Include any explanatory text or context that precedes the actual question
-    4. Preserve mathematical expressions, converting them to LaTeX
-    5. Capture the marks/points allocated to each question or subpart
-    6. Maintain the hierarchical structure of questions (main questions and their subparts)
-
-    SPECIAL CONSIDERATIONS:
-    - Look for question identifiers like "Q.1", "Question 1", "Set. (A)", etc.
-    - Identify marks usually displayed in brackets like [5] or [5 marks] or (10 marks)
-    - For questions with multiple parts, ensure to include all parts in the extraction
-    - For complex questions with scenarios/case studies, include the entire scenario text
-    - For multi-part questions, properly nest the subparts under the main question
-    - Preserve any formatting instructions or note to students
-
-    CRITICAL: ALL backslashes must be DOUBLED in your JSON response to be valid.
-    CRITICAL: DO NOT add any answers, solutions, or additional content not present in the original question paper.
+    YOUR ONLY ROLE IS TO ACCURATELY EXTRACT AND CONVERT THE ORIGINAL TEXT TO JSON FORMAT - NOT TO GENERATE ANSWERS.
     """
-    
+   
     user_prompt = f"""
     Extract all questions from the following exam paper content EXACTLY as they appear:
-    
+   
     {text_content}
-    
+   
     Return the information as a JSON array like this:
     [
         {{
@@ -337,15 +329,17 @@ async def extract_questions(text_content: str, config: EnvConfig) -> list:
         }},
         ...
     ]
-    
+   
     CRITICAL REMINDERS:
-    1. Include ONLY the content from the original question paper.
-    2. DO NOT generate answers or solutions to any questions.
-    3. DO NOT add any content that doesn't exist in the original text.
-    4. For LaTeX expressions, use double backslashes: e.g., "\\\\alpha" not "\\alpha"
-    5. Ensure the output is valid JSON - test it by making sure all special characters are properly escaped.
+    1. Extract ONLY what appears in the original document - DO NOT add any new content.
+    2. DO NOT solve any equations or complete any calculations.
+    3. DO NOT generate answers to the questions.
+    4. PRESERVE the questions exactly as they appear, even if they contain incomplete expressions.
+    5. If a question asks to "Find x" or "Calculate y" - DO NOT provide x or y.
+    6. For LaTeX expressions, use double backslashes: e.g., "\\\\alpha" not "\\alpha"
+    7. Ensure the output is valid JSON with properly escaped characters.
     """
-    
+   
     result = await invoke_llm(system_prompt, user_prompt, ModelType.EXTRACTION, config)
     if "error" in result:
         logging.error(f"Error extracting questions: {result['error']}")
