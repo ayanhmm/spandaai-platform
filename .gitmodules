@@ -13,3 +13,6 @@
 [submodule "domains/EdTech/domains/EdTech/HybridGraphClustering"]
 	path = domains/EdTech/domains/EdTech/HybridGraphClustering
 	url = https://github.com/spandaai/HybridGraphClustering.git
+[submodule "domains/EdTech/HybridGraphClustering"]
+	path = domains/EdTech/HybridGraphClustering
+	url = https://github.com/spandaai/HybridGraphClustering.git
