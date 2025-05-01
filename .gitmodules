@@ -10,3 +10,6 @@
 [submodule "platform/train/LLaMA-Factory"]
 	path = platform/train/LLaMA-Factory
 	url = https://github.com/hiyouga/LLaMA-Factory.git
+[submodule "domains/EdTech/domains/EdTech/HybridGraphClustering"]
+	path = domains/EdTech/domains/EdTech/HybridGraphClustering
+	url = https://github.com/spandaai/HybridGraphClustering.git
