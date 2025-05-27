@@ -230,7 +230,7 @@ spark.read.table("nessie.sales_data").show()
 spark.stop()
 ```
 
-**Note:** If you encounter an "Unknown Host" issue with `http://minio:9000`, you may need to replace `minio` with the container's actual IP address. You can find this by running `docker inspect minio` and looking for the IP address in the network section.
+**Note:** If you encounter an "Unknown Host" issue with `http://minio:9000`, you may need to replace `minio` with the container's actual IP address. You can find this by running `docker inspect minio | grep IPAddress` and looking for the IP address in the network section.
 
 ### 6. Configure Dremio to Connect to Nessie/MinIO
 
@@ -239,7 +239,7 @@ spark.stop()
    - Click "Add a Source" and select "Nessie"
    - **General settings tab:**
      - Source Name: `nessie`
-     - Nessie Endpoint URL: `nessie:19120/api/v2`
+     - Nessie Endpoint URL: `http://nessie:19120/api/v2`
      - Auth Type: `None`
    - **Storage settings tab:**
      - AWS Root Path: `warehouse`
@@ -264,7 +264,7 @@ spark.stop()
    docker exec -it superset superset init
    ```
 
-3. Access Superset at http://localhost:8080 and log in:
+3. Access Superset at http://localhost:8088 and log in:
    - Username: `admin`
    - Password: `admin`
 
@@ -276,6 +276,28 @@ spark.stop()
      dremio+flight://USERNAME:PASSWORD@dremio:32010/?UseEncryption=false
      ```
      (Replace USERNAME and PASSWORD with your Dremio credentials)
+   - You must URL-encode any special character in the username or password that could interfere with the URL structure 
+
+      | Character | Meaning in URL                                  | Encoded As |
+      | --------- | ----------------------------------------------- | ---------- |
+      | `@`       | Separates user/pass from host                   | `%40`      |
+      | `:`       | Separates user from password, or host from port | `%3A`      |
+      | `/`       | Indicates path segments                         | `%2F`      |
+      | `?`       | Starts query parameters                         | `%3F`      |
+      | `#`       | Starts a fragment                               | `%23`      |
+      | `&`       | Separates query parameters                      | `%26`      |
+      | `=`       | Separates key and value in query                | `%3D`      |
+      | `+`       | Space (in some cases)                           | `%2B`      |
+      | `%`       | Escape character itself                         | `%25`      |
+
+      ✅ **Safe Characters (No Encoding Needed)**  
+      Alphanumeric (`A-Z`, `a-z`, `0-9`) and a few others:
+
+      - `-` (hyphen)  
+      - `_` (underscore)  
+      - `.` (dot)  
+      - `~` (tilde)
+
    - Test connection and save
 
 5. Create a dataset:
@@ -293,9 +315,8 @@ spark.stop()
 ### Spark Connection Issues
 
 If the Spark notebook can't connect to MinIO using the hostname, use the container's IP address:
-1. Run `docker inspect minio`
-2. Find the IP address in the Network section
-3. Update the `STORAGE_URI` variable in your PySpark code, e.g., `STORAGE_URI = "http://172.18.0.6:9000"`
+1. Run `docker inspect minio | grep IPAddress`
+2. Update the `STORAGE_URI` variable in your PySpark code, e.g., `STORAGE_URI = "http://172.18.0.6:9000"`
 
 ### Dremio Connection Issues
 
