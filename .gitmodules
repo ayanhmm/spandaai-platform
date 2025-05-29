@@ -13,9 +13,6 @@
 [submodule "domains/EdTech/HybridGraphClustering"]
 	path = domains/EdTech/HybridGraphClustering
 	url = https://github.com/spandaai/HybridGraphClustering.git
-[submodule "foundation/conversational_data_analytics/foundation/conversational_data_analytics/VannaSpanda"]
-	path = foundation/conversational_data_analytics/foundation/conversational_data_analytics/VannaSpanda
+[submodule "foundation/conversational_data_analytics/VannaSpanda"]
+	path = foundation/conversational_data_analytics/VannaSpanda
 	url = https://github.com/spandaai/VannaSpanda.git
-[submodule "foundation/conversational_optimization/foundation/conversational_optimization/SpandaOptiChat"]
-	path = foundation/conversational_optimization/foundation/conversational_optimization/SpandaOptiChat
-	url = https://github.com/spandaai/SpandaOptiChat.git
