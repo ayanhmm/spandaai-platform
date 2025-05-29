@@ -25,6 +25,6 @@
 [submodule "domains/EdTech/educational-video-analysis-framework"]
 	path = domains/EdTech/educational-video-analysis-framework
 	url = https://github.com/spandaai/multi-modal-instructor-evaluation.git
-[submodule "foundation/RAG/foundation/RAG/PIKE-RAG"]
-	path = foundation/RAG/foundation/RAG/PIKE-RAG
+[submodule "foundation/RAG/PIKE-RAG"]
+	path = foundation/RAG/PIKE-RAG
 	url = https://github.com/spandaai/PIKE-RAG.git
