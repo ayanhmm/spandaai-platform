@@ -19,3 +19,6 @@
 [submodule "foundation/conversational_optimization/SpandaOptiChat"]
 	path = foundation/conversational_optimization/SpandaOptiChat
 	url = https://github.com/spandaai/SpandaOptiChat.git
+[submodule "solutions/multimodal_afe_frontend"]
+	path = solutions/multimodal_afe_frontend
+	url = https://github.com/spandaai/multimodal_afe_frontend.git
