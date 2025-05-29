@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  afe-frontend:
+    container_name: afe-frontend
+    build: .
+    restart: always
+    ports:
+      - "80:80"  # Serve app on port 80 using Nginx
+    env_file:
+      - .env
+    command: [ "nginx", "-g", "daemon off;" ]  # Ensure Nginx runs

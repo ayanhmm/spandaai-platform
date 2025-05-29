@@ -1,3 +1,31 @@
+## 🎓 EdTech Domain Solutions
+
+These solutions are part of a broader EdTech framework and are composed of modular, reusable functional blocks such as lecture transcription, semantic analysis, rubric-based grading, and content generation. These components are designed to be flexible and can be easily adapted to a wide range of educational use cases beyond the three showcased here. Whether you're building tools for automated assessment, content personalization, or interactive learning experiences, the foundational blocks provided in this suite offer a strong starting point. The three highlighted examples—Multi-Modal Lecture Content and Delivery Analysis, Dissertation Evaluation, and Question Bank Generator—are fully functional, open-source implementations that demonstrate the potential of what's possible in the EdTech domain.
+
+### 📊 Multi-Modal Lecture Content and Delivery Analysis
+
+A solution designed to analyze lecture delivery using multiple modalities such as audio, visual, and textual data to assess engagement and delivery quality.
+
+![Architecture: Multi-Modal Lecture Content and Delivery Analysis](docs/afe.png)
+
+---
+
+### 📝 Dissertation Evaluation
+
+An automated framework for evaluating student dissertations using AI-powered semantic understanding and rubric-based grading.
+
+![Architecture: Dissertation Evaluation](docs/da.png)
+
+---
+
+### 🧠 Question Bank Generator
+
+Generates a rich and diverse set of questions from curriculum materials, lectures, or textbooks using context-aware AI models.
+
+![Architecture: Question Bank Generator](docs/qbg.png)
+
+---
+
 # Kubernetes Cluster Setup
 
 This README provides instructions on how to apply various Kubernetes cluster elements, including deployments, services, config maps, secrets, and Horizontal Pod Autoscalers (HPA).

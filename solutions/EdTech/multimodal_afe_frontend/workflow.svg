@@ -1,0 +1,151 @@
+<svg viewBox="0 0 1000 1400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background and Title -->
+  <rect x="0" y="0" width="1000" height="1400" fill="#f8f9fa" />
+  <text x="500" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Multimodal Instructor Evaluation Application: Complete Workflow</text>
+
+  <!-- PHASE 1: Video Ingestion -->
+  <rect x="50" y="80" width="900" height="180" rx="10" ry="10" fill="#e3f2fd" stroke="#2196f3" stroke-width="2" />
+  <text x="500" y="110" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold" fill="#0d47a1">1. Video Ingestion Phase</text>
+  
+  <!-- Local Upload -->
+  <rect x="100" y="130" width="350" height="110" rx="5" ry="5" fill="#bbdefb" stroke="#64b5f6" stroke-width="1" />
+  <text x="275" y="150" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#1565c0">A. Local Upload</text>
+  <text x="275" y="175" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Upload from local system</text>
+  <text x="275" y="195" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Chunked upload for large files</text>
+  <text x="275" y="215" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Batch processing & metadata capture</text>
+  
+  <!-- Cloud Integration -->
+  <rect x="550" y="130" width="350" height="110" rx="5" ry="5" fill="#bbdefb" stroke="#64b5f6" stroke-width="1" />
+  <text x="725" y="150" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#1565c0">B. Cloud Integration</text>
+  <text x="725" y="175" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Google Drive & SharePoint integration</text>
+  <text x="725" y="195" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• OAuth authentication</text>
+  <text x="725" y="215" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Automatic metadata extraction</text>
+
+  <!-- Video database icon -->
+  <rect x="400" y="275" width="200" height="50" rx="5" ry="5" fill="#b2dfdb" stroke="#26a69a" stroke-width="1" />
+  <text x="500" y="305" font-family="Arial" font-size="14" text-anchor="middle" fill="#00695c">Video Database</text>
+
+  <!-- PHASE 2: Multi-Modal Processing -->
+  <rect x="50" y="340" width="900" height="430" rx="10" ry="10" fill="#e8f5e9" stroke="#4caf50" stroke-width="2" />
+  <text x="500" y="370" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold" fill="#2e7d32">2. Multi-Modal Processing Phase</text>
+  
+  <!-- Audio Processing -->
+  <rect x="100" y="390" width="800" height="100" rx="5" ry="5" fill="#c8e6c9" stroke="#81c784" stroke-width="1" />
+  <text x="500" y="415" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#2e7d32">A. Audio Processing</text>
+  
+  <!-- Transcription Pipeline -->
+  <rect x="120" y="435" width="760" height="40" rx="5" ry="5" fill="#a5d6a7" stroke="#66bb6a" stroke-width="1" />
+  <text x="500" y="460" font-family="Arial" font-size="14" text-anchor="middle" fill="#1b5e20">Transcription Pipeline: Audio extraction → Whisper model → Timestamped transcript</text>
+  
+  <!-- Visual Processing -->
+  <rect x="100" y="500" width="800" height="170" rx="5" ry="5" fill="#c8e6c9" stroke="#81c784" stroke-width="1" />
+  <text x="500" y="525" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#2e7d32">B. Visual Processing</text>
+  
+  <!-- Slide Extraction -->
+  <rect x="120" y="545" width="370" height="110" rx="5" ry="5" fill="#a5d6a7" stroke="#66bb6a" stroke-width="1" />
+  <text x="305" y="565" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#1b5e20">Slide Extraction</text>
+  <text x="305" y="585" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Frame extraction at intervals</text>
+  <text x="305" y="605" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Slide detection & extraction</text>
+  <text x="305" y="625" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Duplicate removal</text>
+  <text x="305" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• OCR processing</text>
+  
+  <!-- Image Analysis Agent -->
+  <rect x="510" y="545" width="370" height="110" rx="5" ry="5" fill="#a5d6a7" stroke="#66bb6a" stroke-width="1" />
+  <text x="695" y="565" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#1b5e20">Image Analysis Agent</text>
+  <text x="695" y="585" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Content analysis using VLLMs</text>
+  <text x="695" y="605" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Visual quality assessment</text>
+  <text x="695" y="625" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Diagram & chart detection</text>
+  <text x="695" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Text-image alignment</text>
+  
+  <!-- Engagement Analysis -->
+  <rect x="100" y="680" width="800" height="80" rx="5" ry="5" fill="#c8e6c9" stroke="#81c784" stroke-width="1" />
+  <text x="500" y="705" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#2e7d32">C. Engagement Analysis</text>
+  
+  <!-- Student Engagement Metrics -->
+  <rect x="120" y="725" width="760" height="20" rx="5" ry="5" fill="#a5d6a7" stroke="#66bb6a" stroke-width="1" />
+  <text x="500" y="740" font-family="Arial" font-size="12" text-anchor="middle" fill="#1b5e20">Face detection → Head pose estimation → Attention analysis → Engagement scoring</text>
+  
+  <!-- Processing Results Database -->
+  <rect x="400" y="780" width="200" height="50" rx="5" ry="5" fill="#b2dfdb" stroke="#26a69a" stroke-width="1" />
+  <text x="500" y="810" font-family="Arial" font-size="14" text-anchor="middle" fill="#00695c">Processing Results Database</text>
+
+  <!-- PHASE 3: Evaluation Phase -->
+  <rect x="50" y="840" width="900" height="320" rx="10" ry="10" fill="#fff3e0" stroke="#ff9800" stroke-width="2" />
+  <text x="500" y="870" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold" fill="#e65100">3. Evaluation Phase</text>
+  
+  <!-- Rubric-Based Assessment -->
+  <rect x="100" y="890" width="800" height="180" rx="5" ry="5" fill="#ffe0b2" stroke="#ffb74d" stroke-width="1" />
+  <text x="500" y="915" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#e65100">A. Rubric-Based Assessment</text>
+  
+  <!-- Text Analysis Agent -->
+  <rect x="120" y="935" width="370" height="110" rx="5" ry="5" fill="#ffcc80" stroke="#ffa726" stroke-width="1" />
+  <text x="305" y="955" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#e65100">Analysis Agent</text>
+  <text x="305" y="975" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Content relevance analysis</text>
+  <text x="305" y="995" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Teaching methodology assessment</text>
+  <text x="305" y="1015" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Communication clarity evaluation</text>
+  <text x="305" y="1035" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Material organization analysis</text>
+  
+  <!-- Scoring Agent -->
+  <rect x="510" y="935" width="370" height="110" rx="5" ry="5" fill="#ffcc80" stroke="#ffa726" stroke-width="1" />
+  <text x="695" y="955" font-family="Arial" font-size="14" text-anchor="middle" font-weight="bold" fill="#e65100">Scoring Agent</text>
+  <text x="695" y="975" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Quantitative scoring for criteria</text>
+  <text x="695" y="995" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Score normalization & weighting</text>
+  <text x="695" y="1015" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Comparative benchmark analysis</text>
+  <text x="695" y="1035" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Overall performance calculation</text>
+  
+  <!-- Multi-Modal Integration -->
+  <rect x="100" y="1080" width="800" height="70" rx="5" ry="5" fill="#ffe0b2" stroke="#ffb74d" stroke-width="1" />
+  <text x="500" y="1105" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#e65100">B. Multi-Modal Integration</text>
+  <text x="500" y="1130" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Correlation of transcripts with slides → Alignment of visual aids with spoken content → Integration of engagement metrics → Comprehensive scoring</text>
+  
+  <!-- PHASE 4: Feedback Generation and RLHF -->
+  <rect x="50" y="1170" width="900" height="220" rx="10" ry="10" fill="#e1f5fe" stroke="#03a9f4" stroke-width="2" />
+  <text x="500" y="1200" font-family="Arial" font-size="20" text-anchor="middle" font-weight="bold" fill="#01579b">4. Feedback Generation and RLHF</text>
+  
+  <!-- Report Generation -->
+  <rect x="100" y="1220" width="350" height="90" rx="5" ry="5" fill="#b3e5fc" stroke="#4fc3f7" stroke-width="1" />
+  <text x="275" y="1240" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#01579b">A. Report Generation</text>
+  <text x="275" y="1260" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Criterion-wise feedback</text>
+  <text x="275" y="1280" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Scores, metrics & visual analytics</text>
+  <text x="275" y="1300" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Improvement suggestions</text>
+  
+  <!-- RLHF -->
+  <rect x="550" y="1220" width="350" height="150" rx="5" ry="5" fill="#b3e5fc" stroke="#4fc3f7" stroke-width="1" />
+  <text x="725" y="1240" font-family="Arial" font-size="16" text-anchor="middle" font-weight="bold" fill="#01579b">B. RLHF</text>
+  
+  <!-- Feedback Collection -->
+  <rect x="570" y="1260" width="310" height="40" rx="5" ry="5" fill="#81d4fa" stroke="#29b6f6" stroke-width="1" />
+  <text x="725" y="1285" font-family="Arial" font-size="12" text-anchor="middle" fill="#01579b">Instructor, peer & student feedback collection</text>
+  
+  <!-- Model Refinement -->
+  <rect x="570" y="1310" width="310" height="40" rx="5" ry="5" fill="#81d4fa" stroke="#29b6f6" stroke-width="1" />
+  <text x="725" y="1335" font-family="Arial" font-size="12" text-anchor="middle" fill="#01579b">Feedback integration → Model optimization</text>
+  
+  <!-- Arrows connecting the flows -->
+  <!-- Video to Processing -->
+  <path d="M500 325 L500 340" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  
+  <!-- Processing to Database -->
+  <path d="M500 770 L500 780" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  
+  <!-- Database to Evaluation -->
+  <path d="M500 830 L500 840" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  
+  <!-- Evaluation to Feedback -->
+  <path d="M500 1160 L500 1170" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrowhead)" />
+  
+  <!-- RLHF feedback loop -->
+  <path d="M900 1295 C950 1295, 950 800, 900 800" stroke="#01579b" stroke-width="2" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowhead)" />
+  <text x="950" y="1050" font-family="Arial" font-size="14" text-anchor="middle" fill="#01579b" transform="rotate(90, 950, 1050)">Continuous Improvement Loop</text>
+  
+  <!-- Define the arrowhead marker -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <rect x="50" y="1350" width="900" height="40" rx="5" ry="5" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1" />
+  <text x="500" y="1375" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Multimodal Components: Audio Processing | Visual Processing | Text Analysis | Engagement Analysis | Integrated Evaluation | RLHF</text>
+</svg>
