@@ -1,15 +1,18 @@
-[submodule "platform/observability/dockprom"]
-	path = platform/observability/dockprom
+[submodule "foundation/observability/dockprom"]
+	path = foundation/observability/dockprom
 	url = git@github.com:stefanprodan/dockprom.git
-[submodule "platform/train/Llama-Factory"]
-	path = platform/train/Llama-Factory
+[submodule "foundation/train/Llama-Factory"]
+	path = foundation/train/Llama-Factory
 	url = https://github.com/hiyouga/LLaMA-Factory.git
-[submodule "platform/train/unsloth"]
-	path = platform/train/unsloth
+[submodule "foundation/train/unsloth"]
+	path = foundation/train/unsloth
 	url = https://github.com/spandaai/unsloth.git
-[submodule "platform/train/LLaMA-Factory"]
-	path = platform/train/LLaMA-Factory
+[submodule "foundation/train/LLaMA-Factory"]
+	path = foundation/train/LLaMA-Factory
 	url = https://github.com/hiyouga/LLaMA-Factory.git
 [submodule "domains/EdTech/HybridGraphClustering"]
 	path = domains/EdTech/HybridGraphClustering
 	url = https://github.com/spandaai/HybridGraphClustering.git
+[submodule "foundation/conversational_data_analytics/foundation/conversational_data_analytics/VannaSpanda"]
+	path = foundation/conversational_data_analytics/foundation/conversational_data_analytics/VannaSpanda
+	url = https://github.com/spandaai/VannaSpanda.git
