@@ -22,3 +22,6 @@
 [submodule "solutions/multimodal_afe_frontend"]
 	path = solutions/multimodal_afe_frontend
 	url = https://github.com/spandaai/multimodal_afe_frontend.git
+[submodule "domains/EdTech/educational-video-analysis-framework"]
+	path = domains/EdTech/educational-video-analysis-framework
+	url = https://github.com/spandaai/multi-modal-instructor-evaluation.git
