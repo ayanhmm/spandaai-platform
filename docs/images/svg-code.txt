@@ -1,184 +1,164 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1450">
   <!-- Background -->
-  <rect x="0" y="0" width="1100" height="1100" fill="#000000" stroke="none"/>
+  <rect x="0" y="0" width="1400" height="1450" fill="#000000" stroke="none"/>
   
-  <!-- Title -->
-  <text x="550" y="60" font-family="Arial" font-size="38" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+  <!-- Title Section -->
+  <text x="700" y="50" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
     Spanda.AI Platform
   </text>
-  <text x="550" y="100" font-family="Arial" font-size="24" text-anchor="middle" fill="#FFFFFF">
+  <text x="700" y="85" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#CCCCCC">
     Multi-Domain Generative AI Ecosystem
   </text>
 
   <!-- Solutions Layer -->
-  <rect x="100" y="130" width="900" height="240" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
-  <text x="550" y="165" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Solutions Layer</text>
+  <rect x="60" y="120" width="1280" height="310" rx="12" ry="12" fill="#1A1A1A" stroke="#FFBF00" stroke-width="3"/>
+  <text x="700" y="155" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Solutions Layer</text>
   
   <!-- Domain-Specific Applications -->
-  <rect x="130" y="185" width="250" height="85" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="255" y="225" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domain-Specific Applications</text>
-  <text x="255" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#CCCCCC">Industry-specific AI solutions</text>
+  <rect x="100" y="185" width="360" height="100" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="280" y="218" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domain-Specific Applications</text>
+  <text x="280" y="245" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">Industry-specific AI solutions</text>
+  <text x="280" y="265" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">tailored for domain expertise</text>
   
   <!-- SDKs+Integration Tools -->
-  <rect x="425" y="185" width="250" height="85" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="550" y="225" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">SDKs+Integration Tools</text>
-  <text x="550" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#CCCCCC">Developer libraries+connectivity tools</text>
+  <rect x="520" y="185" width="360" height="100" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="700" y="218" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">SDKs + Integration Tools</text>
+  <text x="700" y="245" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">Developer libraries and</text>
+  <text x="700" y="265" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">enterprise connectivity tools</text>
   
   <!-- Extensible Solutions -->
-  <rect x="720" y="185" width="250" height="85" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="845" y="225" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Extensible Solutions</text>
-  <text x="845" y="250" font-family="Arial" font-size="14" text-anchor="middle" fill="#CCCCCC">Future solution types</text>
+  <rect x="940" y="185" width="360" height="100" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="1120" y="218" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Extensible Solutions</text>
+  <text x="1120" y="245" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">Future solution types and</text>
+  <text x="1120" y="265" font-family="Arial, sans-serif" font-size="15" text-anchor="middle" fill="#CCCCCC">custom implementations</text>
   
   <!-- Low-Code Solution Creator -->
-  <rect x="275" y="285" width="550" height="70" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="550" y="320" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Low-Code Langflow Solution Creator</text>
-  <text x="550" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#CCCCCC">Visual workflow builder for AI pipeline development</text>
+  <rect x="300" y="320" width="800" height="85" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="700" y="350" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Low-Code Langflow Solution Creator</text>
+  <text x="700" y="375" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#CCCCCC">Visual workflow builder for AI pipeline development</text>
+  <text x="700" y="395" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#CCCCCC">and rapid prototyping</text>
   
-  <!-- Domain Layer with more space -->
-  <rect x="100" y="385" width="900" height="320" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
-  <text x="550" y="420" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domain Layer</text>
+  <!-- Domain Layer -->
+  <rect x="60" y="460" width="1280" height="390" rx="12" ry="12" fill="#1A1A1A" stroke="#FFBF00" stroke-width="3"/>
+  <text x="700" y="495" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domain Layer</text>
   
   <!-- EdTech Domain -->
-  <rect x="130" y="440" width="200" height="250" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="230" y="465" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">EdTech Domain</text>
+  <rect x="100" y="520" width="360" height="300" rx="10" ry="10" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="280" y="550" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">EdTech Domain</text>
+  <text x="280" y="575" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#00FF00">Core Focus</text>
   
   <!-- EdTech Kong API Gateway -->
-  <rect x="145" y="485" width="170" height="40" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="230" y="510" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API Gateway</text>
+  <rect x="120" y="600" width="320" height="50" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="280" y="630" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API Gateway</text>
   
-  <!-- EdTech Dapr sidecars(TBD) -->
-  <rect x="145" y="535" width="170" height="35" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="230" y="558" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr sidecars(TBD)</text>
+  <!-- EdTech Dapr sidecars -->
+  <rect x="120" y="665" width="320" height="45" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="280" y="693" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr Sidecars (TBD)</text>
   
   <!-- EdTech Services -->
-  <rect x="145" y="580" width="170" height="95" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="230" y="605" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">EdTech Services</text>
-  <text x="230" y="625" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Document Analysis</text>
-  <text x="230" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">QA Generation</text>
-  <text x="230" y="665" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Educational AI Agents</text>
+  <rect x="120" y="725" width="320" height="80" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="280" y="750" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">EdTech Services</text>
+  <text x="280" y="773" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#CCCCCC">• Document Analysis</text>
+  <text x="280" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#CCCCCC">• QA Generation, Educational AI Agents etc</text>
   
-  <!-- FinTech Domain -->
-  <rect x="370" y="440" width="220" height="250" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="480" y="465" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">FinTech Domain(Planned)</text>
+  <!-- Manufacturing Domain -->
+  <rect x="520" y="520" width="360" height="300" rx="10" ry="10" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="700" y="550" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Manufacturing Domain</text>
+  <text x="700" y="575" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#00FF00">Core Focus</text>
   
-  <!-- FinTech Kong API Gateway -->
-  <rect x="395" y="485" width="170" height="40" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="480" y="510" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API Gateway</text>
+  <!-- Manufacturing Kong API Gateway -->
+  <rect x="540" y="600" width="320" height="50" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="700" y="630" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API Gateway</text>
   
-  <!-- FinTech Dapr sidecars(TBD) -->
-  <rect x="395" y="535" width="170" height="35" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="480" y="558" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr sidecars(TBD)</text>
+  <!-- Manufacturing Dapr sidecars -->
+  <rect x="540" y="665" width="320" height="45" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="700" y="693" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr Sidecars (TBD)</text>
   
-  <!-- FinTech Services -->
-  <rect x="395" y="580" width="170" height="95" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="480" y="605" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">FinTech Services</text>
-  <text x="480" y="625" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Risk Assessment</text>
-  <text x="480" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Fraud Detection</text>
-  <text x="480" y="665" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Financial AI Agents</text>
+  <!-- Manufacturing Services -->
+  <rect x="540" y="725" width="320" height="80" rx="6" ry="6" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
+  <text x="700" y="750" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Manufacturing Services</text>
+  <text x="700" y="773" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#CCCCCC">• Predictive Maintenance</text>
+  <text x="700" y="790" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#CCCCCC">• Quality Control, Process Optimization etc</text>
   
-  <!-- OilGas Domain -->
-  <rect x="630" y="440" width="220" height="250" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="740" y="465" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">OilGas Domain(Planned)</text>
-  
-  <!-- OilGas Kong API Gateway -->
-  <rect x="655" y="485" width="170" height="40" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="740" y="510" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API Gateway</text>
-  
-  <!-- OilGas Dapr sidecars(TBD) -->
-  <rect x="655" y="535" width="170" height="35" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="740" y="558" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr sidecars(TBD)</text>
-  
-  <!-- OilGas Services -->
-  <rect x="655" y="580" width="170" height="95" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1"/>
-  <text x="740" y="605" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">OilGas Services</text>
-  <text x="740" y="625" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Predictive Maintenance</text>
-  <text x="740" y="645" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Resource Optimization</text>
-  <text x="740" y="665" font-family="Arial" font-size="12" text-anchor="middle" fill="#CCCCCC">Energy AI Agents</text>
-  
-  <!-- Future Domains (dashed) -->
-  <rect x="890" y="440" width="100" height="250" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5" stroke-dasharray="5,5"/>
-  <text x="940" y="465" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Future</text>
-  <text x="940" y="490" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domains</text>
-  
-  <!-- Future Domains Kong API Gateway -->
-  <rect x="900" y="515" width="80" height="35" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1" stroke-dasharray="5,5"/>
-  <text x="940" y="535" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Kong API</text>
-  
-  <!-- Future Domains Dapr sidecars(TBD) -->
-  <rect x="900" y="560" width="80" height="30" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1.5" stroke-dasharray="5,5"/>
-  <text x="940" y="580" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Dapr sidecars</text>
-  
-  <!-- Future Domains Services -->
-  <rect x="900" y="600" width="80" height="75" rx="4" ry="4" fill="#1A1A1A" stroke="#FFBF00" stroke-width="1" stroke-dasharray="5,5"/>
-  <text x="940" y="620" font-family="Arial" font-size="10" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Domain Services</text>
-  <text x="940" y="635" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Healthcare</text>
-  <text x="940" y="650" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Manufacturing</text>
-  <text x="940" y="665" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Others</text>
+  <!-- Compatible with Other Domains -->
+  <rect x="940" y="520" width="360" height="300" rx="10" ry="10" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="1120" y="580" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Compatible with</text>
+  <text x="1120" y="605" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Other Domains</text>
+  <text x="1120" y="650" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" fill="#CCCCCC">• FinTech</text>
+  <text x="1120" y="675" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" fill="#CCCCCC">• Healthcare</text>
+  <text x="1120" y="700" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" fill="#CCCCCC">• Energy</text>
+  <text x="1120" y="725" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" fill="#CCCCCC">• Retail + E-commerce</text>
+  <text x="1120" y="750" font-family="Arial, sans-serif" font-size="17" text-anchor="middle" fill="#CCCCCC">• Government</text>
 
-  <!-- Foundation Layer (renamed from Platform Layer) -->
-  <rect x="100" y="720" width="900" height="220" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
-  <text x="550" y="755" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Foundation Layer</text>
+  <!-- Foundation Layer -->
+  <rect x="60" y="880" width="1280" height="360" rx="12" ry="12" fill="#1A1A1A" stroke="#FFBF00" stroke-width="3"/>
+  <text x="700" y="915" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Foundation Layer</text>
   
-  <!-- Fine Tuning + Pre-Training -->
-  <rect x="130" y="780" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="230" y="805" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Fine Tuning + Pre-Training</text>
-  <text x="230" y="825" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">MS-Swift, Unsloth</text>
-  <text x="230" y="840" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">TensorFlow + PyTorch</text>
+  <!-- Row 1: Fine Tuning, Inference, RAG, Testing -->
+  <rect x="100" y="940" width="270" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="235" y="965" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Fine Tuning + Pre-Training</text>
+  <text x="235" y="985" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">MS-Swift, Unsloth</text>
+  <text x="235" y="1002" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">TensorFlow + PyTorch</text>
   
-  <!-- Inference -->
-  <rect x="360" y="780" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="460" y="805" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Inference</text>
-  <text x="460" y="825" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">vLLM, Ollama</text>
-  <text x="460" y="840" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Llama.cpp, Dllama (Planned)</text>
+  <rect x="390" y="940" width="200" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="490" y="970" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Inference</text>
+  <text x="490" y="990" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">vLLM, Ollama</text>
+  <text x="490" y="1007" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">Llama.cpp, Dllama</text>
   
-  <!-- RAG -->
-  <rect x="590" y="780" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="690" y="805" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">RAG</text>
-  <text x="690" y="825" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Weaviate, Sentence Transformers</text>
-  <text x="690" y="840" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Ollama support</text>
+  <rect x="610" y="940" width="240" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="730" y="970" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">RAG</text>
+  <text x="730" y="990" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">Weaviate, Sentence Transformers</text>
+  <text x="730" y="1007" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">Ollama support</text>
   
-  <!-- Testing -->
-  <rect x="820" y="780" width="150" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="895" y="805" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Testing</text>
-  <text x="895" y="825" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">promptfoo</text>
-  <text x="895" y="840" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">(Functional + Risk)</text>
+  <rect x="870" y="940" width="200" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="970" y="970" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Testing</text>
+  <text x="970" y="990" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">promptfoo</text>
+  <text x="970" y="1007" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">(Functional + Risk)</text>
   
-  <!-- Infrastructure -->
-  <rect x="130" y="860" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="230" y="885" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Infrastructure</text>
-  <text x="230" y="905" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Kafka, Redis</text>
-  <text x="230" y="920" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Kubernetes, Docker, Helm, Ray</text>
+  <!-- Row 2: Conversational Data Analytics, Deep Learning, Conversational Optimization -->
+  <rect x="100" y="1040" width="270" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="235" y="1065" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Conversational</text>
+  <text x="235" y="1082" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Data Analytics</text>
+  <text x="235" y="1105" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Rath, Vanna | Natural Language Queries</text>
   
-  <!-- Observability -->
-  <rect x="360" y="860" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="460" y="885" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Observability</text>
-  <text x="460" y="905" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Prometheus, Pushgateway</text>
-  <text x="460" y="920" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">AlertManager, Grafana</text>
+  <rect x="390" y="1040" width="240" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="510" y="1070" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Deep Learning</text>
+  <text x="510" y="1090" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">Face Analysis Models</text>
+  <text x="510" y="1107" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#CCCCCC">RetinaFace, SixDRep</text>
   
-  <!-- Agentic Framework -->
-  <rect x="590" y="860" width="200" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5"/>
-  <text x="690" y="885" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Agentic Framework</text>
-  <text x="690" y="905" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Orchestration, Management</text>
-  <text x="690" y="920" font-family="Arial" font-size="11" text-anchor="middle" fill="#CCCCCC">Agent Tools</text>
+  <rect x="650" y="1040" width="270" height="80" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="785" y="1065" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Conversational</text>
+  <text x="785" y="1082" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Optimization</text>
+  <text x="785" y="1105" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Optimization Models | Solvers | Agentic Framework</text>
   
-  <!-- Analytics + Lakehouse -->
-  <rect x="820" y="860" width="150" height="65" rx="6" ry="6" fill="#333333" stroke="#FFBF00" stroke-width="1.5" stroke-dasharray="5,5"/>
-  <text x="895" y="885" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Analytics + Lakehouse</text>
-  <text x="895" y="905" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Apache Superset, Iceberg</text>
-  <text x="895" y="920" font-family="Arial" font-size="9" text-anchor="middle" fill="#CCCCCC">Dremio, Spark, MinIO, Nesse</text>
+  <!-- Row 3: Infrastructure, Observability, Agentic Framework, Analytics -->
+  <rect x="100" y="1140" width="240" height="60" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="220" y="1165" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Infrastructure</text>
+  <text x="220" y="1185" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Kafka, Redis, K8s, Docker, Ray</text>
   
-  <!-- Connect the Foundation Layer with Research Layer -->
-  <line x1="550" y1="940" x2="550" y2="955" stroke="#FFBF00" stroke-width="2" stroke-dasharray="6,3"/>
+  <rect x="360" y="1140" width="240" height="60" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="480" y="1165" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Observability</text>
+  <text x="480" y="1185" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Prometheus, Grafana, AlertManager</text>
+  
+  <rect x="620" y="1140" width="240" height="60" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="740" y="1165" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Agentic Framework</text>
+  <text x="740" y="1185" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Orchestration, Agent Tools</text>
+  
+  <rect x="880" y="1140" width="280" height="60" rx="8" ry="8" fill="#333333" stroke="#FFBF00" stroke-width="2"/>
+  <text x="1020" y="1160" font-family="Arial, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Analytics + Lakehouse</text>
+  <text x="1020" y="1180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Superset, Iceberg, Dremio, Spark</text>
+  <text x="1020" y="1197" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#CCCCCC">Production Ready</text>
   
   <!-- Spanda.AI Research Layer -->
-  <rect x="100" y="955" width="900" height="80" rx="8" ry="8" fill="#1A1A1A" stroke="#FFBF00" stroke-width="2"/>
-  <text x="550" y="1000" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Spanda.AI Research</text>
+  <rect x="60" y="1270" width="1280" height="60" rx="12" ry="12" fill="#1A1A1A" stroke="#FFBF00" stroke-width="3"/>
+  <text x="700" y="1308" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">Spanda.AI Research</text>
   
   <!-- Key Principles -->
-  <rect x="100" y="1050" width="900" height="35" rx="0" ry="0" fill="#FFBF00" stroke="none"/>
-  <text x="550" y="1072" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#000000">Key Principles: Domain Isolation • Selective Consumption • Shared Foundation • Agentic Foundation • Extensibility</text>
+  <rect x="60" y="1340" width="1280" height="35" rx="0" ry="0" fill="#FFBF00" stroke="none"/>
+  <text x="700" y="1363" font-family="Arial, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#000000">Key Principles: Domain Isolation • Selective Consumption • Shared Foundation • Agentic Foundation • Extensibility</text>
   
   <!-- Connect the layers with vertical lines -->
-  <line x1="550" y1="370" x2="550" y2="385" stroke="#FFBF00" stroke-width="2" stroke-dasharray="6,3"/>
-  <line x1="550" y1="705" x2="550" y2="720" stroke="#FFBF00" stroke-width="2" stroke-dasharray="6,3"/>
+  <line x1="700" y1="430" x2="700" y2="460" stroke="#FFBF00" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="700" y1="850" x2="700" y2="880" stroke="#FFBF00" stroke-width="3" stroke-dasharray="8,4"/>
+  <line x1="700" y1="1240" x2="700" y2="1270" stroke="#FFBF00" stroke-width="3" stroke-dasharray="8,4"/>
 </svg>
