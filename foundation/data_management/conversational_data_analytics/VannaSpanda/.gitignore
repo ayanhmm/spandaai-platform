@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Configuration files with sensitive data
+config.py
+
+# Database
+*.sqlite3
+*.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Local vector store data
+vanna_chromadb/
+
+# macOS
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/
+
+**.egg-info
+venv
+.DS_Store
+notebooks/*
+tests/__pycache__
+__pycache__/
+.idea
+.coverage
+docs/*.html
+.ipynb_checkpoints/
+.tox/
+notebooks/chroma.sqlite3
+dist
+.env
+*.sqlite
+htmlcov
+chroma.sqlite3
+*.bin
+.coverage.*
+milvus.db
+.milvus.db.lock
