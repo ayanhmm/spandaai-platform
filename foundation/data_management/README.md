@@ -18,8 +18,22 @@ Note: The above stack provides extensive capabilities beyond what's listed, supp
 
 **Integration Points**: Will provide analytical capabilities across the platform.
 
+**Current Implementation and Planned next steps**:
+| Component          | Category                | Status | Notes                         |
+| ------------------ | ----------------------- | ------ | ----------------------------- |
+| Apache Superset    | BI/Visualization        | ✅      |           -                    |
+| Apache Iceberg     | Table Format            | ✅      |           -                    |
+| Dremio             | Lakehouse Query Engine  | ✅      |           -                    |
+| Apache Spark       | Processing Engine       | ✅      |           -                    |
+| MinIO              | Object Storage          | ✅      |           -                    |
+| Nessie             | Table Version Control   | ✅      |           -                    |
+| **Apache NiFi**    | **Data Ingestion**      | ⬜️     | Drag-and-drop flow management |
+| **Apache Kafka**   | **Streaming/Brokering** | ⬜️     | Core for real-time pipelines  |
+| **Airbyte**        | **ELT Syncing**         | ⬜️     | Easy sync from SaaS & DBs     |
+| **Apache Airflow** | **Orchestration**       | ⬜️     | DAGs for all ETL jobs         |
+| **dbt**            | **SQL Transformations** | ⬜️     | Developer-friendly modeling   |
 
-![Data Architecture](images/data_architecture.png)
+![Data Pipeline](images/data_pipeline.png)
 
 
 This guides you through setting up a complete data engineering environment that demonstrates the Data Lakehouse architecture. You'll learn how to move data from an operational database (PostgreSQL) to a data lake (MinIO with Apache Iceberg tables managed by Nessie), and then query the data using Dremio and visualize it through Apache Superset.
@@ -29,7 +43,7 @@ This guides you through setting up a complete data engineering environment that 
 - [Docker](https://www.docker.com/products/docker-desktop/) installed on your machine
 - Basic knowledge of SQL and data engineering concepts
 
-## Architecture Overview
+## Demo Architecture Overview
 
 This setup demonstrates a modern Data Lakehouse architecture with the following components:
 
@@ -39,6 +53,8 @@ This setup demonstrates a modern Data Lakehouse architecture with the following 
 - **Nessie**: Catalog service for Apache Iceberg tables
 - **Dremio**: Data lakehouse platform and query engine
 - **Apache Superset**: Business intelligence and visualization tool
+
+![Data Architecture](images/data_architecture.png)
 
 ## Setup Instructions
 
