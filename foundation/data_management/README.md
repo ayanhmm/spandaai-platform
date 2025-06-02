@@ -3,6 +3,10 @@
 
 ### Analytics/Lakehouse
 
+
+![Data Pipeline](images/data_pipeline.png)
+
+
 **Purpose**: Data storage, analysis, and intelligence.
 
 | Component | Status | Description | Supported Sources |
@@ -32,8 +36,6 @@ Note: The above stack provides extensive capabilities beyond what's listed, supp
 | **Airbyte**        | **ELT Syncing**         | ⬜️     | Easy sync from SaaS & DBs     |
 | **Apache Airflow** | **Orchestration**       | ⬜️     | DAGs for all ETL jobs         |
 | **dbt**            | **SQL Transformations** | ⬜️     | Developer-friendly modeling   |
-
-![Data Pipeline](images/data_pipeline.png)
 
 
 This guides you through setting up a complete data engineering environment that demonstrates the Data Lakehouse architecture. You'll learn how to move data from an operational database (PostgreSQL) to a data lake (MinIO with Apache Iceberg tables managed by Nessie), and then query the data using Dremio and visualize it through Apache Superset.
