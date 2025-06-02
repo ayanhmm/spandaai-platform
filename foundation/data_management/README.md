@@ -1,30 +1,35 @@
 # Spanda.AI Platform - Data Management and Analytics
 
+**Spanda.AI: The Intelligent Data Platform for the AI Era**
 
-**Spanda.AI Platform represents the next evolution of enterprise data management, combining the power of modern lake house architecture with cutting-edge generative AI capabilities.** Built on a foundation of industry-leading open-source technologies including Apache Spark, Dremio, Apache Iceberg, and MinIO, the platform delivers a unified data ecosystem that seamlessly bridges traditional analytics with conversational AI interfaces. This comprehensive architecture eliminates data silos while providing organizations with both the robust analytical capabilities they need today and the intelligent, automated insights they'll require tomorrow.
+Spanda.AI is a next-generation data platform that bridges traditional analytics with modern AI capabilities. Designed for enterprises navigating digital transformation, our solution transforms raw data into actionable intelligence through an integrated suite of technologies.
 
-**At its core, the platform implements a six-layer architecture designed for enterprise scale and flexibility.** From ingesting data across diverse sources through Apache NiFi, Airbyte, and Kafka, to storing it in a high-performance object storage layer with ACID transactions and schema evolution, every component has been carefully selected to ensure reliability, performance, and future-proofing. The crown jewel of the platform is its GenAI Conversational Analytics Layer, which already enables users to chat naturally with their SQL databases through advanced Text-to-SQL generation, while the planned automated data exploration and visualization capabilities will revolutionize how organizations discover insights from their data. With 75% of core components already implemented and battle-tested, Spanda.AI Platform offers enterprises a clear path to data-driven decision making powered by artificial intelligence.
+At its core, Spanda.AI delivers:
+
+1. **Unified Data Management**  
+   A single platform combining the flexibility of data lakes with the reliability of data warehouses, powered by open table formats and Git-like version control.
+
+2. **Smart Analytics**  
+   From traditional business intelligence to conversational AI interfaces that understand natural language queries - making data accessible to both analysts and business users.
+
+3. **Enterprise-Grade Foundations**  
+   Built on proven open-source technologies with enhancements for security, performance and scalability to handle petabyte-scale datasets.
+
+4. **Future-Ready Architecture**  
+   Supporting both batch and real-time use cases with seamless integration for machine learning and AI workloads.
+
+What sets Spanda.AI apart is our focus on eliminating the traditional trade-offs between scale and simplicity. Our platform enables:
+- Data teams to work more efficiently with automated pipelines and collaborative tooling
+- Business users to get answers through intuitive AI interfaces
+- Organizations to future-proof their data infrastructure while reducing costs
+
+Whether you're modernizing legacy systems or building new data capabilities, Spanda.AI provides the complete toolkit for the age of AI-driven decision making.
 
 ---
 
 
 ![Data Pipeline](images/data_pipeline.png)
 
-
-**Purpose**: Data storage, analysis, and intelligence.
-
-| Component | Status | Description | Supported Sources |
-|-----------|--------|-------------|--------------------|
-| **Apache Superset** | Done ✅ | Business intelligence web application. | Connects to databases like PostgreSQL, MySQL, Snowflake, and more. |
-| **Iceberg** | Done ✅ | Table format for large analytical datasets. | Works with Spark, Flink, Hive, Dremio, and Presto. |
-| **Dremio** | Done ✅ | Data lake engine. | Supports sources like Amazon S3, Azure Data Lake, Google Cloud Storage, HDFS, PostgreSQL, MySQL, MongoDB, Snowflake, and Elasticsearch. |
-| **Apache Spark** | Done ✅ | Analytics engine for large-scale data processing. | Works with Hadoop, S3, Delta Lake, Kafka, and JDBC-compatible sources. |
-| **MinIO** | Done ✅ | High-performance object storage. | Compatible with Amazon S3 APIs and integrates with Spark, Presto, and Dremio. |
-| **Nesse** | Done ✅ | Data processing framework. | Works with various databases and file systems. |
-
-Note: The above stack provides extensive capabilities beyond what's listed, supporting integrations with various data sources.
-
-**Integration Points**: Will provide analytical capabilities across the platform.
 
 **Current Implementation and Planned next steps**:
 | Component          | Category                | Status | Notes                         |
@@ -51,6 +56,24 @@ This guides you through setting up a complete data engineering environment that 
 
 ## Demo Architecture Overview
 
+![Data Architecture](images/data_architecture.png)
+
+**Purpose**: Data storage, analysis, and intelligence.
+
+| Component | Status | Description | Supported Sources |
+|-----------|--------|-------------|--------------------|
+| **Apache Superset** | Done ✅ | Business intelligence web application. | Connects to databases like PostgreSQL, MySQL, Snowflake, and more. |
+| **Iceberg** | Done ✅ | Table format for large analytical datasets. | Works with Spark, Flink, Hive, Dremio, and Presto. |
+| **Dremio** | Done ✅ | Data lake engine. | Supports sources like Amazon S3, Azure Data Lake, Google Cloud Storage, HDFS, PostgreSQL, MySQL, MongoDB, Snowflake, and Elasticsearch. |
+| **Apache Spark** | Done ✅ | Analytics engine for large-scale data processing. | Works with Hadoop, S3, Delta Lake, Kafka, and JDBC-compatible sources. |
+| **MinIO** | Done ✅ | High-performance object storage. | Compatible with Amazon S3 APIs and integrates with Spark, Presto, and Dremio. |
+| **Nesse** | Done ✅ | Data processing framework. | Works with various databases and file systems. |
+
+Note: The above stack provides extensive capabilities beyond what's listed, supporting integrations with various data sources.
+
+**Integration Points**: Will provide analytical capabilities across the platform.
+
+
 This setup demonstrates a modern Data Lakehouse architecture with the following components:
 
 - **PostgreSQL**: Operational database
@@ -59,8 +82,6 @@ This setup demonstrates a modern Data Lakehouse architecture with the following 
 - **Nessie**: Catalog service for Apache Iceberg tables
 - **Dremio**: Data lakehouse platform and query engine
 - **Apache Superset**: Business intelligence and visualization tool
-
-![Data Architecture](images/data_architecture.png)
 
 ## Setup Instructions
 
