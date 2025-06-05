@@ -20,6 +20,7 @@ The SpandaAI Platform is a cutting-edge Generative AI (GenAI) ecosystem designed
    - [Solutions Layer](#solutions-layer)
    - [Domain Layer](#domain-layer)
    - [Foundation Layer](#foundation-layer)
+     - [Foundation Setup Summary](docs/spanda_foundation_summary.md)
    - [Research Layer](#research-layer)
 4. [Key Components](#key-components)
    - [Fine Tuning & Pre-Training](#fine-tuning--pre-training)
