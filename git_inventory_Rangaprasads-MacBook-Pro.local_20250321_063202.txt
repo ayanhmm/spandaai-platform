@@ -1,7 +1,0 @@
-Repository Path: /Users/ranga/projects/spanda/spandaai-platform
-Current Branch: main
-Latest Commit: 41a689cfbaf26c54eaf4aa73028a59f32fd745c4 - Adding the README file
-Uncommitted Changes: 6
-Stashed Changes: 0
-Remote URL: git@github.com:spandaai/spandaai-platform.git
-----------------------------------------------------
