@@ -1,30 +1,66 @@
-"""CLI tool to manage Spanda Foundation Docker Compose setup."""
+#!/usr/bin/env python3
+
+"""
+Spanda CLI: A lightweight wrapper around Docker Compose commands
+"""
 
 import subprocess
 from pathlib import Path
+from typing import Optional
+
 import typer
 
 app = typer.Typer()
+BASE_DIR = Path(__file__).resolve().parent
+ENV_FILE = BASE_DIR / ".env"
+COMPOSE_FILE = BASE_DIR / "master-compose.yml"
+
+
+def run_compose_command(*args: str):
+    """Run docker compose commands with the env and master-compose file"""
+    command = [
+        "docker",
+        "compose",
+        "--env-file", str(ENV_FILE),
+        "-f", str(COMPOSE_FILE),
+        *args
+    ]
+    typer.echo(f"🔧 Running: {' '.join(command)}")
+    subprocess.run(command, check=True)
+
 
 @app.command()
 def dry_run():
-    """Perform a dry run of Docker Compose to validate configuration."""
-    typer.echo("🔧 Running: docker compose --env-file .env -f master-compose.yml config")
-    subprocess.run(
-        ["docker", "compose", "--env-file", ".env", "-f", "master-compose.yml", "config"],
-        check=True
-    )
+    """Validates the master Compose file and shows active profiles"""
+    run_compose_command("config", "--profiles")
+
 
 @app.command()
-def validate_env():
-    """Check if .env file exists and display contents."""
-    env_path = Path(".env")
-    if env_path.exists():
-        typer.echo("✅ .env file found. Contents:")
-        with open(env_path, encoding="utf-8") as f:
-            typer.echo(f.read())
-    else:
-        typer.echo("❌ .env file is missing.")
+def up(profile: Optional[str] = typer.Option(None, help="Start a specific profile only")):
+    """Starts the Docker Compose services"""
+    args = ["--profile", profile] if profile else []
+    run_compose_command("up", "-d", *args)
+
+
+@app.command()
+def down():
+    """Stops and removes all Docker Compose services"""
+    run_compose_command("down")
+
+
+@app.command()
+def logs(service: Optional[str] = typer.Argument(None, help="Service name to tail logs for")):
+    """Tails logs of a specific service or all if none is provided"""
+    args = ["logs", "-f"]
+    if service:
+        args.append(service)
+    run_compose_command(*args)
+
+
+@app.command()
+def status():
+    """Displays the status of all containers"""
+    run_compose_command("ps")
 
 
 if __name__ == "__main__":
