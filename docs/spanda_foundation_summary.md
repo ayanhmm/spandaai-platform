@@ -1,7 +1,7 @@
 
 # 🛠️ Spanda Foundation Layer — End-of-Day Summary (June 05, 2025)
 
-## ✅ 1. Foundation Environment Setup
+## 1. Foundation Environment Setup
 Created a foundational multi-service Docker Compose setup for Spanda using `master-compose.yml`.
 
 ### `.env` Configuration:
@@ -15,7 +15,7 @@ AIRFLOW_PORT=8080
 
 ---
 
-## 🧩 2. Docker Compose: `master-compose.yml`
+## 2. Docker Compose: `master-compose.yml`
 
 Defined multiple services with profile blocks:
 
@@ -28,11 +28,11 @@ services:
   grafana:         # profile: aiops
 ```
 
-> ⚠️ Removed the obsolete `version` field to avoid API errors.
+>  Removed the obsolete `version` field to avoid API errors.
 
 ---
 
-## ⚙️ 3. CLI Wrapper Added
+##  3. CLI Wrapper Added
 
 A Python wrapper `spanda_cli.py` was created to invoke Docker Compose with profile support.
 
@@ -48,7 +48,7 @@ docker compose --env-file .env -f master-compose.yml up -d
 
 ---
 
-## 🧼 4. Troubleshooting Done
+##  4. Troubleshooting Done
 
 | Issue | Resolution |
 |-------|------------|
@@ -58,7 +58,7 @@ docker compose --env-file .env -f master-compose.yml up -d
 
 ---
 
-## 🐳 5. Current Running Services
+##  5. Current Running Services
 
 ```bash
 docker compose -f master-compose.yml ps
@@ -72,7 +72,7 @@ docker compose -f master-compose.yml ps
 
 ---
 
-## 🧪 6. How Team Can Test Locally
+##  6. How Team Can Test Locally
 
 ### Step-by-step:
 1. **Clone the Repo**
@@ -83,7 +83,7 @@ docker compose -f master-compose.yml ps
 
 2. **Activate Python venv (if needed)**
     ```bash
-    source .foundation_venv/bin/activate
+    source .foundation_venv/bin/activate (or whatever is your venv)
     ```
 
 3. **Run Foundation Layer**
@@ -103,7 +103,7 @@ docker compose -f master-compose.yml ps
 
 ---
 
-## 🪜 7. Next Suggested Tasks
+##  7. Next Suggested Tasks
 
 - [ ] Add example DAG to Airflow under `/dags`
 - [ ] Add Prometheus scrape config for Airflow, Nifi, etc.
