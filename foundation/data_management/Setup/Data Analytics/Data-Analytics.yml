@@ -1,0 +1,15 @@
+services:
+  superset:
+    image: alexmerced/dremio-superset
+    container_name: superset
+    networks:
+      - Spanda-Net
+    ports:
+      - "8088:8088"
+
+networks:
+  Spanda-Net:
+    external: true
+    name: Spanda-Net
+    driver: bridge
+    
