@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5435:5432"
+    networks:
+      - Spanda-Net
+
+networks:
+  Spanda-Net:
+    external: true
+    name: Spanda-Net
+    driver: bridge
+    
