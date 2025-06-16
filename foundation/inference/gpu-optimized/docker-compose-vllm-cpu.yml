@@ -40,7 +40,7 @@ services:
       "--disable-sliding-window",          # Disable if not needed to save memory
       # CPU-specific optimizations - Note: vLLM will auto-select IPEX quantization for CPU
       "--dtype", "bfloat16",               # Explicitly use bf16 (CPU optimized)
-      "--max-parallel-loading-workers", "2" # Limit parallel loading for stability
+      "--max-parallel-loading-workers", "2" # Limit parallel loading for stability # Can add as many/as little arguments as we want, this is dependent on what the user wants
     ]
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8001/health"]

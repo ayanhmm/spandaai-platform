@@ -21,9 +21,9 @@ services:
       "--max-num-seqs", "256",
       "--gpu-memory-utilization", "0.90",
       "--tensor-parallel-size", "1",
-      "--disable-log-requests",
       "--trust-remote-code",
       "--enforce-eager",
+      "--enable-server-load-tracking",
       "--load-format", "auto" # Can add as many/as little arguments as we want, this is dependent on what the user wants
     ]
     deploy:
