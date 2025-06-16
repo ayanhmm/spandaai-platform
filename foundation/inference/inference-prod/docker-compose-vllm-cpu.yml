@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  vllm-cpu:
+    image: duobinji/vllm:cpu
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN}
+      - OMP_NUM_THREADS=8  # Adjust based on your CPU cores
+      - OPENBLAS_NUM_THREADS=1
+      - MKL_NUM_THREADS=1
+      - VLLM_CPU_KVCACHE_SPACE=4  # Explicitly set to avoid warning
+    ports:
+      - "8001:8001"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    # Optional: Set CPU and memory limits
+    deploy:
+      resources:
+        limits:
+          cpus: '8.0'  # Adjust based on available cores
+          memory: 16G  # Adjust based on available RAM
+    command: [
+      "--host", "0.0.0.0",
+      "--port", "8001",
+      "--model", "joshmiller656/Llama3.2-3B-Instruct-AWQ-INT4",
+      "--tokenizer", "joshmiller656/Llama3.2-3B-Instruct-AWQ-INT4",
+      "--dtype", "auto",
+      # CPU-optimized parameters
+      "--max-model-len", "2048",           # Reduced for CPU efficiency
+      "--max-num-batched-tokens", "2048",  # Reduced batch size for CPU
+      "--max-num-seqs", "8",               # Much lower for CPU processing
+      "--block-size", "16",                # Smaller block size for CPU
+      "--swap-space", "4",                 # CPU swap space in GB
+      "--cpu-offload-gb", "0",             # No GPU offloading needed
+      "--disable-log-requests",
+      "--trust-remote-code",
+      "--enforce-eager",                   # Good for CPU inference
+      "--load-format", "auto",
+      "--enable-prefix-caching",           # Can help with repeated prefixes
+      "--disable-sliding-window",          # Disable if not needed to save memory
+      # CPU-specific optimizations - Note: vLLM will auto-select IPEX quantization for CPU
+      "--dtype", "bfloat16",               # Explicitly use bf16 (CPU optimized)
+      "--max-parallel-loading-workers", "2" # Limit parallel loading for stability
+    ]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 60s      # Increased interval for CPU
+      timeout: 20s       # Increased timeout for slower CPU responses
+      retries: 5         # More retries for stability
+      start_period: 120s # Longer startup time for CPU loading

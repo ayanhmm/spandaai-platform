@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm-vision
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm-vision
+  template:
+    metadata:
+      labels:
+        app: vllm-vision
+    spec:
+      initContainers:
+        - name: wait-for-service
+          image: curlimages/curl
+          command: 
+            - 'sh'
+            - '-c'
+            - 'until curl -s http://vllm-service:8002/v1/chat/completions; do echo waiting for vllm service; sleep 2; done;'
+      hostIPC: true
+      volumes:
+        - name: hf-cache
+          hostPath:
+            path: /mnt/data/huggingface
+            type: DirectoryOrCreate
+        - name: shm
+          emptyDir:
+            medium: Memory
+      containers:
+        - name: vllm-vision
+          image: vllm/vllm-openai:latest
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "until curl -s http://vllm-service:8002/v1/chat/completions; do echo 'waiting for vllm service'; sleep 2; done;"]
+          ports:
+            - containerPort: 8000
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: hf-secret
+                  key: HF_TOKEN
+          volumeMounts:
+            - name: hf-cache
+              mountPath: /root/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+          args:
+            - "--model"
+            - "Qwen/Qwen2.5-VL-32B-Instruct-AWQ"
+            - "--gpu-memory-utilization"
+            - "0.9"
+            - "--max-num-batched-tokens"
+            - "8192"
+            - "--max-num-seqs"
+            - "16"
+            - "--max-model-len"
+            - "4096"
+            - "--block-size"
+            - "16"
+            - "--swap-space"
+            - "1"
+            - "--tensor-parallel-size"
+            - "1"
+            - "--enforce-eager"
+            - "--dtype"
+            - "float16"
+          securityContext:
+            privileged: true
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-vision-service
+spec:
+  selector:
+    app: vllm-vision
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+    spec:
+      hostIPC: true
+      volumes:
+      - name: hf-cache
+        hostPath:
+          path: /mnt/data/huggingface
+          type: DirectoryOrCreate
+      - name: shm
+        emptyDir:
+          medium: Memory
+      containers:
+      - name: vllm
+        image: vllm/vllm-openai:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: HUGGING_FACE_HUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: hf-secret
+              key: HF_TOKEN
+        volumeMounts:
+        - name: hf-cache
+          mountPath: /root/.cache/huggingface
+        - name: shm
+          mountPath: /dev/shm
+        command:
+        - "/bin/sh"
+        - "-c"
+        args:
+        - vllm serve ibnzterrell/Meta-Llama-3.3-70B-Instruct-AWQ-INT4
+          --max-num-seqs 256
+          --max-num-batched-tokens 16384
+          --gpu-memory-utilization 0.6
+          --swap-space 8
+          --max-model-len 8128
+          --disable-custom-all-reduce
+          --use-v2-block-manager
+          --enable-chunked-prefill
+          --enable-prefix-caching
+          --enforce-eager
+          --quantization awq_marlin
+        securityContext:
+          privileged: true
+---
+# vllm : service
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm-service
+spec:
+  selector:
+    app: vllm
+  ports:
+  - protocol: TCP
+    port: 8002
+    targetPort: 8000
+  type: ClusterIP
+---

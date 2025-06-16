@@ -109,3 +109,4 @@ celerybeat.pid
 git_debug_*
 git_inventory_*
 
+foundation/inference/inference-prod/.env
