@@ -100,17 +100,20 @@ Depending upon your requirements, Visit the `Setup` folder and inside it visit t
 
 ## Setup Instructions
 Instructions for Combining the individual modules into a fully functional pipeline
-### 1. Create Docker Compose File
+#### 1. Create Docker Compose File
 
 Create a new directory for the project, then create a copy of the `.yml` files of all the required modules 
 
-### 2. Set Up a network 
+#### 2. Set Up a network 
 Create a new network for communication with other modules of the pipeline and list all networks to check if network properly created
 ```bash
    docker network create Spanda-Net
    docker network ls
    ```
 
-### 3. Launch the required applications
-Run the script `Launch.sh` inside the `Setup` folder to launch all the applications and open their UI on your browser.
+#### 3. Launch the required applications
+Run the script `Launch.sh` inside the `Setup` folder to gat a list of all the applications and select the required applications and open their UI on your browser.
+
+#### 4. Module Specific Readme files
+Refer to the Module Specific Readme files to understand how to furthur work on each application
 

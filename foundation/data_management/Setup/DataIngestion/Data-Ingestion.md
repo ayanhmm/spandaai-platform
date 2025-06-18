@@ -181,19 +181,19 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
 
 
 ## Setting up a Python Script as a real time source
-   - Save the `Sample_Producer.py` or `Sample_Producer_2.py` script to same folder as docker compose
-   - Copy the script to the kafka container
-      ```bash
-      docker cp Sample_Producer.py kafka:/produce.py
-      ``` 
+   - Mount the scripts to the kafka container:
+      - If the scripts were locates in the same folder as docker-compose, they should already be mounted. check via
+         ```bash
+         docker exec -it kafka bash 
+         cd /user_data
+         ls
+         ``` 
+      - Otherwise, Save the `Sample_Producer.py` or `Sample_Producer_2.py` script to same folder as docker compose. Copy the script to the kafka container manually using `docker cp Sample_Producer.py kafka:/user_data/produce.py`
+
    - Access the container to run the script
       ```bash
       docker exec -it kafka bash 
-      ``` 
-   - Make sure that you are in the root folder inside the container
-      ```bash
-      cd ../../
-      ls
+      cd /user_data
       ``` 
    - Install the python kafka package inside the container
       ```bash
@@ -205,6 +205,39 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
       ``` 
    - Now the producer is online and has started producing.
    - You may run both the scripts together to simulate multiple sensors publishing data on same kafka topic.
+
+## Setting up Nifi to publish data to Kafka from a .csv file
+- Mount the .csv files to the kafka container:
+   - If the scripts were located in the same folder as docker-compose, they should already be mounted. check via
+      ```bash
+      docker exec -it nifi bash 
+      cd /user_data
+      ls
+      ``` 
+   - Otherwise, Save the files to the same folder as docker compose. Copy them to the kafka container manually using `docker cp Sample_Table.csv kafka:/user_data/table.csv`
+
+- Fetching the .csv file from nifi's local directory
+   - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `GetFile` as the type of processor.
+   - Double click on the newly created processor to open its configuration. Go to the properties tab.
+    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
+      - Input Directory specifies the address of the .csv file inside the nifi container.
+      - Specify File Filter: `.*\.csv` so that it only reads the desired files.
+      - Keep Source File: false.
+- Splitting the .csv file into individual records
+   - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `SplitRecore` as the type of processor.
+   - Double click on the newly created processor to open its configuration. Go to the properties tab.
+    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
+      - Record Reader specifies the type of file we are reading.for .csv files select `CSVReader`. Inside the configuration settings of the CSVReader, set First Line Is Header to true.
+      - Record Writer specifies the format you want to split the file into. Since, we will be publishing the records to kafka, set it to `JsonRecordSetWriter`.
+      - Set Records per Split to 1.
+
+- Publish the records to a kafka topic
+   - Refer to `Setting up kafka-producer using nifi`
+
+- Forming a relationship among the above processors.
+    `GetFile -> splitRecord -> Publish Kafka -> Output port` 
+
+- Set the state of all the processors to running to start publishing.
 
 ## Kafka Data Filtering and Transfer using Nifi
 - **Setting up a kafka-consumer inside nifi:**
