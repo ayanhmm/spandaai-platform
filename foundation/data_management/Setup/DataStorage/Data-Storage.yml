@@ -10,6 +10,8 @@ services:
       - "5435:5432"
     networks:
       - Spanda-Net
+    volumes:
+      - ./:/user_data
 
 networks:
   Spanda-Net:
