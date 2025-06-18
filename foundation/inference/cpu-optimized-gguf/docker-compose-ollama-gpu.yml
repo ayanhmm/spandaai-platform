@@ -11,6 +11,7 @@ services:
     networks:
       - platform_network
       - app_network
+      - dev-network
     runtime: nvidia
     deploy:
       resources:
@@ -27,4 +28,6 @@ networks:
   platform_network:
     external: true
   app_network:
+    external: true
+  dev-network:
     external: true

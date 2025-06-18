@@ -12,8 +12,28 @@ services:
       - Spanda-Net
     volumes:
       - ./:/user_data
+      
+  mysql-dev:
+    image: mysql:latest
+    container_name: mysql-dev
+    ports:
+      - "${MYSQL_EXTERNAL_PORT}:${MYSQL_PORT}"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mysql_data_dev:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: --bind-address=0.0.0.0
+    restart: unless-stopped
+    networks:
+      - dev-network
+volumes:
+  mysql_data_dev:
 
 networks:
+  dev-network:
+    external: true
   Spanda-Net:
     external: true
     name: Spanda-Net

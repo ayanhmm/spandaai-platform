@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  backend:
+    image: hanish1/afe-backend:latest
+    container_name: afe-backend-dev
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - video_storage_dev:/app/uploads
+    environment:
+      # Ollama Configuration
+      - OLLAMA_URL=${OLLAMA_URL}
+      - OLLAMA_MODEL_FOR_ANALYSIS=${OLLAMA_MODEL_FOR_ANALYSIS}
+      - OLLAMA_MODEL_FOR_EXTRACTION=${OLLAMA_MODEL_FOR_EXTRACTION}
+      - OLLAMA_MODEL_FOR_SUMMARY=${OLLAMA_MODEL_FOR_SUMMARY}
+      - OLLAMA_MODEL_FOR_IMAGE=${OLLAMA_MODEL_FOR_IMAGE}
+      - OLLAMA_MODEL_FOR_SCORING=${OLLAMA_MODEL_FOR_SCORING}
+      - OLLAMA_MODEL_FOR_HEAD_DIRECTION=${OLLAMA_MODEL_FOR_HEAD_DIRECTION}
+      
+      # Backend Configuration
+      - ROOT_STORAGE_DIR=${ROOT_STORAGE_DIR}
+      - GPU=${GPU}
+      - USE_GPU=${USE_GPU}
+      - YAW_HIGH=${YAW_HIGH}
+      - YAW_LOW=${YAW_LOW}
+      - PITCH_HIGH=${PITCH_HIGH}
+      - PITCH_LOW=${PITCH_LOW}
+      
+      # Database Configuration
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      
+      # Other Configuration
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN}
+    restart: unless-stopped
+    networks:
+      - dev-network
+
+volumes:
+  video_storage_dev:
+
+networks:
+  dev-network:
+    external: true

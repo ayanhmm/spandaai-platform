@@ -11,6 +11,7 @@ services:
     networks:
       - platform_network
       - app_network
+      - dev-network
     restart: unless-stopped
 volumes:
   ollama:
@@ -19,4 +20,6 @@ networks:
   platform_network:
     external: true
   app_network:
+    external: true
+  dev-network:
     external: true

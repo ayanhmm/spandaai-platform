@@ -48,3 +48,15 @@ services:
       timeout: 20s       # Increased timeout for slower CPU responses
       retries: 5         # More retries for stability
       start_period: 120s # Longer startup time for CPU loading
+    networks:
+      - platform_network
+      - app_network
+      - dev-network
+
+networks:
+  platform_network:
+    external: true
+  app_network:
+    external: true
+  dev-network:
+    external: true

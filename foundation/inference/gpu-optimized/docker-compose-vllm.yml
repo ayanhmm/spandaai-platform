@@ -38,3 +38,15 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+    networks:
+      - platform_network
+      - app_network
+      - dev-network
+
+networks:
+  platform_network:
+    external: true
+  app_network:
+    external: true
+  dev-network:
+    external: true
