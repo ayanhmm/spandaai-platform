@@ -1,0 +1,228 @@
+<svg viewBox="0 0 1400 1100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fafbfc"/>
+      <stop offset="100%" style="stop-color:#f5f6f8"/>
+    </linearGradient>
+    
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.08)"/>
+    </filter>
+    
+    <linearGradient id="primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f766e"/>
+      <stop offset="100%" style="stop-color:#0d5a54"/>
+    </linearGradient>
+    
+    <linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#5b21b6"/>
+    </linearGradient>
+    
+    <linearGradient id="planned" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#94a3b8"/>
+      <stop offset="100%" style="stop-color:#64748b"/>
+    </linearGradient>
+    
+    <linearGradient id="ai_planned" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" opacity="0.7"/>
+    </marker>
+  </defs>
+  
+  <rect width="1400" height="1100" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1320" height="1020" fill="white" stroke="#e2e8f0" rx="8" filter="url(#shadow)"/>
+  
+  <!-- Header -->
+  <rect x="80" y="80" width="1240" height="90" fill="white" stroke="#f1f5f9" rx="6"/>
+  <rect x="110" y="105" width="40" height="40" fill="url(#primary)" rx="6"/>
+  <text x="130" y="130" text-anchor="middle" fill="white" font-size="18" font-weight="700" font-family="system-ui">S</text>
+  
+  <text x="165" y="110" fill="#1e293b" font-size="24" font-weight="700" font-family="system-ui">Spanda.AI Enterprise Data Platform</text>
+  <text x="165" y="130" fill="#64748b" font-size="14" font-weight="500" font-family="system-ui">Modern Lake House Architecture with AI-Powered Analytics</text>
+  <text x="165" y="146" fill="#94a3b8" font-size="12" font-weight="400" font-family="system-ui">Unified data processing, storage, and intelligent insights platform</text>
+  
+  <!-- Legend -->
+  <rect x="920" y="90" width="360" height="70" fill="#f8fafc" stroke="#e2e8f0" rx="4"/>
+  <text x="935" y="108" fill="#475569" font-size="12" font-weight="600" font-family="system-ui">Technology Stack Status</text>
+  <rect x="935" y="118" width="12" height="12" fill="url(#accent)" rx="2"/>
+  <text x="954" y="127" fill="#475569" font-size="11" font-family="system-ui">Complete</text>
+  <rect x="1020" y="118" width="12" height="12" fill="url(#ai)" rx="2"/>
+  <text x="1039" y="127" fill="#475569" font-size="11" font-family="system-ui">AI Enhanced</text>
+  <rect x="1120" y="118" width="12" height="12" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="3,2" rx="2"/>
+  <text x="1139" y="127" fill="#475569" font-size="11" font-family="system-ui">Planned</text>
+  <rect x="1195" y="118" width="12" height="12" fill="none" stroke="#64748b" stroke-width="2" rx="2"/>
+  <text x="1214" y="127" fill="#475569" font-size="11" font-family="system-ui">Data Flow</text>
+
+  
+  <!-- Layer 1: Data Ingestion -->
+  <rect x="80" y="190" width="1240" height="120" fill="white" stroke="#f1f5f9" rx="6" filter="url(#shadow)"/>
+  <text x="100" y="220" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui">01. Data Ingestion</text>
+  <text x="100" y="236" fill="#64748b" font-size="13" font-family="system-ui">Multi-source data ingestion with intelligent discovery and profiling</text>
+  
+  <rect x="120" y="250" width="150" height="50" fill="url(#accent)" rx="4"/>
+  <text x="195" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Enterprise Databases</text>
+  <text x="195" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">PostgreSQL • MySQL • Oracle</text>
+  <text x="195" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">SQL Server • DB2</text>
+  
+  <rect x="290" y="250" width="150" height="50" fill="url(#accent)" rx="4"/>
+  <text x="365" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Cloud Storage</text>
+  <text x="365" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">AWS S3 • Azure Blob • GCS</text>
+  <text x="365" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">MinIO • HDFS</text>
+  
+  <rect x="460" y="250" width="150" height="50" fill="url(#accent)" rx="4"/>
+  <text x="535" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Event Streams</text>
+  <text x="535" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Apache Kafka • Kinesis</text>
+  <text x="535" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Event Hubs • Pulsar</text>
+  
+  <rect x="630" y="250" width="150" height="50" fill="url(#accent)" rx="4"/>
+  <text x="705" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">SaaS Platforms</text>
+  <text x="705" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Salesforce • HubSpot</text>
+  <text x="705" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">ServiceNow • Zendesk</text>
+  
+  <rect x="800" y="250" width="150" height="50" fill="url(#accent)" rx="4"/>
+  <text x="875" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">NoSQL Systems</text>
+  <text x="875" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">MongoDB • Cassandra</text>
+  <text x="875" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Elasticsearch • Redis</text>
+  
+  <!-- Airbyte - Planned -->
+  <rect x="970" y="250" width="180" height="50" fill="url(#planned)" rx="4" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="1060" y="268" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Airbyte</text>
+  <text x="1060" y="282" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">ELT connectors</text>
+  <text x="1060" y="294" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Data integration</text>
+  
+  <path d="M 700 320 L 700 340" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+  
+  <!-- Layer 2: Data Processing -->
+  <rect x="80" y="350" width="1240" height="120" fill="white" stroke="#f1f5f9" rx="6" filter="url(#shadow)"/>
+  <text x="100" y="380" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui">02. Data Processing and ETL</text>
+  <text x="100" y="396" fill="#64748b" font-size="13" font-family="system-ui">Real-time and batch processing with intelligent pipeline generation</text>
+  
+  <rect x="120" y="410" width="160" height="50" fill="url(#accent)" rx="4"/>
+  <text x="200" y="428" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Apache NiFi</text>
+  <text x="200" y="442" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Visual ETL workflows</text>
+  <text x="200" y="454" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Real-time processing</text>
+  
+  <rect x="300" y="410" width="160" height="50" fill="url(#accent)" rx="4"/>
+  <text x="380" y="428" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Apache Spark</text>
+  <text x="380" y="442" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Distributed computing</text>
+  <text x="380" y="454" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Batch and stream processing</text>
+  
+  <!-- Apache Airflow - Planned -->
+  <rect x="480" y="410" width="160" height="50" fill="url(#planned)" rx="4" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="560" y="428" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Apache Airflow</text>
+  <text x="560" y="442" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Workflow orchestration</text>
+  <text x="560" y="454" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">DAG management</text>
+  
+  <!-- dbt Core - Planned -->
+  <rect x="660" y="410" width="160" height="50" fill="url(#planned)" rx="4" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="740" y="428" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">dbt Core</text>
+  <text x="740" y="442" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">SQL transformations</text>
+  <text x="740" y="454" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Data modeling</text>
+  
+  <!-- AI Pipeline Generator - Planned -->
+  <rect x="840" y="410" width="180" height="50" fill="url(#ai_planned)" rx="4" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="930" y="428" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Agentic LLM-powered</text>
+  <text x="930" y="442" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Data Processing</text>
+  <text x="930" y="454" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">and ETL</text>
+  
+  <!-- Layer 3: Data Lake Storage -->
+  <rect x="80" y="510" width="1240" height="120" fill="white" stroke="#f1f5f9" rx="6" filter="url(#shadow)"/>
+  <text x="100" y="540" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui">03. Data Lake Storage</text>
+  <text x="100" y="556" fill="#64748b" font-size="13" font-family="system-ui">Modern lake house with ACID transactions and intelligent data management</text>
+  
+  <rect x="200" y="570" width="180" height="50" fill="url(#accent)" rx="4"/>
+  <text x="290" y="588" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">MinIO Object Storage</text>
+  <text x="290" y="602" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">S3-compatible storage</text>
+  <text x="290" y="614" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Distributed architecture</text>
+  
+  <rect x="400" y="570" width="180" height="50" fill="url(#accent)" rx="4"/>
+  <text x="490" y="588" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Apache Iceberg</text>
+  <text x="490" y="602" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">ACID transactions</text>
+  <text x="490" y="614" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Time travel queries</text>
+  
+  <rect x="600" y="570" width="180" height="50" fill="url(#accent)" rx="4"/>
+  <text x="690" y="588" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Project Nessie</text>
+  <text x="690" y="602" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Git-like versioning</text>
+  <text x="690" y="614" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Branch operations</text>
+  
+
+  
+  <path d="M 700 640 L 700 660" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" opacity="0.7"/>
+  
+  <!-- Layer 4: Data Processing Engine -->
+  <rect x="80" y="670" width="1240" height="120" fill="white" stroke="#f1f5f9" rx="6" filter="url(#shadow)"/>
+  <text x="100" y="700" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui">04. Query Engine and Processing</text>
+  <text x="100" y="716" fill="#64748b" font-size="13" font-family="system-ui">High-performance distributed query processing with semantic intelligence</text>
+  
+  <rect x="300" y="730" width="240" height="50" fill="url(#accent)" rx="4"/>
+  <text x="420" y="748" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Dremio Data Lake Engine</text>
+  <text x="420" y="762" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Self-service analytics • Query acceleration</text>
+  <text x="420" y="774" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Apache Arrow • Columnar processing</text>
+  
+  <rect x="560" y="730" width="240" height="50" fill="url(#accent)" rx="4"/>
+  <text x="680" y="748" text-anchor="middle" fill="white" font-size="11" font-weight="600" font-family="system-ui">Apache Spark Analytics</text>
+  <text x="680" y="762" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">ML workloads • Stream processing</text>
+  <text x="680" y="774" text-anchor="middle" fill="rgba(255,255,255,0.85)" font-size="9" font-family="system-ui">Unified analytics engine</text>
+  
+  <!-- Layer 5: Data Analytics -->
+  <rect x="80" y="830" width="1240" height="140" fill="white" stroke="#f1f5f9" rx="6" filter="url(#shadow)"/>
+  <text x="100" y="860" fill="#1e293b" font-size="16" font-weight="700" font-family="system-ui">05. Data Analytics and Visualization</text>
+  <text x="100" y="876" fill="#64748b" font-size="13" font-family="system-ui">Traditional BI tools and next-generation AI-powered conversational analytics</text>
+  
+  <!-- Traditional BI -->
+  <rect x="120" y="890" width="580" height="70" fill="#f8fafc" stroke="#e2e8f0" rx="4"/>
+  <text x="140" y="908" fill="#475569" font-size="12" font-weight="600" font-family="system-ui">Traditional Business Intelligence</text>
+  <rect x="140" y="918" width="110" height="32" fill="url(#accent)" rx="3"/>
+  <text x="195" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Apache Superset</text>
+  <text x="195" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Dashboards and Reports</text>
+  
+  <rect x="260" y="918" width="110" height="32" fill="url(#accent)" rx="3"/>
+  <text x="315" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Data Exploration</text>
+  <text x="315" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Query Interface</text>
+  
+  <rect x="380" y="918" width="110" height="32" fill="url(#accent)" rx="3"/>
+  <text x="435" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Jupyter Hub</text>
+  <text x="435" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Data Science</text>
+  
+  <rect x="500" y="918" width="110" height="32" fill="url(#accent)" rx="3"/>
+  <text x="555" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">REST APIs</text>
+  <text x="555" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Integration Layer</text>
+  
+  <!-- AI Analytics -->
+  <rect x="720" y="890" width="580" height="70" fill="#faf7ff" stroke="#e4d4f4" rx="4"/>
+  <text x="740" y="908" fill="#6b21a8" font-size="12" font-weight="600" font-family="system-ui">AI-Powered Conversational Analytics</text>
+  <rect x="740" y="918" width="130" height="32" fill="url(#ai)" rx="3"/>
+  <text x="805" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Text to SQL</text>
+  <text x="805" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Query Generation</text>
+  
+  <rect x="880" y="918" width="130" height="32" fill="url(#ai_planned)" rx="3" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="945" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">AI Insight Engine</text>
+  <text x="945" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Pattern Recognition</text>
+  
+  <rect x="1020" y="918" width="130" height="32" fill="url(#ai_planned)" rx="3" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="1085" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Predictive Analytics</text>
+  <text x="1085" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">ML and Forecasting</text>
+  
+  <rect x="1160" y="918" width="130" height="32" fill="url(#ai_planned)" rx="3" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="1225" y="933" text-anchor="middle" fill="white" font-size="10" font-weight="500" font-family="system-ui">Auto Reports</text>
+  <text x="1225" y="944" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="8" font-family="system-ui">Intelligent Summaries</text>
+  
+  <!-- Footer -->
+  <rect x="80" y="990" width="1240" height="60" fill="#f8fafc" stroke="#e2e8f0" rx="6"/>
+  <text x="100" y="1012" fill="#475569" font-size="13" font-weight="600" font-family="system-ui">Enterprise Security and Governance</text>
+  <text x="100" y="1028" fill="#64748b" font-size="11" font-family="system-ui">• Multi-tenant architecture • Role-based access control • Data lineage tracking • Audit logging • Compliance frameworks</text>
+  <text x="100" y="1042" fill="#64748b" font-size="11" font-family="system-ui">• Disaster recovery • High availability • End-to-end encryption • GDPR/CCPA compliance • SOC 2 Type II</text>
+  
+  <text x="1200" y="1028" text-anchor="end" fill="#94a3b8" font-size="11" font-weight="500" font-family="system-ui">© 2025 Spanda.AI</text>
+  <text x="1200" y="1042" text-anchor="end" fill="#94a3b8" font-size="11" font-weight="500" font-family="system-ui">Enterprise Data Platform</text>
+</svg>
