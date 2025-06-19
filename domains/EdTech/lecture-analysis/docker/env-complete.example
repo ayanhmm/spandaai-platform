@@ -28,3 +28,6 @@ DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=Mysql@824
 DB_NAME=instructor_eval
+
+# External Services
+HUGGINGFACE_TOKEN=put-your-hf-token-here
