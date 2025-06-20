@@ -3,9 +3,9 @@ services:
     platform: linux/x86_64
     image: dremio/dremio-oss:latest
     ports:
-      - 9047:9047
-      - 31010:31010
-      - 32010:32010
+      - ${DREMIO_WEB_UI_EXTERNAL_PORT}:9047 #Dremio Web UI 
+      - ${DREMIO_JDBC_CLIENT_EXTERNAL_PORT}:31010 #ODBC/JDBC Client Port 
+      - ${DREMIO_FLIGHT_SQL_EXTERNAL_PORT}:32010 #Flight SQL Port
     container_name: dremio
     networks:
       - Spanda-Net

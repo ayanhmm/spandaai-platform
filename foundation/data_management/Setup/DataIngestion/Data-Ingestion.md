@@ -104,6 +104,46 @@
    - username = `admin` 
    - password = `password1234`
 
+## Set up Airbyte for Data Transfer
+- Install Airbyte's command-line tool 
+   - For Mac and Linux Operating Systems
+      ```bash
+      curl -LsfS https://get.airbyte.com | bash 
+      ```
+   - For Windows refer to : https://github.com/airbytehq/abctl/releases/tag/v0.26.0
+
+- Install Dependancies:
+   ```bash
+   abctl local install
+   ```
+   To run Airbyte in a low-resource environment (fewer than 4 CPUs), specify the `--low-resource-mode` flag to the local install command. In low-resource mode, you are unable to access the Connector Builder.
+
+- Set up Login credentials:
+   - Get default credentials
+      ```bash
+      abctl local credentials
+      ```
+   - Set custom credentials
+      ```bash
+      abctl local credentials --password YourStrongPasswordExample
+      abctl local credentials --email YourStrongPasswordExample
+      ```
+
+- Access the Airbyte UI at http://localhost:8000
+
+- Connect to the required network
+   ```bash
+   docker network connect Spanda-Net airbyte-abctl-control-plane
+   ```
+
+- Set up instructions Based on `https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart`
+
+## Set up Airflow for Task Scheduling
+- Fetching the Docker-Compose file
+```bash
+curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.0.2/docker-compose.yaml'
+```
+
 
 ##  Utilize Spark for Video Data Ingestion
 - Copy the videos folder to Spark container
@@ -239,6 +279,7 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
 
 - Set the state of all the processors to running to start publishing.
 
+
 ## Kafka Data Filtering and Transfer using Nifi
 - **Setting up a kafka-consumer inside nifi:**
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `ConsumeKafka` as the type of processor.
@@ -303,6 +344,52 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
    - **Convert Record:** Write data to HDFS in a supported format (like Parquet or Avro).
    - **MonitorActivity:** Monitor data flow inactivity and alert if data hasn't arrived in a set time. Example: Alert if no sensor data arrives in 5 minutes.
    - **ValidateRecord:** Ensure incoming data conforms to a schema (like Avro/JSON Schema).
+
+## Creating an Airbyte Connection for Data Transfer 
+- Access the Airbyte UI at http://localhost:8000 and locg in via credentials obtained while setting up Airbyte.
+
+- Creating a source:
+   - Go to the `sources` tab accessible via the menu on the left.
+   - Go to New Source. 
+   - Select the service you want to use as a Data Source.
+   - ##### Creating a Postgres Source
+      - Select the `postgres connector`. Fill in the required fields to complete the setup.
+      - **Source Name:** Any name to uniquely identify the source. Name the source as `postgres1`
+      - **Host:** container name or ip address of the postgres container. `postgres`.
+      Inorder to refer via container name, make sure both services are on the same docker network.
+      Ip Address can be found using `docker inspect postgres | grep IPAddress`
+      - **Port:** External port of the postgres container which is `5432`
+      - **Database Name:** `mydb`
+      - **Username:** `admin` Login credentials of the postgres user who has access to the specified database. 
+      - **Password:** `password1234`
+      - **Update Method:** Set the criteria which determines when and how data is to be extracted from the source
+   - Click Set the Source to validate the above fields.
+
+- Creating a Destination:
+   - Go to the `Destinations` tab accessible via the menu on the left.
+   - Go to New Destination. 
+   - Select the service you want to use as a Data Destination.
+   - ##### Creating a minio destination
+      - Select the `S3 connector`. Fill in the required fields to complete the setup.
+      - **Destination Name:** Any name to uniquely identify the source. Name the source as `minio1`
+      - **Access Key ID:** `admin` Login credentials of the minio UI. 
+      - **Secret Access Key:** `password1234`
+      - **S3 Bucket Name:** Name of the minio bucket which will store the recieved data. `warehouse`
+      - **S3 Bucket Path:** Path inside the minio bucket which will store the recieved data. `testing/postgres`
+      - **S3 Bucket Region:** `us-east-1`, as defined in the minio docker file.
+      - **Output Format:** `Parquet`, for iceberg compatibility.
+      - **S3 Endpoint:** This column is located in the optional fields drop down area, Minio URL. `http://172.18.0.4:9000` or whaever the ipaddress of minio container is. It can be determined using `docker inspect postgres | grep IPAddress`
+      `http://minio:9000` does not work as the endpoint.
+   - Click Set the Destination to validate the above fields.
+
+- Establishing a connection:
+   - Go to the `Connections` tab accessible via the menu on the left.
+   - Go to Create Connection.
+   - Select one of the existing sources or create a new source. Select `postgres1`
+   Select one of the existing destinations or create a new destination. Select `minio1`
+   - Select the desired sync mode and press next
+   - Configure the connection including defining sync frequency and timing.
+   - Press finish and sync to establish the connection
 
 ## Additional Resources
 

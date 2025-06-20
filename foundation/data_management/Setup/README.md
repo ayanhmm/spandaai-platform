@@ -12,6 +12,7 @@ Create a new network for communication with other modules of the pipeline and li
    ```
 
 #### 3. Launch the required applications
+- Create a `.env` file in the directory declaring the environmental variables. Paste the content of `Setup-env.example` for quick start.
 - Run the script `Launch.sh` inside the `Setup` folder to gat a list of all the applications and select the required applications and open their UI on your browser.
 - Check if all the containers are properly launched and connected to the required network
    ```bash
@@ -24,6 +25,7 @@ Create a new network for communication with other modules of the pipeline and li
    - Open MinIO console in your browser: http://localhost:9001
    - Access the Dremio UI at http://localhost:9047 
    - Access Superset at http://localhost:8088 
+   - Access the Airbyte UI at http://localhost:8000
 
 #### 4. Module Specific Instructions
 Refer to the Module Specific Instruction given below to understand how to furthur work on each application.
@@ -36,14 +38,24 @@ Refer to the Module Specific Instruction given below to understand how to furthu
    - [Set Up Postgres Database and connect to Datalake utilizing spark](#Set-Up-Postgres-Database-and-connect-to-Datalake-utilizing-spark)
    - [Set up Kafka for Real Time Pipelines](#Set-up-Kafka-for-Real-Time-Pipelines)
    - [Real time Data Ingestion via Kafka and Spark](#Real-time-Data-Ingestion-via-Kafka-and-Spark)
-
-- ##### Data Handling via Nifi
    - [Set up Nifi for Data Handling](#set-up-nifi-for-data-handling)
    - [Kafka Data Filtering and Transfer using Nifi](#kafka-data-filtering-and-transfer-using-nifi)
+   - [Set up Airbyte for Data Transfer](#Set-up-Airbyte-for-Data-Transfer)
+   - [Creating an Airbyte Connection for Data Transfer](#Creating-an-Airbyte-Connection-for-Data-Transfer)
+   
+
+- ##### Nifi Processors
    - [Setting up a kafka-consumer inside nifi:](#setting-up-a-kafka-consumer-inside-nifi)
    - [Setting up kafka-producer using nifi:](#setting-up-kafka-producer-using-nifi)
    - [Setting up QueryRecord to filter Kafka data](#setting-up-queryrecord-to-filter-kafka-data)
    - [Setting up ConvertRecord to convert Kafka data format](#setting-up-convertrecord-to-convert-kafka-data-format)
+   - [Setting up GetFile to import a file to the canvas](#Setting-up-GetFile-to-import-a-file-to-the-canvas)
+   - [Setting up SplitRecord to Split Csv file to records](#Setting-up-SplitRecord-to-Split-Csv-file-to-records)
+
+- ##### Airbyte Connectors
+   - [Creating a Postgres Source](#Creating-a-Postgres-Source)
+   - [Creating a Kafka Source](#Creating-a-Kafka-Source)
+   - [Creating a minio destination](#Creating-a-minio-destination)
 
 - ##### Setting up the Data Lake
    - [Set Up Nessie as a catalog](#set-up-nessie-as-a-catalog)
@@ -69,7 +81,7 @@ Refer to the Module Specific Instruction given below to understand how to furthu
 ## Set up a PostgreSQL Database manually
 - Access the PostgreSQL shell for database named `mydb`:
    ```bash
-   docker exec -it postgres psql -U myuser mydb
+   docker exec -it postgres psql -U admin mydb
    ```
 
 - Create a table and add sample data:
@@ -259,6 +271,23 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
    - username = `admin` 
    - password = `password1234`
 
+- **Note:** 
+   - The below commands have been included in the volumes section of the docker compose service of nifi inorder to locally save the nifi canvas so as to not lose progress even if the container gets deleted
+      ```bash
+      - ./nifi-instance-data/conf:/opt/nifi/nifi-current/conf
+      - ./nifi-instance-data/database_repository:/opt/nifi/nifi-current/database_repository
+      - ./nifi-instance-data/flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
+      - ./nifi-instance-data/content_repository:/opt/nifi/nifi-current/content_repository
+      - ./nifi-instance-data/provenance_repository:/opt/nifi/nifi-current/provenance_repository
+      - ./nifi-instance-data/state:/opt/nifi/nifi-current/state
+      ```
+   - These files get linked to the nifi container when it is composed, which means that if the container is launched without the initial presence of these files, it will crash since that would result in deletion of the default content of these folders.
+   - So make sure when you compose the docker file, the initial folder `nifi-instance-data` is already present in the directory.
+   - otherwise, if you donot with to save the progress, simply comment out the above lines in the docker compose of nifi
+
+- **Note:**
+When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Please note that the password must be `12 characters` minimum otherwise NiFi will generate a random username and password.
+
 
 ## Kafka Data Filtering and Transfer using Nifi
 - #### Setting up a kafka-consumer inside nifi:
@@ -336,15 +365,15 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
       ``` 
    - Otherwise, Save the files to the same folder as docker compose. Copy them to the kafka container manually using `docker cp Sample_Table.csv kafka:/user_data/table.csv`
 
-- Fetching the .csv file from nifi's local directory
+- ##### Setting up GetFile to import a file to the canvas
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `GetFile` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
     - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
       - Input Directory specifies the address of the .csv file inside the nifi container.
       - Specify File Filter: `.*\.csv` so that it only reads the desired files.
       - Keep Source File: false.
-- Splitting the .csv file into individual records
-   - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `SplitRecore` as the type of processor.
+- ##### Setting up SplitRecord to Split Csv file to records
+   - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `SplitRecord` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
     - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
       - Record Reader specifies the type of file we are reading.for .csv files select `CSVReader`. Inside the configuration settings of the CSVReader, set First Line Is Header to true.
@@ -359,6 +388,92 @@ It saves real time data from kafka to a minio bucket and creates a nessie for th
 
 - Set the state of all the processors to running to start publishing.
 
+## Set up Airbyte for Data Transfer
+- Install Airbyte's command-line tool 
+   - For Mac and Linux Operating Systems
+      ```bash
+      curl -LsfS https://get.airbyte.com | bash 
+      ```
+   - For Windows refer to : https://github.com/airbytehq/abctl/releases/tag/v0.26.0
+
+- Install Dependancies:
+   ```bash
+   abctl local install
+   ```
+   To run Airbyte in a low-resource environment (fewer than 4 CPUs), specify the `--low-resource-mode` flag to the local install command. In low-resource mode, you are unable to access the Connector Builder.
+
+- Set up Login credentials:
+   - Get default credentials
+      ```bash
+      abctl local credentials
+      ```
+   - Set custom credentials
+      ```bash
+      abctl local credentials --password YourStrongPasswordExample
+      abctl local credentials --email YourStrongPasswordExample
+      ```
+
+- Access the Airbyte UI at http://localhost:8000
+
+- Connect to the required network
+   ```bash
+   docker network connect Spanda-Net airbyte-abctl-control-plane
+   ```
+
+- Set up instructions Based on `https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart`
+
+## Creating an Airbyte Connection for Data Transfer 
+- Access the Airbyte UI at http://localhost:8000 and locg in via credentials obtained while setting up Airbyte.
+
+- Creating a source:
+   - Go to the `sources` tab accessible via the menu on the left.
+   - Go to New Source. 
+   - Select the service you want to use as a Data Source.
+   - ##### Creating a Postgres Source
+      - Select the `postgres connector`. Fill in the required fields to complete the setup.
+      - **Source Name:** Any name to uniquely identify the source. Name the source as `postgres1`
+      - **Host:** container name or ip address of the postgres container. `postgres`.
+      Inorder to refer via container name, make sure both services are on the same docker network.
+      Ip Address can be found using `docker inspect postgres | grep IPAddress`
+      - **Port:** External port of the postgres container which is `5432`
+      - **Database Name:** `mydb`
+      - **Username:** `admin` Login credentials of the postgres user who has access to the specified database. 
+      - **Password:** `password1234`
+      - **Update Method:** Set the criteria which determines when and how data is to be extracted from the source
+   - ##### Creating a Kafka Source
+      - Select the `Kafka connector`. Fill in the required fields to complete the setup.
+      - **Source Name:** Any name to uniquely identify the source. Name the source as `kafka1`.
+      - **Bootstrap Servers:** Kafka URL. `kafka:9092` or whaever the ipaddress of kafka container is. It can be determined using `docker inspect kafka | grep IPAddress`
+      - **Message Format:** `JSON`
+      - **Protocol:** `PLAINTEXT`
+      - **List of Topics:** Names of the topics that are to be read `sensor_data`.
+   - Click Set the Source to validate the above fields.
+
+- Creating a Destination:
+   - Go to the `Destinations` tab accessible via the menu on the left.
+   - Go to New Destination. 
+   - Select the service you want to use as a Data Destination.
+   - ##### Creating a minio destination
+      - Select the `S3 connector`. Fill in the required fields to complete the setup.
+      - **Destination Name:** Any name to uniquely identify the source. Name the source as `minio1`
+      - **Access Key ID:** `admin` Login credentials of the minio UI. 
+      - **Secret Access Key:** `password1234`
+      - **S3 Bucket Name:** Name of the minio bucket which will store the recieved data. `warehouse`
+      - **S3 Bucket Path:** Path inside the minio bucket which will store the recieved data. `testing/postgres`
+      - **S3 Bucket Region:** `us-east-1`, as defined in the minio docker file.
+      - **Output Format:** `Parquet`, for iceberg compatibility.
+      - **S3 Endpoint:** This column is located in the optional fields drop down area, Minio URL. `http://172.18.0.4:9000` or whaever the ipaddress of minio container is. It can be determined using `docker inspect postgres | grep IPAddress`
+      `http://minio:9000` does not work as the endpoint.
+   - Click Set the Destination to validate the above fields.
+
+- Establishing a connection:
+   - Go to the `Connections` tab accessible via the menu on the left.
+   - Go to Create Connection.
+   - Select one of the existing sources or create a new source. Select `postgres1`
+   Select one of the existing destinations or create a new destination. Select `minio1`
+   - Select the desired sync mode and press next
+   - Configure the connection including defining sync frequency and timing.
+   - Press finish and sync to establish the connection
 
 ## Set Up Nessie as a catalog
 

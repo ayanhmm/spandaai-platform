@@ -3,11 +3,12 @@ services:
     image: postgres:latest
     container_name: postgres
     environment:
-      POSTGRES_DB: mydb
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "5435:5432"
+      - "${POSTGRES_EXTERNAL_PORT}:5432"
+
     networks:
       - Spanda-Net
     volumes:
@@ -27,7 +28,7 @@ services:
     command: --bind-address=0.0.0.0
     restart: unless-stopped
     networks:
-      - dev-network
+      - Spanda-Net
 volumes:
   mysql_data_dev:
 
