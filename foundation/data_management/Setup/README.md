@@ -2,7 +2,8 @@
 Instructions for Combining the individual modules into a fully functional pipeline
 #### 1. Create Docker Compose File
 
-Create a new directory for the project, then create a copy of the `.yml` files of all the required modules 
+Create a new directory for the project, then create a copy of the `.yml` files of all the required modules.
+You may refer to [Some Helpful Docker Commands](#Some-Helpful-Docker-Commands) to familiarize yourself with some common docker commands. 
 
 #### 2. Set Up a network 
 Create a new network for communication with other modules of the pipeline and list all networks to check if network properly created
@@ -13,7 +14,7 @@ Create a new network for communication with other modules of the pipeline and li
 
 #### 3. Launch the required applications
 - Create a `.env` file in the directory declaring the environmental variables. Paste the content of `Setup-env.example` for quick start.
-- Run the script `Launch.sh` inside the `Setup` folder to gat a list of all the applications and select the required applications and open their UI on your browser.
+- Inside the `Setup` folder, Run the script `start-data-management-services` to launch all the services or `Partial-Launch`  script to get a list of all the applications and select the required applications and open their UI on your browser.
 - Check if all the containers are properly launched and connected to the required network
    ```bash
    docker network inspect Spanda-Net
@@ -25,6 +26,7 @@ Create a new network for communication with other modules of the pipeline and li
    - Open MinIO console in your browser: http://localhost:9001
    - Access the Dremio UI at http://localhost:9047 
    - Access Superset at http://localhost:8088 
+   - Access Rath UI at http://localhost:3000 
    - Access the Airbyte UI at http://localhost:8000
 
 #### 4. Module Specific Instructions
@@ -51,6 +53,7 @@ Refer to the Module Specific Instruction given below to understand how to furthu
    - [Setting up ConvertRecord to convert Kafka data format](#setting-up-convertrecord-to-convert-kafka-data-format)
    - [Setting up GetFile to import a file to the canvas](#Setting-up-GetFile-to-import-a-file-to-the-canvas)
    - [Setting up SplitRecord to Split Csv file to records](#Setting-up-SplitRecord-to-Split-Csv-file-to-records)
+   - [Setting up PutS3Object to Save Data to Minio](#Setting-up-PutS3Object-to-Save-Data-to-Minio)
 
 - ##### Airbyte Connectors
    - [Creating a Postgres Source](#Creating-a-Postgres-Source)
@@ -66,16 +69,16 @@ Refer to the Module Specific Instruction given below to understand how to furthu
 
 - ##### Setting up the Data Analytics Applications
    - [Set Up Superset for BI Dashboards](#set-up-superset-for-bi-dashboards)
+   - [Add a Dremio connection to Superset](#Add-a-Dremio-connection-to-Superset)
+   - [Add a Postgres connection to Superset](#Add-a-Postgres-connection-to-Superset)
+   - [Importing data from a CSV to a Database in Superset](#Importing-data-from-a-CSV-to-a-Database-in-Superset)
+   - [Build dashboards in Superset](#Build-dashboards-in-Superset)
    - [Set Up Rath for Data Exploration](#set-up-rath-for-data-exploration)
+
 
 - ##### Setting Dummy Real Time Kafka Producers
     - [Setting up a Python Script as a real time source](#Setting-up-a-Python-Script-as-a-real-time-source)
     - [Setting up Nifi to publish data to Kafka from a .csv file](#setting-up-nifi-to-publish-data-to-kafka-from-a-csv-file)
-
-
-
-
-
 
 
 ## Set up a PostgreSQL Database manually
@@ -94,6 +97,10 @@ Refer to the Module Specific Instruction given below to understand how to furthu
          sales_amount DECIMAL(10, 2),
          sales_date DATE
       );
+      ```
+   - List all tables inside a database
+      ```sql
+      \d
       ```
    - Insert sample data into the table
       ```sql
@@ -294,16 +301,16 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `ConsumeKafka` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
-      - Kafka Connection Service specifies the kafka service port it needs to consume data from.
-      - Topics specify the topics it needs to subscribe to.
-      - Group ID is the kafka consumer group identifier.  
+      - **Kafka Connection Service** specifies the kafka service port it needs to consume data from.
+      - **Topics** specify the topics it needs to subscribe to.
+      - **Group ID** is the kafka consumer group identifier.  
    - Setting up a Kafka Connection Service:
       - Click on the 3 vertical dots at the end of Kafka Connection Service property and select create new service option
       - select `org.apache.nifi - nifi-kafka-3-service-nar` service type, press add.
       - The new service has been created.
       - Inorder to configure the new service, press the 3 dots again and then select go to service option. It takes you to the Controller Services List window.
       - Select the required service, click at the 3 vertical dots on the right and select edit option
-      - Declare The Bootstrap Servers `kafka:9092`. Press the verification tick to check if the connection to the port is created.
+      - Declare The **Bootstrap Servers** `kafka:9092`. Press the verification tick to check if the connection to the port is created.
       - Apply the changes and change the state of the service to `Enabled` via the 3 vertical dots
    - Return to the processor's configuration settings and press the verificatio tick to check if the required topic can be accessed. Press Apply.
    - Set up a new output port by dragging the icon from the top to the canvas. Give a suitable name to the port.
@@ -318,11 +325,11 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `PublishKafka` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
-      - Kafka Connection Service specifies the kafka service port it needs to publish data to.
-      - Topic name specify the topics it needs to publish to.
-      - Either set Transactions Enabled to false Delivery Guarentee to best effort or to true and Guarentee Delivery depending upon your usecase
-      - Set Record rerader to JsonTreeReader. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
-      - Set Record Writer to JsonRecordSetWriter. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
+      - **Kafka Connection Service** specifies the kafka service port it needs to publish data to.
+      - **Topic name** specify the topics it needs to publish to.
+      - Either set **Transactions Enabled** to false Delivery Guarentee to best effort or to true and Guarentee Delivery depending upon your usecase
+      - Set **Record rerader** to JsonTreeReader. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
+      - Set **Record Writer** to JsonRecordSetWriter. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
    - Form a relationship to the kafka consumer and another to an output service or port.
    - **Note:** Order of data might change. NiFi is a dataflow engine, not a queue. It processes records asynchronously and independently. Even though records arrive in order, NiFi might buffer, route, or process them in parallel, causing reordering.
 
@@ -330,9 +337,9 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `QueryRecord` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
-      - Set Record rerader to JsonTreeReader. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
-      - Set Record Writer to JsonRecordSetWriter. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
-      - in the Query property, Provide a SQL Query which will be used to filter the data. For instance, `SELECT * FROM FLOWFILE WHERE source = 'sensor1'` filters all the data coming from sensor 1.
+      - Set **Record reader** to JsonTreeReader. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
+      - Set **Record Writer** to JsonRecordSetWriter. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
+      - in the **Query property**, Provide a SQL Query which will be used to filter the data. For instance, `SELECT * FROM FLOWFILE WHERE source = 'sensor1'` filters all the data coming from sensor 1.
          **Note:** If the query field does not exist by default, press the + icon of Required Fields to add a propery.
    - Form a relationship to the kafka consumer and another to the kafka publisher.
    - Now, the publisher will only publish the data points which satisfy the given query.
@@ -342,10 +349,19 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `ConvertRecord` as the type of processor.
    - Double click on the newly created processor to open its configuration. Go to the properties tab.
    - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
-      - Set Record rerader to JsonTreeReader or whatever the format of the incoming data is. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
-      - Set Record Writer to the format you want to convert the data to. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
+      - Set **Record rerader** to JsonTreeReader or whatever the format of the incoming data is. Go to its settings and set Schema Access Strategy: Infer Schema. Click Apply and then enable the service.
+      - Set **Record Writer** to the format you want to convert the data to. Go to its settings and set Schema Write Strategy: Do Not Write Schema. Click Apply and then enable the service.
    - Form a relationship to the kafka consumer and another to the kafka publisher.
    - Now, the publisher will only publish the data points in the newly declared format.
+
+- #### Setting up PutS3Object to Save Data to Minio
+   - Set up a new Nifi processor by dragging the processor icon from the top to the canvas. Select `PutS3Object` as the type of processor.
+   - Double click on the newly created processor to open its configuration. Go to the properties tab.
+   - Assign the required Properties: (If any of the properties are not visible, press the + icon of Required Fields to add a propery).
+      - **Bucket :** `warehouse`
+      - **Region :** `US East (N. Virginia)`
+      - **AWS Credentials Provider Service :** `AWSCredentialsProviderControllerService`. Go to its configuration settings and enter your minio login credentials as Access Key ID `admin` and Secret Access Key `password1234`.
+      - **Endpoint Override URL :** `http://minio:9000` , You may also enter the ip address of the minio container instead of minio in the above url.
 
 - **Other useful Processors:**
    - **LookupRecord:** Enrich a record by looking up data from another source (DB, file, etc.).
@@ -353,6 +369,17 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - **Convert Record:** Write data to HDFS in a supported format (like Parquet or Avro).
    - **MonitorActivity:** Monitor data flow inactivity and alert if data hasn't arrived in a set time. Example: Alert if no sensor data arrives in 5 minutes.
    - **ValidateRecord:** Ensure incoming data conforms to a schema (like Avro/JSON Schema).
+   - **ListS3:** 
+      - List all objects inside a bucket. 
+      - **Note:** If you intend to access the objects via some other processor such as GetS3ObjectMetadata, then set the value of `Record Writer` to no value set otherwise the processor will not be able to locate the S3 object.
+      - Rest of the configuration properties similar to PutS3Object as described before.
+   - **GetS3ObjectMetadata:** 
+      - Used to extract the meta data of various files from minio by pairing up with ListS3.
+      - The configuration properties are similar to PutS3Object as described before.
+   
+   - **Merge Record:** 
+      - Concatenate various flowfiles into a single flowfile
+      - Can be used if you want to save multiple records from kafka as a single table/file to a S3 Destination. 
 
 
 ## Setting up Nifi to publish data to Kafka from a .csv file
@@ -409,8 +436,8 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
       ```
    - Set custom credentials
       ```bash
-      abctl local credentials --password YourStrongPasswordExample
-      abctl local credentials --email YourStrongPasswordExample
+      abctl local credentials --password password1234
+      abctl local credentials --email admin@admin.com
       ```
 
 - Access the Airbyte UI at http://localhost:8000
@@ -419,7 +446,20 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    ```bash
    docker network connect Spanda-Net airbyte-abctl-control-plane
    ```
+- To stop running all containers, but keep your data:
+   ```bash
+   abctl local uninstall
+   ```
 
+- To stop running containers and delete all data:
+   - Uninstall Airbyte with the --persisted flag
+      ```bash
+      abctl local uninstall --persisted
+      ```
+   - Clear any remaining information abctl created.
+      ```bash
+      rm -rf ~/.airbyte/abctl
+      ```
 - Set up instructions Based on `https://docs.airbyte.com/platform/using-airbyte/getting-started/oss-quickstart`
 
 ## Creating an Airbyte Connection for Data Transfer 
@@ -493,7 +533,7 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
 - Open MinIO console in your browser: http://localhost:9001
 - Login with:
    - Username: `admin`
-   - Password: `password`
+   - Password: `password1234`
 
 -  Set Up MinIO Bucket - Create a new bucket named `warehouse`
 
@@ -509,7 +549,7 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    - **Storage settings tab:**
      - AWS Root Path: `warehouse`
      - AWS Access Key: `admin`
-     - AWS Secret Key: `password`
+     - AWS Secret Key: `password1234`
      - Uncheck "Encrypt Connection" Box
    - **Connection Properties:**
      - Key: `fs.s3a.path.style.access` | Value: `true`
@@ -526,16 +566,22 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
 - Access Superset at http://localhost:8088 and log in:
    - Username: `admin`
    - Password: `admin`
+   - After login, if you face `fetching issude` that implies that initiation failed
 
-- Add a Dremio connection:
+- ##### Add a Dremio connection to Superset:
+   - Make sure the Dremio backend is up and running.
    - Go to "Settings" > "Database Connections"
    - Click "Add a database" > Select "Other"
    - Create a display name for your dataset.
-   - Enter connection string:
-     ```
-     dremio+flight://USERNAME:PASSWORD@dremio:32010/?UseEncryption=false
-     ```
-     (Replace USERNAME and PASSWORD with your Dremio credentials)
+   - Enter connection string: 
+      - String format:
+         ```bash
+         dremio+flight://USERNAME:PASSWORD@dremio:32010/?UseEncryption=false
+         ```
+      - Replace USERNAME and PASSWORD with your Dremio credentials
+         ```bash
+         dremio+flight://admin:password1234@dremio:32010/?UseEncryption=false
+         ```
    - You must URL-encode any special character in the username or password that could interfere with the URL structure 
 
       | Character | Meaning in URL                                  | Encoded As |
@@ -560,15 +606,65 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
 
    - Test connection and save
 
-- Create a dataset:
-   - Click the "+" icon > "Create dataset"
-   - Select the database connection you want to analyze
-   - Choose the desired table
-   - Save
+- ##### Add a Postgres connection to Superset:
+   - Make sure the Postgres backend is up and running.
+   - Go to "Settings" > "Database Connections"
+   - Click "Add a database" > Select "PostgresSQL"
+   - Fill up the following details:
+      - **Host:** `Postgres` IP Address of the container/backend
+      - **Port:** `5432` Default Postgres Port
+      - **Database name:** `mydb` Name of database in postgress
+      - **Username:** `admin` Access Credentials of the database
+      - **Password:** `password1234`
+      - **Display Name:** `spanda demo` Alias for the database
+   - Test connection and save
 
-- Build dashboards:
-   - Create charts based on your dataset
-   - Add charts to dashboards for visualization
+
+- ##### Importing data from a CSV to a Database in Superset:
+   - Enabling CSV imports for a database
+      - Disabled by default, we must Enable `Allow file uploads to database' in any database's settings` to upload CSV Data.
+      - Select the database connection you want to analyze.
+      - Go to the edit option under the actions tab
+      - Advances Configurations > Security
+      - Enable `Allow file uploads to database`
+      - Press Finish 
+      - Now the `CSV Upload` column of the selected database shows a tick.
+   - `+` Dropdown on top right > Data > Upload CSV to database
+   - Fill up the following details:
+      - **CSV Upload:** Select a file to be uploaded to the database
+      - **Table Name:** Name of table to be created with CSV file
+      - **Database:** Select a database to upload the file to
+      - **Delimiter:** Enter a delimiter for the uploaded file
+   - Under File Settings:
+      - **Skip Initial Space:** Skip spaces after delimiter
+      - **Skip Blank Lines:** Skip blank lines rather than interpreting them as Not A Number values
+      - **Columns To Be Parsed as Dates:** A comma separated list of columns that should be parsed as dates
+      
+
+- ##### Build dashboards in Superset:
+   - Dashboards tab > `+` Dashboard
+   - Double Press `[Untitled Dashboard]` to name your Dashboard.
+   - Save the Dashboards
+   - Create charts based on your dataset:
+      - Manually:
+         - Datasets tab > Select database for which you want to create a chart
+         - Create a chart:
+            - **Data Tab:** Choose the data to represent
+            - **Customise Tab:** Assign labesls to axes, etc.
+      - Using SQL Queries for more control:
+         - SQL tab > SQL Lab
+         - Select Database and table
+         - Type in the query
+         - Test Run
+         - Save the query > Assign it a name and Description
+         - Query saved as a new dataset
+         - Continue the setps for manual creation
+      - Fill `Add name of the Chart` block
+      - Click Save then Name the Chart and chose destination Dashboard
+      - Save And Go To Dashboard
+   - Edit Dashboaed
+      - **Charts Tab:** Manage visibility of Charts.
+      - **Layouts Tab:** Organise the Dashboard 
 
 ## Set Up Rath for Data Exploration
 - Clone the Rath repository and open it
@@ -583,3 +679,53 @@ When you set up the `SINGLE_USER_CREDENTIALS_PASSWORD` for logging into nifi, Pl
    yarn workspace rath-client build
    yarn workspace rath-client start
    ```
+
+- Access Rath UI at http://localhost:3000 
+
+- ##### Uploading a CSV Data Source to Rath
+   - Data Connections > `+`Create Data Source > file
+   - Upload the CSV File You want to explore
+   - Under the preview tab, the table that will be uploaded is visible
+   - Click Load Data
+
+- ##### Data Exploration Features Provided By Rath
+   - **View statistics from your data source:**
+      - Data source > import data > Select dataset
+      - Select amongst the Table view, Mets view and Statistics view. 
+      - Table tab displays the graphs for each of the coulmns and count/amount of entries.
+      - Meta tab gives some more edit abilities to the statistics.
+      - Statistics tab allows you to select portion of a chart and view its data in tabular form.
+   - **Data Preparation:** Under the table view, Select any text substring and let the interface analyze its pattern to predict transformation operations. It will automatically generate suggestions of filtration, transformations and cleaning etc.filter.
+   - **Data AutoPilot:** `One-click automated data analysis` Augmented analytic engine for discovering patterns, insights, and causals. A fully-automated way to explore and visualize dataset with one click.
+   - **Data CoPilot:** RATH will work as your copilot in data science, learn your intends and generate relevant recommendations.
+   - **Data Painter:** An interactive, instinctive yet powerful tool for exploratory data analysis by directly coloring your data, with further analytical features.
+      - Chose the data painter option when exploring data with auto pilot.
+      - **Data Erase:** To erase outliers and only mantain the points of intrest.
+      -  **Data color:** To color different segments of the data for better inference.
+
+
+
+
+## Some Helpful Docker Commands:
+   | Command Description                                 | Command                                               |
+|-----------------------------------------------------|--------------------------------------------------------|
+| Run a yml file                                      | `docker-compose up -d`                                |
+| Lists all running processes                         | `Docker ps`                                           |
+| List all processes that exist                       | `Docker ps -a`                                        |
+| Stop all containers                                 | `docker stop $(docker ps -q)`                         |
+| Delete all containers                               | `docker rm $(docker ps -a -q)`                        |
+| Force Deletion without stopping                     | `docker rm -f <container>`                            |
+| Inspect a container                                 | `docker logs <container_name_or_id>`                  |
+| Copy a file inside container                        | `docker cp source destination`                        |
+| Create a network                                    | `docker network create Spanda-Net`                    |
+| List all networks                                   | `docker network ls`                                   |
+| Get Network Details                                 | `docker inspect <name>`                               |
+| Access Container                                    | `docker exec -it <container> bash`                    |
+| Exit Container                                      | `exit`                                                |
+| Get Container Details                               | `docker inspect <container>`                          |
+| Get Container IP Address                            | `docker inspect <container> \| grep IPAddress`        |
+| Get Container Host Port                             | `docker inspect <container> \| grep HostPort`         |
+| Check disk usage by Docker objects                  | `docker system df`                                    |
+| Cleans builder cache to reclaim disk space          | `docker builder prune`                                |
+
+
